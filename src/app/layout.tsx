@@ -42,15 +42,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en" className={`${poppins.className}`}> {/*${inconsolata.className} */}
+    <html lang="en" className={`${poppins.className}`}>
+      <head>
+        <link rel="stylesheet" href="/icons/css/all.min.css" />
+      </head>
       <body className="flex flex-col min-h-screen">
-        <main className="flex-grow container mx-auto bg-white">
-          <LayoutWrapper>
-            <Header/>
+        <LayoutWrapper>
+          <Header />
+          <main className="flex-grow container mx-auto bg-white">
             {children}
-            <Footer/>
-          </LayoutWrapper>
-        </main>
+          </main>
+          <Footer />
+        </LayoutWrapper>
       </body>
     </html>
   );

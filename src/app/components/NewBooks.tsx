@@ -6,28 +6,34 @@ import React, { useEffect, useState } from 'react'
 import DiscountBadge from './DiscountBadge';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Bookdetails } from '@/lib/types/type';
+import { useGetProductsQuery } from '@/store/api';
+
 
 const NewBooks = () => {
-      const booksPerSlide = 3;
-      const totalSlides = Math.ceil(books.length / booksPerSlide);
-      const [currentBookSlide, setCurrentBookSlide] = useState(0);
+    const [currentBookSlide, setCurrentBookSlide] = useState(0);
+    const {data: apiResponse={}, isLoading} = useGetProductsQuery({})
+    const [books, setBooks] = useState<Bookdetails[]>([]);
 
-      const extendedBooks = [...books, ...books.slice(0, booksPerSlide - (books.length % booksPerSlide))];
+    useEffect(()=>{
+        if(apiResponse.success){
+            setBooks(apiResponse.data);
+        }
+    }, [apiResponse])
+
 
       useEffect(() => {
-        if (totalSlides > 1) {
             const timer = setInterval(() => {
-                setCurrentBookSlide((prev) => (prev + 1) % totalSlides);
+                setCurrentBookSlide((prev) => (prev + 1) % 3);
             }, 7000); // Change image every 7 seconds
             return () => clearInterval(timer); // Cleanup the timer on component unmount
-        }
-    }, [totalSlides]);
+      }, []);
 
       const prevSlide = () => {
-        setCurrentBookSlide((prev) => (prev - 1 + totalSlides) % totalSlides); // Loop back to last slide
+        setCurrentBookSlide((prev) => (prev - 1 + 3) % 3); // Loop back to last slide
       };
-      const nextslide = () => {
-        setCurrentBookSlide((prev) => (prev + 1) % totalSlides); // Loop back to first slide
+      const nextSlide = () => {
+        setCurrentBookSlide((prev) => (prev + 1) % 3); // Loop back to first slide
       };
 
       const calculateDiscount = (price: number, finalPrice: number): number => {
@@ -49,11 +55,11 @@ const NewBooks = () => {
                 <div className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentBookSlide * 100}%)`}}
                 >
-                  {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+                  {Array.from({ length: 3 }).map((_, slideIndex) => (
                     <div key={slideIndex} 
                       className="w-full flex-none">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          {extendedBooks.slice(slideIndex * booksPerSlide, slideIndex * booksPerSlide + booksPerSlide).map((book) => (
+                          {books.slice(slideIndex * 3, slideIndex * 3 + 3).map((book, idx) => (
                             <Card
                             key={book._id} className='relative'
                             >
@@ -65,7 +71,7 @@ const NewBooks = () => {
                                       alt={book.title}
                                       width={300}
                                       height={400}
-                                      className="w-full h-[300px] object-cover rounded-lg mb-4"
+                                      className="w-full h-[300px] object-contain rounded-lg mb-4"
                                     />
                                     {calculateDiscount(book.price, book.finalPrice) > 0 && (
                                       <DiscountBadge discount={calculateDiscount(book.price, book.finalPrice)} />
@@ -103,7 +109,7 @@ const NewBooks = () => {
               <button className='absolute left-2 top-1/2 -translate-y-1/2 bg-white/40 p-2 rounded-full shadow-lg/30'onClick={prevSlide}>
               <ChevronLeft className='h-6 w-6'/>
               </button>
-              <button className='absolute right-2 top-1/2 -translate-y-1/2 bg-white/40 p-2 rounded-full shadow-lg/30'onClick={nextslide}>
+              <button className='absolute right-2 top-1/2 -translate-y-1/2 bg-white/40 p-2 rounded-full shadow-lg/30'onClick={nextSlide}>
               <ChevronRight className='h-6 w-6'/>
               </button>
 

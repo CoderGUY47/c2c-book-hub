@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 
 //first difned the UserState
-interface UserState{
+export interface UserState{
     user: any|null;
     isEmailVerified: boolean;
     isLoginDialogOpen: boolean;
@@ -23,6 +23,7 @@ const userSlice = createSlice({
     reducers:{
         setUser:(state,action:PayloadAction<any>)=>{
             state.user=action.payload;
+            state.isLoggedIn = true;
         },
         setEmailVerified:(state,action:PayloadAction<any>)=>{
             state.isEmailVerified=action.payload;

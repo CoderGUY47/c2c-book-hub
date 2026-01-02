@@ -1,11 +1,18 @@
 import type { NextConfig } from "next";
 
+import path from "path";
+
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: true,
-  images:{
-    domains:['images.unsplash.com','media.istockphoto.com']
-  }
+  images: {
+    // Add res.cloudinary.com to this list
+    domains: [
+      'images.unsplash.com', 
+      'media.istockphoto.com', 
+      'res.cloudinary.com'
+    ]
+  },
+  outputFileTracingRoot: path.join(__dirname, "../"),
 };
 
 export default nextConfig;

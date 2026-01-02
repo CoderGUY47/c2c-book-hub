@@ -1,11 +1,12 @@
 'use client'
 import Image from "next/image";
-import { ArrowRightCircle, BookOpen, Camera, CreditCard, Library, Search, ShoppingBag, Store, Tag, Truck, Wallet } from "lucide-react";
+import { ArrowRightCircle, BookOpen, Camera, CreditCard, Library, LucideCircleArrowOutUpRight, ScanQrCode, Search, ShoppingBag, ShoppingBasket, Store, Tag, Truck, Wallet } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import NewBooks from "./components/NewBooks";
 import { Card, CardContent } from "@/components/ui/card";
+import { FaArrowRight, FaArrowRightArrowLeft } from "react-icons/fa6";
 
 export default function Home() {
   const bannerImages = [
@@ -124,22 +125,25 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-5 py-8">
             <Button
               size="lg"
-              className="group bg-gradient-to-r from-purple-400 to-purple-700 hover:from-purple-700 hover:to-purple-400 text-white px-8 py-7 rounded-2xl"
+              className="group bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-yellow-400 hover:to-orange-500 text-white px-8 py-7 rounded-2xl"
             >
               <div className="flex items-center gap-3">
-                <div className="bg-white/20 p-2 rounded-lg  group-hover:bg-white/30 transition-colors">
-                  <ShoppingBag className="h-6 w-6" />
+                <div className="bg-white/20 p-2 rounded-sm  group-hover:bg-white/30 transition-colors">
+                  <ScanQrCode className="h-8 w-8" />
                 </div>
                 <Link href="/book-sell">
                   <div className="text-left">
                     <div className="text-md font-mono font-black opacity-90">
-                      Start Shopping in our Mart
+                      Start Shopping in our Book-Shop
                     </div>
                     <div className="font-semibold font-lg">
                       Available for buying used Books
                     </div>
                   </div>
                 </Link>
+                <div className="bg-white/30 p-2 rounded-full group-hover:bg-gray-800 transition-colors">
+                    <LucideCircleArrowOutUpRight className="h-8 w-8 animate-bounce" />
+                </div>
               </div>
             </Button>
             <Button
@@ -147,19 +151,22 @@ export default function Home() {
               className="group bg-gradient-to-r from-purple-400 to-purple-700 hover:from-purple-700 hover:to-purple-400 text-white px-8 py-7 rounded-xl duration-500"
             >
               <div className="flex items-center gap-3">
-                <div className="bg-white/20 p-2 rounded-lg group-hover:bg-white/30 duration-500 transition-colors">
-                  <ShoppingBag className="h-6 w-6" />
+                <div className="bg-white/20 p-2 rounded-sm group-hover:bg-white/30 duration-500 transition-colors">
+                  <ShoppingBasket className="h-6 w-6" />
                 </div>
                 <Link href="/book-sell">
                   <div className="text-left">
                     <div className="text-md font-mono font-black opacity-90">
-                      Start Shopping in our Mart
+                      Now You Can Sell Books Here
                     </div>
                     <div className="font-semibold font-lg">
-                      Available for buying used Books
+                      Available for selling used Books
                     </div>
                   </div>
                 </Link>
+                <div className="bg-white/30 p-2 rounded-full group-hover:bg-gray-800 transition-colors">
+                    <LucideCircleArrowOutUpRight className="h-8 w-8 animate-bounce" />
+                </div>
               </div>
             </Button>
           </div>

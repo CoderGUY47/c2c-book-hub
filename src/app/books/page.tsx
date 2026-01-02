@@ -4,7 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { books, filters } from '@/lib/Constant';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns';
 import BookLoader from '@/lib/BookLoader';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -17,6 +17,8 @@ import { Ghost, Heart } from 'lucide-react';
 import Pagination from '../components/Pagination';
 import NoData from '../components/NoData';
 import { useRouter } from 'next/navigation';
+import { useGetProductsQuery } from '@/store/api';
+import { Bookdetails } from '@/lib/types/type';
 
 
 const page = () => {
@@ -26,13 +28,26 @@ const page = () => {
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
     const [sortOption, setSortOption] = useState('newest')
     const bookPerPage = 6;
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
+    const {data: apiResponse={}, isLoading} = useGetProductsQuery({})
     const router = useRouter();
+    const [books, setBooks] = useState<Bookdetails[]>([]);
+    const searchTerms = new URLSearchParams(window.location.search).get('search') || '';
+
+    useEffect(()=>{
+        if(apiResponse.success){
+            setBooks(apiResponse.data);
+        }
+    }, [apiResponse])
+
+    console.log(books);
+
+
 
     const toggleFilter = (section: string, item:string)=>{
         const updateFilter = (prev:string[])=>{
            return prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]
-        }
+        };
         switch(section){
             case "condition":
                 setSelectedCondition(updateFilter);
@@ -51,7 +66,13 @@ const page = () => {
         const conditionMatch = selectedCondition.length === 0 || selectedCondition.map(cond => cond.toLowerCase()).includes(book.condition.toLowerCase());
         const typeMatch = selectedType.length === 0 || selectedType.map(cond => cond.toLowerCase()).includes(book.classType.toLowerCase());
         const categoryMatch = selectedCategory.length === 0 || selectedCategory.map(cond => cond.toLowerCase()).includes(book.category.toLowerCase());
-        return conditionMatch && typeMatch && categoryMatch;
+        const searchMatch = searchTerms 
+        ? book.title.toLowerCase().includes(searchTerms.toLowerCase())  //if searchTerm is matched with anyof this below then show, if not show all books
+        ||book.author.toLowerCase().includes(searchTerms.toLowerCase())
+        ||book.category.toLowerCase().includes(searchTerms.toLowerCase())
+        ||book.subject.toLowerCase().includes(searchTerms.toLowerCase())
+        :true; 
+        return conditionMatch && typeMatch && categoryMatch && searchMatch; 
     });
 
     const sortedBooks = [...filterBooks].sort((a,b)=>{
@@ -177,7 +198,7 @@ const page = () => {
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
                                 paginatedBooks.map((book) => (
                                     <motion.div 
@@ -187,18 +208,18 @@ const page = () => {
                                         exit={{ opacity: 0, y: -10 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        <Card className='group relative overflow-hidden h-120 rounded-lg transition-shadow duration-500 hover:shadow-2xl bg-indigo-100/60 border-0'>
+                                        <Card className='group relative overflow-hidden h-120 rounded-lg transition-shadow duration-500 hover:shadow-2xl border-0'>
                                             <CardContent className='p-0'>
                                                 <Link 
                                                 href={`/books/${book._id}`}
                                                 >
-                                                    <div className="relative">
+                                                    <div className="relative -mt-[23px]">
                                                         <Image
                                                             src={book.images[0]}
                                                             alt={book.title}
                                                             width={400}
                                                             height={300}
-                                                            className="w-full h-[250px] transition-transform duration-500 group-hover:scale-105 object-cover rounded-t-lg"
+                                                            className="w-full h-[300px] transition-transform duration-500 group-hover:scale-105 object-cover rounded-t-lg"
                                                         />
                                                         <div className="absolute flex flex-colleft-0 top-0 z-10 gap-2 p-2">
                                                             {calculateDiscount(book.price, book.finalPrice) > 0 && (
@@ -217,9 +238,9 @@ const page = () => {
                                                     </div>
                                                     <div className="p-6 space-y-2">
                                                         <div className="flex items-start justify-between">
-                                                            <h3 className="text-lg font-semibold text-indigo-500 line-clamp-2 h-14">{book.title}</h3>
+                                                            <h3 className="text-xl font-bold text-indigo-400 line-clamp-2 h-14">{book.title}</h3>
                                                         </div>
-                                                        <p className="text-sm text-gray-400">{book.author}</p>
+                                                        <p className="text-md text-gray-400 font-semibold -mt-[20px]">{book.author}</p>
                                                         <div className="flex items-baseline gap-2">
                                                             <span className='text-lg font-bold text-gray-900'>৳{book.finalPrice}</span>
                                                             {book.price && (

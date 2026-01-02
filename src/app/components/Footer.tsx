@@ -161,6 +161,12 @@ const Footer = () => {
             height={50}
             width={70}
             />
+            <Image
+            src='/icons/ssl-commerz.png'
+            alt='SSLCommerz'
+            height={50}
+            width={90}
+            />
           </div>
         </div>
       </div>
