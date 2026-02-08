@@ -1,0 +1,21 @@
+// compiler options
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./",
+        "strict": true,
+        "esModuleInterop": true,
+    },
+}
+
+// install for backend
+// npm i express mongoose mongodb dotenv body-parser typescript cors
+
+// install -----npm i nodemon------ helps to update when code changes in realtime
+
+
+//mongodb cluster 
+// username: smhasan4599 
+// password: j6nN7PKT24xam6ri

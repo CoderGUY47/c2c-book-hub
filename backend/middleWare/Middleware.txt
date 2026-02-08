@@ -1,0 +1,5 @@
+//we want to add id property to the Request interface, so that we can access req.id in our controllers
+//this is called declaration merging in typescript
+//we are declaring a global namespace called Express, and then we are adding a new interface called Request to it
+//and then we are adding a new property called id of type string to the Request interface
+//now we can use req.id in our controllers to get user id

@@ -1,0 +1,743 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-poppins: var(--font-poppins);
+  --font-hanken-grotesk: var(--font-hanken-grotesk);
+}
+/* body {
+  font-family: "Inconsolata", monospace;
+} */
+
+/*
+@custom-variant dark (&:is(.dark *));
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --radius-md: calc(var(--radius) - 2px);
+
+  --radius-lg: var(--radius);
+
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+
+  --color-input: var(--input);
+
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+
+  --color-chart-2: var(--chart-2);
+
+  --color-chart-3: var(--chart-3);
+
+  --color-chart-4: var(--chart-4);
+
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  --color-sidebar-primary: var(--sidebar-primary);
+
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+
+  --color-sidebar-accent: var(--sidebar-accent);
+
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+
+  --color-sidebar-border: var(--sidebar-border);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.205 0 0);
+
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.97 0 0);
+
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+
+  --muted-foreground: oklch(0.556 0 0);
+
+  --accent: oklch(0.97 0 0);
+
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: oklch(0.922 0 0);
+
+  --input: oklch(92.191% 0.0001 271.152);
+
+  --ring: oklch(0.708 0 0);
+
+  --chart-1: oklch(0.646 0.222 41.116);
+
+  --chart-2: oklch(0.6 0.118 184.704);
+
+  --chart-3: oklch(0.398 0.07 227.392);
+
+  --chart-4: oklch(0.828 0.189 84.429);
+
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  --sidebar: oklch(0.985 0 0);
+
+  --sidebar-foreground: oklch(0.145 0 0);
+
+  --sidebar-primary: oklch(0.205 0 0);
+
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+
+  --sidebar-accent: oklch(0.97 0 0);
+
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+
+  --sidebar-border: oklch(0.922 0 0);
+
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.205 0 0);
+
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0 0);
+
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.922 0 0);
+
+  --primary-foreground: oklch(0.205 0 0);
+
+  --secondary: oklch(0.269 0 0);
+
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+
+  --muted-foreground: oklch(0.708 0 0);
+
+  --accent: oklch(0.269 0 0);
+
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.704 0.191 22.216);
+
+  --border: oklch(1 0 0 / 10%);
+
+  --input: oklch(1 0 0 / 15%);
+
+  --ring: oklch(0.556 0 0);
+
+  --chart-1: oklch(0.488 0.243 264.376);
+
+  --chart-2: oklch(0.696 0.17 162.48);
+
+  --chart-3: oklch(0.769 0.188 70.08);
+
+  --chart-4: oklch(0.627 0.265 303.9);
+
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  --sidebar: oklch(0.205 0 0);
+
+  --sidebar-foreground: oklch(0.985 0 0);
+
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+
+  --sidebar-accent: oklch(0.269 0 0);
+
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+
+  --sidebar-border: oklch(1 0 0 / 10%);
+
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Retro Button Design */
+.retro-button {
+  --stone-50: #fafaf9;
+  --stone-800: #292524;
+  --yellow-400: #8900de;
+
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1;
+  font-size: 1rem;
+  border-radius: 0.7rem;
+  outline: 2px solid transparent;
+  outline-offset: 6px;
+  color: var(--stone-50);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.retro-button:active {
+  outline-color: var(--yellow-400);
+}
+
+.retro-button:focus-visible {
+  outline-color: var(--yellow-400);
+  outline-style: dashed;
+}
+
+.retro-button > div {
+  padding: 2px;
+  border-radius: .7rem;
+  background-color: var(--yellow-400);
+  transform: translate(-4px, -4px);
+  transition: all 150ms ease;
+  box-shadow: 0.5px 0.5px 0 0 var(--yellow-400), 1px 1px 0 0 var(--yellow-400),
+    1.5px 1.5px 0 0 var(--yellow-400), 2px 2px 0 0 var(--yellow-400),
+    2.5px 2.5px 0 0 var(--yellow-400), 3px 3px 0 0 var(--yellow-400),
+    0 0 0 2px var(--stone-800), 0.5px 0.5px 0 2px var(--stone-800),
+    1px 1px 0 2px var(--stone-800), 1.5px 1.5px 0 2px var(--stone-800),
+    2px 2px 0 2px var(--stone-800), 2.5px 2.5px 0 2px var(--stone-800),
+    3px 3px 0 2px var(--stone-800), 3.5px 3.5px 0 2px var(--stone-800),
+    4px 4px 0 2px var(--stone-800), 0 0 0 4px var(--stone-50),
+    0.5px 0.5px 0 4px var(--stone-50), 1px 1px 0 4px var(--stone-50),
+    1.5px 1.5px 0 4px var(--stone-50), 2px 2px 0 4px var(--stone-50),
+    2.5px 2.5px 0 4px var(--stone-50), 3px 3px 0 4px var(--stone-50),
+    3.5px 3.5px 0 4px var(--stone-50), 4px 4px 0 4px var(--stone-50);
+}
+
+.retro-button:hover > div {
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 0 var(--yellow-400), 0 0 0 0 var(--yellow-400),
+    0 0 0 0 var(--yellow-400), 0 0 0 0 var(--yellow-400),
+    0 0 0 0 var(--yellow-400), 0 0 0 0 var(--yellow-400),
+    0 0 0 2px var(--stone-800), 0 0 0 2px var(--stone-800),
+    0 0 0 2px var(--stone-800), 0 0 0 2px var(--stone-800),
+    0 0 0 2px var(--stone-800), 0 0 0 2px var(--stone-800),
+    0 0 0 2px var(--stone-800), 0 0 0 2px var(--stone-800),
+    0 0 0 2px var(--stone-800), 0 0 0 4px var(--stone-50),
+    0 0 0 4px var(--stone-50), 0 0 0 4px var(--stone-50),
+    0 0 0 4px var(--stone-50), 0 0 0 4px var(--stone-50),
+    0 0 0 4px var(--stone-50), 0 0 0 4px var(--stone-50),
+    0 0 0 4px var(--stone-50), 0 0 0 4px var(--stone-50);
+}
+
+.retro-button > div > div {
+  position: relative;
+  pointer-events: none;
+  border-radius: calc(0.7rem - 2px);
+  background-color: var(--stone-800);
+  width: 100%;
+}
+
+.retro-button > div > div::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.7rem;
+  opacity: 0.1;
+  background-image: radial-gradient(rgb(255 255 255 / 80%) 20%, transparent 20%),
+    radial-gradient(rgb(255 255 255 / 100%) 20%, transparent 20%);
+  background-position: 0 0, 4px 4px;
+  background-size: 8px 8px;
+  mix-blend-mode: hard-light;
+  box-shadow: inset 0 0 0 1px var(--stone-800);
+  animation: dots 0.4s infinite linear;
+  transition: opacity 150ms ease;
+}
+
+.retro-button > div > div > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  gap: 0.25rem;
+  filter: drop-shadow(0 -1px 0 var(--stone-800));
+  color: var(--stone-50);
+}
+
+.retro-button > div > div > div:hover {
+  filter: drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.1));
+}
+
+.retro-button > div > div > div:active {
+  transform: translateY(2px);
+}
+
+@keyframes star-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dots {
+  0% {
+    background-position: 0 0, 4px 4px;
+  }
+  100% {
+    background-position: 8px 0, 12px 4px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .retro-button:active,
+  .retro-button:focus-visible {
+    outline-color: var(--yellow-400);
+  }
+}
+
+/* Skew Button Design */
+/* Skew Button Design */
+.skew-button {
+  transform-style: preserve-3d;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white; /* Changed to white for better visibility on black/40 */
+  border: none;
+  border-radius: 9999px; /* rounded-full */
+  cursor: pointer;
+  transform: rotateX(20deg);
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2.5rem auto;
+}
+
+.skew-button:hover {
+  color: white;
+  z-index: 1;
+}
+
+.skew-button::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background-color: #a855f7; /* purple-500 */
+  top: 0;
+  left: -40px;
+  z-index: -1;
+  transform: skewX(45deg);
+  border-radius: 9999px; /* Match button radius */
+  transition: all 1s;
+}
+
+.skew-button::after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  filter: blur(7px);
+  height: 100%;
+  background-color: white;
+  top: 0;
+  left: -10px;
+  transition: all 0.9s linear;
+  transform: skewX(45deg);
+}
+
+.skew-button:hover::after {
+  transform: translateX(115px);
+}
+
+.skew-button:hover::before {
+  width: 200%;
+}
+
+/* Ripple Button Design */
+.ripple-button {
+  outline: 0;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.ripple-button:hover {
+  opacity: 0.95;
+  background-color: #7c3aed; /* Maintain purple-600 on hover */
+}
+
+.ripple-button .animation {
+  border-radius: 100%;
+  animation: ripple 0.6s linear infinite;
+  display: block;
+  width: 2px;
+  height: 2px;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 255, 255, 0.1),
+      0 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 60px rgba(255, 255, 255, 0.1),
+      0 0 0 80px rgba(255, 255, 255, 0);
+  }
+}
+
+
+
+
+
+.glowing-box-active .glowing-box-animations,
+.glowing-box-active .glowing-box-borders-masker {
+  opacity: 1;
+}
+
+.glowing-box-animations {
+  opacity: 1; /* Always visible as per request */
+  pointer-events: none;
+  transition: 1s ease opacity;
+}
+
+.glowing-box-animations,
+.glowing-box-borders {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.glowing-box-animations:before,
+.glowing-box-borders:before {
+  content: "";
+  float: left;
+  padding-top: 100%;
+}
+
+.glowing-box-glow {
+  filter: blur(10px);
+  opacity: 0.1;
+}
+
+.glowing-box-animations * {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.glowing-box-stars-masker {
+  -webkit-mask: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjgnIGhlaWdodD0nMjQnIHZpZXdCb3g9JzAgMCAyOCAyNCcgZmlsbD0nbm9uZScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48cGF0aCBkPSdNMTQuMDUzNCAxNS43MzJDMTMuODQ0NCAxNS4yODMgMTQuMjg0OCAxNC44NDg5IDE0LjczMjYgMTUuMDUxQzE0LjgyOTYgMTUuMDk1OSAxNC45MDQzIDE1LjE3MDcgMTQuOTQ5IDE1LjI2OEMxNS4xNTA2IDE1LjcxNyAxNC43MTc3IDE2LjE1MTEgMTQuMjY5OCAxNS45NDlDMTQuMTcyOCAxNS45MDQxIDE0LjA5ODIgMTUuODI5MyAxNC4wNTM0IDE1LjczMlonIGZpbGw9J2JsYWNrJy8+PHBhdGggZD0nTTE4LjgwMDEgMTMuNTA5M0MxOS4wMDE2IDEzLjA2MDMgMTguNTY4NyAxMi42MjYzIDE4LjEyMDkgMTIuODI4M0MxOC4wMjM5IDEyLjg3MzIgMTcuOTQ5MiAxMi45NDgxIDE3LjkwNDUgMTMuMDQ1M0MxNy42OTU1IDEzLjQ5NDQgMTguMTM1OCAxMy45Mjg0IDE4LjU4MzcgMTMuNzI2NEMxOC42ODA3IDEzLjY4MTUgMTguNzU1MyAxMy42MDY2IDE4LjgwMDEgMTMuNTA5M1onIGZpbGw9J2JsYWNrJy8+PHBhdGggZD0nTTAuOTQ5MDQzIDIuNzMyQzEuMTUwNTcgMi4yODI5NyAwLjcxNzY2MyAxLjg0ODkxIDAuMjY5ODM2IDIuMDUwOTdDMC4xNzI4MDYgMi4wOTU4NyAwLjA5ODE2MiAyLjE3MDcxIDAuMDUzMzc5MyAyLjI2OEMtMC4xNTU2MDcgMi43MTcwMyAwLjI4NDc1OSAzLjE1MTA5IDAuNzMyNTg3IDIuOTQ5MDNDMC44Mjk2MTYgMi45MDQxMyAwLjkwNDI2IDIuODI5MjkgMC45NDkwNDMgMi43MzJaJyBmaWxsPSdibGFjaycvPjxwYXRoIGQ9J00yNi45NDg5IDcuNzMyQzI3LjE1MSA3LjI4Mjk3IDI2LjcxNjkgNi44NDg5MSAyNi4yNjc5IDcuMDUwOTdDMjYuMTcwNiA3LjA5NTg3IDI2LjA5NTggNy4xNzA3MSAyNi4wNTA4IDcuMjY4QzI1Ljg0ODggNy43MTcwMyAyNi4yODI4IDguMTUxMDkgMjYuNzMxOSA3Ljk0OTAzQzI2LjgyOTIgNy45MDQxMyAyNi45MDQgNy44MjkyOSAyNi45NDg5IDcuNzMyWicgZmlsbD0nYmxhY2snLz48cGF0aCBkPSdNMTMuMDUzNCA1LjczMkMxMi44NDQ0IDUuMjgyOTcgMTMuMjg0OCA0Ljg0ODkxIDEzLjczMjYgNS4wNTA5N0MxMy44Mjk2IDUuMDk1ODcgMTMuOTA0MyA1LjE3MDcxIDEzLjk0OSA1LjI2OEMxNC4xNTA2IDUuNzE3MDMgMTMuNzE3NyA2LjE1MTA5IDEzLjI2OTggNS45NDkwM0MxMy4xNzI4IDUuOTA0MTMgMTMuMDk4MiA1LjgyOTI5IDEzLjA1MzQgNS43MzJaJyBmaWxsPSdibGFjaycvPjxwYXRoIGQ9J00xMC4wNTM0IDE3LjczMkM5Ljg0NDM5IDE3LjI4MyAxMC4yODQ4IDE2Ljg0ODkgMTAuNzMyNiAxNy4wNTFDMTAuODI5NiAxNy4wOTU5IDEwLjkwNDMgMTcuMTcwNyAxMC45NDkgMTcuMjY4QzExLjE1MDYgMTcuNzE3IDEwLjcxNzcgMTguMTUxMSAxMC4yNjk4IDE3L90OUMxMC4xNzI4IDE3LjkwNDEgMTAuMDk4MiAxNy44MjkzIDEwLjA1MzQgMTcuNzMyWicgZmlsbD0nYmxhY2snLz48cGF0aCBkPSdNMTUuMDUzNCAyMS43MzJDMTQuODQ0NCAyMS4yODMgMTUuMjg0OCAyMC44NDg5IDE1LjczMjYgMjEuMDUxQzE1LjgyOTYgMjEuMDk1OSAxNS45MDQzIDIxLjE3MDcgMTUuOTQ5IDIxLjI2OEMxNi4xNTA2IDIxLjcxNyAxNS43MTc3IDIyLjE1MTEgMTUuMjY5OCAyMS45NDlDMTUuMTcyOCAyMS45MDQxIDE1LjA5ODIgMjEuODI5MyAxNS4wNTM0IDIxLjczMlonIGZpbGw9J2JsYWNrJy8+PC9zdmc+Cg==);
+  mask: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjgnIGhlaWdodD0nMjQnIHZpZXdCb3g9JzAgMCAyOCAyNCcgZmlsbD0nbm9uZScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48cGF0aCBkPSdNMTQuMDUzNCAxNS43MzJDMTMuODQ0NCAxNS4yODMgMTQuMjg0OCAxNC44NDg5IDE0LjczMjYgMTUuMDUxQzE0LjgyOTYgMTUuMDk1OSAxNC45MDQzIDE1LjE3MDcgMTQuOTQ5IDE1LjI2OEMxNS4xNTA2IDE1LjcxNyAxNC43MTc3IDE2LjE1MTEgMTQuMjY5OCAxNS45NDlDMTQuMTcyOCAxNS45MDQxIDE0LjA5ODIgMTUuODI5MyAxNC4wNTM0IDE1LjczMlonIGZpbGw9J2JsYWNrJy8+PHBhdGggZD0nTTE4LjgwMDEgMTMuNTA5M0MxOS4wMDE2IDEzLjA2MDMgMTguNTY4NyAxMi42MjYzIDE4LjEyMDkgMTIuODI4M0MxOC4wMjM5IDEyLjg3MzIgMTcuOTQ5MiAxMi45NDgxIDE3LjkwNDUgMTMuMDQ1M0MxNy42OTU1IDEzLjQ5NDQgMTguMTM1OCAxMy45Mjg0IDE4LjU4MzcgMTMuNzI2NEMxOC42ODA3IDEzLjY4MTUgMTguNzU1MyAxMy42MDY2IDE4LjgwMDEgMTMuNTA5M1onIGZpbGw9J2JsYWNrJy8+PHBhdGggZD0nTTAuOTQ5MDQzIDIuNzMyQzEuMTUwNTcgMi4yODI5NyAwLjcxNzY2MyAxLjg0ODkxIDAuMjY5ODM2IDIuMDUwOTdDMC4xNzI4MDYgMi4wOTU4NyAwLjA5ODE2MiAyLjE3MDcxIDAuMDUzMzc5MyAyLjI2OEMtMC4xNTU2MDcgMi43MTcwMyAwLjI4NDc1OSAzLjE1MTA5IDAuNzMyNTg3IDIuOTQ5MDNDMC44Mjk2MTYgMi45MDQxMyAwLjkwNDI2IDIuODI5MjkgMC45NDkwNDMgMi43MzJaJyBmaWxsPSdibGFjaycvPjxwYXRoIGQ9J00yNi45NDg5IDcuNzMyQzI3LjE1MSA3LjI4Mjk3IDI2LjcxNjkgNi44NDg5MSAyNi4yNjc5IDcuMDUwOTdDMjYuMTcwNiA3LjA5NTg3IDI2LjA5NTggNy4xNzA3MSAyNi4wNTA4IDcuMjY4QzI1Ljg0ODggNy43MTcwMyAyNi4yODI4IDguMTUxMDkgMjYuNzMxOSA3Ljk0OTAzQzI2LjgyOTIgNy45MDQxMyAyNi45MDQgNy44MjkyOSAyNi45NDg5IDcuNzMyWicgZmlsbD0nYmxhY2snLz48cGF0aCBkPSdNMTMuMDUzNCA1LjczMkMxMi44NDQ0IDUuMjgyOTcgMTMuMjg0OCA0Ljg0ODkxIDEzLjczMjYgNS4wNTA5N0MxMy44Mjk2IDUuMDk1ODcgMTMuOTA0MyA1LjE3MDcxIDEzLjk0OSA1LjI2OEMxNC4xNTA2IDUuNzE3MDMgMTMuNzE3NyA2LjE1MTA5IDEzLjI2OTggNS45NDkwM0MxMy4xNzI4IDUuOTA0MTMgMTMuMDk4MiA1LjgyOTI5IDEzLjA1MzQgNS43MzJaJyBmaWxsPSdibGFjaycvPjxwYXRoIGQ9J00xMC4wNTM0IDE3LjczMkM5Ljg0NDM5IDE3LjI4MyAxMC4yODQ4IDE2Ljg0ODkgMTAuNzMyNiAxNy4wNTFDMTAuODI5NiAxNy4wOTU5IDEwLjkwNDMgMTcuMTcwNyAxMC45NDkgMTcuMjY4QzExLjE1MDYgMTcuNzE3IDEwLjcxNzcgMTguMTUxMSAxMC4yNjk4IDE3Ljk0OUMxMC4xNzI4IDE3LjkwNDEgMTAuMDk4MiAxNy44MjkzIDEwLjA1MzQgMTcuNzMyWicgZmlsbD0nYmxhY2snLz48cGF0aCBkPSdNMTUuMDUzNCAyMS43MzJDMTQuODQ0NCAyMS4yODMgMTUuMjg0OCAyMC44NDg5IDE1LjczMjYgMjEuMDUxQzE1LjgyOTYgMjEuMDk1OSAxNS45MDQzIDIxLjE3MDcgMTUuOTQ5IDIxLjI2OEMxNi4xNTA2IDIxLjcxNyAxNS43MTc3IDIyLjE1MTEgMTUuMjY5OCAyMS45NDlDMTUuMTcyOCAyMS45MDQxIDE1LjA5ODIgMjEuODI5MyAxNS4wNTM0IDIxLjczMlonIGZpbGw9J2JsYWNrJy8+PC9zdmc+Cg==);
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 13%;
+  mask-size: 13%;
+}
+
+.glowing-box-borders,
+.glowing-box-glow,
+.glowing-box-stars {
+  animation: borderTurn var(--animation-speed, 2s) infinite linear;
+  background-image: conic-gradient(
+    from 0 at 50% 50%,
+    rgba(255, 255, 255, 0.5) 0deg,
+    rgba(255, 255, 255, 0) 60deg,
+    rgba(255, 255, 255, 0) 310deg,
+    rgba(255, 255, 255, 0.5) 360deg
+  );
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.glowing-box-borders-masker {
+  border-radius: 12px;
+  content: "";
+  inset: 0;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 1;
+  padding: 1.5px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transition: 1s ease opacity;
+}
+
+.glowing-box-borders {
+  animation-name: borderTurnWithTranslate;
+}
+
+
+
+.glowing-box-button .glowing-span {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 8.85%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+
+@keyframes borderTurnWithTranslate {
+  0% { transform: translate(-50%, -50%) rotate(0); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes borderTurn {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modern Glow Effect */
+.modern-glow {
+  position: relative;
+  z-index: 1;
+}
+
+.modern-glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(to right, #9333ea, #4f46e5);
+  filter: blur(30px);
+  opacity: 0.3;
+  z-index: -1;
+  transform: scale(0.95);
+  transition: all 0.5s ease-in-out;
+  animation: pulse-glow 4s infinite;
+}
+
+.modern-glow:hover::after {
+  filter: blur(35px);
+  opacity: 0.5;
+  transform: scale(1.1);
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+}
+
+/* Modern Custom Scrollbar Utility */
+.modern-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4); /* violet-500/40 */
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7); /* violet-500/70 */
+}
+
+/* For Firefox */
+.modern-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(142, 94, 255, 0.806) transparent;
+}
+
+/* From Uiverse.io by aaronross1 */ 
+.delete-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #3b3945;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.delete-svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.delete-svgIcon path {
+  fill: white;
+}
+
+.delete-button:hover {
+  width: 80px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69) !important;
+  align-items: center;
+}
+
+.delete-button:hover .delete-svgIcon {
+  width: 15px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.delete-button::before {
+  display: none;
+  content: "Delete";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.delete-button:hover::before {
+  display: block;
+  padding-right: 8px;
+  font-size: 11px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}

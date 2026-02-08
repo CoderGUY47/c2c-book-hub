@@ -1,5 +1,43 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Local Ignores
+node_modules/
+.next/
+.env*
+dist/
+*.log
 
+# Agent Ignores
+.qodo/
+.agent/
+.agents/
+.claude/
+.cline/
+.codebuddy/
+.codex/
+.commandcode/
+.continue/
+.crush/
+.cursor/
+.factory/
+.gemini/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.opencode/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.windsurf/
+.zencoder/
+
+# Remote Ignores (Standard Next.js)
 # dependencies
 /node_modules
 /.pnp
@@ -13,10 +51,6 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 
@@ -29,9 +63,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
 
 # vercel
 .vercel
