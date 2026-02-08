@@ -93,15 +93,31 @@ Follow these steps to set up the project locally.
 ## 📂 Project Structure
 
 ```bash
-frontend/
-├── src/
-│   ├── app/              # Next.js App Router pages
-│   ├── components/       # Reusable UI components
-│   ├── lib/              # Utilities and types
-│   ├── store/            # Redux store and slices
-│   └── ...
-├── public/               # Static assets
-└── ...
+c2c-book-hub/
+├── frontend/
+│   ├── public/               # Static assets
+│   ├── src/
+│   │   ├── app/              # Next.js App Router pages & layouts
+│   │   ├── components/       # Reusable UI components (Shadcn, Custom)
+│   │   ├── lib/              # Utilities, types, and constants
+│   │   └── store/            # Redux state management (Slices, APIs)
+│   ├── .env.local            # Environment variables
+│   ├── next.config.ts        # Next.js configuration
+│   └── tailwind.config.js    # Tailwind CSS configuration
+│
+├── backend/
+│   ├── config/               # Database and app configuration
+│   ├── controllers/          # Route logic and request handling
+│   ├── middleware/           # Custom middleware (Auth, Error handling)
+│   ├── models/               # Mongoose schemas and models
+│   ├── routes/               # API route definitions
+│   ├── services/             # Business logic services
+│   ├── utils/                # Helper functions
+│   ├── uploads/              # File uploads directory
+│   ├── index.ts              # Entry point
+│   └── verify_ssl.ts         # SSL Verification utility
+│
+└── README.md                 # Project documentation
 ```
 
 ## 🤝 Contributing
