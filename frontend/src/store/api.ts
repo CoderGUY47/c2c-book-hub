@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // import { register } from 'module'
 
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 const API_URLS={
     REGISTER:`/api/auth/register`,

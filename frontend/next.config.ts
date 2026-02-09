@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       'covers.openlibrary.org'
     ]
   },
+  output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../"),
 };
 
