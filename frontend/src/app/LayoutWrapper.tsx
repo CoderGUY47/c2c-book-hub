@@ -6,14 +6,21 @@ import { PersistGate } from "redux-persist/integration/react";
 import BookLoader from "@/lib/BookLoader";
 import { Toaster } from 'react-hot-toast';
 import AuthCheck from "@/store/Provider/AuthProvider";
+import Header from "./components/Header";
+import { usePathname } from "next/navigation";
+import Footer from "./components/Footer";
 
 export default function LayoutWrapper ({children}: {children: React.ReactNode}){
+    const pathname = usePathname();
+    const isAdminRoute = pathname.startsWith('/admin');
     return(
         <Provider store={store}>
             <PersistGate loading={<BookLoader/>} persistor={persistor}>
             <Toaster />
                 <AuthCheck>
+                    {!isAdminRoute && <Header/>}
                     {children}
+                    {!isAdminRoute && <Footer/>}
                 </AuthCheck>
             </PersistGate>
         </Provider>

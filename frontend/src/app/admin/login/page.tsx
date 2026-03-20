@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -92,17 +94,13 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
     setSignupLoading(true);
     try {
       const { email, password, name } = data;
-      const result = await register({ email, password, name }).unwrap();
+      const result = await register({ email, password, name, role: "admin" }).unwrap();
       //console.log("Registration successful:", result);
       if (result.success) {
         toast.success(
           "Registration verification link sent! Please verify your email before logging in."
         );
-        dispatch(setUser(result.data));
-        dispatch(toggleLoginDialog());
-        dispatch(authStatus());
-        router.push("/");
-        window.location.reload();
+        setCurrentTab("login");
       }
     } catch (error) {
       console.error(error);
@@ -120,12 +118,8 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
       console.log("Login successful:", result);
       if (result.success) {
         toast.success("User logged in successfully.");
-        //dispatch(setUser(result.data));
-        //dispatch(toggleLoginDialog());
-        setIsLoginOpen(false);
         dispatch(authStatus());
-        router.push("/");
-        window.location.reload();
+        window.location.href = "/admin";
       }
     } catch (error) {
       console.error(error);
@@ -135,24 +129,7 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setGoogleLoading(true);
-    try {
-      router.push(`${BASE_URL}/api/auth/google`);
-      dispatch(authStatus());
-      dispatch(toggleLoginDialog());
-      setTimeout(() => {
-        toast.success("Google login successful.");
-        setIsLoginOpen(false);
-        router.push("/");
-      }, 3000);
-    } catch (error) {
-      console.error(error);
-      toast.error("Google login failed. Please try again.");
-    } finally {
-      setGoogleLoading(false);
-    }
-  };
+
 
   const onSubmitForgotPassword = async (data: ForgotPasswordFormData) => {
     // handle login logic here
@@ -173,16 +150,15 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
   };
 
   return (
-    <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
-      <DialogContent className="sm:max-w-[500px] p-6 bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-lg">
-        <DialogHeader>
-          <DialogTitle className="text-center text-3xl font-poppins font-black text-white mt-4 mb-4">
-            Welcome to Book Shop
-          </DialogTitle>
-          <DialogDescription className="text-center text-gray-100 text-lg font-poppins font-semibold">
-            Please login or sign up to continue.
-          </DialogDescription>
-          <Tabs
+    <div className="min-h-screen flex items-center justify-center bg-[url('/images/book2.webp')] bg-cover bg-center p-4 relative">
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="w-full max-w-[500px] p-6 bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-lg relative z-10">
+          <div className="text-center text-white mb-2 mt-4">
+            <h1 className="text-3xl font-poppins font-black mb-4">Book Shop Admin</h1>
+            <p className="text-gray-100 text-lg font-poppins font-semibold">Please login to access the dashboard.</p>
+          </div>
+          <div>
+                      <Tabs
             value={currentTab}
             onValueChange={(value) =>
               setCurrentTab(value as "login" | "signup" | "forgot-password")
@@ -190,10 +166,10 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
           >
             <TabsList className="grid w-full grid-cols-3 mb-4 mt-4">
               <TabsTrigger value="login" className="font-poppins text-md font-semibold">
-                Login
+                Login as Admin
               </TabsTrigger>
               <TabsTrigger value="signup" className="font-poppins text-md font-semibold">
-                Sign Up
+                Sign Up as Admin
               </TabsTrigger>
               <TabsTrigger value="forgot-password" className="font-poppins text-md font-semibold">
                 Reset password
@@ -272,36 +248,10 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
                       {loginLoading ? (
                         <Loader2 className="animate-spin mr-2" size={20} />
                       ) : (
-                        "Login"
+                        "Login as Admin"
                       )}
                     </Button>
                   </form>
-                  <div className="flex items-center my-4">
-                    <div className="h-px flex-1 bg-white/30"></div>
-                    <span className="mx-4 text-white font-poppins">or</span>
-                    <div className="h-px flex-1 bg-white/30"></div>
-                  </div>
-                  <Button
-                    onClick={handleGoogleLogin}
-                    className="w-full flex items-center font-poppins justify-center gap-2 bg-white text-gray-700 border border-gray-300 font-bold hover:bg-white/70 hover:border-none transition duration-300"
-                  >
-                    {googleLoading ? (
-                      <>
-                        <Loader2 className="animate-spin mr-2" size={20} />
-                        Continue with Google
-                      </>
-                    ) : (
-                      <>
-                        <Image
-                          src="/icons/google.svg"
-                          alt="google"
-                          width={20}
-                          height={20}
-                        />
-                        Continue with Google
-                      </>
-                    )}
-                  </Button>
                 </TabsContent>
 
                 {/* signup part */}
@@ -414,7 +364,7 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
                       {signupLoading ? (
                         <Loader2 className="animate-spin mr-2" size={20} />
                       ) : (
-                        "Sign Up"
+                        "Sign Up as Admin"
                       )}
                     </Button>
                   </form>
@@ -502,9 +452,9 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
             </Link>
             .
           </p>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+          </div>
+        </div>
+    </div>
   );
 };
 

@@ -42,11 +42,11 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-gradient from-gray-950 via-bg-transparent to-gray-950 ">
         <LayoutWrapper>
-          <Header />
+          {/* <Header /> */}
           <main className="flex-grow w-full bg-gray-950">
             {children}
           </main>
-          <Footer />
+          {/* <Footer /> */}
         </LayoutWrapper>
       </body>
     </html>
