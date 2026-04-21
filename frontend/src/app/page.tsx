@@ -120,10 +120,9 @@ export default function Homepage() {
   const [currentImage, setCurrentImage] = useState(0);
   const user = useSelector((state: RootState) => state.user.user);
   const router = useRouter();
+  // No automatic redirect for admins - allow them to browse the homepage
   useEffect(() => {
-    if (user && user.role === "admin") {
-      router.push("/admin");
-    }
+    // Admin check removed to prevent infinite loop/forced redirects
   }, [user, router]);
 
   
