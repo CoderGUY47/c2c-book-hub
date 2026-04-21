@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import {
   ArrowRightCircle,
   BookOpen,
@@ -209,178 +210,102 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Trending Books Section (NYT Style) */}
-      <TrendingBooksSection />
-
-      {/* Browse Genres Section */}
-      <BrowseGenresSection />
-
-      <NewBooks />
-      {/* <div className="flex justify-center mt-7 mb-20">
-        <Link href="/books">
-          <Button className="ripple-button inline-flex items-center justify-between bg-purple-600 text-md font-bold p-6 text-white border-0 rounded-full tracking-wider overflow-hidden transition-all cursor-pointer">
-            <i className="animation"></i>
-            Go to Books Collection <BiCollection className="size-5" />
-            <i className="animation"></i>
-          </Button>
-        </Link>
-      </div> */}
-
-      {/* Recommended for You (Mock Books) */}
-      <MockBooksSection />
-
-      {/* Free Ebooks Section */}
-      <FreeEbooksSection />
-
-      {/* selling system */}
+      {/* Book-Hub Ecosystem & Intelligence Hub */}
       <div className="py-24 bg-gray-950 relative overflow-hidden">
         {/* Background Decorative Blurs */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] -z-10" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -z-10" />
+        
+        <div className="w-[85%] mx-auto space-y-24">
+          
+          {/* Discovery Row: Bento Layout for Dynamic Sections */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <div className="lg:col-span-8 bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 backdrop-blur-sm">
+              <TrendingBooksSection />
+            </div>
+            <div className="lg:col-span-4 flex flex-col gap-6">
+              <div className="flex-1 bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 backdrop-blur-sm">
+                <BrowseGenresSection />
+              </div>
+              <div className="flex-1 bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 backdrop-blur-sm">
+                <FreeEbooksSection />
+              </div>
+            </div>
+          </div>
 
-        <section className="py-8 bg-transparent relative z-10">
-          <div className="w-[80%] mx-auto px-4">
+          {/* Catalog & Recommendations Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-4 backdrop-blur-sm shadow-2xl overflow-hidden">
+               <NewBooks />
+            </div>
+            <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-4 backdrop-blur-sm shadow-2xl overflow-hidden">
+               <MockBooksSection />
+            </div>
+          </div>
+
+          {/* THE MASTER HOW-IT-WORKS BENTO GRID */}
+          <section className="relative z-10 pt-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-poppins font-black mb-4 text-white tracking-tighter">
-                How to
-                <span className="text-transparent bg-clip-text bg-gradient-to-tl from-red-600 to-orange-400"> SELL </span>Your Used Books in
-                <span className="text-transparent bg-clip-text bg-gradient-to-tl from-indigo-600 to-violet-500"> Book-Hub?</span>
+              <h2 className="text-5xl md:text-7xl font-poppins font-black mb-8 text-white tracking-tighter leading-none">
+                Mastering the <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-400 via-purple-500 to-indigo-400">Book-Hub</span> Lifecycle
               </h2>
-              <p className="text-gray-400 max-w-2xl mx-auto text-lg font-medium">
-                Turn your bookshelf into a goldmine with these 3-step selling process.
+              <p className="text-gray-400 max-w-3xl mx-auto text-xl font-medium leading-relaxed">
+                A seamless journey from clearing your bookshelf to uncovering your next literary treasure.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              {sellSteps.map((step, index) => (
-                <div key={index} className="group relative w-full aspect-[3/4] md:aspect-auto md:h-[420px] flex justify-center p-2">
-                  {/* Premium Image-First Card */}
-                  <div className="relative w-full h-full rounded-[3rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(79,70,229,0.3)] group-hover:border-indigo-500/50">
-
-                    {/* Hero Icon (Fills Card) */}
-                    <div className="absolute inset-0 flex items-center justify-center p-0 transition-all duration-700 group-hover:scale-110 group-hover:blur-md opacity-90 group-hover:opacity-20">
-                      {/* @ts-ignore */}
-                      {step.imageSrc && (
-                        <Image
-                          /* @ts-ignore */
-                          src={step.imageSrc}
-                          alt={step.title}
-                          width={500}
-                          height={500}
-                          className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
-                        />
-                      )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[450px]">
+              {/* Combine and sequence steps for a Bento look */}
+              {[...sellSteps.map(s => ({ ...s, type: 'sell' })), ...buySteps.map(b => ({ ...b, type: 'buy' }))].map((step, index) => (
+                <div 
+                  key={`${step.type}-${index}`} 
+                  className={cn(
+                    "group relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-700 hover:shadow-[0_0_100px_rgba(79,70,229,0.2)]",
+                    step.type === 'sell' ? "hover:border-indigo-500/50" : "hover:border-purple-500/50",
+                    index === 0 ? "lg:col-span-2 lg:row-span-1" : "",
+                    index === 5 ? "lg:col-span-2 lg:row-span-1" : ""
+                  )}
+                >
+                  {/* Category Badge */}
+                  <div className="absolute top-8 left-8 z-20">
+                    <div className={cn(
+                      "px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl backdrop-blur-md border border-white/10",
+                      step.type === 'sell' ? "bg-indigo-600/20 text-indigo-400" : "bg-purple-600/20 text-purple-400"
+                    )}>
+                      {step.type === 'sell' ? "Seller Experience" : "Buyer Experience"} • {step.step}
                     </div>
+                  </div>
 
-                    {/* Step Number Badge (Preserved style as requested) */}
-                    <div className="absolute top-0 right-0 z-20 transition-all duration-500 group-hover:scale-90 group-hover:opacity-0">
-                      <div className="bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-black px-6 py-2 rounded-bl-3xl shadow-xl tracking-tighter uppercase text-xs">
-                        {step.step}
-                      </div>
-                    </div>
+                  {/* Visual Background */}
+                  <div className="absolute inset-0 flex items-center justify-center p-16 transition-all duration-1000 group-hover:scale-125 group-hover:blur-2xl opacity-70 group-hover:opacity-10">
+                    {step.imageSrc && (
+                      <Image
+                        src={step.imageSrc}
+                        alt={step.title}
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)]"
+                      />
+                    )}
+                  </div>
 
-                    {/* Hover Overlay (Full Content) */}
-                    <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-10 text-center opacity-0 group-hover:opacity-100 backdrop-blur-2xl bg-gray-950/40 transition-all duration-700">
-
-                      <div className="mb-4 bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                        {step.step}
-                      </div>
-
-                      <h3 className="text-3xl font-poppins font-black text-white tracking-tight leading-tight mb-6 transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200">
-                        {step.title}
-                      </h3>
-
-                      <div className="w-16 h-1 bg-indigo-500 rounded-full mb-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-300" />
-
-                      <p className="text-gray-200 font-medium leading-relaxed text-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-400">
-                        {step.description}
-                      </p>
-
-                      <div className="absolute bottom-10 flex flex-col items-center opacity-40">
-                        <div className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">
-                          Book-Hub
-                        </div>
-                      </div>
-                    </div>
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-12 text-center opacity-0 group-hover:opacity-100 backdrop-blur-2xl bg-gray-950/40 transition-all duration-700">
+                    <h3 className="text-4xl lg:text-5xl font-poppins font-black text-white tracking-tight leading-tight mb-8 transform -translate-y-8 group-hover:translate-y-0 transition-all duration-500">
+                      {step.title}
+                    </h3>
+                    <div className={cn(
+                      "w-20 h-1.5 rounded-full mb-8 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700",
+                      step.type === 'sell' ? "bg-indigo-500" : "bg-purple-500"
+                    )} />
+                    <p className="text-gray-200 font-medium leading-relaxed text-xl max-w-lg transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* buying system */}
-        <section className="py-10 pb-15 bg-transparent">
-          <div className="w-[80%] mx-auto px-4">
-            <div className="text-center mb-7">
-              <h2 className="text-4xl md:text-5xl font-poppins font-black mb-4 text-white tracking-tighter">
-                How to
-                <span className="text-transparent bg-clip-text bg-gradient-to-tl from-red-600 to-orange-400"> BUY </span>Your Used Books in
-                <span className="text-transparent bg-clip-text bg-gradient-to-tl from-indigo-600 to-violet-500"> Book-Hub?</span>
-              </h2>
-              <p className="text-gray-400 max-w-2xl mx-auto text-lg font-medium">
-                Get a limited dicscount and get the best price for your books in
-                Book-Hub.😉
-              </p>
-            </div>
-            <div className="relative grid md:grid-cols-3 gap-4 pt-10">
-              {buySteps.map((step, index) => (
-                <div key={index} className="group relative w-full aspect-[3/4] md:aspect-auto md:h-[420px] flex justify-center p-2">
-                  {/* Premium Image-First Card */}
-                  <div className="relative w-full h-full rounded-[3rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(124,58,237,0.3)] group-hover:border-purple-500/50">
-
-                    {/* Hero SVG Icon (Fills Card) */}
-                    <div className="absolute inset-0 flex items-center justify-center p-6 transition-all duration-700 group-hover:scale-110 group-hover:blur-md opacity-90 group-hover:opacity-20">
-                      {/* @ts-ignore */}
-                      {step.imageSrc && (
-                        <Image
-                          /* @ts-ignore */
-                          src={step.imageSrc}
-                          alt={step.title}
-                          width={280}
-                          height={280}
-                          className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
-                        />
-                      )}
-                    </div>
-
-                    {/* Step Badge (Subtle initial state) */}
-                    <div className="absolute top-6 left-6 z-20 transition-all duration-500 group-hover:scale-90 group-hover:opacity-0">
-                      <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black px-4 py-2 rounded-2xl uppercase tracking-[0.2em]">
-                        {step.step}
-                      </div>
-                    </div>
-
-                    {/* Hover Overlay (Full Content) */}
-                    <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-10 text-center opacity-0 group-hover:opacity-100 backdrop-blur-2xl bg-gray-950/40 transition-all duration-700">
-
-                      <div className="mb-4 bg-gradient-to-tr from-purple-600 to-indigo-600 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                        {step.step}
-                      </div>
-
-                      <h3 className="text-3xl font-poppins font-black text-white tracking-tight leading-tight mb-6 transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200">
-                        {step.title}
-                      </h3>
-
-                      <div className="w-16 h-1 bg-purple-500 rounded-full mb-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-300" />
-
-                      <p className="text-gray-200 font-medium leading-relaxed text-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-400">
-                        {step.description}
-                      </p>
-
-                      <div className="absolute bottom-10 flex flex-col items-center opacity-40">
-                        <div className="text-[10px] font-black uppercase tracking-[0.4em] text-purple-400">
-                          Book-Hub
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
+          </section>
         {/* blogs */}
         <section className="py-15 bg-transparent">
           <div className="w-[80%] mx-auto px-4">
