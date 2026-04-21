@@ -174,10 +174,6 @@ const page = () => {
             <h1 className='text-4xl font-black text-white tracking-tight uppercase'>Dashboard <span className="text-purple-500">Overview</span></h1>
             <p className="text-gray-500 mt-1 font-medium">Welcome back, Admin. Here's what's happening today.</p>
           </div>
-          <div className="hidden md:flex items-center gap-3 bg-[#1a1a1a] p-1 rounded-2xl border border-white/5">
-            <Button variant="ghost" className="rounded-xl text-white bg-white/5 shadow-sm px-6">Real-time</Button>
-            <Button variant="ghost" className="rounded-xl text-gray-500 hover:text-white px-6">Analytics</Button>
-          </div>
         </div>
         
         {/* displaying stats */}
