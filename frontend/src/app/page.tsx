@@ -322,6 +322,7 @@ export default function Homepage() {
         <div className="absolute top-40 right-95 w-[900px] h-[900px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 w-[900px] h-[1000px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
       </div>
-    </main>
+    </div>
+  </main>
   );
 }
