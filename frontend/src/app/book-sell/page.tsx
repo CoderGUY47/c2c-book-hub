@@ -60,13 +60,7 @@ const page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    reset,
-    control,
+  const { register, handleSubmit, watch, setValue, reset, control,
     formState: { errors },
   } = useForm<Bookdetails & { agreeToTerms: boolean; discount: number }>({
     defaultValues: {
@@ -75,6 +69,14 @@ const page = () => {
       discount: 0,
     },
   });
+
+
+  useEffect(() => {
+    if (user && user.role !== "user") {
+      router.push("/admin");
+    }
+  }, [user, router]);
+
 
   // Cover Image Handlers
   const handleCoverImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

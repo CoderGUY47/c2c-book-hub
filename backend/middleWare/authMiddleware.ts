@@ -8,6 +8,7 @@ declare global{
     namespace Express{
         interface Request{
             id: string; //we can use req.id in our controllers to get user id
+            role:string;
         }
     }
 }
@@ -26,6 +27,7 @@ const authenticatedUser = async(req:Request, res:Response, next:NextFunction)=>{
             return response(res,401,'Unauthorized login. User not found or Invalid token');
         }
         req.id = decode.userId; //we can use req.id in our controllers to get user id
+        req.role = decode.role; //we can use req.role in our controllers to get access to admin
         next(); //if everything is fine, proceed to the next middleware or route handler
     }
     catch(error){

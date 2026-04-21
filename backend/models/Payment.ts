@@ -27,7 +27,7 @@ export interface IPayment extends Document {
   order: mongoose.Types.ObjectId;
   amount: number;
   currency: string;
-  status: "pending" | "successful" | "failed" | "refunded" | "cancelled";
+  status: "successful" | "failed" | "refunded" | "cancelled";
   provider: string; // e.g., 'sslcommerz', 'bkash', 'cod'
   providerDetails: TProviderDetails;
 }
@@ -42,8 +42,8 @@ const PaymentSchema = new Schema<IPayment>(
     currency: { type: String, required: true, default: "BDT" },
     status: {
       type: String,
-      enum: ["pending", "successful", "failed", "refunded", "cancelled"],
-      default: "pending",
+      enum: ["successful", "failed", "refunded", "cancelled"],
+      default: "successful",
       required: true,
     },
     provider: { type: String, required: true },

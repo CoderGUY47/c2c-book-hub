@@ -71,6 +71,13 @@ const BooksContent = () => {
   const router = useRouter();
   const [books, setBooks] = useState<Bookdetails[]>([]);
 
+  const user = useSelector((state: RootState) => state.user.user);
+  useEffect(() => {
+    if (user && user.role !== "user") {
+      router.push("/admin");
+    }
+  }, [user, router]);
+
   useEffect(() => {
     if (apiResponse?.success) {
       setBooks(apiResponse.data);
@@ -274,8 +281,15 @@ const BooksContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-200">
-      <div className="container w-[80%] mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gray-950 text-slate-200 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] animate-pulse delay-1000" />
+        <div className="absolute top-[40%] right-[10%] w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container w-[80%] mx-auto px-4 py-8 relative z-10">
         <nav className="mb-8 flex items-center gap-2 text-sm text-slate-400">
           <Link href="/" className="hover:text-indigo-400 transition-colors">
             Home
@@ -302,19 +316,26 @@ const BooksContent = () => {
           <div className="space-y-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="space-y-2">
-                <h1 className="text-4xl md:text-6xl font-black font-poppins text-white tracking-tight">
-                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Used Book</span>
-                </h1>
-                <p className="text-slate-400 font-medium text-lg">Collection of over 100+ used books</p>
+                <motion.h1
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="text-4xl md:text-6xl font-black font-poppins text-white tracking-tight"
+                >
+                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-700 to-purple-600 drop-shadow-sm">Used Book</span>
+                </motion.h1>
+                <p className="text-slate-400 font-medium text-lg flex items-center gap-2">
+                  <span className="w-8 h-[1.75px] bg-indigo-500/50" />
+                  Collection of over {books.length * 100}+ old titles
+                </p>
               </div>
 
               <div className="flex items-center gap-4">
-                <span className="text-sm font-bold text-white uppercase tracking-widest hidden sm:block">Sort By</span>
+                <span className="text-sm font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Sort By</span>
                 <Select value={sortOption} onValueChange={setSortOption}>
-                  <SelectTrigger className="w-[220px] h-12 bg-slate-800/40 border-0 text-white rounded-xl font-poppins font-bold focus:ring-0 hover:bg-slate-800/0 transition-all">
+                  <SelectTrigger className="w-[220px] h-12 bg-slate-900/60 backdrop-blur-md border border-white/5 text-white rounded-xl font-poppins font-bold focus:ring-2 focus:ring-indigo-500/20 hover:bg-slate-800/80 transition-all shadow-xl">
                     <SelectValue placeholder="Latest Arrival" />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800/70 border-slate-700/40 border-0 text-white font-poppins">
+                  <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/10 text-white font-poppins">
                     <SelectItem value="newest">Latest Arrival</SelectItem>
                     <SelectItem value="oldest">Oldest First</SelectItem>
                     <SelectItem value="price-low">Price: Low to High</SelectItem>
@@ -325,10 +346,10 @@ const BooksContent = () => {
             </div>
 
             {/* Premium Horizontal Filter Bar */}
-            <div className="sticky top-[0px] z-40 py-2 -mx-4 px-4 bg-transparen shadow-2xl">
-              <div className="flex items-center gap-4 overflow-x-auto pb-2 no-scrollbar">
-                <div className="p-2.5 bg-indigo-500/10 rounded-lg shrink-0">
-                  <Ghost className="size-6 text-indigo-500" />
+            <div className="sticky top-4 z-40 py-4 -mx-4 px-4">
+              <div className="flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar p-2 bg-slate-900/40 backdrop-blur-2xl border border-white/5 rounded-2xl shadow-2xl">
+                <div className="p-2.5 bg-indigo-500/20 rounded-xl shrink-0 shadow-lg shadow-indigo-500/10">
+                  <Ghost className="size-6 text-indigo-400" />
                 </div>
                 {Object.entries(filters).map(([key, values]) => {
                   const activeCount =
@@ -341,24 +362,24 @@ const BooksContent = () => {
 
                   return (
                     <Select key={key}>
-                      <SelectTrigger className={`h-10 px-5 min-w-max rounded-xl border-white font-bold text-xs uppercase tracking-widest transition-all text-white
+                      <SelectTrigger className={`h-11 px-6 min-w-max rounded-xl border-white/5 font-bold text-xs uppercase tracking-widest transition-all text-white
                         ${activeCount > 0
-                          ? "bg-indigo-600/20 border-indigo-500/50 shadow-[0_0_15px_rgba(79,70,229,0.2)]"
-                          : "bg-slate-800/40 hover:bg-slate-700/40 border-transparent"}
+                          ? "bg-indigo-600/30 border-indigo-500/50 shadow-[0_0_20px_rgba(79,70,229,0.3)]"
+                          : "bg-slate-800/40 hover:bg-slate-700/60 border-transparent"}
                       `}>
                         <div className="flex items-center gap-3">
                           {key.charAt(0).toUpperCase() + key.slice(1)}
                           {activeCount > 0 && (
-                            <Badge className="bg-indigo-500 text-white border-0 text-[10px] h-4.5 min-w-[18px] flex items-center justify-center px-1 font-black">
+                            <Badge className="bg-indigo-500 text-white border-0 text-[10px] h-5 min-w-[20px] flex items-center justify-center px-1 font-black rounded-full">
                               {activeCount}
                             </Badge>
                           )}
                         </div>
                       </SelectTrigger>
-                      <SelectContent className="bg-slate-900/95 border-0 text-slate-500 font-poppins min-w-[220px] shadow-2xl">
-                        <div className="p-2 space-y-1">
+                      <SelectContent className="bg-slate-900/98 backdrop-blur-2xl border-white/10 text-white font-poppins min-w-[240px] shadow-2xl rounded-2xl">
+                        <div className="p-3 space-y-2">
                           {values.map((value) => (
-                            <div key={value} className="flex items-center gap-3 p-2.5 hover:bg-white rounded-xl cursor-pointer transition-colors" onClick={() => toggleFilter(key, value)}>
+                            <div key={value} className="flex items-center gap-3 p-3 hover:bg-indigo-500/10 rounded-xl cursor-pointer transition-all group/item" onClick={() => toggleFilter(key, value)}>
                               <Checkbox
                                 id={`${key}-${value}`}
                                 checked={
@@ -369,10 +390,10 @@ const BooksContent = () => {
                                           key === "author" ? selectedAuthor.includes(value) :
                                             key === "year" ? selectedYear.includes(value) : false
                                 }
-                                className="border-slate-700 data-[state=checked]:bg-indigo-500 data-[state=checked]:border-indigo-500"
-                                onCheckedChange={() => { }} // Controlled by div onClick
+                                className="border-slate-600 data-[state=checked]:bg-indigo-500 data-[state=checked]:border-indigo-500 transition-colors"
+                                onCheckedChange={() => { }}
                               />
-                              <Label htmlFor={`${key}-${value}`} className="text-sm font-bold cursor-pointer flex-1 tracking-wide text-white">{value}</Label>
+                              <Label htmlFor={`${key}-${value}`} className="text-sm font-bold cursor-pointer flex-1 tracking-wide group-hover/item:text-indigo-400 transition-colors">{value}</Label>
                             </div>
                           ))}
                         </div>
@@ -388,7 +409,7 @@ const BooksContent = () => {
                       setSelectedCondition([]); setSelectedType([]); setSelectedCategory([]);
                       setSelectedGenre([]); setSelectedAuthor([]); setSelectedYear([]);
                     }}
-                    className="text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 font-bold text-xs uppercase tracking-tighter transition-all rounded-xl"
+                    className="text-rose-400 hover:text-white hover:bg-rose-500/20 font-black text-xs uppercase tracking-widest transition-all rounded-xl border border-rose-500/20 px-6 h-11"
                   >
                     Reset All
                   </Button>
@@ -398,8 +419,8 @@ const BooksContent = () => {
 
             <div className="w-full">
               {paginatedBooks.length ? (
-                <div className="space-y-4">
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="space-y-12">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {paginatedBooks.map((book) => (
                       <motion.div
                         key={book._id}
@@ -408,107 +429,114 @@ const BooksContent = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                       >
-                        <Card className="group relative h-[500px] py-0 gap-2 bg-gradient-to-tl from-[#1e293b]/80 via-[#0f172a]/90 to-[#1e293b]/80 border-0 rounded-3xl overflow-hidden shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 group">
+                        <Card className="group relative h-[520px] py-0 bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-indigo-500/20 hover:border-indigo-500/30 transition-all duration-700">
+                          {/* Inner Glow Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
                           {/* Book Cover Container */}
-                          <div className="relative -mt-0 p-4 h-[400px] w-full bg-gray-600/60 flex items-center justify-center overflow-hidden">
-                            <Link className="relative z-10 block h-full w-full" href={`/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`}>
-                              <Image
-                                src={book.images[0]}
-                                alt={book.title}
-                                fill
-                                className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-700 ease-out"
-                              />
+                          <div className="relative h-[380px] w-full bg-slate-950/20 flex items-center justify-center overflow-hidden">
+                            <Link className="relative z-10 block h-full w-full p-8" href={`/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`}>
+                              <div className="relative h-full w-full transform group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                                <Image
+                                  src={book.images[0]}
+                                  alt={book.title}
+                                  fill
+                                  className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+                                />
+                              </div>
                             </Link>
 
-                            {/* Interactive Glow */}
-                            <div className="absolute inset-0 bg-gradient-to-tl from-[#0f172a] to-transparent opacity-60 pointer-events-none" />
+                            {/* Decorative Overlay */}
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-tl from-slate-900/80 to-transparent pointer-events-none" />
 
                             {/* Status Badges */}
-                            <div className="absolute top-6 left-6 z-30">
-                              <Badge className="bg-slate-900/80 backdrop-blur-xl text-indigo-400 border border-indigo-500/20 font-black text-[9px] uppercase tracking-widest py-1 px-3">
+                            <div className="absolute top-8 left-8 z-30">
+                              <Badge className="bg-slate-900/60 backdrop-blur-md rounded-full text-indigo-400 border border-indigo-500/50 font-black text-[10px] uppercase tracking-widest py-1.5 px-4 shadow-xl">
                                 {book.condition}
                               </Badge>
                             </div>
 
-                            {/* Discount Badge - Right Side */}
-                            <div className="absolute top-6 right-6 z-30">
+                            {/* Discount Badge */}
+                            <div className="absolute top-8 right-8 z-30">
                               {calculateDiscount(book.price, book.finalPrice) > 0 && (
-                                <DiscountBadge
-                                  discount={calculateDiscount(book.price, book.finalPrice)}
-                                  className="bg-gradient-to-tl from-orange-600 to-amber-500 text-white font-black text-[10px] px-2 py-1.5 rounded-lg uppercase shadow-xl border border-white/10"
-                                />
+                                <div className="bg-gradient-to-tl from-orange-500 to-rose-600 text-white font-bold text-xs px-3 py-1 rounded-full uppercase shadow-xl border-0 animate-bounce-slow">
+                                  {calculateDiscount(book.price, book.finalPrice)}% OFF
+                                </div>
                               )}
                             </div>
 
-                            {/* Quick Actions Overlay */}
-                            <div className="absolute inset-0 bg-[#0f172a]/80 rounded-0 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-5 z-40">
-                              <Button
-                                size="icon"
-                                onClick={(e) => handleAddToCart(e, book)}
-                                className="h-14 w-14 rounded-2xl bg-white/5 hover:bg-amber-500/20 text-white hover:text-amber-400 border border-white/10 shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 delay-75 hover:scale-105"
-                              >
-                                <ShoppingCart className="size-7" />
-                              </Button>
-                              <Button
-                                size="icon"
-                                onClick={(e) => handleAddToWishlist(e, book._id)}
-                                className="h-14 w-14 rounded-2xl bg-white/5 hover:bg-rose-500/20 text-white hover:text-rose-400 border border-white/10 shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 delay-75 hover:scale-105"
-                              >
-                                <Heart className={`size-7 ${wishlist.some((w) => w.products.includes(book._id)) ? "fill-rose-500 text-rose-500" : ""}`} />
-                              </Button>
-                              <RWebShare
-                                data={{
-                                  text: `I just found this book on Book Hub and I think you will love it!: ${book.title}`,
-                                  title: `Check out this book on Book Hub: ${book.title}`,
-                                  url: `${typeof window !== 'undefined' ? window.location.origin : ''}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
-                                }}
-                                onClick={() => console.log("Shared successfully clicked")}
-                              >
+                            {/* Premium Quick Actions */}
+                            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-4 z-40 px-6">
+                              <motion.div whileHover={{ y: -0 }} className="flex gap-4">
                                 <Button
                                   size="icon"
-                                  className="h-14 w-14 rounded-2xl bg-white/5 hover:bg-indigo-500/20 text-white hover:text-indigo-400 border border-white/10 shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 delay-150 hover:scale-110"
+                                  onClick={(e) => handleAddToCart(e, book)}
+                                  className="h-12 w-12 rounded-xl bg-indigo-500/20 text-indigo-500 hover:bg-indigo-500/30 hover:text-indigo-600 border-0 hover:border-0 transition-all"
                                 >
-                                  <Share2 className="size-7" />
+                                  <ShoppingCart className="size-6" />
                                 </Button>
-                              </RWebShare>
+                                <Button
+                                  size="icon"
+                                  onClick={(e) => handleAddToWishlist(e, book._id)}
+                                  className={`h-12 w-12 rounded-xl bg-red-500/20 backdrop-blur-md text-red-500 hover:bg-red-500 border-0 hover:border-0  hover:text-red-600 transition-all
+                                    ${wishlist.some((w) => w.products.includes(book._id)) ? "text-rose-500 bg-rose-500/10 border-0" : "hover:bg-rose-500/20 hover:text-rose-400 hover:border-0"}
+                                  `}
+                                >
+                                  <Heart className={`size-6 ${wishlist.some((w) => w.products.includes(book._id)) ? "fill-rose-500" : ""}`} />
+                                </Button>
+                                <RWebShare
+                                  data={{
+                                    text: `Check out this amazing book I targets found on Book Hub!`,
+                                    title: book.title,
+                                    url: `${typeof window !== 'undefined' ? window.location.origin : ''}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
+                                  }}
+                                >
+                                  <Button
+                                    size="icon"
+                                    className="h-12 w-12 rounded-xl bg-amber-500/20 backdrop-blur-md text-amber-600 border-0 shadow-xl hover:bg-amber-500/20 hover:border-0 hover:text-amber-500 transition-all"
+                                  >
+                                    <Share2 className="size-6" />
+                                  </Button>
+                                </RWebShare>
+                              </motion.div>
                             </div>
                           </div>
 
-                          <CardContent className="p-4 space-y-3">
-                            <div className="space-y-1">
+                          <CardContent className="p-6 space-y-4 relative bg-transparent">
+                            <div className="space-y-2">
                               <Link href={`/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`}>
-                                <h3 className="text-[18px] -mt-1 mb-4 font-black text-white font-poppins line-clamp-2 h-[50px] group-hover:text-indigo-400 transition-colors">
+                                <h3 className="h-12 -mt-8 mb-1.5 text-lg font-bold text-indigo-500 font-poppins line-clamp-2 leading-tight group-hover:text-indigo-400 transition-colors">
                                   {book.title}
                                 </h3>
                               </Link>
-                              <div className="flex items-center gap-2 ">
-                                <Badge variant="outline" className="text-[10px] border-emerald-500/30 text-emerald-400 bg-emerald-500/5 font-bold uppercase py-0">{book.genre || "Fiction"}</Badge>
-                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{book.author}</span>
+                              <div className="flex items-center gap-3">
+                                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest">{book.author}</span>
+                                <div className="w-1 h-1 bg-slate-700 rounded-full" />
+                                <Badge variant="outline" className="text-[10px] border-indigo-500/20 text-indigo-400 bg-indigo-500/5 font-bold uppercase py-0.5 px-2">
+                                  {book.genre || "No Genre"}
+                                </Badge>
                               </div>
                             </div>
 
-                            <p className="text-xs text-slate-400 line-clamp-1 h-4 font-medium leading-relaxed opacity-70">
-                              {book.subtitle || "Exploring the depths of literature with this carefully preserved edition."}
-                            </p>
-
-                            <div className="flex items-center bg-white/5 p-4 rounded-2xl border border-white/5 mt-auto">
-                              <div className="flex-1">
-                                <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest block mb-1">Selling Price</span>
+                            <div className="flex items-center justify-between pt-1 border-t-1 border-white/5">
+                              <div className="space-y-1">
+                                <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest block">Price</span>
                                 <div className="flex items-baseline gap-2">
-                                  <span className="text-2xl font-black text-white tracking-tighter">
-                                    ৳{book.finalPrice}
+                                  <span className="text-lg font-black text-white tracking-tight">
+                                    <i className="fa-solid fa-bangladeshi-taka-sign"></i>{book.finalPrice}
                                   </span>
                                   {book.price && book.price > book.finalPrice && (
-                                    <span className="text-xs text-slate-500 line-through font-bold opacity-60">
-                                      ৳{book.price}
+                                    <span className="text-sm text-slate-400 line-through font-bold opacity-80">
+                                      <i className="fa-solid fa-bangladeshi-taka-sign"></i>{book.price}
                                     </span>
                                   )}
                                 </div>
                               </div>
-                              <div className="h-12 w-px bg-white/10 mx-6" />
                               <div className="text-right">
-                                <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest block mb-1">Published</span>
-                                <span className="text-xs font-black text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded-md">{book.year || "2024"}</span>
+                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest block mb-1">Edition</span>
+                                <span className="text-xs font-black text-slate-200 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
+                                  {book.year || "2024"}
+                                </span>
                               </div>
                             </div>
                           </CardContent>
@@ -517,7 +545,7 @@ const BooksContent = () => {
                     ))}
                   </div>
 
-                  <div className="flex justify-center pb-12 pt-4">
+                  <div className="flex justify-center pb-12 pt-8">
                     <Pagination
                       currentPage={currentPage}
                       totalPages={totalPages}
@@ -526,21 +554,26 @@ const BooksContent = () => {
                   </div>
                 </div>
               ) : (
-                <div className="py-32 bg-slate-900/50 rounded-[3rem] border border-white/5 backdrop-blur-2xl flex flex-col items-center justify-center text-center px-6">
-                  <div className="h-24 w-24 bg-indigo-500/10 rounded-full flex items-center justify-center mb-6">
-                    <Ghost className="size-12 text-indigo-400 animate-pulse" />
+                <div className="py-32 bg-slate-900/40 backdrop-blur-2xl rounded-[3rem] border border-white/5 relative overflow-hidden flex flex-col items-center justify-center text-center px-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-indigo-500/5 via-transparent to-transparent opacity-50" />
+                  <div className="relative z-10">
+                    <div className="h-28 w-28 bg-indigo-500/10 rounded-full flex items-center justify-center mb-8 shadow-inner shadow-indigo-500/10">
+                      <Ghost className="size-14 text-indigo-400 animate-pulse" />
+                    </div>
+                    <h2 className="text-4xl font-black text-white mb-4 font-poppins">No Treasures Found</h2>
+                    <p className="text-slate-400 max-w-md mx-auto mb-10 font-medium text-lg leading-relaxed">
+                      Your filters are a bit too specific! Try expanding your horizons or resetting everything to see the full collection.
+                    </p>
+                    <Button
+                      onClick={() => {
+                        setSelectedCondition([]); setSelectedType([]); setSelectedCategory([]);
+                        setSelectedGenre([]); setSelectedAuthor([]); setSelectedYear([]);
+                      }}
+                      className="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-12 h-16 rounded-[1.2rem] shadow-2xl shadow-indigo-500/30 transition-all uppercase tracking-widest text-sm"
+                    >
+                      Browse All Books
+                    </Button>
                   </div>
-                  <h2 className="text-3xl font-black text-white mb-3 font-poppins">No Books Found</h2>
-                  <p className="text-slate-400 max-w-md mx-auto mb-10 font-medium font-poppins">We couldn't find any books matching your specific filters. Try expanding your search or resetting all filters.</p>
-                  <Button
-                    onClick={() => {
-                      setSelectedCondition([]); setSelectedType([]); setSelectedCategory([]);
-                      setSelectedGenre([]); setSelectedAuthor([]); setSelectedYear([]);
-                    }}
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-10 h-14 rounded-2xl shadow-2xl shadow-indigo-500/20 transition-all uppercase tracking-widest"
-                  >
-                    Reset All Filters
-                  </Button>
                 </div>
               )}
             </div>

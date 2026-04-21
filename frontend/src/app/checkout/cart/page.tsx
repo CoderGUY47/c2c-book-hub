@@ -80,6 +80,12 @@ const page = () => {
   const [createSslPayment] = useCreateSslPaymentMutation();
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
 
+  useEffect(() => {
+    if (user && user.role !== "user") {
+      router.push("/admin");
+    }
+  }, [user, router]);
+
   //for the address dialog popup, show the given addresses from before if available
   useEffect(() => {
     if (orderData && orderData.shippingAddress) {

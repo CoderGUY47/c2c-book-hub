@@ -3,13 +3,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { formatDistanceToNow } from "date-fns";
 import {
     Heart,
-    Loader2,
-    MapPin,
-    Share2,
-    ShoppingCart,
     Star,
     BookOpen,
     ExternalLink,
@@ -26,6 +21,8 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShareButton } from "@/app/components/Share";
 import NoData from "@/app/components/NoData";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface OpenLibraryWork {
     title: string;
@@ -50,6 +47,13 @@ const ExternalBookDetails = () => {
     const [author, setAuthor] = useState<string>("Unknown Author");
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState(0);
+
+    const user = useSelector((state: RootState) => state.user.user);
+    useEffect(() => {
+        if (user && user.role !== "user") {
+            router.push("/admin");
+        }
+    }, [user, router]);
 
     useEffect(() => {
         const fetchBookDetails = async () => {

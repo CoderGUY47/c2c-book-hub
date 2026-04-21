@@ -1,27 +1,11 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
-  Lock,
-  Package,
-  ShoppingCart,
-  Search,
-  Heart,
-  User,
-  User2,
-  LogOut,
-  ChevronRight,
-  FileTerminal,
-  HelpCircle,
-  BookLock,
-  Menu,
-  BookOpen, // Added import
+  Lock, Package, ShoppingCart, Search, Heart, User, User2, LogOut, ChevronRight,
+  FileTerminal, HelpCircle, BookLock, Menu, BookOpen, // Added import
 } from "lucide-react";
 
 import { SlBag } from "react-icons/sl";
@@ -34,14 +18,7 @@ import { logout, toggleLoginDialog } from "@/store/slice/userSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-// import { RiEBike2Fill } from "react-icons/ri";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet";
 import AuthPage from "./AuthPage";
 import { setCart } from "@/store/slice/cartSlice";
 import { useGetCartQuery, useLogoutMutation } from "@/store/api";
@@ -68,10 +45,10 @@ const Header = () => {
   );
   const user = useSelector((state: RootState) => state.user.user); //getting user data from redux and ipaste it from the AuthProvider
   const [logoutMutation] = useLogoutMutation();
-  const userPlaceholder = user?.name
-    ?.split(" ")
-    .map((name: string) => name[0])
-    .join("");
+  // const userPlaceholder = user?.name
+  //   ?.split(" ")
+  //   .map((name: string) => name[0])
+  //   .join("");
   const cartItemCount = useSelector(
     (state: RootState) => state.cart.items.length
   );
@@ -134,6 +111,10 @@ const Header = () => {
       toast.error("Failed to logout. Please try again.");
     }
   };
+  const userPlaceholder = user?.name
+    ?.split(" ")
+    .map((name: string) => name[0])
+    .join("");
 
   const menuItems = [
     ...(user && user
@@ -159,8 +140,8 @@ const Header = () => {
                 )}
               </Avatar>
               <div className="flex flex-col">
-                <span className="font-semibold text-md text-white">{user.name}</span>
-                <span className="text-xs text-white">{user.email}</span>
+                <span className="font-semibold text-md text-white">{user.name || "Guest User"}</span>
+                <span className="text-xs text-white">{user.email || "No email found"}</span>
               </div>
             </div>
           ),

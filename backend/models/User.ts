@@ -17,6 +17,7 @@ export interface IUser extends Document {
     agreeTerms: boolean;
     addresses: mongoose.Types.ObjectId[];
     comparePassword(candidatePassword: string): Promise<boolean>;
+    role:"user"|"admin" 
 }
 
 
@@ -33,7 +34,8 @@ const userSchema = new Schema<IUser>({
     verificationToken: {type:String, default:null},
     resetPasswordToken: {type:String, default:null},
     resetPasswordExpires: {type:Date, default:null},
-    addresses: [{type:Schema.Types.ObjectId, ref: "Address"}]  //it showed me errors so, i add 0.0.00/0 ipv4 ,so we need not to change it again and again for connecting the mongodb cluster
+    addresses: [{type:Schema.Types.ObjectId, ref: "Address"}],  //it showed me errors so, i add 0.0.00/0 ipv4 ,so we need not to change it again and again for connecting the mongodb cluster
+    role: {type:String, enum:["user","admin"], default:"user"}
 }, { timestamps: true });
 
 

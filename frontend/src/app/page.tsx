@@ -27,94 +27,106 @@ import { BiCollection } from "react-icons/bi";
 import BrowseGenresSection from "./components/BrowseGenresSectionV2"; // Using V2 for images layout
 import FreeEbooksSection from "./components/FreeEbooksSection";
 import TrendingBooksSection from "./components/TrendingBooksSection";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const bannerImages = [
-    "/images/book1.webp",
-    "/images/book-2.jpg",
-    "/images/book3.webp",
-    "/images/book4.webp",
-    "/images/book5.webp",
-    "/images/book6.webp",
-    "/images/book7.webp",
-    
-  ];
+const bannerImages = [
+  "/images/book1.webp",
+  "/images/book2.webp",
+  "/images/book3.webp",
+  "/images/book4.webp",
+  "/images/book5.webp",
+  "/images/book6.webp",
+  "/images/book7.webp",
 
-  const blogPosts = [
-    {
-      imageSrc: "/images/reading.png",
-      title: "Readers are always learners",
-      description:
-        "Reading is a journey of discovery, and every book opens a new door to knowledge and understanding.",
-      // icon: <BookOpen className="w-6 h-6 text-gray-700" />,
-    },
-    {
-      imageSrc:
-        "/images/bookshelf.png",
-      title: "Also available in any institutional Library",
-      description:
-        "You can find our books in any institutional library.",
-      // icon: <Library className="w-6 h-6 text-gray-700" />,
-    },
-    {
-      imageSrc:
-        "/images/feedback.png",
-      title: "What is Book-Hub?",
-      description:
-        "Book-Hub is a platform that helps you to buy and sell used books online easily.",
-      // icon: <Store className="w-6 h-6 text-gray-700" />,
-    },
-  ];
+];
 
-  const sellSteps = [
-    {
-      step: "Step 1",
-      title: "Post an ad for selling used books",
-      description:
-        "Post an ad & describe your book details to sell your old books online.",
-      imageSrc: "/icons/post-online.png"
-    },
-    {
-      step: "Step 2",
-      title: "Set the selling price for your books",
-      description:
-        "Set the price for your books at which you want to sell them.",
-      imageSrc: "/icons/price.png"
-    },
-    {
-      step: "Step 3",
-      title: "Get paid into your Online Banking account",
-      description:
-        "You will get money into your account once you receive an order for your book.",
-      // icon: <Wallet className="h-8 w-8 text-indigo-400" />,
-      imageSrc: "/icons/payment.png"
-    },
-  ];
+const blogPosts = [
+  {
+    imageSrc: "/images/reading.png",
+    title: "Readers are always learners",
+    description:
+      "Reading is a journey of discovery, and every book opens a new door to knowledge and understanding.",
+    // icon: <BookOpen className="w-6 h-6 text-gray-700" />,
+  },
+  {
+    imageSrc:
+      "/images/bookshelf.png",
+    title: "Also available in any institutional Library",
+    description:
+      "You can find our books in any institutional library.",
+    // icon: <Library className="w-6 h-6 text-gray-700" />,
+  },
+  {
+    imageSrc:
+      "/images/feedback.png",
+    title: "What is Book-Hub?",
+    description:
+      "Book-Hub is a platform that helps you to buy and sell used books online easily.",
+    // icon: <Store className="w-6 h-6 text-gray-700" />,
+  },
+];
 
-  const buySteps = [
-    {
-      step: "Step 1",
-      title: "Select the used books you want",
-      description:
-        "Search from over thousands of used books listed on Book-Hub.",
-      imageSrc: "/icons/searching.svg",
-    },
-    {
-      step: "Step 2",
-      title: "Place the order by making payment",
-      description:
-        "Then simply place the order by clicking on the 'Buy Now' button.",
-      imageSrc: "/icons/payment.svg",
-    },
-    {
-      step: "Step 3",
-      title: "Get the books delivered at your doorstep",
-      description: "The books will be delivered to you at your doorstep!",
-      imageSrc: "/icons/delivery.svg",
-    },
-  ];
+const sellSteps = [
+  {
+    step: "Step 1",
+    title: "Post an ad for selling used books",
+    description:
+      "Post an ad & describe your book details to sell your old books online.",
+    imageSrc: "/icons/post-online.png"
+  },
+  {
+    step: "Step 2",
+    title: "Set the selling price for your books",
+    description:
+      "Set the price for your books at which you want to sell them.",
+    imageSrc: "/icons/price.png"
+  },
+  {
+    step: "Step 3",
+    title: "Get paid into your Online Banking account",
+    description:
+      "You will get money into your account once you receive an order for your book.",
+    // icon: <Wallet className="h-8 w-8 text-indigo-400" />,
+    imageSrc: "/icons/payment.png"
+  },
+];
 
+const buySteps = [
+  {
+    step: "Step 1",
+    title: "Select the used books you want",
+    description:
+      "Search from over thousands of used books listed on Book-Hub.",
+    imageSrc: "/icons/searching.svg",
+  },
+  {
+    step: "Step 2",
+    title: "Place the order by making payment",
+    description:
+      "Then simply place the order by clicking on the 'Buy Now' button.",
+    imageSrc: "/icons/payment.svg",
+  },
+  {
+    step: "Step 3",
+    title: "Get the books delivered at your doorstep",
+    description: "The books will be delivered to you at your doorstep!",
+    imageSrc: "/icons/delivery.svg",
+  },
+];
+
+export default function Homepage() {
   const [currentImage, setCurrentImage] = useState(0);
+  const user = useSelector((state: RootState) => state.user.user);
+  const router = useRouter();
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      router.push("/admin");
+    }
+  }, [user, router]);
+
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % bannerImages.length);
@@ -138,14 +150,14 @@ export default function Home() {
               className="object-cover"
               priority={index === 0} // Load the first image immediately
             />
-            <div className="absolute inset-0 bg-gray-950/70" />
+            <div className="absolute inset-0 bg-gray-950/60" />
           </div>
         ))}
 
         <div className="relative flex flex-col w-[80%] mx-auto px-0 h-full items-center justify-center text-white text-center">
           <h1 className="text-4xl md:text-6xl max-w-4xl mx-auto font-black font-poppins mb-4">
             The <span className="text-transparent bg-clip-text bg-gradient-to-tl from-amber-600 to-red-600">New</span> Online Buying &
-            Selling Mart in Bangladesh
+            Selling Book Hub in Bangladesh
           </h1>
           <div className="flex flex-col sm:flex-row gap-5 py-8">
             <Button

@@ -1,0 +1,31 @@
+{
+  "name": "c2c-book-hub-merged",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "axios": "^1.12.2",
+    "bcryptjs": "^3.0.2",
+    "bkash": "^0.3.0",
+    "body-parser": "^2.2.0",
+    "cloudinary": "^2.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "fuse.js": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "next": "15.5.9",
+    "nodemailer": "^7.0.5",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "sslcommerz-lts": "^1.2.0",
+    "uuid": "^13.0.0"
+  }
+}

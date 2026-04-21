@@ -45,6 +45,8 @@ async(req:Request, res: Response, next: NextFunction) : Promise<void> =>{ //cook
         const accessToken = await generateToken(user)
         res.cookie('access_token', accessToken, {
             httpOnly: true, 
+            sameSite:"none",
+            secure:true,
             maxAge: 24 * 60 * 60 * 1000, // 1 day
         });
         res.redirect(`${process.env.FRONTEND_URL}`); // Redirect to frontend after successful login

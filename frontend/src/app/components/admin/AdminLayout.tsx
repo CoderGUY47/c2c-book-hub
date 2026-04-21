@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useRouter, usePathname } from 'next/navigation';
-import { CreditCard, LayoutDashboard, Menu, ShoppingBag, Sidebar, User, X} from 'lucide-react';
+import { BookOpen, CreditCard, Home, LayoutDashboard, LogOut, Menu, Settings as SettingsIcon, ShoppingBag, Sidebar, User, X} from 'lucide-react';
 import { useLogoutMutation } from '@/store/api';
 import toast from 'react-hot-toast';
 import { logout } from '@/store/slice/userSlice';
@@ -80,159 +80,187 @@ const AdminLayout:React.FC<AdminLayoutProps> = ({children}) => {
       },
     ]
   return (
-    <div className='min-h-screen bg-gray-100'>
-      {/* mobile sidebar     */}
-      <div className='lg:hidden'>
-        <Button variant='ghost' size='icon' className='fixed top-4 left-4 z-50 text-gray-800'
-        onClick={()=> setSidebarOpen(!sidebarOpen)}
-        >
-          {sidebarOpen ? <X /> : <Menu />}
-        </Button>
-        {sidebarOpen && (
-          <div className="fixed inset-0 z-40 bg-black/50"
-          onClick={()=> setSidebarOpen(false)}
-          ></div>
-        )}
+  <div className="min-h-screen bg-[#050505] flex text-white text-opacity-90">
 
-        <aside className={cn("fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        )}>
-          <div className="flex h-16 items-center justify-center p-6 bg-gradient-to-r from-purple-500 to-indigo-600 border-b border-gray-200">
-            <h1 className="text-2xl font-bold">BookShop Admin</h1>
-          </div>
-
-          <nav className="h-full overflow-y-auto bg-white shadow-lg">
-            <div className="mt-5 px-2 space-y-1">
-              {navigation.map((item)=>(
-                <Button className={cn("w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                  pathname === item.href ? `bg-gradient-to-r ${item.bgColor} text-white` : `text-gray-700 hover:bg-gray-100 hover:${item.textColor}`
-                )}
-                onClick={item.onclick}
-                >
-                  <item.icon 
-                    className={cn("mr-3 h-6 w-6", 
-                    pathname === item.href ? "text-white" : `text-gray-500 group-hover:${item.textColor}`)}
-                  />
-                  {item.name}
-                </Button>
-              ))}
-            </div>
-
-            <div className="absolute bottom-0 w-full p-4 border-t-2">
-              <Button
-              variant='ghost'
-              size='lg'
-              className='w-full justify-start text-red-500 hover:bg-red-100 hover:text-red-600'
-              onClick={handleLogout}
-              >
-                <Sidebar className='mr-3 h-6 w-6'/>
-                Logout
-              </Button>
-            </div>
-          </nav>
-        </aside>
-      </div>
-
-
-
-       {/* Desktop sidebar */}
-        <div className='hidden lg:fixed lg:flex lg:flex-col lg:w-64 lg:inset-y-0 lg:bg-white lg:shadow-lg'>
-          <div className="flex flex-col flex-grow overflow-y-auto" >
-            <div className="flex h-16 items-center justify-center p-6 bg-gradient-to-r from-purple-500 to-indigo-600 border-b border-gray-200">
-              <h1 className="text-2xl font-bold">BookShop Admin</h1>
-            </div>
-
-          <nav className="flex-1 bg-white shadow-lg">
-            <div className="mt-5 px-2 space-y-1">
-              {navigation.map((item)=>(
-                <button className={cn("w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                  pathname === item.href ? `bg-gradient-to-r ${item.bgColor} text-white` : `text-gray-700 hover:bg-gray-100 hover:${item.textColor}`
-                )}
-                onClick={item.onclick}
-                >
-                  <item.icon 
-                    className={cn("mr-3 h-6 w-6", 
-                    pathname === item.href ? "text-white" : `text-gray-500 group-hover:${item.textColor}`)}
-                  />
-                  {item.name}
-                </button>
-              ))}
-            </div>
-
-            <div className="p-4 mt-auto border-t-2">
-              <Button
-              variant='ghost'
-              size='lg'
-              className='w-full justify-start text-red-500 hover:bg-red-100 hover:text-red-600'
-              onClick={handleLogout}
-              >
-                <Sidebar className='mr-3 h-6 w-6'/>
-                Logout
-              </Button>
-            </div>
-          </nav>
-        </div>
-      </div>
-
-
-      {/* Main content */}
-      <div className='lg:pl-64 flex flex-col flex-1'>
-        <header className='bg-white shadow-sm z-10'>
-          <div className='flex items-center justify-between px-4 h-16 sm:px-6 lg:px-8'>
-            <h1 className='text-xl font-semibold ml-10 text-gray-800'>
-              {navigation.find((item)=>item.href === pathname)?.name || "Admin"} 
-            </h1>
-            <div className="flex-end items-center space-x-4">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button className="focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none relative z-10 flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-[15px] py-[15px] text-[16px] font-bold text-[#212121] shadow-md transition-all duration-500 hover:text-white before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-0 before:rounded-[15px] before:bg-[#212121] before:transition-all before:duration-500 before:content-[''] hover:before:w-full">
-                              <Avatar className="w-7 h-7 rounded-full font-black -mr-0 overflow-hidden relative">
-                                {user?.profilePicture ? (
-                                  <AvatarImage src={user.profilePicture} alt="User"/>
-                                ) : userPlaceholder ? (
-                                  <AvatarFallback>{userPlaceholder}</AvatarFallback>
-                                ) : (
-                                  <AvatarFallback className="bg-transparent">
-                                    <User className="h-5 w-5 -ml-3" />
-                                  </AvatarFallback>
-                                )}
-                              </Avatar>
-                              {user ? (
-                                <div className="hidden md:block text-left">
-                                  <p className="font-medium text-md text-gray-800">{user?.name}</p>
-                                  <p className="text-xs text-gray-800">{user?.email}</p>
-                                </div>
-                              ) : (
-                                <p className="font-medium text-md text-gray-800">My Account</p>
-                              )}
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="w-80 p-2 mt-6 bg-gray-900/5 backdrop-blur-xl border-[1.25px] border-white/35 shadow-[0_3px_24px_4px_rgba(134,90,196,0.2)] rounded-xl text-gray-800">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                              <DropdownMenuSeparator>
-                                <DropdownMenuItem>Profile</DropdownMenuItem>
-                                <DropdownMenuItem>Settings</DropdownMenuItem>
-                              </DropdownMenuSeparator>
-                              {user ? (
-                                <DropdownMenuItem className='text-red-500' onClick={handleLogout}>Logout</DropdownMenuItem>
-                              ) : (
-                                <DropdownMenuItem className='text-red-500' onClick={()=>router.push('/admin/login')}>Login</DropdownMenuItem>
-                              )}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-            </div>
-          </div>
-        </header>
-        <main className="flex pb-8">
-          <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              {children}
-            </div>
-          </div>
-        </main>
-      </div>
+    {/* ── Mobile overlay ── */}
+    <div className="lg:hidden">
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+      )}
     </div>
-  )
+
+    {/* ── Sidebar ── */}
+    <aside
+      className={cn(
+        "fixed inset-y-0 left-0 z-50 w-56 flex flex-col bg-[#0d0d0f] border-r border-white/[0.07]",
+        "transition-transform duration-300 ease-in-out",
+        "lg:translate-x-0",
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      )}
+    >
+      {/* Logo */}
+      <div className="px-5 pt-5 pb-4 border-b border-white/[0.07] flex items-center justify-between">
+        <div>
+          <p className="text-[10px] font-medium tracking-widest uppercase text-white/25 mb-1">Admin panel</p>
+          <h1 className="text-lg font-medium text-white tracking-tight">
+            Book<span className="text-violet-400">Shop</span>
+          </h1>
+        </div>
+        <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/30 hover:text-white transition-colors">
+          <X size={18} />
+        </button>
+      </div>
+
+      {/* Nav */}
+      <nav className="flex-1 px-2 py-4 space-y-0.5">
+        <p className="text-[10px] font-medium tracking-widest uppercase text-white/25 px-3 mb-2">Menu</p>
+        {navigation.map((item, i) => {
+          const active = pathname === item.href;
+          return (
+            <button
+              key={i}
+              onClick={item.onclick}
+              className={cn(
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                active
+                  ? "bg-violet-500/[0.15] border border-violet-400/20 text-white"
+                  : "text-white/50 hover:text-white/80 hover:bg-white/[0.04]"
+              )}
+            >
+              <span
+                className={cn(
+                  "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0",
+                  active ? "bg-violet-400/20" : "bg-white/[0.05]"
+                )}
+              >
+                <item.icon size={15} className={active ? "text-violet-300" : "text-white/40"} />
+              </span>
+              {item.name}
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Back to Homepage */}
+      <div className="px-2 pb-2">
+        <button
+          onClick={() => router.push('/')}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white/80 hover:bg-white/[0.04] transition-all duration-200"
+        >
+          <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white/[0.05]">
+            <Home size={15} className="text-white/40" />
+          </span>
+          Back to Homepage
+        </button>
+      </div>
+
+      {/* Logout */}
+      <div className="px-3 pb-8 bg-gray-800/10 pt-4 border-t border-white/5">
+        {/* Mobile Logout (Highly Visible) */}
+        <Button
+          variant="default"
+          onClick={handleLogout}
+          className="lg:hidden w-full flex items-center justify-center gap-3 h-12 rounded-xl text-sm font-medium text-rose-400 bg-rose-500/10 border-0"
+        >
+          <LogOut size={16} className="text-rose-400" />
+          Logout
+        </Button>
+
+        {/* Desktop Logout (Subtle/Refined) */}
+        <Button
+          variant="default"
+          onClick={handleLogout}
+          className="hidden lg:flex w-full items-center justify-start gap-4 px-4 py-6 rounded-2xl text-base font-semibold text-white bg-rose-500/20 border border-white/5 duration-500 transition-all"
+        >
+          <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-white/5 border-0 group-hover:bg-rose-500 group-hover:text-rose-300">
+            <LogOut size={16} className="text-white/60 group-hover:text-rose-300 transition-colors" />
+          </span>
+          Logout
+        </Button>
+      </div>
+    </aside>
+
+    {/* ── Main content ── */}
+    <div className="lg:pl-56 flex flex-col flex-1 min-h-screen">
+
+      {/* Topbar */}
+      <header className="sticky top-0 z-40 h-[60px] bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.05] flex items-center justify-between px-6 shadow-none">
+        <div className="flex items-center gap-4">
+          <button
+            className="lg:hidden w-9 h-9 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            {sidebarOpen ? <X size={16} /> : <Menu size={16} />}
+          </button>
+          <h2 className="text-[15px] font-medium text-white">
+            {navigation.find((n) => n.href === pathname)?.name ?? "Admin"}
+          </h2>
+        </div>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-2.5 bg-white/[0.04] border border-white/[0.09] rounded-full pl-1 pr-3 py-1 focus:outline-none hover:bg-white/[0.07] transition-colors">
+              <Avatar className="w-7 h-7 rounded-full overflow-hidden border border-white/20">
+                {user?.profilePicture
+                  ? <AvatarImage src={user.profilePicture} alt="User" />
+                  : <AvatarFallback className="bg-gradient-to-br from-violet-600 to-indigo-500 text-[11px] font-medium text-white">{userPlaceholder ?? <User size={13} />}</AvatarFallback>
+                }
+              </Avatar>
+              <span className="text-[12px] font-medium text-white/75">{user?.name ?? "Guest"}</span>
+            </button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="w-56 mt-3 bg-[#111] border border-white/10 rounded-2xl shadow-2xl text-white p-1.5">
+            <div className="px-3 py-2 mb-1">
+              <p className="text-[10px] font-medium tracking-widest uppercase text-white/30">My Account</p>
+            </div>
+            <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/5 cursor-pointer group">
+              <User size={14} className="text-white/40 group-hover:text-violet-400 transition-colors" />
+              <span className="text-sm">Profile</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/5 cursor-pointer group">
+              <SettingsIcon size={14} className="text-white/40 group-hover:text-violet-400 transition-colors" />
+              <span className="text-sm">Settings</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push('/')}
+              className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-violet-500/10 cursor-pointer group"
+            >
+              <Home size={14} className="text-white/40 group-hover:text-violet-400 transition-colors" />
+              <span className="text-sm">Visit Homepage</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-white/[0.06] my-1" />
+            {user ? (
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-rose-500/10 cursor-pointer text-rose-400 hover:text-rose-300 transition-all duration-200 group"
+              >
+                <LogOut size={14} className="group-hover:scale-110 transition-transform" />
+                <span className="text-sm font-semibold">Logout</span>
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem
+                onClick={() => router.push('/admin/login')}
+                className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/5 cursor-pointer group"
+              >
+                <User size={14} className="text-white/40 group-hover:text-violet-400" />
+                <span className="text-sm">Login</span>
+              </DropdownMenuItem>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </header>
+
+      {/* Page content */}
+      <main className="flex-1 p-6">
+        <div className="max-w-7xl mx-auto">
+          {children}
+        </div>
+      </main>
+    </div>
+  </div>
+);
+  
 }
 
 export default AdminLayout

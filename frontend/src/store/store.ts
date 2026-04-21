@@ -8,9 +8,7 @@ import { api } from './api'
 import type { PersistPartial } from 'redux-persist/es/persistReducer'
 import checkoutReducer, { CheckoutState } from './slice/checkoutSlice'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
-
-
-
+import { adminApi } from './adminApi'
 
 const createNoopStorage = () => {
     return {
@@ -27,8 +25,6 @@ const createNoopStorage = () => {
 };
 
 const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
-
-
 //persist(user's data saved in local storage when reload and login) configuration for user
 const userPersistConfig = {key: 'user', storage, whitelist: ['user', 'isEmailVerified', 'isLoggedIn']}
 const cartPersistConfig = {key: 'cart', storage, whitelist: ['items']}
@@ -44,6 +40,7 @@ const persitedCheckoutReducer = persistReducer(checkoutPersistConfig, checkoutRe
 export const store = configureStore({
     reducer:{
         [api.reducerPath] : api.reducer, //rtk wuery api
+        [adminApi.reducerPath]: adminApi.reducer,
         user: persitedUserReducer,
         cart: persitedCartReducer,
         wishlist: persitedWishlistReducer,
@@ -55,6 +52,7 @@ export const store = configureStore({
                 ignoredActions: [FLUSH,REHYDRATE,PAUSE,PURGE,PERSIST,REGISTER],
             },
         }).concat(api.middleware)
+        .concat(adminApi.middleware)
 })
 
 //setup the listener for RTK Query

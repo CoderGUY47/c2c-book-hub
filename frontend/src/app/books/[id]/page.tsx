@@ -71,6 +71,13 @@ const page = () => {
     }
   }, [apiResponse]);
 
+  const user = useSelector((state: RootState) => state.user.user);
+  useEffect(() => {
+    if (user && user.role !== "user") {
+      router.push("/admin");
+    }
+  }, [user, router]);
+
   const handleAddToCart = async () => {
     if (book) {
       setIsAddToCart(true);

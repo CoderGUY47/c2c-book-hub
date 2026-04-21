@@ -34,12 +34,8 @@ const StatusStep = ({
     isActive: boolean;
 }) => {
     return (
-        <div
-            className={`flex flex-col items-center ${isCompleted ? "text-amber-500" : isActive ? "text-indigo-100" : "text-gray-100"}`}
-        >
-            <div
-                className={`rounded-full p-2 ${isCompleted ? "bg-amber-50" : isActive ? "bg-violet-500/70 shadow-md backdrop-blur-xl" : "bg-white/10 shadow-md backdrop-blur-xl"}`}
-            >
+        <div className={`flex flex-col items-center ${isCompleted ? "text-amber-500" : isActive ? "text-indigo-100" : "text-gray-100"}`}>
+            <div className={`rounded-full p-2 ${isCompleted ? "bg-amber-50" : isActive ? "bg-violet-500/70 shadow-md backdrop-blur-xl" : "bg-white/10 shadow-md backdrop-blur-xl"}`}>
                 {icon}
             </div>
             <span className="font-medium text-xs mt-1">{title}</span>
@@ -131,16 +127,16 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                                 <div key={index} className="flex items-center space-x-4 bg-black/20 p-3 shadow-md rounded-lg border-0">
                                     <div className="relative w-22 h-28 flex-shrink-0">
                                         <Image
-                                            src={item.product?.images?.[0] || "/placeholder-book.png"}
-                                            alt={item.product?.title || "Product Image"}
+                                            src={item?.product?.images?.[0] || "/placeholder-book.png"}
+                                            alt={item?.product?.title || "Product Image"}
                                             fill
                                             className="object-cover rounded-sm"
                                         />
                                     </div>
                                     <div className="flex-1">
-                                        <h4 className="text-white font-bold text-xs line-clamp-1 mb-1 tracking-wider">Product: {item.product?.title}</h4>
-                                        <p className="text-white text-xs font-bold tracking-wider mb-1">Quantity: {item.quantity}</p>
-                                        <p className="text-white font-bold text-xs tracking-wider">Price: ৳{item.product?.finalPrice}</p>
+                                        <h4 className="text-white font-bold text-xs line-clamp-1 mb-1 tracking-wider">Product: {item?.product?.title}</h4>
+                                        <p className="text-white text-xs font-bold tracking-wider mb-1">Quantity: {item?.quantity}</p>
+                                        <p className="text-white font-bold text-xs tracking-wider">Price: ৳{item?.product?.finalPrice}</p>
                                     </div>
                                 </div>
                             ))}
@@ -151,8 +147,8 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                         <h3 className="text-lg font-bold text-green-500 mb-1">
                             Shipping Address
                         </h3>
-                        <p>{order.shippingAddress.addressLine1}</p>
-                        <p>{order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.postalCode}</p>
+                        <p>{order?.shippingAddress?.addressLine1}</p>
+                        <p>{order?.shippingAddress?.city}, {order?.shippingAddress?.state} - {order?.shippingAddress?.postalCode}</p>
                     </div>
                     
 
@@ -161,15 +157,15 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                         <h3 className="text-lg font-bold text-amber-500 mb-1">
                             Payment Details
                         </h3>
-                        <p><span className="font-bold text-white">Order ID:</span> #{order._id}</p>
+                        <p><span className="font-bold text-white">Order ID:</span> #{order?._id}</p>
 
-                        {order.paymentMethod === "SSLCommerz" ? (
-                            <p><span className="font-bold text-white">Payment ID:</span> {order.paymentDetails?.ssl_payment_id || 'N/A'}</p>
+                        {order?.paymentMethod === "SSLCommerz" ? (
+                            <p><span className="font-bold text-white">Payment ID:</span> {order?.paymentDetails?.ssl_payment_id || 'N/A'}</p>
                         ) : (
-                            <p><span className="font-bold text-white">Payment ID:</span> {order.paymentDetails?.transactionId || order.paymentDetails?.ssl_payment_id || Math.floor(100000000 + Math.random() * 900000000)}</p>
+                            <p><span className="font-bold text-white">Payment ID:</span> {order?.paymentDetails?.transactionId || order?.paymentDetails?.ssl_payment_id || Math.floor(100000000 + Math.random() * 900000000)}</p>
                         )}
 
-                        <p><span className="font-bold text-white">Amount:</span> <i className="fa-solid fa-bangladeshi-taka-sign"></i>{order.totalAmount}</p>
+                        <p><span className="font-bold text-white">Amount:</span> <i className="fa-solid fa-bangladeshi-taka-sign"></i>{order?.totalAmount}</p>
                     </div>
                 </div>
             </DialogContent>

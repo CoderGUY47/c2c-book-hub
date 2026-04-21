@@ -4,7 +4,7 @@ import { logout, toggleLoginDialog } from '@/store/slice/userSlice';
 import { RootState } from '@/store/store';
 import { BookOpen, Heart, LogOut, Package, User } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useEffect } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import NoData from '../components/NoData';
@@ -48,6 +48,11 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   const userPlaceholder = user?.name?.split(" ")?.map((name: string) => name[0])?.join("");
   const router = useRouter();
 
+  useEffect(() => { 
+    if (user && user.role !== "user") {
+      router.push("/admin");
+    }
+  }, [user, router]);
 
   const handleLogout = async () => {
     try {

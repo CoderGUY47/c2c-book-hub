@@ -55,6 +55,7 @@ async (
                 profilePicture: photos?.[0]?.value, 
                 isVerified: emails?.[0]?.verified || false,
                 agreeTerms: true,
+                role:"user",
             })
             console.log('[GOOGLE STRATEGY] New user created:', {
                 id: user._id,

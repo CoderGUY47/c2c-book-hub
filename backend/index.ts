@@ -13,6 +13,7 @@ import userRoutes from './routes/userRoute';
 import orderRoutes from './routes/orderRoute';
 import paymentRoutes from './routes/paymentRoute';
 import passport from './controllers/strategy/googleStrategy'
+import adminRoutes from './routes/adminRoute';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use('/api/user/address', addressRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/admin', adminRoutes);
 
 if (require.main === module) {
   app.listen(PORT, () => {
