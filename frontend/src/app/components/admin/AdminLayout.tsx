@@ -102,9 +102,15 @@ const AdminLayout:React.FC<AdminLayoutProps> = ({children}) => {
       <div className="px-5 pt-5 pb-4 border-b border-white/[0.07] flex items-center justify-between">
         <div>
           <p className="text-[10px] font-medium tracking-widest uppercase text-white/25 mb-1">Admin panel</p>
-          <h1 className="text-lg font-medium text-white tracking-tight">
-            Book<span className="text-violet-400">Shop</span>
-          </h1>
+          <div className="relative h-8 w-32 cursor-pointer" onClick={() => router.push('/')}>
+            <Image 
+              src="/images/oxpecker-bookhub.png" 
+              alt="Logo" 
+              fill 
+              className="object-contain object-left"
+              priority
+            />
+          </div>
         </div>
         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/30 hover:text-white transition-colors">
           <X size={18} />
