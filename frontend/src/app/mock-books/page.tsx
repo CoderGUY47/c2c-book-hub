@@ -34,7 +34,7 @@ const MockBooksPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-black font-poppins text-white leading-tight mb-6">
+                        <h1 className="text-5xl md:text-7xl font-black font-langar text-white leading-tight mb-6">
                             CURATED <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">CLASSICS.</span>
                         </h1>
                         <p className="text-zinc-400 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">

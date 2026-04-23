@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
       'lh3.googleusercontent.com',
       'books.google.com',
       'covers.openlibrary.org'
-    ]
+    ],
+    unoptimized: true
   },
   output: "standalone",
   outputFileTracingRoot: path.join(__dirname, "../"),

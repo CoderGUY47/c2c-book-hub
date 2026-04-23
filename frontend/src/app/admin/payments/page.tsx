@@ -6,16 +6,18 @@ import OrderPaymentDialog from '@/app/components/admin/OrderPaymentDialog';
 import Pagination from '@/app/components/Pagination';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import BookLoader from '@/lib/BookLoader';
 import { cn } from '@/lib/utils';
 import { useGetPaymentTransactionsQuery, useGetSellerPaymentsQuery } from '@/store/adminApi';
-import { Calendar, CreditCard, DollarSign, FileText, Filter, Lightbulb, Package, Pencil, Search, ShoppingBag } from 'lucide-react';
+import { Calendar, CreditCard, DollarSign, FileText, Filter, Lightbulb, Package, Pencil, Search, ShoppingBag, User2, Smartphone, BookOpen, Edit3, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useMemo, useState } from 'react'
+import { generateInvoice } from '@/lib/generateInvoice';
+import InvoicePreviewModal from '@/app/components/admin/InvoicePreviewModal';
 
 const page = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -31,6 +33,7 @@ const page = () => {
 
     //for editing the orders
     const [selectedPayment, setSelectedPayment] = useState<any>(null);
+    const [receiptPayment, setReceiptPayment] = useState<any>(null);
 
     // Fetch seller payments (processed)
     const { data: PaymentsData, isLoading: isPaymentsLoading } = useGetSellerPaymentsQuery(filters);
@@ -211,12 +214,12 @@ const page = () => {
                                     </Select>
                                 </div>
 
-                                <div className="space-y-1.5 w-full flex-[1.5] min-w-[200px]">
+                                <div className="space-y-1.5 w-full flex-[1] min-w-[200px]">
                                     <label className="text-white font-bold text-sm ml-1 select-none">Search</label>
                                     <div className="relative flex items-center">
                                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                                         <Input
-                                            placeholder="Search by ID or name"
+                                            placeholder="search "
                                             value={filters.search}
                                             onChange={(e) => handleFilterChange("search", e.target.value)}
                                             className="w-full bg-white/5 border border-white/[0.07] text-white text-sm rounded-xl placeholder:text-gray-300 px-4 py-2.5 pl-10 focus:outline-none focus:ring-1 focus:ring-purple-500/50 hover:bg-white/8 transition-colors"
@@ -346,7 +349,7 @@ const page = () => {
                                                             <Button 
                                                                 variant="default" 
                                                                 size="sm" 
-                                                                className="font-poppins font-black bg-white text-indigo-500 hover:text-white hover:bg-indigo-500/95"
+                                                                className="font-poppins font-bold bg-white text-indigo-500 hover:text-white hover:bg-indigo-500/95"
                                                                 onClick={() => setSelectedPayment(payment)}
                                                                 >
                                                                 <Lightbulb className="size-4 mr-1" />
@@ -355,7 +358,8 @@ const page = () => {
                                                             <Button
                                                                 variant="default"
                                                                 size="sm"
-                                                                className="font-poppins font-black bg-white text-red-500 hover:text-white hover:bg-red-500/95"
+                                                                className="font-poppins font-bold bg-white text-red-500 hover:text-white hover:bg-red-500/95"
+                                                                onClick={() => setReceiptPayment(payment)}
                                                                 >
                                                                 <FileText className="size-4 mr-1" />
                                                                 Receipt
@@ -384,139 +388,180 @@ const page = () => {
                         </CardContent>
                     </Card>
                 </div>
-
-
-               {selectedPayment && (
-                <Dialog open={!!selectedPayment} onOpenChange={(open) => !open && setSelectedPayment(null)}>
-                    <DialogContent className="sm:max-w-4xl overflow-y-auto">
-                        <DialogHeader>
-                            <DialogTitle className="text-2xl font-poppins font-black text-purple-100">Payment Details</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-6">
-                          <div className="bg-gradeint-to-tl from-gray-900/50 to-gray-800/50 p-6 rounded-2xl border-0">
-                            <h3 className='text-xl font-poppins font-bold text-violet-500 mb-4'>Transaction Information</h3>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Amount: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                ৳{selectedPayment.amount}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Payment Method: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.paymentMethod}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Status: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                <span className={`px-3 py-1 rounded-full text-xs font-semibold 
-                                    ${selectedPayment.status === "complete" ? "bg-green-500/20 text-green-400" 
-                                      : selectedPayment.status === "failed" ? "bg-red-500/20 text-red-400" 
-                                      : "bg-yellow-500/20 text-yellow-400"}
-                                    `}
-                                >{selectedPayment.status}</span>
-                              </div>  
-                              <div className='text-sm font-semibold text-white/60'>
-                                Date: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {formatDate(selectedPayment.createdAt)}
-                              </div>
-
-                              <div className='text-sm font-semibold text-white/60'>
-                                Processed By: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.seller?.name || "N/A"}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="bg-gradeint-to-tl from-blue-900/50 to-blue-800/50 p-6 rounded-2xl border-0">
-                            <h3 className='text-xl font-poppins font-bold text-orange-500 mb-4'>Seller Information</h3>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Amount
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.amount}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Email: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.seller?.email}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Phone: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.seller?.phoneNumber || "Not Provided"}
-                              </div>  
-                              <div className='text-sm font-semibold text-white/60'>
-                                Payment Method: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.product?.paymentMode || "Not Specified"}
-                              </div>
-
-                              <div className='text-sm font-semibold text-white/60'>
-                                Processed By: 
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment.seller?.name || "N/A"}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="bg-gradeint-to-tl from-white to-red-500 p-6 rounded-2xl border-0">
-                            <h3 className='text-xl font-poppins font-bold text-green-500 mb-4'>Product & Order Information</h3>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Product
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                {selectedPayment?.product?.title || "No Product Found"}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Price
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                ৳{selectedPayment?.product?.finalPrice || "No Price Found"}
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                Order ID
-                              </div>
-                              <div className='text-sm font-semibold text-white/60'>
-                                #{selectedPayment?.order?._id?.slice(-6) || "N/A"}
-                              </div>  
-                            </div>
-                          </div>
-                          
-                            {selectedPayment?.notes && (
-                              <div className='mt-6'>
-                                <h3 className='text-xl font-poppins font-bold text-green-500 mb-4'>Notes</h3>
-                                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                                  <div className='text-xl font-bold text-white'>
-                                    Notes
-                                  </div>
-                                  <div className='text-sm font-semibold text-white/60'>
-                                    {selectedPayment?.notes || "No notes provided"}
-                                  </div>
+                {selectedPayment && (
+                    <Dialog open={!!selectedPayment} onOpenChange={(open) => !open && setSelectedPayment(null)}>
+                        <DialogContent className="sm:max-w-3xl bg-[#030303]/95 backdrop-blur-2xl border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)] rounded-[2.5rem] overflow-hidden p-0 gap-0">
+                            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+                            
+                            <DialogHeader className="p-8 pb-4 relative z-10 flex flex-row items-center justify-between">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
+                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">Detailed Transaction Archive</span>
+                                    </div>
+                                    <DialogTitle className="text-4xl font-black font-langar text-white tracking-tight">
+                                        Payment <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Insight.</span>
+                                    </DialogTitle>
+                                    <DialogDescription className="sr-only">
+                                        Detailed breakdown of transaction history, merchant profiles, and acquisition metadata.
+                                    </DialogDescription>
                                 </div>
-                              </div>
-                            )}
-                        </div>
-                        
+                            </DialogHeader>
 
-                    </DialogContent>
-                </Dialog>
-               )}
+                            <div className="p-8 pt-2 space-y-6 relative z-10 max-h-[75vh] overflow-y-auto modern-scrollbar">
+                                {/* Primary Status Card */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-3xl p-5 flex flex-col justify-center">
+                                        <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Settlement Amount</span>
+                                        <div className="text-3xl font-black text-white flex items-center gap-2 tracking-tighter">
+                                            <i className="fa-solid fa-bangladeshi-taka-sign text-indigo-500 text-xl" />
+                                            {selectedPayment.amount}
+                                        </div>
+                                    </div>
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-3xl p-5 flex flex-col justify-center">
+                                        <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Payment Method</span>
+                                        <div className="text-lg font-bold text-white tracking-tight uppercase">
+                                            {selectedPayment.paymentMethod || "Electronic Transfer"}
+                                        </div>
+                                    </div>
+                                    <div className="bg-white/[0.03] border border-white/5 rounded-3xl p-5 flex flex-col justify-center">
+                                        <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Current State</span>
+                                        <div>
+                                            <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                                                selectedPayment.status === "complete" 
+                                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
+                                                : "bg-amber-500/10 text-amber-500 border border-amber-500/20"
+                                            }`}>
+                                                <div className={`h-1.5 w-1.5 rounded-full ${selectedPayment.status === "complete" ? "bg-emerald-500" : "bg-amber-500"}`} />
+                                                {selectedPayment.status || "Pending"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                {/* Two Column Details Section */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Seller Identity */}
+                                    <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[50px] rounded-full" />
+                                        <h3 className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                                           <User2 size={12} /> Merchant Profile
+                                        </h3>
+                                        <div className="space-y-5">
+                                            <div className="flex items-center gap-4">
+                                                <div className="h-10 w-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                                                    <User2 className="text-indigo-400 h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Account Name</p>
+                                                    <p className="text-sm font-bold text-white">{selectedPayment.seller?.name || "Independent Seller"}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="h-10 w-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                                                    <Smartphone className="text-purple-400 h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Connect</p>
+                                                    <p className="text-sm font-bold text-white">{selectedPayment.seller?.phoneNumber || selectedPayment.seller?.email || "Encrypted"}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    {/* Order Meta */}
+                                    <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] rounded-full" />
+                                        <h3 className="text-xs font-black text-purple-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                                           <Package size={12} /> Acquisition Meta
+                                        </h3>
+                                        <div className="space-y-5">
+                                            <div className="flex items-center gap-4">
+                                                <div className="h-10 w-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                                                    <ShoppingBag className="text-orange-400 h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Order Hash</p>
+                                                    <p className="text-sm font-bold text-white tabular-nums tracking-widest">#{selectedPayment?.order?._id?.slice(-8).toUpperCase() || "INTERNAL"}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                                    <Calendar className="text-emerald-400 h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Processed On</p>
+                                                    <p className="text-sm font-bold text-white">{formatDate(selectedPayment.createdAt)}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Product Manifest Card */}
+                                <div className="bg-gradient-to-br from-indigo-500/[0.05] to-purple-500/[0.05] border border-white/5 rounded-[2rem] p-1 shadow-inner group">
+                                    <div className="bg-[#080808] rounded-[1.9rem] p-6">
+                                        <h3 className="text-xs font-black text-white/30 uppercase tracking-[0.3em] mb-6 flex items-center justify-between">
+                                           <span className="flex items-center gap-2"><BookOpen size={12} /> Product Manifest</span>
+                                           <span className="text-[10px] text-indigo-500/40">Verified Collection Item</span>
+                                        </h3>
+                                        
+                                        <div className="flex flex-col md:flex-row items-center gap-6">
+                                            {selectedPayment.product?.images?.[0] && (
+                                                <div className="relative h-24 w-16 flex-shrink-0 group-hover:scale-105 transition-transform duration-500">
+                                                    <Image 
+                                                        src={selectedPayment.product.images[0]} 
+                                                        alt="cover" 
+                                                        fill 
+                                                        className="object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]" 
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="flex-1 text-center md:text-left">
+                                                <h4 className="text-xl font-bold text-white mb-1 leading-tight">{selectedPayment?.product?.title || "Classified Publication"}</h4>
+                                                <p className="text-xs font-medium text-white/30 uppercase tracking-widest italic">{selectedPayment?.product?.author || "Curated Edition"}</p>
+                                            </div>
+                                            <div className="px-6 py-3 bg-white/5 rounded-2xl border border-white/5 text-center">
+                                                <p className="text-[9px] font-black text-white/20 uppercase tracking-widest mb-1">Catalog Value</p>
+                                                <p className="text-lg font-black text-white tracking-tighter">
+                                                    <i className="fa-solid fa-bangladeshi-taka-sign mr-1 text-indigo-400" />
+                                                    {selectedPayment?.product?.finalPrice || "0"}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Notes Section if exists */}
+                                {selectedPayment?.notes && (
+                                    <div className="p-6 bg-white/[0.01] border border-dashed border-white/10 rounded-3xl">
+                                        <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                            <Edit3 size={10} /> Administrative Annotations
+                                        </p>
+                                        <p className="text-sm text-white/60 leading-relaxed font-medium italic">
+                                            "{selectedPayment.notes}"
+                                        </p>
+                                    </div>
+                                )}
+
+                                <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/5">
+                                    <Button 
+                                        onClick={() => setSelectedPayment(null)}
+                                        className="bg-white/5 hover:bg-white/10 text-white font-black text-[10px] uppercase tracking-[0.2em] px-10 py-6 rounded-2xl border border-white/10 transition-all active:scale-95"
+                                    >
+                                        Close
+                                    </Button>
+                                </div>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                )}
+
+                <InvoicePreviewModal 
+                    isOpen={!!receiptPayment} 
+                    onClose={() => setReceiptPayment(null)} 
+                    payment={receiptPayment} 
+                />
             </AdminLayout>
         </div>
     )

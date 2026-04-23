@@ -71,11 +71,6 @@ const page = () => {
   });
 
 
-  useEffect(() => {
-    if (user && user.role !== "user") {
-      router.push("/admin");
-    }
-  }, [user, router]);
 
 
   // Cover Image Handlers
@@ -254,7 +249,7 @@ const page = () => {
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-10 text-center">
-          <h1 className="text-4xl mb-4 font-black font-poppins text-[#7a19ea]">
+          <h1 className="text-4xl mb-4 font-black font-poppins text-violet-600">
             Sell Your Used Books Here
           </h1>
           <p className="text-md text-gray-400 mb-4 font-semibold">
@@ -277,7 +272,7 @@ const page = () => {
           className="space-y-8"
         >
           {/* Title and Description */}
-          <Card className="border-t-10 pt-0 border-t-indigo-500 shadow-lg">
+          <Card className="border-t-10 pt-0 border-t-indigo-500 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-blue-100 to-indigo-100">
               <CardTitle className="flex text-2xl font-black font-poppins text-indigo-500 items-center">
                 <LuSwatchBook className="mr-2 h-8 w-8" />
@@ -346,7 +341,7 @@ const page = () => {
                         onValueChange={field.onChange}
                         value={field.value}
                       >
-                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400 ">
+                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400">
                           <SelectValue placeholder="select your book category" />
                         </SelectTrigger>
                         <SelectContent className="font-poppins font-semibold">
@@ -515,7 +510,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="year"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-black text-slate-800"
                 >
                   Year
                 </Label>
@@ -737,7 +732,7 @@ const page = () => {
           </Card>
 
           {/* Additional Information */}
-          <Card className="border-t-10 pt-0 border-t-purple-600 shadow-lg">
+          <Card className="border-t-10 pt-0 border-t-purple-600 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-purple-100 to-pink-100">
               <CardTitle className="flex text-2xl font-black font-poppins text-purple-600 items-center">
                 <SiGitbook className="mr-2 h-8 w-8" />
@@ -863,7 +858,6 @@ const page = () => {
                           placeholder="Description of the book"
                           className="md:w-3/4 font-poppins placeholder:text-gray-400 font-semibold h-52 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:border-transparent transition-all"
                           rows={9}
-                        // className='pl-10 placeholder:text-gray-400 font-hanken-grotesk font-semibold w-full'
                         />
                         {errors.description && (
                           <p className="text-indigo-300 text-sm font-normal">
@@ -879,7 +873,7 @@ const page = () => {
           </Card>
 
           {/* Price Details with Negotiation */}
-          <Card className="border-t-10 pt-0 border-t-amber-500 shadow-lg">
+          <Card className="border-t-10 pt-0 border-t-amber-500 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-amber-50 to-yellow-50">
               <CardTitle className="flex text-2xl font-black font-poppins text-amber-500 items-center">
                 <i className="fa-solid fa-bangladeshi-taka-sign mr-2 text-xl"></i>
@@ -889,7 +883,7 @@ const page = () => {
                 ( Author, Description, BDT, etc...)
               </CardDescription>
             </CardHeader>
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 bg-white">
               <div className="space-y-4">
                 <div className="space-y-0">
                   <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
@@ -989,14 +983,14 @@ const page = () => {
           </Card>
 
           {/* Bank details */}
-          <Card className="border-t-10 pt-0 border-t-[#ce1241] shadow-lg">
+          <Card className="border-t-10 pt-0 border-t-red-600 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-red-100 to-pink-100">
               <CardTitle className="flex text-2xl font-black font-poppins text-[#ea023c] items-center">
                 <i className="fa-solid fa-vault mr-2 text-xl"></i>
                 Bank Details
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 pt-2">
+            <CardContent className="space-y-4 pt-2 bg-white">
               {/* Form Fields for Book Details */}
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label className="md:w-1/4 text-md font-black font-poppins text-gray-700">
@@ -1094,10 +1088,10 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="sample: 646c5b69c6762"
-                      className="placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
                     />
                     {errors.paymentDetails?.sessionId && (
-                      <p className="text-indigo-500 text-sm font-normal mt-1">
+                      <p className="text-indigo-300 text-sm font-normal">
                         {errors.paymentDetails.sessionId.message}
                       </p>
                     )}
@@ -1116,7 +1110,7 @@ const page = () => {
                     </Label>
                     <Input
                       {...register("paymentDetails.bankDetails.accountNumber", {
-                        required: "Acocunt Number is required",
+                        required: "Account Number is required",
                         pattern: {
                           value: /^[0-9]{9,18}$/,
                           message: "Invalid account number format",
@@ -1243,7 +1237,7 @@ const page = () => {
               </Label>
             </div>
             {errors.agreeToTerms && (
-              <p className="text-red-500 text-xs font-semibold">
+              <p className="text-indigo-300 text-sm font-normal">
                 {errors.agreeToTerms.message as string}
               </p>
             )}

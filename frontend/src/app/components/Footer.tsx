@@ -68,11 +68,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gray-950 text-gray-400 border-t border-white/5 overflow-hidden">
-      {/* Background Aesthetic Elements */}
-      <div className="absolute top-10 left-2/4 w-[700px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-15 right-2/4 w-[700px] h-[700px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
-
+    <footer className="relative bg-black text-white border-t border-white/5 overflow-hidden">
       <div className="w-[78%] mx-auto px-0 relative z-10 pt-20 pb-10">
         <motion.div
           variants={containerVariants}
@@ -108,7 +104,7 @@ const Footer = () => {
 
           {/* Useful Links */}
           <motion.div variants={itemVariants} className="w-full lg:w-[15%] space-y-6">
-            <h3 className="text-lg font-black text-indigo-400 uppercase tracking-[0.3em]">About</h3>
+            <h3 className="text-base font-bold font-poppins text-violet-500 uppercase tracking-[0.3em]">About</h3>
             <ul className="space-y-4">
               {[
                 { label: "About Us", href: "/about-us" },
@@ -117,7 +113,7 @@ const Footer = () => {
                 { label: "Contact Us", href: "/contact-us" },
               ].map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm font-semibold hover:text-white flex items-center group transition-colors">
+                  <Link href={link.href} className="text-sm font-normal hover:text-white flex items-center group hover:underline transition-colors">
                     {link.label}
                     <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </Link>
@@ -128,7 +124,7 @@ const Footer = () => {
 
           {/* Legal / Policy */}
           <motion.div variants={itemVariants} className="w-full lg:w-[15%] space-y-6">
-            <h3 className="text-lg font-black text-indigo-400 uppercase tracking-[0.3em]">Policies</h3>
+            <h3 className="text-base font-bold font-poppins text-violet-500 uppercase tracking-[0.3em]">Policies</h3>
             <ul className="space-y-4">
               {[
                 { label: "Privacy Policy", href: "/privacy-policy" },
@@ -136,7 +132,7 @@ const Footer = () => {
                 { label: "Return Policy", href: "/return-policy" },
               ].map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm font-semibold hover:text-white flex items-center group transition-colors">
+                  <Link href={link.href} className="text-sm font-normal hover:text-white flex items-center group transition-colors hover:underline">
                     {link.label}
                     <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </Link>
@@ -147,9 +143,9 @@ const Footer = () => {
 
           {/* Quick Contact */}
           <motion.div variants={itemVariants} className="w-full lg:w-[30%] space-y-6">
-            <h3 className="text-lg font-black text-indigo-400 uppercase tracking-[0.3rem]">Support</h3>
+            <h3 className="text-base font-poppins font-bold text-violet-500 uppercase tracking-[0.3rem]">Support</h3>
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 py-10 space-y-4">
-              <p className="text-xs font-bold text-gray-300 leading-relaxed tracking-wider">
+              <p className="text-xs font-semibold text-gray-300 leading-relaxed tracking-wider">
                 Subscribe to our newsletter for exclusive updates & offers.
               </p>
               <div className="flex gap-2">
@@ -207,8 +203,8 @@ const Footer = () => {
           <div className="flex flex-col items-center justify-center lg:items-start space-y-2">
             <p className="flex flex-col md:flex-col items-start justify-center gap-2 text-[10px] font-black tracking-widest text-gray-500">
               <span className="flex items-center gap-1 tracking-wide text-gray-400/70 text-xs font-semibold uppercase">
-                <Image src="/images/fav-ico.png" alt="Copyright" height={30} width={25} className="brightness-90 opacity-90 hover:brightness-100 hover:opacity-100 hover:scale-105 transition-all cursor-pointer" /> &copy;{currentYear} -
-                All Copyright Reserved - Oxpecker Book-Hub. One's book can be Someone's treasure.</span>
+                <Image src="/images/favicon.ico" alt="Copyright" height={30} width={25} className="brightness-90 opacity-90 hover:brightness-100 hover:opacity-100 hover:scale-105 transition-all cursor-pointer" /> &copy;{currentYear} -
+                All Copyright Reserved - Oxpecker Book-Shop. One's book can be Someone's treasure.</span>
             </p>
           </div>
 

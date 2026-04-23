@@ -48,11 +48,6 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   const userPlaceholder = user?.name?.split(" ")?.map((name: string) => name[0])?.join("");
   const router = useRouter();
 
-  useEffect(() => { 
-    if (user && user.role !== "user") {
-      router.push("/admin");
-    }
-  }, [user, router]);
 
   const handleLogout = async () => {
     try {

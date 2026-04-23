@@ -25,7 +25,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Ghost, Heart, ShoppingCart, Share2 } from "lucide-react";
+import { Ghost, Heart, ShoppingCart, Share2, ChevronDown } from "lucide-react";
 import Pagination from "../components/Pagination";
 import NoData from "../components/NoData";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -57,9 +57,14 @@ const BooksContent = () => {
   const [selectedAuthor, setSelectedAuthor] = useState<string[]>([]);
   const [selectedYear, setSelectedYear] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState("newest");
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const bookPerPage = 9;
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+  
   const searchParams = useSearchParams();
   const searchTerms = searchParams.get("search") || "";
   const { data: apiResponse, isLoading } = useGetProductsQuery();
@@ -72,11 +77,7 @@ const BooksContent = () => {
   const [books, setBooks] = useState<Bookdetails[]>([]);
 
   const user = useSelector((state: RootState) => state.user.user);
-  useEffect(() => {
-    if (user && user.role !== "user") {
-      router.push("/admin");
-    }
-  }, [user, router]);
+
 
   useEffect(() => {
     if (apiResponse?.success) {
@@ -113,17 +114,15 @@ const BooksContent = () => {
     setCurrentPage(1);
   };
 
-  // Fuse.js configuration
   const fuseOptions = {
     keys: [
       { name: "title", weight: 0.6 },
       { name: "author", weight: 0.4 },
     ],
-    threshold: 0.3, // 0.0 = perfect match, 1.0 = match anything
+    threshold: 0.3,
     includeScore: true,
   };
 
-  // 1. First, Search (if applicable)
   let searchedBooks = books;
   if (searchTerms) {
     const fuse = new Fuse(books, fuseOptions);
@@ -131,7 +130,6 @@ const BooksContent = () => {
     searchedBooks = result.map((res) => res.item);
   }
 
-  // 2. Then, Filter
   const filteredBooks = searchedBooks.filter((book) => {
     const conditionMatch =
       selectedCondition.length === 0 ||
@@ -175,10 +173,7 @@ const BooksContent = () => {
     );
   });
 
-  // 3. Finally, Sort
   const sortedBooks = [...filteredBooks].sort((a, b) => {
-    // If searching and using default sort ('newest'), keep Fuse's relevance order
-    // (Fuse returns most relevant first by default)
     if (searchTerms && sortOption === "newest") {
       return 0;
     }
@@ -217,11 +212,6 @@ const BooksContent = () => {
       return Math.round(discount);
     }
     return 0;
-  };
-
-  const formatDate = (dateString: Date) => {
-    const date = new Date(dateString);
-    return formatDistanceToNow(date, { addSuffix: true });
   };
 
   const handleAddToCart = async (e: React.MouseEvent, book: Bookdetails) => {
@@ -282,20 +272,13 @@ const BooksContent = () => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-slate-200 relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] animate-pulse delay-1000" />
-        <div className="absolute top-[40%] right-[10%] w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px]" />
-      </div>
-
       <div className="container w-[80%] mx-auto px-4 py-8 relative z-10">
         <nav className="mb-8 flex items-center gap-2 text-sm text-slate-400">
           <Link href="/" className="hover:text-indigo-400 transition-colors">
             Home
           </Link>
           <span>/</span>
-          <span className="text-slate-200 font-medium font-poppins">Books</span>
+          <span className="text-white font-medium font-poppins">Books</span>
         </nav>
 
         {isLoading ? (
@@ -319,9 +302,9 @@ const BooksContent = () => {
                 <motion.h1
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="text-4xl md:text-6xl font-black font-poppins text-white tracking-tight"
+                  className="text-4xl md:text-6xl font-bold font-langar text-white tracking-tight"
                 >
-                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-700 to-purple-600 drop-shadow-sm">Used Book</span>
+                  Premium <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-400 to-purple-400 drop-shadow-sm">Used Book</span>
                 </motion.h1>
                 <p className="text-slate-400 font-medium text-lg flex items-center gap-2">
                   <span className="w-8 h-[1.75px] bg-indigo-500/50" />
@@ -330,12 +313,12 @@ const BooksContent = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <span className="text-sm font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Sort By</span>
+                <span className="text-sm font-bold text-slate-500 uppercase tracking-widest hidden sm:block">Sort By</span>
                 <Select value={sortOption} onValueChange={setSortOption}>
-                  <SelectTrigger className="w-[220px] h-12 bg-slate-900/60 backdrop-blur-md border border-white/5 text-white rounded-xl font-poppins font-bold focus:ring-2 focus:ring-indigo-500/20 hover:bg-slate-800/80 transition-all shadow-xl">
+                  <SelectTrigger className="w-[220px] h-12 bg-slate-900/40 backdrop-blur-md border border-white/5 text-white rounded-xl font-poppins font-bold focus:ring-2 focus:ring-indigo-500/20 hover:bg-slate-800 transition-all shadow-xl">
                     <SelectValue placeholder="Latest Arrival" />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/10 text-white font-poppins">
+                  <SelectContent className="bg-slate-900 backdrop-blur-xl border-white/10 text-white font-poppins">
                     <SelectItem value="newest">Latest Arrival</SelectItem>
                     <SelectItem value="oldest">Oldest First</SelectItem>
                     <SelectItem value="price-low">Price: Low to High</SelectItem>
@@ -347,9 +330,9 @@ const BooksContent = () => {
 
             {/* Premium Horizontal Filter Bar */}
             <div className="sticky top-4 z-40 py-4 -mx-4 px-4">
-              <div className="flex items-center gap-4 overflow-x-auto pb-4 no-scrollbar p-2 bg-slate-900/40 backdrop-blur-2xl border border-white/5 rounded-2xl shadow-2xl">
-                <div className="p-2.5 bg-indigo-500/20 rounded-xl shrink-0 shadow-lg shadow-indigo-500/10">
-                  <Ghost className="size-6 text-indigo-400" />
+              <div className="flex items-center gap-4 overflow-x-auto no-scrollbar p-2 bg-white/10 backdrop-blur-2xl border border-white/5 rounded-2xl shadow-2xl">
+                <div className="p-2.5 bg-white rounded-lg shrink-0 shadow-lg shadow-indigo-500/10">
+                  <Ghost className="size-6 text-indigo-600" />
                 </div>
                 {Object.entries(filters).map(([key, values]) => {
                   const activeCount =
@@ -362,18 +345,21 @@ const BooksContent = () => {
 
                   return (
                     <Select key={key}>
-                      <SelectTrigger className={`h-11 px-6 min-w-max rounded-xl border-white/5 font-bold text-xs uppercase tracking-widest transition-all text-white
+                      <SelectTrigger className={`h-11 px-6 min-w-max rounded-xl border-white/5 font-bold text-xs uppercase tracking-widest transition-all
                         ${activeCount > 0
-                          ? "bg-indigo-600/30 border-indigo-500/50 shadow-[0_0_20px_rgba(79,70,229,0.3)]"
-                          : "bg-slate-800/40 hover:bg-slate-700/60 border-transparent"}
+                          ? "bg-indigo-600/30 border-indigo-500/50 shadow-[0_0_20px_rgba(79,70,229,0.3)] text-indigo-400"
+                          : "bg-slate-800/40 hover:bg-slate-700/60 text-slate-300 border-transparent"}
                       `}>
                         <div className="flex items-center gap-3">
                           {key.charAt(0).toUpperCase() + key.slice(1)}
-                          {activeCount > 0 && (
-                            <Badge className="bg-indigo-500 text-white border-0 text-[10px] h-5 min-w-[20px] flex items-center justify-center px-1 font-black rounded-full">
-                              {activeCount}
-                            </Badge>
-                          )}
+                          <div className="flex items-center gap-1.5 ml-auto">
+                            {activeCount > 0 && (
+                              <Badge className="bg-indigo-500 text-white border-0 text-[10px] h-5 min-w-[20px] flex items-center justify-center px-1 font-bold rounded-full">
+                                {activeCount}
+                              </Badge>
+                            )}
+                            <ChevronDown className="size-3 opacity-50" />
+                          </div>
                         </div>
                       </SelectTrigger>
                       <SelectContent className="bg-slate-900/98 backdrop-blur-2xl border-white/10 text-white font-poppins min-w-[240px] shadow-2xl rounded-2xl">
@@ -403,13 +389,13 @@ const BooksContent = () => {
                 })}
                 {(selectedCondition.length > 0 || selectedType.length > 0 || selectedCategory.length > 0 || selectedGenre.length > 0 || selectedAuthor.length > 0 || selectedYear.length > 0) && (
                   <Button
-                    variant="ghost"
+                    variant="default"
                     size="sm"
                     onClick={() => {
                       setSelectedCondition([]); setSelectedType([]); setSelectedCategory([]);
                       setSelectedGenre([]); setSelectedAuthor([]); setSelectedYear([]);
                     }}
-                    className="text-rose-400 hover:text-white hover:bg-rose-500/20 font-black text-xs uppercase tracking-widest transition-all rounded-xl border border-rose-500/20 px-6 h-11"
+                    className="text-rose-400 hover:text-white hover:bg-rose-500/20 font-bold text-xs uppercase tracking-widest transition-all rounded-xl border border-rose-500/20 px-6 h-11"
                   >
                     Reset All
                   </Button>
@@ -451,7 +437,7 @@ const BooksContent = () => {
 
                             {/* Status Badges */}
                             <div className="absolute top-8 left-8 z-30">
-                              <Badge className="bg-slate-900/60 backdrop-blur-md rounded-full text-indigo-400 border border-indigo-500/50 font-black text-[10px] uppercase tracking-widest py-1.5 px-4 shadow-xl">
+                              <Badge className="bg-slate-900/60 backdrop-blur-md rounded-full text-indigo-400 border border-indigo-500/50 font-bold text-[10px] uppercase tracking-widest py-1.5 px-4 shadow-xl">
                                 {book.condition}
                               </Badge>
                             </div>
@@ -484,20 +470,29 @@ const BooksContent = () => {
                                 >
                                   <Heart className={`size-6 ${wishlist.some((w) => w.products.includes(book._id)) ? "fill-rose-500" : ""}`} />
                                 </Button>
-                                <RWebShare
-                                  data={{
-                                    text: `Check out this amazing book I targets found on Book Hub!`,
-                                    title: book.title,
-                                    url: `${typeof window !== 'undefined' ? window.location.origin : ''}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
-                                  }}
-                                >
+                                {isMounted ? (
+                                  <RWebShare
+                                    data={{
+                                      text: `Check out this amazing book I patterns found on Book-Shop!`,
+                                      title: book.title,
+                                      url: `${window.location.origin}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
+                                    }}
+                                  >
+                                    <Button
+                                      size="icon"
+                                      className="h-12 w-12 rounded-xl bg-amber-500/20 backdrop-blur-md text-amber-600 border-0 shadow-xl hover:bg-amber-500/20 hover:border-0 hover:text-amber-500 transition-all"
+                                    >
+                                      <Share2 className="size-6" />
+                                    </Button>
+                                  </RWebShare>
+                                ) : (
                                   <Button
                                     size="icon"
-                                    className="h-12 w-12 rounded-xl bg-amber-500/20 backdrop-blur-md text-amber-600 border-0 shadow-xl hover:bg-amber-500/20 hover:border-0 hover:text-amber-500 transition-all"
+                                    className="h-12 w-12 rounded-xl bg-amber-500/20 backdrop-blur-md text-amber-600 border-0 shadow-xl"
                                   >
                                     <Share2 className="size-6" />
                                   </Button>
-                                </RWebShare>
+                                )}
                               </motion.div>
                             </div>
                           </div>
@@ -510,7 +505,7 @@ const BooksContent = () => {
                                 </h3>
                               </Link>
                               <div className="flex items-center gap-3">
-                                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest">{book.author}</span>
+                                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">{book.author}</span>
                                 <div className="w-1 h-1 bg-slate-700 rounded-full" />
                                 <Badge variant="outline" className="text-[10px] border-indigo-500/20 text-indigo-400 bg-indigo-500/5 font-bold uppercase py-0.5 px-2">
                                   {book.genre || "No Genre"}
@@ -520,9 +515,9 @@ const BooksContent = () => {
 
                             <div className="flex items-center justify-between pt-1 border-t-1 border-white/5">
                               <div className="space-y-1">
-                                <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest block">Price</span>
+                                <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest block">Price</span>
                                 <div className="flex items-baseline gap-2">
-                                  <span className="text-lg font-black text-white tracking-tight">
+                                  <span className="text-lg font-bold text-white tracking-tight">
                                     <i className="fa-solid fa-bangladeshi-taka-sign"></i>{book.finalPrice}
                                   </span>
                                   {book.price && book.price > book.finalPrice && (
@@ -534,7 +529,7 @@ const BooksContent = () => {
                               </div>
                               <div className="text-right">
                                 <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest block mb-1">Edition</span>
-                                <span className="text-xs font-black text-slate-200 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
+                                <span className="text-xs font-bold text-slate-200 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
                                   {book.year || "2024"}
                                 </span>
                               </div>
@@ -560,7 +555,7 @@ const BooksContent = () => {
                     <div className="h-28 w-28 bg-indigo-500/10 rounded-full flex items-center justify-center mb-8 shadow-inner shadow-indigo-500/10">
                       <Ghost className="size-14 text-indigo-400 animate-pulse" />
                     </div>
-                    <h2 className="text-4xl font-black text-white mb-4 font-poppins">No Treasures Found</h2>
+                    <h2 className="text-4xl font-bold text-white mb-4 font-langar">No Treasures Found</h2>
                     <p className="text-slate-400 max-w-md mx-auto mb-10 font-medium text-lg leading-relaxed">
                       Your filters are a bit too specific! Try expanding your horizons or resetting everything to see the full collection.
                     </p>
@@ -569,7 +564,7 @@ const BooksContent = () => {
                         setSelectedCondition([]); setSelectedType([]); setSelectedCategory([]);
                         setSelectedGenre([]); setSelectedAuthor([]); setSelectedYear([]);
                       }}
-                      className="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-12 h-16 rounded-[1.2rem] shadow-2xl shadow-indigo-500/30 transition-all uppercase tracking-widest text-sm"
+                      className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-12 h-16 rounded-[1.2rem] shadow-2xl shadow-indigo-500/30 transition-all uppercase tracking-widest text-sm"
                     >
                       Browse All Books
                     </Button>

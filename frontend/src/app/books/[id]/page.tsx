@@ -64,6 +64,11 @@ const page = () => {
   const [addToWishlistMutation] = useAddToWishlistMutation();
   const [removeFromWishlistMutation] = useRemoveFromWishlistMutation();
   const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (apiResponse?.success) {
@@ -72,11 +77,6 @@ const page = () => {
   }, [apiResponse]);
 
   const user = useSelector((state: RootState) => state.user.user);
-  useEffect(() => {
-    if (user && user.role !== "user") {
-      router.push("/admin");
-    }
-  }, [user, router]);
 
   const handleAddToCart = async () => {
     if (book) {
@@ -141,7 +141,6 @@ const page = () => {
     return (
       <div className="min-h-screen bg-gray-100">
         <div className="container mx-auto px-9 py-8">
-          {/* Breadcrumb Skeleton */}
           <div className="flex gap-2 mb-8">
             <Skeleton className="h-4 w-12 bg-gray-200" />
             <Skeleton className="h-4 w-4 bg-gray-200" />
@@ -151,7 +150,6 @@ const page = () => {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            {/* Image Gallery Skeleton */}
             <div className="space-y-4">
               <Skeleton className="h-[400px] w-full rounded-lg bg-gray-200" />
               <div className="flex gap-2">
@@ -161,7 +159,6 @@ const page = () => {
               </div>
             </div>
 
-            {/* Info Skeleton */}
             <div className="space-y-6">
               <div className="flex justify-between items-start">
                 <div className="space-y-3 w-full">
@@ -249,11 +246,11 @@ const page = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50 text-black">
       <div className="container mx-auto px-9 py-8">
         <nav className="mb-5 flex items-center gap-2 text-sm text-muted-foreground">
           <Link href="/" className="hover:underline font-bold text-primary">
-            {""} {/*for gap*/}
+            {""}
             Home{""}
           </Link>
           <span>/</span>
@@ -285,8 +282,8 @@ const page = () => {
                       bg-gradient-to-r from-amber-500 to-orange-500
                       shadow-2xl
                       px-4 py-2
-                      text-xs font-bold font-hanken-grotesk text-white
-                      rounded-md
+                      text-xs font-bold font-hanken-grotesk text-black
+                      rounded-md 
                       transition-transform duration-200 hover:scale-110
                       cursor-pointer"
                 >
@@ -316,34 +313,39 @@ const page = () => {
             </div>
           </div>
 
-          {/** Book Details Section */}
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <h1 className="text-2xl font-bold">{book.title}</h1>
+                <h1 className="text-2xl font-bold text-black">{book.title}</h1>
                 <p className="text-sm text-muted-foreground">
-                  Posted {formatDate(book.createdAt)}
+                  Posted {isMounted ? formatDate(book.createdAt) : '...'}
                 </p>
               </div>
               <div className="flex gap-2">
-                <ShareButton
-                  url={`${window.location.origin}/books/${book._id}`}
-                  title={`Check out this book on Book Shop: ${book.title}`}
-                  text={`I just found this book on Book Shop and I think you will love it!: ${book.title}`}
-                />
+                {isMounted ? (
+                  <ShareButton
+                    url={`${window.location.origin}/books/${book._id}`}
+                    title={`Check out this book on Book Shop: ${book.title}`}
+                    text={`I just found this book on Book Shop and I think you will love it!: ${book.title}`}
+                  />
+                ) : (
+                  <Button variant="outline" size="sm">
+                    <TbShare2 className="size-5 mr-1" />Share
+                  </Button>
+                )}
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleAddToWishlist(book._id)}
+                  onClick={() => handleAddToWishlist(book._id || "")}
                 >
                   <Heart
-                    className={`size-5 mr-1 ${wishlist.some((w) => w.products.includes(book._id))
+                    className={`size-5 mr-1 ${wishlist.some((w) => w.products.includes(book._id || ""))
                       ? "fill-red-500"
                       : ""
                       }`}
                   />
                   <span className="hidden md:inline cursor-pointer">
-                    {wishlist.some((w) => w.products.includes(book._id))
+                    {wishlist.some((w) => w.products.includes(book._id || ""))
                       ? "Removed"
                       : "Add"}
                   </span>
@@ -381,7 +383,7 @@ const page = () => {
                   </>
                 )}
               </Button>
-              <Card className="border border-gray-200 shadow-sm">
+              <Card className="border border-gray-200 shadow-sm bg-white text-black">
                 <CardHeader>
                   <CardTitle className="text-lg font-bold">
                     Book Details
@@ -421,13 +423,13 @@ const page = () => {
         </div>
 
         <div className="mt-8 grid gap-8 md:grid-cols-2">
-          <Card className="border-none shadow-md">
+          <Card className="border-none shadow-md bg-white text-black">
             <CardHeader>
               <CardTitle className="text-lg font-bold">Description</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {book.aboutAuthor && (
-                <div className="text-sm font-semibold text-gray-800">
+                <div className="text-sm font-semibold text-black">
                   {book.aboutAuthor}
                 </div>
               )}
@@ -443,13 +445,12 @@ const page = () => {
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div>Ad Id: {book._id}</div>
-                <div>Posted: {formatDate(book.createdAt)}</div>
+                <div>Posted: {isMounted ? formatDate(book.createdAt) : '...'}</div>
               </div>
             </CardContent>
           </Card>
 
-          {/* book seller details */}
-          <Card className="border-none shadow-md h-[300px]">
+          <Card className="border-none shadow-md h-[300px] bg-white text-black">
             <CardHeader>
               <CardTitle className="text-lg font-bold">Sold By</CardTitle>
             </CardHeader>
@@ -511,74 +512,7 @@ const page = () => {
           </Card>
         </div>
 
-        {/* Working Proccess */}
-        <section className="mt-16 mb-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 inline-block">
-              How It Works
-            </h2>
-            <p className="text-gray-500 mt-2 font-medium">
-              Simple steps to buy or sell books
-            </p>
-          </div>
-          <div className="grid gap-10 md:grid-cols-3 pt-6">
-            {[
-              {
-                step: "1",
-                title: "Seller posts an Ad",
-                description:
-                  "Seller posts an ad on book kart to sell their used books.",
-                image: { src: "/icons/ads.png", alt: "Post Ad" },
-                color: "from-blue-500 to-indigo-600",
-              },
-              {
-                step: "2",
-                title: "Buyer Pays Online",
-                description:
-                  "Buyer makes an online payment to book kart to buy those books.",
-                image: { src: "/icons/pay_online.png", alt: "Payment" },
-                color: "from-indigo-500 to-purple-600",
-              },
-              {
-                step: "3",
-                title: "Seller ships the books",
-                description: "Seller then ships the books to the buyer",
-                image: { src: "/icons/fast-delivery.png", alt: "Shipping" },
-                color: "from-purple-500 to-pink-600",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="group relative bg-white/20 backdrop-blur-sm rounded-2xl p-6 pt-12 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                  <div
-                    className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    {item.step}
-                  </div>
-                </div>
-                <div className="space-y-4 text-center">
-                  <div className="h-24 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
-                    <Image
-                      src={item.image.src}
-                      alt={item.image.alt}
-                      width={100}
-                      height={100}
-                      className="object-contain"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed px-2">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+
       </div>
     </div>
   );

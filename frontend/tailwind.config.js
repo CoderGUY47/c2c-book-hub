@@ -19,6 +19,8 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-poppins)"],
         mono: ["var(--font-hanken-grotesk)"],
+        serif: ["var(--font-playfair)"],
+        langar: ["var(--font-langar)"],
         "hanken-grotesk": ["var(--font-hanken-grotesk)"],
       },
       keyframes: {

@@ -258,8 +258,8 @@ const AdminLayout:React.FC<AdminLayoutProps> = ({children}) => {
       </header>
 
       {/* Page content */}
-      <main className="flex-1 p-6">
-        <div className="max-w-7xl mx-auto">
+      <main className="flex-1 p-14">
+        <div className="max-w-8xl mx-auto">
           {children}
         </div>
       </main>

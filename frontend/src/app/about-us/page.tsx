@@ -13,7 +13,7 @@ const AboutUs = () => {
 
       <div className="container relative z-10 w-[80%] mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-black font-poppins mb-6 text-white tracking-tight">
+          <h1 className="text-5xl md:text-6xl font-black font-langar mb-6 text-white tracking-tight">
             About <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-500 to-purple-500">Us</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
@@ -58,7 +58,7 @@ const AboutUs = () => {
 
         {/* Why Choose Us Section */}
         <section className="py-20 relative px-0 bg-transparent">
-          <h2 className="text-4xl md:text-5xl font-black text-center mb-16 text-white font-poppins tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-16 text-white font-langar tracking-tight">
             Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-tr from-red-600 to-orange-400">Book-Hub?</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -84,11 +84,11 @@ const AboutUs = () => {
         </section>
 
         {/* Images Section - Explicit Bento Grid for Manual Updates */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-4 gap-4 mb-20 h-auto md:h-[500px]">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-4 gap-4 mb-20 h-auto md:h-[550px]">
           {/* Image 1 */}
           <div className="relative group overflow-hidden rounded-3xl border border-white/10 shadow-xl md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-1">
             <img
-              src="/images/book-1.webp"
+              src="/images/book1.webp"
               alt="Premium Books"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -98,7 +98,7 @@ const AboutUs = () => {
           {/* Image 2 */}
           <div className="relative group overflow-hidden rounded-2xl border border-white/10 shadow-lg md:col-start-3 md:col-span-1 md:row-start-1 md:row-span-1">
             <img
-              src="/images/book-2.webp"
+              src="/images/book2.webp"
               alt="Reading Culture"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -108,7 +108,7 @@ const AboutUs = () => {
           {/* Image 3 */}
           <div className="relative group overflow-hidden rounded-2xl border border-white/10 shadow-lg md:col-start-1 md:col-span-2 md:row-start-2 md:row-span-2">
             <img
-              src="/images/book-3.webp"
+              src="/images/book3.webp"
               alt="Book Collection"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -118,7 +118,7 @@ const AboutUs = () => {
           {/* Image 4 */}
           <div className="relative group overflow-hidden rounded-2xl border border-white/10 shadow-lg md:col-start-3 md:col-span-1 md:row-start-2 md:row-span-2">
             <img
-              src="/images/book-4.webp"
+              src="/images/book4.webp"
               alt="Quality Knowledge"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -128,7 +128,7 @@ const AboutUs = () => {
           {/* Image 5 */}
           <div className="relative group overflow-hidden rounded-2xl border border-white/10 shadow-lg md:col-start-1 md:col-span-3 md:row-start-4 md:row-span-4">
             <img
-              src="/images/book-5.webp"
+              src="/images/book5.webp"
               alt="Eco Friendly"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
