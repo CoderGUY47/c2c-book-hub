@@ -205,14 +205,14 @@ const AdminLayout:React.FC<AdminLayoutProps> = ({children}) => {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-2.5 bg-white/[0.04] border border-white/[0.09] rounded-full pl-1 pr-3 py-1 focus:outline-none hover:bg-white/[0.07] transition-colors">
+            <button className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.09] rounded-full pl-1 pr-3 py-1 focus:outline-none hover:bg-white/[0.07] transition-colors">
               <Avatar className="w-7 h-7 rounded-full overflow-hidden border border-white/20">
                 {user?.profilePicture
                   ? <AvatarImage src={user.profilePicture} alt="User" />
                   : <AvatarFallback className="bg-gradient-to-br from-violet-600 to-indigo-500 text-[11px] font-medium text-white">{userPlaceholder ?? <User size={13} />}</AvatarFallback>
                 }
               </Avatar>
-              <span className="text-[12px] font-medium text-white/75">{user?.name ?? "Guest"}</span>
+              <span className="text-[10px] font-medium text-white/75">{user?.name ?? "Guest"}</span>
             </button>
           </DropdownMenuTrigger>
 

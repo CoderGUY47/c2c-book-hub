@@ -37,10 +37,6 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-interface LoginProps {
-  isLoginOpen: boolean;
-  setIsLoginOpen: (open: boolean) => void;
-}
 interface LoginFormData {
   email: string;
   password: string;
@@ -56,7 +52,7 @@ interface ForgotPasswordFormData {
   email: string;
 }
 
-const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
+const AuthPage = () => {
   const [currentTab, setCurrentTab] = useState<
     "login" | "signup" | "forgot-password"
   >("login");
