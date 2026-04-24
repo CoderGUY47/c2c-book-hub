@@ -49,7 +49,7 @@ import { ShareButton } from "@/app/components/Share";
 
 const page = () => {
   const params = useParams();
-  const id = params.id;
+  const id = params?.id;
   const [selectedImage, setSelectedImage] = useState(0);
   const router = useRouter();
   const dispatch = useDispatch();

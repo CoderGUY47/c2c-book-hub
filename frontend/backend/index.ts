@@ -18,6 +18,7 @@ import adminRoutes from './routes/adminRoute';
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1); // Trust Vercel's reverse proxy for secure cookies
 
 const corsOption = {
   origin: process.env.FRONTEND_URL || '*',
