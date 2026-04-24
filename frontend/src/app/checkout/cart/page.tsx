@@ -11,7 +11,7 @@ import {
   useCreateOrUpdateOrderMutation,
   useCreateSslPaymentMutation,
 } from "@/store/api";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import {
   addToWishlistAction,
   removeFromWishlistAction,

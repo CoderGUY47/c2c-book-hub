@@ -8,7 +8,7 @@ import { Check, Layers, Loader2, Package, ShoppingCart, Tag, User } from 'lucide
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 
 const page = () => {

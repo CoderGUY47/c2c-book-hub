@@ -43,7 +43,7 @@ import Link from "next/link";
 import { TbShare2 } from "react-icons/tb";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
 import { ShareButton } from "@/app/components/Share";
 

@@ -15,7 +15,7 @@ import { FcReading } from "react-icons/fc";
 import { FcReadingEbook } from "react-icons/fc";
 import { FaPenToSquare } from "react-icons/fa6";
 import { setUser } from '@/store/slice/userSlice';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 const page = () => {
     const [isEditing,setIsEditing] = useState(false);

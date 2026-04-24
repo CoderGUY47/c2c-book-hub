@@ -1,7 +1,7 @@
 import React, { useState } from 'react' 
 import { useProcessSellerPaymentMutation } from '@/store/adminApi';
 import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';

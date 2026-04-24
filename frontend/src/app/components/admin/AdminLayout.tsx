@@ -4,7 +4,7 @@ import { RootState } from '@/store/store';
 import { useRouter, usePathname } from 'next/navigation';
 import { BookOpen, CreditCard, Home, LayoutDashboard, LogOut, Menu, Settings as SettingsIcon, ShoppingBag, Sidebar, User, X} from 'lucide-react';
 import { useLogoutMutation } from '@/store/api';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { logout } from '@/store/slice/userSlice';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';

@@ -7,7 +7,7 @@ import { useDeleteProductByIdMutation, useGetProductBySellerIdQuery } from '@/st
 import { Package, Trash2, Tag, User, CreditCard, Layers } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'

@@ -36,7 +36,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
 import { ShareButton } from "@/app/components/Share";
 import { books } from "@/lib/Constant";
@@ -77,8 +77,8 @@ const MockBookDetailsPage = () => {
 
         // Mock books are for demonstration only - they don't exist in the database
         toast.error("This is a curated example book for demonstration purposes only. Please browse our actual marketplace to find real listings!", {
-            duration: 5000,
-            icon: "📚"
+            autoClose: 5000,
+            icon: <span>📚</span>
         });
         return;
     };
@@ -93,8 +93,8 @@ const MockBookDetailsPage = () => {
 
         // Mock books are for demonstration only - they don't exist in the database
         toast.error("This is a curated example book for demonstration purposes only. Please browse our actual marketplace to find real listings!", {
-            duration: 5000,
-            icon: "📚"
+            autoClose: 5000,
+            icon: <span>📚</span>
         });
         return;
     };

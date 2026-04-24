@@ -34,7 +34,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 
 interface LoginFormData {

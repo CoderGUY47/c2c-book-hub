@@ -14,7 +14,7 @@ import {
 import { Bookdetails } from "@/lib/types/type";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { useAddToCartMutation } from "@/store/api";
 import { addToCart } from "@/store/slice/cartSlice";

@@ -4,7 +4,7 @@ import { authStatus, setEmailVerified } from '@/store/slice/userSlice';
 import { RootState } from '@/store/store';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import {motion} from 'framer-motion';
 import { CheckCircle, CircleCheck, Loader2 } from 'lucide-react';

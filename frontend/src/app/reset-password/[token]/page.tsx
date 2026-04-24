@@ -3,7 +3,7 @@ import { useResetPasswordMutation } from '@/store/api';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import {motion} from 'framer-motion';
 import { Input } from '@/components/ui/input';

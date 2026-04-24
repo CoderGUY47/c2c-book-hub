@@ -37,7 +37,7 @@ import {
 } from "@/store/api";
 import { Bookdetails } from "@/lib/types/type";
 import DiscountBadge from "../components/DiscountBadge";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/slice/cartSlice";
 import Fuse from "fuse.js";

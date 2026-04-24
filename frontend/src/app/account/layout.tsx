@@ -5,7 +5,7 @@ import { RootState } from '@/store/store';
 import { BookOpen, Heart, LogOut, Package, User } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import NoData from '../components/NoData';
 import Link from 'next/link';
