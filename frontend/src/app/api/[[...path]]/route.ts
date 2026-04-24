@@ -5,26 +5,14 @@ import serverless from 'serverless-http';
 
 const handler = serverless(app);
 
-export const GET = async (req: Request) => {
+const handleRequest = async (req: Request) => {
+  // console.log(`API Bridge hit: ${req.method} ${req.url}`);
   return (handler(req, {}) as any);
 };
 
-export const POST = async (req: Request) => {
-  return (handler(req, {}) as any);
-};
-
-export const PUT = async (req: Request) => {
-  return (handler(req, {}) as any);
-};
-
-export const DELETE = async (req: Request) => {
-  return (handler(req, {}) as any);
-};
-
-export const PATCH = async (req: Request) => {
-  return (handler(req, {}) as any);
-};
-
-export const OPTIONS = async (req: Request) => {
-  return (handler(req, {}) as any);
-};
+export const GET = handleRequest;
+export const POST = handleRequest;
+export const PUT = handleRequest;
+export const DELETE = handleRequest;
+export const PATCH = handleRequest;
+export const OPTIONS = handleRequest;
