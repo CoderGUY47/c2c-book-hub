@@ -275,10 +275,10 @@ const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-700 ${
+      className={`sticky top-0 z-50 transition-colors duration-500 py-4 ${
         isScrolled 
-        ? "bg-black/70 backdrop-blur-2xl border-b border-white/5 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
-        : "bg-black border-b border-transparent py-5"
+        ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
+        : "bg-black/95 border-b border-transparent"
       }`}
     >
       <div className="container w-[94%] lg:w-[88%] mx-auto flex items-center justify-between px-4">
@@ -295,9 +295,9 @@ const Header = () => {
           </Link>
           <div className="hidden lg:flex space-x-8 text-xs font-poppins font-semibold tracking-[0.1em] uppercase text-white/50">
             <Link href="/books" className="text-white relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-indigo-500 after:scale-x-100 transition-all">Explore Books</Link>
-            <Link href="/book-sell" className="hover:text-white transition-all hover:tracking-[0.15em] duration-300">Sell Books</Link>
-            <Link href="/blog" className="hover:text-white transition-all hover:tracking-[0.15em] duration-300">Blog</Link>
-            <Link href="/about-us" className="hover:text-white transition-all hover:tracking-[0.15em] duration-300">About Us</Link>
+            <Link href="/book-sell" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">Sell Books</Link>
+            <Link href="/blog" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">Blog</Link>
+            <Link href="/about-us" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">About Us</Link>
           </div>
         </div>
 
