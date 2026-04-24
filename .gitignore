@@ -5,6 +5,10 @@ node_modules/
 dist/
 *.log
 deploy.zip
+deployment_package/
+deploy_scripts/
+exclude_list.txt
+
 
 # Agent Ignores
 .qodo/
