@@ -11,7 +11,7 @@ import confetti from "canvas-confetti";
 const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const orderId = searchParams.get("orderId");
+  const orderId = searchParams?.get("orderId");
   const { data: orderData, isLoading } = useGetOrderByIdQuery(orderId, {
     skip: !orderId,
   });

@@ -44,7 +44,7 @@ import { TbShare2 } from "react-icons/tb";
 
 const MockBookDetailsPage = () => {
     const params = useParams();
-    const idOrSlug = params.id as string;
+    const idOrSlug = params?.id as string;
     const router = useRouter();
     const dispatch = useDispatch();
     const [selectedImage, setSelectedImage] = useState(0);

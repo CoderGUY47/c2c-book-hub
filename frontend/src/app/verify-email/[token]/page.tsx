@@ -12,7 +12,8 @@ import { Button } from '@/components/ui/button';
 
 const page:React.FC = () => {  //FC used to define functional component with typescript and it works for type checking
 
-  const {token} = useParams<{token:string}>()
+  const params = useParams<{token:string}>();
+  const token = params?.token;
   const router = useRouter();
   const dispatch = useDispatch();
   const [verifyEmail] = useVerifyEmailMutation();

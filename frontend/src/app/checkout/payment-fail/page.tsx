@@ -9,8 +9,8 @@ import { motion } from "framer-motion";
 const PaymentFailPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const error = searchParams.get("error");
-  const orderId = searchParams.get("orderId");
+  const error = searchParams?.get("error");
+  const orderId = searchParams?.get("orderId");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center p-4 overflow-hidden relative">

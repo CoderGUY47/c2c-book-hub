@@ -40,7 +40,7 @@ interface Author {
 
 const ExternalBookDetails = () => {
     const params = useParams();
-    const id = params.id as string;
+    const id = params?.id as string;
     const router = useRouter();
 
     const [book, setBook] = useState<OpenLibraryWork | null>(null);

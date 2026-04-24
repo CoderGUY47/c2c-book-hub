@@ -66,7 +66,8 @@ const BooksContent = () => {
   const bookPerPage = 9;
   
   const searchParams = useSearchParams();
-  const searchTerms = searchParams.get("search") || "";
+  const query = searchParams?.get("query") || null;
+  const searchTerms = searchParams?.get("search") || "";
   const { data: apiResponse, isLoading } = useGetProductsQuery();
   const [addToCartMutation] = useAddToCartMutation();
   const [addToWishlistMutation] = useAddToWishlistMutation();
