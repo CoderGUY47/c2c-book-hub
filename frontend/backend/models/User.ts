@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, CallbackWithoutResultAndOptionalError } from "mongoose";
 import bcrypt from "bcryptjs";
 
 
@@ -41,7 +41,7 @@ const userSchema = new Schema<IUser>({
 
 
 //comparing passwords
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next: CallbackWithoutResultAndOptionalError) {
     if(!this.isModified('password')) return next(); //if password is not modified then return
     const salt = await bcrypt.genSalt(10); //if password is modified then hash it
     this.password = await bcrypt.hash(this.password!, salt);
