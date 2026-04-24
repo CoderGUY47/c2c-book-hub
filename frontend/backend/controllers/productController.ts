@@ -95,7 +95,7 @@ export const getProductById = async (req: Request, res: Response) => {
         const { id } = req.params;
         let query;
 
-        if (mongoose.Types.ObjectId.isValid(id)) {
+        if (mongoose.Types.ObjectId.isValid(id as any)) {
             query = { _id: id };
         } else {
             // Check if valid ObjectId exists at the end of the slug (Pattern: ...-objectid)
