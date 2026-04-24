@@ -81,6 +81,8 @@
     "@types/multer": "^2.1.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/redux-persist": "^4.3.1",
