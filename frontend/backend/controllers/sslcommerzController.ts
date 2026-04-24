@@ -215,7 +215,7 @@ export const sslIpn = async (req: Request, res: Response) => {
 
 export const getTransactionStatusByTranId = async (req: Request, res: Response) => {
   try {
-    const { tran_id } = req.params;
+    const tran_id = req.params.tran_id as string;
     const apiResult = await sslcommerzService.queryByTransactionId(tran_id);
 
     if (apiResult.no_of_trans_found === 0) {
@@ -235,7 +235,7 @@ export const getTransactionStatusByTranId = async (req: Request, res: Response) 
 
 export const getTransactionStatusBySessionId = async (req: Request, res: Response) => {
   try {
-    const { sessionkey } = req.params;
+    const sessionkey = req.params.sessionkey as string;
     const apiResult = await sslcommerzService.queryBySessionId(sessionkey);
 
     if (apiResult.no_of_trans_found === 0) {
@@ -282,7 +282,7 @@ export const initiateRefund = async (req: Request, res: Response) => {
 
 export const getRefundStatus = async (req: Request, res: Response) => {
   try {
-    const { refund_ref_id } = req.params;
+    const refund_ref_id = req.params.refund_ref_id as string;
     const result = await sslcommerzService.queryRefundStatus(refund_ref_id);
     return response(res, 200, "Refund status fetched successfully.", result);
   } catch (error: any) {

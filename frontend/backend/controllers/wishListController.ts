@@ -41,7 +41,7 @@ export const addToWishlist = async(req: Request, res: Response)=>{
 export const removeFromWishlist = async(req: Request, res: Response)=>{
     try{
         const userId = req.id; // Assuming authenticatedUser middleware adds user to req
-        const {productId} = req.params; //get productId and quantity from body
+        const productId = req.params.productId as string; //get productId and quantity from body
 
         let wishList = await WishList.findOne({user: userId}); //find cart of the user
         if(!wishList){ //if cart not exist, create new cart

@@ -40,7 +40,7 @@ export const getOrderByUser = async (req: Request, res: Response) => {
 
 export const getOrderById = async (req: Request, res: Response) => {
   try {
-    const order = await Order.findById(req.params.id)
+    const order = await Order.findById(req.params.id as any)
       .populate("user", "name email")
       .populate("shippingAddress")
       .populate("payment")

@@ -54,7 +54,7 @@ export const getAllOrders = async(req:Request, res:Response)=>{
 
 export const updateOrder = async(req:Request, res:Response)=>{
     try{
-        const{id} = req.params;
+        const id = req.params.id as string;
         const {status, paymentStatus, notes} = req.body;
         const order = await Order.findById(id);
         if(!order){
@@ -81,7 +81,7 @@ export const updateOrder = async(req:Request, res:Response)=>{
 
 export const processSellerPayment = async(req:Request, res:Response)=>{
     try{
-        const {orderId} = req.params;
+        const orderId = req.params.orderId as string;
         const {productId, amount, paymentMethod, notes} = req.body;
         const user = req.id;
 

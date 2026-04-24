@@ -4,7 +4,7 @@ import User from "../models/User";
 
 export const updateUserProfile = async(req: Request, res: Response)=>{
     try{
-        const {userId} = req.params; // Assuming authenticatedUser middleware adds user to req
+        const userId = req.params.userId as string; // Assuming authenticatedUser middleware adds user to req
         if(!userId){
             return response(res, 400, "User is required, please enter the valid user id.");
         }
