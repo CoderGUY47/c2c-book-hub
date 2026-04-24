@@ -92,14 +92,14 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 export const getProductById = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
+        const id = req.params.id as string;
         let query;
 
         if (mongoose.Types.ObjectId.isValid(id as any)) {
             query = { _id: id };
         } else {
             // Check if valid ObjectId exists at the end of the slug (Pattern: ...-objectid)
-            const idMatch = id.match(/-([0-9a-fA-F]{24})$/);
+            const idMatch = (id as string).match(/-([0-9a-fA-F]{24})$/);
             
             if (idMatch) {
                // If ID found at end, use it
