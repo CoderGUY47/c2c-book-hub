@@ -1,11 +1,8 @@
 import type { NextConfig } from "next";
 
-import path from "path";
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    // Add res.cloudinary.com to this list
     domains: [
       'images.unsplash.com', 
       'media.istockphoto.com', 
@@ -16,8 +13,16 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true
   },
-  output: "standalone",
-  outputFileTracingRoot: path.join(__dirname, "../"),
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Suppress 'supports-color' missing module warning from debug/axios on client side
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        'supports-color': false,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
