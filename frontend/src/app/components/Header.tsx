@@ -23,7 +23,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, } from "@/c
 import AuthPage from "./AuthPage";
 import { setCart } from "@/store/slice/cartSlice";
 import { useGetCartQuery, useLogoutMutation } from "@/store/api";
-import toast from "react-hot-toast";
+// Removed toast import as per request
 
 const getOptimizedUrl = (url: string, width = 40, height = 40) => {
   if (!url) return "";
@@ -97,10 +97,10 @@ const Header = () => {
     try {
       await logoutMutation({}).unwrap();
       dispatch(logout());
-      toast.success("User logged out successfully");
+      // toast.success("User logged out successfully"); removed per request
       setIsDropdownOpen(false);
     } catch (error) {
-      toast.error("Failed to logout. Please try again.");
+      // toast.error("Failed to logout. Please try again."); removed per request
     }
   };
   const userPlaceholder = user?.name

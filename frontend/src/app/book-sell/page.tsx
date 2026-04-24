@@ -6,7 +6,7 @@ import { RootState } from "@/store/store";
 // import { useRouter } from 'next/router';
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+// toast import removed as per request
 import { useDispatch, useSelector } from "react-redux";
 import NoData from "../components/NoData";
 import { useRouter } from "next/navigation";
@@ -172,7 +172,7 @@ const page = () => {
 
       // Validate Cover Image
       if (!coverImageFile) {
-        toast.error("Please upload a cover photo");
+        // toast.error("Please upload a cover photo"); removed per request
         return;
       }
 
@@ -215,7 +215,7 @@ const page = () => {
           .replace(/[^\w\s-]/g, "")
           .replace(/[\s_-]+/g, "-");
         router.push(`/books/${slug}`);
-        toast.success("Your Book has been added successfully");
+        // toast.success("Your Book has been added successfully"); removed per request
         reset();
       }
     } catch (error: any) {
@@ -223,7 +223,7 @@ const page = () => {
         error?.data?.message ||
         error?.message ||
         "Failed to add the book. Please try again.";
-      toast.error(errorMessage);
+      // toast.error(errorMessage); removed per request
       console.error("Failed to add book:", error);
     }
   };
@@ -267,7 +267,7 @@ const page = () => {
         <form
           onSubmit={handleSubmit(onSubmit, (errors) => {
             console.error("Validation Errors:", errors);
-            toast.error("Please fill in all required fields correctly.");
+            // toast.error("Please fill in all required fields correctly."); removed per request
           })}
           className="space-y-8"
         >
