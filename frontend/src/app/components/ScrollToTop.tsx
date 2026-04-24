@@ -26,10 +26,25 @@ const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    const startY = window.scrollY;
+    const duration = 1000; // 1 second duration for slower, 'half speed' scrolling
+    const startTime = performance.now();
+
+    const scrollStep = (currentTime: number) => {
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // easeOutCubic easing for smooth deceleration at the top
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      
+      window.scrollTo(0, startY * (1 - easeProgress));
+
+      if (timeElapsed < duration) {
+        window.requestAnimationFrame(scrollStep);
+      }
+    };
+
+    window.requestAnimationFrame(scrollStep);
   };
 
   return (
