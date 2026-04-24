@@ -50,6 +50,7 @@
     "jspdf-autotable": "^5.0.7",
     "lucide-react": "^0.511.0",
     "mongoose": "^9.5.0",
+    "multer": "^2.1.1",
     "next": "^15.5.14",
     "nodemailer": "^8.0.5",
     "passport": "^0.7.0",
@@ -72,7 +73,14 @@
     "zod": "^3.25.16"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.1.0",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/redux-persist": "^4.3.1",
