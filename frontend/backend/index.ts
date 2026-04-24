@@ -31,8 +31,11 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cookiesParser());
 
-// In Vercel, we connect to DB per request if needed, but since connectDb is likely mongoose based, it handles caching connections.
-connectDb();
+// In Vercel, we must ensure the DB is connected before processing requests.
+app.use(async (req, res, next) => {
+  await connectDb();
+  next();
+});
 
 // API endpoints
 app.use('/api/auth', authRoutes);
