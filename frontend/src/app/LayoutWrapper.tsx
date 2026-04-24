@@ -9,6 +9,7 @@ import AuthCheck from "@/store/Provider/AuthProvider";
 import Header from "./components/Header";
 import { usePathname } from "next/navigation";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function LayoutWrapper ({children}: {children: React.ReactNode}){
     const pathname = usePathname();
@@ -21,6 +22,7 @@ export default function LayoutWrapper ({children}: {children: React.ReactNode}){
                     {!isAdminRoute && <Header/>}
                     {children}
                     {!isAdminRoute && <Footer/>}
+                    {!isAdminRoute && <ScrollToTop/>}
                 </AuthCheck>
             </PersistGate>
         </Provider>
