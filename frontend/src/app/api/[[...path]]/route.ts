@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import app from '../../../backend/index';
+import app from '../../../../backend/index';
 // @ts-ignore
 import serverless from 'serverless-http';
 
