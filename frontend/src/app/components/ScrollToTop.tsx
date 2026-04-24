@@ -27,7 +27,7 @@ const ScrollToTop = () => {
 
   const scrollToTop = () => {
     const startY = window.scrollY;
-    const duration = 1000; // 1 second duration for slower, 'half speed' scrolling
+    const duration = 2500; // 1 second duration for slower, 'half speed' scrolling
     const startTime = performance.now();
 
     const scrollStep = (currentTime: number) => {
