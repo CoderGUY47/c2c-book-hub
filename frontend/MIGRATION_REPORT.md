@@ -31,6 +31,14 @@ This document outlines the technical transition of **Book-Hub** from a tradition
 *   **Problem:** Local builds were passing, but Vercel's production environment caught strict type errors regarding `params` and `searchParams` being possibly null.
 *   **Solution:** Audited and patched over 9 files with optional chaining (`?.`) to satisfy Next.js 15+ strict type checking.
 
+### 5. Notification Engine Migration
+*   **Improvement:** Replaced `react-hot-toast` with **React Toastify**.
+*   **Advantage:** Integrated a global `ToastContainer` in the `LayoutWrapper` to allow standardized, non-blocking notifications across all pages with a sleek dark theme and `bottom-right` positioning.
+
+### 6. Documentation & Branding Overhaul
+*   **Improvement:** Rewrote the project `README.md` to reflect a professional "Pro Developer" aesthetic.
+*   **Advantage:** Includes a unique "Origin Story" for the project, detailed "Solving Process" logs, and a clean bento-grid layout for dependencies, significantly increasing the project's resume-grade quality.
+
 ---
 
 ## ✅ Final Health Status
@@ -40,4 +48,4 @@ This document outlines the technical transition of **Book-Hub** from a tradition
 *   **Mobile Responsiveness:** 100% verified across 4 breakpoints.
 
 ---
-**Status:** `Completed` // **Deploy URL:** [oxpecker.pro.bd](https://oxpecker.pro.bd)
+**Status:** `Finalized` // **Deploy URL:** [oxpecker.pro.bd](https://oxpecker.pro.bd)
