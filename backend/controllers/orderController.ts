@@ -117,8 +117,9 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
 
     return response(res, 200, "Order created or updated successfully", order);
 
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.error("Order creation error:", error?.message);
+    console.error("Validation errors:", JSON.stringify(error?.errors, null, 2));
     return response(res, 500, "Internal Server Error");
   }
 }
