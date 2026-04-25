@@ -84,6 +84,7 @@ export type RefundStatusResponse = {
 
 class SSLCOMMERZService {
   private payment: SslCommerzPayment;
+  private static _instance: SSLCOMMERZService | null = null;
 
   constructor() {
     const store_id = String(process.env.SSLCOMMERZ_STORE_ID || "");
@@ -95,6 +96,13 @@ class SSLCOMMERZService {
     }
 
     this.payment = new SslCommerzPayment(store_id, store_passwd, !isSandbox);
+  }
+
+  static getInstance(): SSLCOMMERZService {
+    if (!SSLCOMMERZService._instance) {
+      SSLCOMMERZService._instance = new SSLCOMMERZService();
+    }
+    return SSLCOMMERZService._instance;
   }
 
   async createSession(req: CreateSessionRequest): Promise<CreateSessionResponse> {
@@ -160,5 +168,15 @@ class SSLCOMMERZService {
   }
 }
 
-const sslcommerzService = new SSLCOMMERZService();
+// Lazy getter: only instantiate when first used, not at module load time.
+// This prevents Vercel cold-start crashes when env vars haven't loaded yet.
+const sslcommerzService = {
+  get instance() { return SSLCOMMERZService.getInstance(); },
+  createSession: (...args: Parameters<SSLCOMMERZService['createSession']>) => SSLCOMMERZService.getInstance().createSession(...args),
+  validateByValId: (...args: Parameters<SSLCOMMERZService['validateByValId']>) => SSLCOMMERZService.getInstance().validateByValId(...args),
+  queryByTransactionId: (...args: Parameters<SSLCOMMERZService['queryByTransactionId']>) => SSLCOMMERZService.getInstance().queryByTransactionId(...args),
+  queryBySessionId: (...args: Parameters<SSLCOMMERZService['queryBySessionId']>) => SSLCOMMERZService.getInstance().queryBySessionId(...args),
+  initiateRefund: (...args: Parameters<SSLCOMMERZService['initiateRefund']>) => SSLCOMMERZService.getInstance().initiateRefund(...args),
+  queryRefundStatus: (...args: Parameters<SSLCOMMERZService['queryRefundStatus']>) => SSLCOMMERZService.getInstance().queryRefundStatus(...args),
+};
 export default sslcommerzService;
