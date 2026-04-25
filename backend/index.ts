@@ -46,6 +46,16 @@ app.use('/api/order', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Global error handler - catches ANY Express error that escapes route handlers
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error('[GLOBAL EXPRESS ERROR]', err?.message, err?.stack);
+  return res.status(500).json({
+    success: false,
+    message: `GLOBAL ERROR: ${err?.message || 'Unknown Error'}`,
+    data: process.env.NODE_ENV !== 'production' ? err?.stack : null,
+  });
+});
+
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
