@@ -64,7 +64,7 @@ const page = () => {
   const [showAddressDialog, setShowAddressDialog] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const { data: cartData, isLoading: isCartLoading } = useGetCartQuery(
-    user?.id
+    user?._id
   );
   const [removeCartMutation] = useRemoveFromCartMutation();
   const [addToCartMutation, { isLoading: isUpdatingQuantity }] =

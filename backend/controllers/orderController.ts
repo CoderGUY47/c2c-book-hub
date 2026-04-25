@@ -20,8 +20,8 @@ export const getOrderByUser = async (req: Request, res: Response) => {
 
     // Fix existing orders with missing status directly in DB
     const migrationResult = await Order.updateMany(
-      { $or: [{ status: { $exists: false } }, { status: null }, { status: "" }] },
-      { $set: { status: "null" } }
+      { $or: [{ status: { $exists: false } }, { status: null }, { status: "" }, { status: "null" }] },
+      { $set: { status: "processing" } }
     );
     
     if (migrationResult.modifiedCount > 0) {
@@ -88,7 +88,7 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
       order.shippingAddress = shippingAddress || order.shippingAddress;
       order.paymentMethod = paymentMethod || order.paymentMethod;
       order.totalAmount = totalAmount || order.totalAmount;
-      order.status = order.status || 'null';
+      order.status = order.status || 'processing';
       if(paymentDetails){
         order.paymentDetails = paymentDetails;
         order.paymentStatus = "complete";
@@ -103,7 +103,7 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
         paymentMethod,
         paymentDetails,
         paymentStatus: paymentDetails ? 'complete' : 'pending',
-        status: 'null'
+        status: 'processing'
       });
     }
     
