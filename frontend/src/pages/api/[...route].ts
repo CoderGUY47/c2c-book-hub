@@ -8,10 +8,23 @@ export const config = {
   api: {
     bodyParser: false,
     externalResolver: true, // Tells Next.js that Express will handle the response
+    responseLimit: false,
   },
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Direct hand-off to Express without needing `serverless-http` wrapper
-  return app(req as any, res as any);
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Await the app so unhandled async errors propagate correctly
+  return new Promise<void>((resolve) => {
+    app(req as any, res as any, (err: any) => {
+      if (err) {
+        console.error('[API HANDLER ERROR]', err?.message, err?.stack);
+        res.status(500).json({
+          success: false,
+          message: `HANDLER ERROR: ${err?.message || 'Unknown Error'}`,
+          data: null,
+        });
+      }
+      resolve();
+    });
+  });
 }
