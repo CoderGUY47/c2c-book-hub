@@ -95,9 +95,15 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
       }
     }
     else{
+      // Map items to plain objects with just the product _id (in case items are populated)
+      const orderItems = cart.items.map((item: any) => ({
+        product: item.product._id || item.product,
+        quantity: item.quantity,
+      }));
+
       order = new Order({
         user: userId,
-        items: cart.items,
+        items: orderItems,
         totalAmount,
         shippingAddress,
         paymentMethod,
