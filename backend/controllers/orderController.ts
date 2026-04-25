@@ -102,7 +102,7 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
         shippingAddress,
         paymentMethod,
         paymentDetails,
-        paymentStatus: paymentDetails ? 'complete' : 'pending',
+        paymentStatus: paymentDetails ? 'complete' : 'processing',
         status: 'processing'
       });
     }
