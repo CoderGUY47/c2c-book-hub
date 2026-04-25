@@ -75,7 +75,7 @@ Moving to Vercel wasn't just a "point and click." We had to re-engineer core sys
 | Utilities | UI Components |
 | :--- | :--- |
 | **Icons:** Lucide React & FontAwesome | **Base UI:** Shadcn UI (Radix Primitives) |
-| **State:** Redux Toolkit & RTK Query | **Toasts:** React Hot Toast |
+| **State:** Redux Toolkit & RTK Query | **Toasts:** React Toastify |
 
 </div>
 
