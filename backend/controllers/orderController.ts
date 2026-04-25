@@ -95,9 +95,8 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
       }
     }
     else{
-      // Map items to plain objects with just the product _id (in case items are populated)
       const orderItems = cart.items.map((item: any) => ({
-        product: item.product._id || item.product,
+        product: item.product?._id || item.product,
         quantity: item.quantity,
       }));
 
@@ -124,8 +123,11 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
     return response(res, 200, "Order created or updated successfully", order);
 
   } catch (error: any) {
-    console.error("Order creation error:", error?.message);
-    console.error("Validation errors:", JSON.stringify(error?.errors, null, 2));
-    return response(res, 500, `VERCEL ERROR: ${error?.message}`, error?.errors);
+    console.error("[ORDER POST ERROR]", error?.name, error?.message);
+    console.error("[ORDER VALIDATION]", JSON.stringify(error?.errors, null, 2));
+    return response(res, 500, `ORDER ERROR: ${error?.name} - ${error?.message}`, {
+      name: error?.name,
+      validationErrors: error?.errors,
+    });
   }
 }
