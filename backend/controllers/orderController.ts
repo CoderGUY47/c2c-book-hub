@@ -120,6 +120,6 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
   } catch (error: any) {
     console.error("Order creation error:", error?.message);
     console.error("Validation errors:", JSON.stringify(error?.errors, null, 2));
-    return response(res, 500, "Internal Server Error");
+    return response(res, 500, `VERCEL ERROR: ${error?.message}`, error?.errors);
   }
 }

@@ -103,7 +103,7 @@ export const initSslPayment = async (req: Request, res: Response) => {
   } catch (error: any) {
     await session.abortTransaction();
     console.error("initSslPayment error:", error);
-    return response(res, 500, `Failed to initialize payment: ${error.message}`, { error: error.message });
+    return response(res, 500, `VERCEL ERROR: ${error?.message}`, { error: error.message });
   } finally {
     session.endSession();
   }
