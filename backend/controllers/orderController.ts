@@ -123,9 +123,9 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
     return response(res, 200, "Order created or updated successfully", order);
 
   } catch (error: any) {
-    console.error("[ORDER POST ERROR]", error?.name, error?.message);
-    console.error("[ORDER VALIDATION]", JSON.stringify(error?.errors, null, 2));
-    return response(res, 500, `ORDER ERROR: ${error?.name} - ${error?.message}`, {
+    console.error("Order creation error:", error?.name, error?.message);
+    console.error("Validation errors:", JSON.stringify(error?.errors, null, 2));
+    return response(res, 500, error?.message || "Internal Server Error", {
       name: error?.name,
       validationErrors: error?.errors,
     });
