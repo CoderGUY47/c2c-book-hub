@@ -33,7 +33,23 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cookiesParser());
 
-connectDb();
+// Cache DB connection across serverless invocations (Vercel standard pattern)
+let isConnected = false;
+const ensureDbConnected = async () => {
+  if (isConnected) return;
+  await connectDb();
+  isConnected = true;
+};
+
+// Middleware to ensure DB is connected before every request
+app.use(async (_req: any, _res: any, next: any) => {
+  try {
+    await ensureDbConnected();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // API endpoints
 app.use('/api/auth', authRoutes);
