@@ -32,9 +32,9 @@ export const getOrderByUser = async (req: Request, res: Response) => {
       return response(res, 404, "No orders found for this user.");
     }
     return response(res, 200, "User Orders fetched successfully", orders);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching orders:", error);
-    return response(res, 500, "Internal Server Error");
+    return response(res, 500, `Order fetch error: ${error?.message}`);
   }
 };
 
@@ -50,9 +50,9 @@ export const getOrderById = async (req: Request, res: Response) => {
       return response(res, 404, "Order not found");
     }
     return response(res, 200, "Order fetched by Id successfully", order);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching Order:", error);
-    return response(res, 500, "Internal Server Error");
+    return response(res, 500, `Order getById error: ${error?.message}`);
   }
 };
 
