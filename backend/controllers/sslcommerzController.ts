@@ -51,8 +51,8 @@ export const initSslPayment = async (req: Request, res: Response) => {
         totalAmount,
         shippingAddress,
         paymentMethod: "sslcommerz",
-        paymentStatus: "pending_payment",
-        status: "null", // Ensure status is explicitly set to "null" by default
+        paymentStatus: "processing",
+        status: "processing",
       });
       // Save the new order immediately so we have an ID
       await order.save({ session }); 
