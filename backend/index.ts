@@ -12,7 +12,7 @@ import addressRoutes from './routes/addressRoute';
 import userRoutes from './routes/userRoute';
 import orderRoutes from './routes/orderRoute';
 import paymentRoutes from './routes/paymentRoute';
-import passport from './controllers/strategy/googleStrategy'
+import passport from './controllers/strategy/googleStrategy';
 import adminRoutes from './routes/adminRoute';
 
 dotenv.config();
@@ -33,27 +33,15 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cookiesParser());
 
-// Cache DB connection across serverless invocations (Vercel standard pattern)
-let isConnected = false;
-const ensureDbConnected = async () => {
-  if (isConnected) return;
-  await connectDb();
-  isConnected = true;
-};
-
-// Middleware to ensure DB is connected before every request
-app.use(async (_req: any, _res: any, next: any) => {
-  try {
-    await ensureDbConnected();
-    next();
-  } catch (err) {
-    next(err);
-  }
+// Connect to DB once. Mongoose buffers commands until connected automatically.
+// Using .catch to log errors without blocking requests or killing the process.
+connectDb().catch((err) => {
+  console.error('[STARTUP] MongoDB connection failed:', err?.message);
 });
 
 // API endpoints
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes); // Corrected from /product to /products
+app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishListRoutes);
 app.use('/api/user/address', addressRoutes);
@@ -62,13 +50,13 @@ app.use('/api/order', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Global error handler - catches ANY Express error that escapes route handlers
+// Global error handler
 app.use((err: any, req: any, res: any, next: any) => {
   console.error('[GLOBAL EXPRESS ERROR]', err?.message, err?.stack);
   return res.status(500).json({
     success: false,
     message: `GLOBAL ERROR: ${err?.message || 'Unknown Error'}`,
-    data: process.env.NODE_ENV !== 'production' ? err?.stack : null,
+    data: null,
   });
 });
 
@@ -79,8 +67,3 @@ if (require.main === module) {
 }
 
 export default app;
-
-
-// const store_id = process.env.SSLCOMMERZ_STORE_ID;          
-// const store_passwd = process.env.SSLCOMMERZ_STORE_PASSWORD 
-// const is_live = false //true for live, false for sandbox  
