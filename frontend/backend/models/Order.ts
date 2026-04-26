@@ -15,7 +15,7 @@ export interface IOrder extends Document {
   items: IOrderItem[];
   totalAmount: number;
   shippingAddress: mongoose.Types.ObjectId | IAddress;
-  paymentStatus: "processing" | "complete" | "delivered" | "failed";
+  paymentStatus: "pending" | "processing" | "complete" | "delivered" | "failed";
   paymentMethod: string;
   // Payment fields are now handled by the Payment model
   payment: mongoose.Types.ObjectId; // Reference to the Payment document
@@ -24,7 +24,7 @@ export interface IOrder extends Document {
     ssl_payment_id?: string;
     ssl_signature?: string;
   };
-  status: "processing" | "shipped" | "delivered" | "cancelled";
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
   notes?:string;   
 }
 
@@ -49,11 +49,11 @@ const OrderSchema = new Schema<IOrder>(
     },
     paymentStatus: {
       type: String,
-      enum: ["processing", "complete", "delivered", "failed"],
+      enum: ["pending", "processing", "complete", "delivered", "failed"],
     },
     status: {
       type: String,
-      enum: ["processing", "shipped", "delivered", "cancelled"],
+      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "processing",
     },      
     notes: {type:String},
