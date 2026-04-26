@@ -249,7 +249,7 @@ const page = () => {
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-10 text-center">
-          <h1 className="text-4xl mb-4 font-black font-poppins text-violet-600">
+          <h1 className="text-4xl mb-4 font-bold font-langar font-poppins text-violet-600">
             Sell Your Used Books Here
           </h1>
           <p className="text-md text-gray-400 mb-4 font-semibold">
@@ -274,7 +274,7 @@ const page = () => {
           {/* Title and Description */}
           <Card className="border-t-10 pt-0 border-t-indigo-500 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-blue-100 to-indigo-100">
-              <CardTitle className="flex text-2xl font-black font-poppins text-indigo-500 items-center">
+              <CardTitle className="flex text-2xl font-bold font-poppins text-indigo-500 items-center">
                 <LuSwatchBook className="mr-2 h-8 w-8" />
                 Book Details
               </CardTitle>
@@ -285,7 +285,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="title"
-                  className="md:w-1/4 text-md font-black font-poppins text-gray-700 mt-3"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700 mt-3"
                 >
                   Add Title & Subtitle
                 </Label>
@@ -327,7 +327,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="category"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
                 >
                   Book Type
                 </Label>
@@ -365,7 +365,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="condition"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
                 >
                   Book Condition
                 </Label>
@@ -413,7 +413,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="classType"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
                 >
                   For class
                 </Label>
@@ -438,7 +438,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="genre"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
                 >
                   Genre
                 </Label>
@@ -510,7 +510,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="year"
-                  className="md:w-1/4 text-md font-black text-slate-800"
+                  className="md:w-1/4 text-md font-bold font-langar text-slate-800"
                 >
                   Year
                 </Label>
@@ -552,7 +552,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="author"
-                  className="md:w-1/4 text-md font-black text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
                 >
                   Writer
                 </Label>
@@ -575,7 +575,7 @@ const page = () => {
 
               {/* Cover Image Section */}
               <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
-                <Label className="md:w-1/4 text-md font-black text-gray-700 mt-2">
+                <Label className="md:w-1/4 text-md font-bold font-langar text-gray-700 mt-2">
                   Cover Photo
                 </Label>
                 <div className="md:w-3/4 space-y-4">
@@ -620,7 +620,7 @@ const page = () => {
                         <div className="bg-indigo-100 p-5 rounded-full mb-4 group-hover:scale-110 transition-transform shadow-inner">
                           <Book className="h-10 w-10 text-indigo-600" />
                         </div>
-                        <p className="text-xl font-black text-gray-700 mb-2">
+                        <p className="text-xl font-bold font-langar text-gray-700 mb-2">
                           Upload Cover Photo
                         </p>
                         <p className="text-sm font-medium text-gray-400 mb-6 text-center max-w-xs">
@@ -639,7 +639,7 @@ const page = () => {
 
               {/* Upload Images */}
               <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
-                <Label className="md:w-1/4 text-md font-black font-poppins text-gray-700 mt-2">
+                <Label className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700 mt-2">
                   Additional Images
                 </Label>
                 <div className="md:w-3/4 space-y-4">
@@ -662,7 +662,7 @@ const page = () => {
                         <div className="bg-indigo-100 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
                           <CloudUpload className="h-8 w-8 text-indigo-600" />
                         </div>
-                        <p className="text-lg font-black text-gray-700 mb-1">
+                        <p className="text-lg font-bold font-langar text-gray-700 mb-1">
                           Click to upload or drag and drop
                         </p>
                         <p className="text-sm font-medium text-gray-500 mb-4">
@@ -734,7 +734,7 @@ const page = () => {
           {/* Additional Information */}
           <Card className="border-t-10 pt-0 border-t-purple-600 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-purple-100 to-pink-100">
-              <CardTitle className="flex text-2xl font-black font-poppins text-purple-600 items-center">
+              <CardTitle className="flex text-2xl font-bold font-poppins text-purple-600 items-center">
                 <SiGitbook className="mr-2 h-8 w-8" />
                 Additional Information
               </CardTitle>
@@ -745,7 +745,7 @@ const page = () => {
             <CardContent className="pt-6">
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger className="text-md font-black font-poppins">
+                  <AccordionTrigger className="text-md font-bold font-poppins text-purple-600">
                     Book Details
                   </AccordionTrigger>
                   <AccordionContent className="py-4 px-1 md:space-y-0 md:space-x-4">
@@ -754,7 +754,7 @@ const page = () => {
                         <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                           <Label
                             htmlFor="price"
-                            className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                            className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                           >
                             Price in BDT
                           </Label>
@@ -776,7 +776,7 @@ const page = () => {
                         <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                           <Label
                             htmlFor="pageCount"
-                            className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                            className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700"
                           >
                             Page Count
                           </Label>
@@ -798,17 +798,17 @@ const page = () => {
                         <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                           <Label
                             htmlFor="releaseDate"
-                            className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                            className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                           >
                             Release Date
                           </Label>
                           <Input
                             {...register("releaseDate")}
                             type="date"
-                            className="md:w-3/4 font-poppins font-semibold placeholder:text-gray-400"
+                            className="md:w-3/4 font-poppins text-purple-400 font-semibold placeholder:text-gray-500"
                           />
                           {errors.releaseDate && (
-                            <p className="text-indigo-300 text-sm font-normal">
+                            <p className="text-indigo-500 text-sm font-normal">
                               {errors.releaseDate.message}
                             </p>
                           )}
@@ -819,7 +819,7 @@ const page = () => {
                 </AccordionItem>
 
                 <AccordionItem value="item-2">
-                  <AccordionTrigger className="text-md font-black font-poppins">
+                  <AccordionTrigger className="text-md font-bold font-poppins text-purple-600">
                     Add Description
                   </AccordionTrigger>
                   <AccordionContent className="py-4 px-1">
@@ -827,7 +827,7 @@ const page = () => {
                       <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
                         <Label
                           htmlFor="aboutAuthor"
-                          className="md:w-1/4 text-md font-black font-poppins text-gray-700 md:mt-2"
+                          className="md:w-1/4 text-md font-bold font-poppins text-gray-700 md:mt-2"
                         >
                           About the Author
                         </Label>
@@ -848,7 +848,7 @@ const page = () => {
                       <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
                         <Label
                           htmlFor="description"
-                          className="md:w-1/4 text-md font-black font-poppins text-gray-700 md:mt-2"
+                          className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700 md:mt-2"
                         >
                           Description
                         </Label>
@@ -875,7 +875,7 @@ const page = () => {
           {/* Price Details with Negotiation */}
           <Card className="border-t-10 pt-0 border-t-amber-500 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-amber-50 to-yellow-50">
-              <CardTitle className="flex text-2xl font-black font-poppins text-amber-500 items-center">
+              <CardTitle className="flex text-2xl font-bold font-langar font-poppins text-amber-500 items-center">
                 <i className="fa-solid fa-bangladeshi-taka-sign mr-2 text-xl"></i>
                 Price Informations
               </CardTitle>
@@ -889,7 +889,7 @@ const page = () => {
                   <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                     <Label
                       htmlFor="shippingCharge"
-                      className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                      className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700"
                     >
                       Shipping Charge
                     </Label>
@@ -936,7 +936,7 @@ const page = () => {
                   <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                     <Label
                       htmlFor="finalPrice"
-                      className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                      className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700"
                     >
                       Final Price(৳)
                     </Label>
@@ -985,7 +985,7 @@ const page = () => {
           {/* Bank details */}
           <Card className="border-t-10 pt-0 border-t-red-600 bg-white shadow-lg">
             <CardHeader className="top-0 mt-0 py-4 bg-gradient-to-r from-red-100 to-pink-100">
-              <CardTitle className="flex text-2xl font-black font-poppins text-[#ea023c] items-center">
+              <CardTitle className="flex text-2xl font-bold font-langar font-poppins text-[#ea023c] items-center">
                 <i className="fa-solid fa-vault mr-2 text-xl"></i>
                 Bank Details
               </CardTitle>
@@ -993,7 +993,7 @@ const page = () => {
             <CardContent className="space-y-4 pt-2 bg-white">
               {/* Form Fields for Book Details */}
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
-                <Label className="md:w-1/4 text-md font-black font-poppins text-gray-700">
+                <Label className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700">
                   Payment Mode
                 </Label>
                 <div className="md:w-3/4 space-y-2">
@@ -1072,7 +1072,7 @@ const page = () => {
                 <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                   <Label
                     htmlFor="sslId"
-                    className="md:w-1/4 text-md font-black font-poppins text-gray-700"
+                    className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700"
                   >
                     SSL ID/Transaction ID
                   </Label>
@@ -1186,7 +1186,7 @@ const page = () => {
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-64 text-lg bg-gradient-to-r font-black font-poppins from-blue-700 to-indigo-400 text-white hover:from-orange-500 hover:to-yellow-600 py-6 shadow-lg rounded-lg transition duration-300 ease-in-out transform hover:scale-100 cursor-pointer"
+            className="w-64 text-lg bg-gradient-to-r font-bold font-langar font-poppins from-blue-700 to-indigo-400 text-white hover:from-orange-500 hover:to-yellow-600 py-6 shadow-lg rounded-lg transition duration-300 ease-in-out transform hover:scale-100 cursor-pointer"
           >
             {isLoading ? (
               <>

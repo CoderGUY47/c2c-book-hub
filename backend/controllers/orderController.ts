@@ -99,9 +99,9 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
         user: userId,
         items: orderItems,
         totalAmount: totalAmount || cartTotal,
-        shippingAddress,
-        paymentMethod,
-        paymentDetails,
+        shippingAddress: shippingAddress || undefined,
+        paymentMethod: paymentMethod || "sslcommerz",
+        paymentDetails: paymentDetails || undefined,
         paymentStatus: paymentDetails ? 'complete' : 'processing',
         status: 'processing'
       });
