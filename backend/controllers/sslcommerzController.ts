@@ -45,9 +45,20 @@ export const initSslPayment = async (req: Request, res: Response) => {
         throw new Error("Cart is empty.");
       }
 
+      const orderItems = cart.items.map((item: any) => {
+        let prodId = item?.product;
+        if (item?.product && typeof item.product === "object" && item.product._id) {
+          prodId = item.product._id;
+        }
+        return {
+          product: prodId,
+          quantity: item?.quantity || 1,
+        };
+      });
+
       order = new Order({
         user: userId,
-        items: cart.items,
+        items: orderItems,
         totalAmount,
         shippingAddress,
         paymentMethod: "sslcommerz",
