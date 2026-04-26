@@ -26,7 +26,7 @@ export const addToCart = async(req: Request, res: Response)=>{
             });
         }
 
-        const existingItem = cart.items.find(item => item.product.toString()=== productId); //check if product already exist in cart
+        const existingItem = (cart.items as any[]).find((item: any) => item.product.toString()=== productId); //check if product already exist in cart
         if(existingItem){ //if product exist in cart, update quantity
             existingItem.quantity += quantity;
         }
@@ -61,7 +61,7 @@ export const removeFromCart = async(req: Request, res: Response)=>{
         if(!cart){ //if cart not exist, create new cart
             return response(res,404,'Cart not found for this user');
         }
-        cart.items = cart.items.filter((item) => item.product.toString() !== productId); //remove item from cart
+        cart.items = (cart.items as any[]).filter((item: any) => item.product.toString() !== productId); //remove item from cart
 
         await cart.save();
         await cart.populate("items.product");
