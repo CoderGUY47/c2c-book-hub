@@ -58,13 +58,13 @@ const BooksContent = () => {
   const [selectedYear, setSelectedYear] = useState<string[]>([]);
   const [sortOption, setSortOption] = useState("newest");
   const [isMounted, setIsMounted] = useState(false);
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const bookPerPage = 9;
-  
+
   const searchParams = useSearchParams();
   const query = searchParams?.get("query") || null;
   const searchTerms = searchParams?.get("search") || "";
@@ -474,7 +474,7 @@ const BooksContent = () => {
                                 {isMounted ? (
                                   <RWebShare
                                     data={{
-                                      text: `Check out this amazing book I patterns found on Book-Shop!`,
+                                      text: `Check out this amazing book I patterns found on Book-Hub!`,
                                       title: book.title,
                                       url: `${window.location.origin}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
                                     }}

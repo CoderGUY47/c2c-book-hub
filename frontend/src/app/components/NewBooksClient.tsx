@@ -96,7 +96,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
             </span>
             <span className="w-8 h-[1px] bg-indigo-500"></span>
           </div>
-          <h2 className="text-5xl md:text-6xl font-langar text-black text-center tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-langar font-bold text-black text-center tracking-tight">
             Newly Arrived
           </h2>
         </div>

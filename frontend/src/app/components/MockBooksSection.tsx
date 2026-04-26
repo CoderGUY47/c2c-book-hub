@@ -24,7 +24,7 @@ const MockBooksSection = () => {
                             </span>
                         </div>
                         <h2 className="text-5xl md:text-6xl font-langar text-zinc-950 leading-tight tracking-tight">
-                            Best of <span className="text-indigo-600">Book-shop.</span>
+                            Best of <span className="text-indigo-600">Book-Hub.</span>
                         </h2>
                         <p className="mt-6 text-zinc-500 font-medium max-w-lg text-lg">
                             Hand-picked selections from our premium community collections.
@@ -42,7 +42,7 @@ const MockBooksSection = () => {
                     {featuredBooks.map((book, index) => (
                         <div key={book._id} className="group flex flex-col">
                             {/* Image Canvas */}
-                            <Link 
+                            <Link
                                 href={`/mock-books/${book.title.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-")}`}
                                 className="relative aspect-[3/4] mb-6 overflow-hidden bg-zinc-50 rounded-sm shadow-sm transition-all duration-500 group-hover:shadow-xl"
                             >
@@ -67,7 +67,7 @@ const MockBooksSection = () => {
                                 <p className="text-xs text-zinc-500 font-medium">
                                     by: {book.author}
                                 </p>
-                                
+
                                 {/* Ratings */}
                                 <div className="flex items-center gap-0.5 pt-1">
                                     {[1, 2, 3, 4, 5].map((s) => (

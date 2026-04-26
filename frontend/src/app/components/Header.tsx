@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import {
   Lock, Package, ShoppingCart, Search, Heart, User, User2, LogOut, ChevronRight,
   FileTerminal, HelpCircle, BookLock, Menu, BookOpen,
-  ShoppingBag, 
+  ShoppingBag,
 } from "lucide-react";
 
 import { SlBag } from "react-icons/sl";
@@ -44,7 +44,7 @@ const Header = () => {
   const isLoginOpen = useSelector(
     (state: RootState) => state.user.isLoginDialogOpen
   );
-  const user = useSelector((state: RootState) => state.user.user); 
+  const user = useSelector((state: RootState) => state.user.user);
   const [logoutMutation] = useLogoutMutation();
   const cartItemCount = useSelector(
     (state: RootState) => state.cart.items.length
@@ -117,12 +117,12 @@ const Header = () => {
           content: (
             <div className="flex gap-x-4 items-center p-0 pb-3 border-b border-white/10">
               <Avatar className="w-12 h-12 -ml-2 rounded-full overflow-hidden relative">
-                <AvatarImage 
-                    src={getOptimizedUrl(user?.profilePicture || user?.image, 48, 48)} 
-                    className="object-cover"
+                <AvatarImage
+                  src={getOptimizedUrl(user?.profilePicture || user?.image, 48, 48)}
+                  className="object-cover"
                 />
                 <AvatarFallback className="bg-gray-700 text-white font-normal text-lg uppercase">
-                    {userPlaceholder}
+                  {userPlaceholder}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
@@ -217,57 +217,57 @@ const Header = () => {
     <div className={className}>
       {menuItems?.map((item: any, index: number) => {
         const itemContent = (
-            <div className="flex items-center gap-x-3 w-full group">
-                <div className="flex items-center justify-center">
-                    {item.icon}
-                </div>
-                <span className="font-medium text-sm text-white/70 group-hover:text-white transition-colors">
-                    {item?.lable}
-                </span>
-                {item?.content && <div className="w-full">{item?.content}</div>}
-                {!item?.content && <ChevronRight className="w-4 h-4 ml-auto text-white/20 group-hover:text-white/40 transition-all" />}
+          <div className="flex items-center gap-x-3 w-full group">
+            <div className="flex items-center justify-center">
+              {item.icon}
             </div>
+            <span className="font-medium text-sm text-white/70 group-hover:text-white transition-colors">
+              {item?.lable}
+            </span>
+            {item?.content && <div className="w-full">{item?.content}</div>}
+            {!item?.content && <ChevronRight className="w-4 h-4 ml-auto text-white/20 group-hover:text-white/40 transition-all" />}
+          </div>
         );
 
         if (isMobile) {
-            return item?.href ? (
+          return item?.href ? (
+            <Link
+              key={index}
+              href={item.href}
+              className={`flex items-center px-4 py-2 rounded-xl transition-all duration-300 ${item.className || "hover:bg-white/5"}`}
+            >
+              {itemContent}
+            </Link>
+          ) : (
+            <button
+              key={index}
+              className={`flex w-full items-center px-4 py-2 rounded-xl transition-all duration-300 ${item.className || "hover:bg-white/5"}`}
+              onClick={item.onclick}
+            >
+              {itemContent}
+            </button>
+          );
+        }
+
+        return (
+          <DropdownMenuItem key={index} asChild>
+            {item?.href ? (
               <Link
-                key={index}
                 href={item.href}
-                className={`flex items-center px-4 py-2 rounded-xl transition-all duration-300 ${item.className || "hover:bg-white/5"}`}
+                className={`flex items-center w-full px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 ${item.className || "hover:bg-white/5"} focus:bg-white/10 outline-none active:scale-[0.98]`}
+                onClick={() => setIsDropdownOpen(false)}
               >
                 {itemContent}
               </Link>
             ) : (
               <button
-                key={index}
-                className={`flex w-full items-center px-4 py-2 rounded-xl transition-all duration-300 ${item.className || "hover:bg-white/5"}`}
+                className={`flex w-full items-center px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 ${item.className || "hover:bg-white/5"} focus:bg-white/10 outline-none active:scale-[0.98]`}
                 onClick={item.onclick}
               >
                 {itemContent}
               </button>
-            );
-        }
-
-        return (
-            <DropdownMenuItem key={index} asChild>
-                {item?.href ? (
-                    <Link
-                        href={item.href}
-                        className={`flex items-center w-full px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 ${item.className || "hover:bg-white/5"} focus:bg-white/10 outline-none active:scale-[0.98]`}
-                        onClick={() => setIsDropdownOpen(false)}
-                    >
-                        {itemContent}
-                    </Link>
-                ) : (
-                    <button
-                        className={`flex w-full items-center px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 ${item.className || "hover:bg-white/5"} focus:bg-white/10 outline-none active:scale-[0.98]`}
-                        onClick={item.onclick}
-                    >
-                        {itemContent}
-                    </button>
-                )}
-            </DropdownMenuItem>
+            )}
+          </DropdownMenuItem>
         );
       })}
     </div>
@@ -275,11 +275,10 @@ const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-colors duration-500 py-4 ${
-        isScrolled 
-        ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
-        : "bg-black/95 border-b border-transparent"
-      }`}
+      className={`sticky top-0 z-50 transition-colors duration-500 py-4 ${isScrolled
+          ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+          : "bg-black/95 border-b border-transparent"
+        }`}
     >
       <div className="container w-[94%] lg:w-[88%] mx-auto flex items-center justify-between px-4">
         {/* Logo & Navigation */}
@@ -306,15 +305,15 @@ const Header = () => {
           {/* New Search Input Style (Desktop) */}
           <div className="relative hidden md:flex items-center group">
             <div className={`flex items-center bg-white/[0.03] border-2 border-white/60 rounded-full px-4 h-9 transition-all duration-500 focus-within:bg-white/[0.08] focus-within:border-indigo-500/30 focus-within:w-64 w-48 group-hover:border-white/20 shadow-inner`}>
-                <Search className="w-3.5 h-3.5 text-white mr-2 group-focus-within:text-indigo-400 transition-colors" />
-                <input
+              <Search className="w-3.5 h-3.5 text-white mr-2 group-focus-within:text-indigo-400 transition-colors" />
+              <input
                 type="text"
                 placeholder="Search lLbrary..."
                 className="bg-transparent outline-none w-full text-xs placeholder:text-white/30 text-white font-semibold font-poppins tracking-wide"
                 value={searchTerms}
                 onChange={(e) => setSearchTerms(e.target.value)}
                 onKeyDown={handleKeyDown}
-                />
+              />
             </div>
           </div>
 
@@ -324,12 +323,12 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center group focus:outline-none transition-all duration-300 active:scale-95">
                   <Avatar className="w-8 h-8 rounded-full overflow-hidden relative border border-white/10 group-hover:border-white/30 transition-all shadow-xl scale-100 group-hover:scale-110">
-                    <AvatarImage 
-                        src={getOptimizedUrl(user?.profilePicture || user?.image, 32, 32)} 
-                        className="object-cover" 
+                    <AvatarImage
+                      src={getOptimizedUrl(user?.profilePicture || user?.image, 32, 32)}
+                      className="object-cover"
                     />
                     <AvatarFallback className="text-[10px] font-normal bg-violet-700/80 text-white uppercase tracking-tighter">
-                        {userPlaceholder || <User className="h-3.5 w-3.5 text-white/60" />}
+                      {userPlaceholder || <User className="h-3.5 w-3.5 text-white/60" />}
                     </AvatarFallback>
                   </Avatar>
                   <span className="ml-2.5 hidden lg:inline text-[11px] font-semibold font-poppins uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-all">
@@ -363,27 +362,27 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] p-0 bg-black border-r border-white/5 text-white backdrop-blur-2xl">
                 <SheetHeader className="border-b border-white/10 p-6 bg-white/[0.01]">
-                  <SheetTitle className="text-xl font-normal text-left text-white tracking-[0.2em] uppercase opacity-80">Book-Shop</SheetTitle>
+                  <SheetTitle className="text-xl font-normal text-left text-white tracking-[0.2em] uppercase opacity-80">Book-Hub</SheetTitle>
                 </SheetHeader>
                 <div className="p-4 overflow-y-auto">
                   {user && (
                     <div className="mb-6 p-4 rounded-2xl bg-white/[0.02] border border-white/5 shadow-inner">
-                        <div className="flex items-center gap-4">
-                            <Avatar className="w-11 h-11 rounded-full ring-1 ring-white/10">
-                                <AvatarImage src={getOptimizedUrl(user?.profilePicture || user?.image, 44, 44)} />
-                                <AvatarFallback className="bg-indigo-600 font-normal">{userPlaceholder}</AvatarFallback>
-                            </Avatar>
-                            <div className="overflow-hidden">
-                                <h3 className="font-medium text-sm text-white truncate tracking-tight">{user?.name}</h3>
-                                <p className="text-[10px] text-white/30 font-normal uppercase tracking-widest mt-0.5">Verified Account</p>
-                            </div>
+                      <div className="flex items-center gap-4">
+                        <Avatar className="w-11 h-11 rounded-full ring-1 ring-white/10">
+                          <AvatarImage src={getOptimizedUrl(user?.profilePicture || user?.image, 44, 44)} />
+                          <AvatarFallback className="bg-indigo-600 font-normal">{userPlaceholder}</AvatarFallback>
+                        </Avatar>
+                        <div className="overflow-hidden">
+                          <h3 className="font-medium text-sm text-white truncate tracking-tight">{user?.name}</h3>
+                          <p className="text-[10px] text-white/30 font-normal uppercase tracking-widest mt-0.5">Verified Account</p>
                         </div>
+                      </div>
                     </div>
                   )}
                   <div className="text-[9px] font-normal uppercase tracking-[0.3em] text-white/20 mb-4 px-3 flex items-center">
-                      <span className="flex-1 h-[1px] bg-white/5 mr-3"></span>
-                      Navigation
-                      <span className="flex-1 h-[1px] bg-white/5 ml-3"></span>
+                    <span className="flex-1 h-[1px] bg-white/5 mr-3"></span>
+                    Navigation
+                    <span className="flex-1 h-[1px] bg-white/5 ml-3"></span>
                   </div>
                   <MenuItems isMobile />
                 </div>

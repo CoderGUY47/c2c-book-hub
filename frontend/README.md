@@ -62,12 +62,12 @@ Follow these steps to set up the project locally.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/CoderGUY47/book-shop.git
+   git clone https://github.com/CoderGUY47/Book-Hub.git
    ```
 
 2. **Navigate to the frontend directory**
    ```bash
-   cd book-shop/frontend
+   cd Book-Hub/frontend
    ```
 
 3. **Install dependencies**

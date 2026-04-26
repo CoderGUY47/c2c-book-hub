@@ -49,7 +49,7 @@ const TrendingBooksCarousel = ({ books }: TrendingBooksCarouselProps) => {
               Global Bestsellers
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black font-poppins leading-tighter tracking-tight uppercase">
+          <h2 className="text-4xl md:text-5xl font-black font-langar leading-tighter tracking-tight uppercase">
             Reader's <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Choice.</span>
           </h2>
         </div>

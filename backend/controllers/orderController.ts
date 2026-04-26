@@ -71,6 +71,18 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
     let order: any;
     if (orderId) {
       order = await Order.findById(orderId);
+      
+      // Ownership check: Prevent updating orders belonging to other users
+      if (order && order.user.toString() !== userId) {
+        return response(res, 403, "Access denied. Order belongs to another user.");
+      }
+      
+      // State check: If order is already completed, it shouldn't be updated during a new checkout flow
+      if (order && (order.paymentStatus === "complete" || order.status === "delivered")) {
+         // If they were trying to update an already completed order, we should probably ignore the orderId
+         // and let the 'else' block create a NEW one, but returning 400 is safer to avoid confusion.
+         return response(res, 400, "Cannot update a completed order.");
+      }
     }
 
     if(order){

@@ -204,7 +204,7 @@ const Footer = () => {
             <p className="flex flex-col md:flex-col items-start justify-center gap-2 text-[10px] font-black tracking-widest text-gray-500">
               <span className="flex items-center gap-1 tracking-wide text-gray-400/70 text-xs font-semibold uppercase">
                 <Image src="/images/favicon.ico" alt="Copyright" height={30} width={25} className="brightness-90 opacity-90 hover:brightness-100 hover:opacity-100 hover:scale-105 transition-all cursor-pointer" /> &copy;{currentYear} -
-                All Copyright Reserved - Oxpecker Book-Shop. One's book can be Someone's treasure.</span>
+                All Copyright Reserved - Oxpecker Book-Hub. One's book can be Someone's treasure.</span>
             </p>
           </div>
 

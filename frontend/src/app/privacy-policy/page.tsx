@@ -50,7 +50,7 @@ const PrivacyPolicy = () => {
           </CardHeader>
           <CardContent className="space-y-8">
             <p className="text-center text-white/90">
-              At Book-Shop, we are committed to protecting your privacy. This privacy policy explains how we collect, use, and disclose your information.
+              At Book-Hub, we are committed to protecting your privacy. This privacy policy explains how we collect, use, and disclose your information.
             </p>
             {policySections.map((section, index) => (
               <PolicySection key={index} icon={section.icon} title={section.title}>

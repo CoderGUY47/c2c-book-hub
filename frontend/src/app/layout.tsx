@@ -30,8 +30,8 @@ const langar = Langar({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Book-Shop",
-    default: "Book-Shop - Online Buying & Selling Book Hub",
+    template: "%s | Book-Hub",
+    default: "Book-Hub - Online Buying & Selling Book Hub",
   },
   description: "The best online marketplace for buying and selling used books. Find cheap, trending, and academic books globally.",
   keywords: ["books", "used books", "buy books online", "sell books online", "bookstore", "read books"],
