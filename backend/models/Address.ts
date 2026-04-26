@@ -21,4 +21,4 @@ const addressSchema = new Schema<IAddress>({
   postalCode: {type: String, required: true},
 },{timestamps:true}); 
 
-export default mongoose.model<IAddress>("Address", addressSchema);
+export default mongoose.models.Address || mongoose.model<IAddress>("Address", addressSchema);

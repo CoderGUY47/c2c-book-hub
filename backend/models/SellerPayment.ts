@@ -30,4 +30,4 @@ const sellerPaymentSchema = new Schema<ISellerPayment>(
     }, {timestamps:true}
 )
 
-export default mongoose.model<ISellerPayment>("SellerPayment", sellerPaymentSchema);
+export default mongoose.models.SellerPayment || mongoose.model<ISellerPayment>("SellerPayment", sellerPaymentSchema);

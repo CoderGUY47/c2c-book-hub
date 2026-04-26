@@ -13,4 +13,4 @@ const wishListSchema = new Schema<IWishList>({
 },{timestamps:true});
 
 
-export default mongoose.model<IWishList>("WishList", wishListSchema);
+export default mongoose.models.WishList || mongoose.model<IWishList>("WishList", wishListSchema);

@@ -25,4 +25,4 @@ const cartSchema = new Schema<ICart>({
 },{timestamps:true});
 
 
-export default mongoose.model<ICart>("Cart", cartSchema);
+export default mongoose.models.Cart || mongoose.model<ICart>("Cart", cartSchema);
