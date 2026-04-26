@@ -58,6 +58,10 @@ export const initSslPayment = async (req: Request, res: Response) => {
       await order.save({ session }); 
     }
 
+    if (!order || !order._id) {
+      throw new Error("Failed to create or retrieve order.");
+    }
+
     const tran_id = order._id.toString();
     const callbacks = getCallbackUrls(order._id.toString());
 

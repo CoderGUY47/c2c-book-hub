@@ -84,10 +84,16 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
         order.paymentStatus = "complete";
       }
     } else {
-      const orderItems = cart.items.map((item: any) => ({
-        product: item.product?._id || item.product,
-        quantity: item.quantity,
-      }));
+      const orderItems = cart.items.map((item: any) => {
+        let prodId = item?.product;
+        if (item?.product && typeof item.product === 'object' && item.product._id) {
+            prodId = item.product._id;
+        }
+        return {
+          product: prodId,
+          quantity: item?.quantity || 1,
+        };
+      });
 
       // Use cart total as fallback if totalAmount not sent from frontend
       const cartTotal = cart.items.reduce((sum: number, item: any) => {
