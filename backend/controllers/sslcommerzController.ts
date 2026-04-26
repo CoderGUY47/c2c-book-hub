@@ -216,13 +216,13 @@ export const sslIpn = async (req: Request, res: Response) => {
 export const getTransactionStatusByTranId = async (req: Request, res: Response) => {
   try {
     const { tran_id } = req.params;
-    const apiResult = await sslcommerzService.queryByTransactionId(tran_id);
+    const apiResult = await sslcommerzService.queryByTransactionId(String(tran_id));
 
     if (apiResult.no_of_trans_found === 0) {
       return response(res, 404, "Transaction not found via SSLCommerz API.", apiResult);
     }
 
-    const localOrder = await Order.findById(tran_id);
+    const localOrder = await Order.findById(String(tran_id));
 
     return response(res, 200, "Transaction status fetched.", {
       gatewayStatus: apiResult.element[0],
