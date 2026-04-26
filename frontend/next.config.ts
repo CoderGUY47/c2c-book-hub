@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
+  experimental: {
+    externalDir: true,
+  },
 };
 
 export default nextConfig;
