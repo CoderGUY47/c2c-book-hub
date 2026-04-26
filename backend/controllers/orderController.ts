@@ -78,20 +78,6 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
       order.shippingAddress = shippingAddress || order.shippingAddress;
       order.paymentMethod = paymentMethod || order.paymentMethod;
       order.totalAmount = totalAmount || order.totalAmount;
-      // Fix any invalid status values from old data (including string "null")
-      const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
-      const validPaymentStatuses = ['pending', 'processing', 'complete', 'delivered', 'failed'];
-      
-      const currentStatus = String(order.status).toLowerCase();
-      const currentPaymentStatus = String(order.paymentStatus).toLowerCase();
-
-      if (!order.status || currentStatus === 'null' || !validStatuses.includes(order.status)) {
-        order.status = 'processing';
-      }
-      if (!order.paymentStatus || currentPaymentStatus === 'null' || currentPaymentStatus === 'pending_payment' || !validPaymentStatuses.includes(order.paymentStatus)) {
-        order.paymentStatus = 'processing';
-      }
-
       if(paymentDetails){
         order.paymentDetails = paymentDetails;
         order.paymentStatus = "complete";
@@ -124,6 +110,20 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
         paymentStatus: paymentDetails ? 'complete' : 'processing',
         status: 'processing'
       });
+    }
+
+    // FINAL HARDEN: Ensure status fields are NEVER null or invalid strings before saving
+    const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+    const validPaymentStatuses = ['pending', 'processing', 'complete', 'delivered', 'failed'];
+
+    const s = order.status ? String(order.status).toLowerCase() : "";
+    const ps = order.paymentStatus ? String(order.paymentStatus).toLowerCase() : "";
+
+    if (!order.status || s === 'null' || s === "" || !validStatuses.includes(order.status)) {
+      order.status = 'processing';
+    }
+    if (!order.paymentStatus || ps === 'null' || ps === "" || ps === 'pending_payment' || !validPaymentStatuses.includes(order.paymentStatus)) {
+      order.paymentStatus = 'processing';
     }
 
     await order.save();
