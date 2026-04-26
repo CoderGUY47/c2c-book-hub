@@ -12,16 +12,17 @@ import addressRoutes from './routes/addressRoute';
 import userRoutes from './routes/userRoute';
 import orderRoutes from './routes/orderRoute';
 import paymentRoutes from './routes/paymentRoute';
-import passport from './controllers/strategy/googleStrategy'
+import passport from './controllers/strategy/googleStrategy';
 import adminRoutes from './routes/adminRoute';
 
 dotenv.config();
 
+const PORT = process.env.PORT || 8000;
+
 const app = express();
-app.set('trust proxy', 1); // Trust Vercel's reverse proxy for secure cookies
 
 const corsOption = {
-  origin: process.env.FRONTEND_URL || '*',
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 };
 
@@ -32,10 +33,10 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cookiesParser());
 
-// In Vercel, we must ensure the DB is connected before processing requests.
-app.use(async (req, res, next) => {
-  await connectDb();
-  next();
+// Connect to DB once. Mongoose buffers commands until connected automatically.
+// Using .catch to log errors without blocking requests or killing the process.
+connectDb().catch((err) => {
+  console.error('[STARTUP] MongoDB connection failed:', err?.message);
 });
 
 // API endpoints
@@ -48,5 +49,21 @@ app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Global error handler
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error('[GLOBAL EXPRESS ERROR]', err?.message, err?.stack);
+  return res.status(500).json({
+    success: false,
+    message: `GLOBAL ERROR: ${err?.message || 'Unknown Error'}`,
+    data: null,
+  });
+});
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+  });
+}
 
 export default app;

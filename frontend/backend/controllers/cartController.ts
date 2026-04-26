@@ -55,7 +55,7 @@ export const addToCart = async(req: Request, res: Response)=>{
 export const removeFromCart = async(req: Request, res: Response)=>{
     try{
         const userId = req.id; // Assuming authenticatedUser middleware adds user to req
-        const productId = req.params.productId as string; //get productId and quantity from body
+        const {productId} = req.params; //get productId and quantity from body
 
         let cart = await CartItems.findOne({user: userId}); //find cart of the user
         if(!cart){ //if cart not exist, create new cart
@@ -79,7 +79,7 @@ export const removeFromCart = async(req: Request, res: Response)=>{
 //get cart of the user
 export const getCartByUser = async(req: Request, res: Response)=>{
     try{
-        const userId = req.params.userId as string; //get userId from params, it used by admin to get cart of any user
+        const userId = req.params.userId; //get userId from params, it used by admin to get cart of any user
 
         let cart = await CartItems.findOne({user: userId}).populate("items.product"); //find cart of the user
         if(!cart){ //if cart not exist, create new cart

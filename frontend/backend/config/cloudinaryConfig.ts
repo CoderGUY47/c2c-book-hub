@@ -3,7 +3,7 @@ import { v2 as cloudinary, UploadApiOptions, UploadApiResponse } from "cloudinar
 import dotenv from "dotenv";
 import { RequestHandler } from "express";
  
-dotenv.config();
+dotenv.config(); // Load environment variables from .env file
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME as string,
@@ -12,23 +12,29 @@ cloudinary.config({
 });
 
 interface CustomFile extends Express.Multer.File {
-    buffer: Buffer;
+    path: string;
 }
 
+
+// Multer configuration for file upload
 const uploadToCloudinary = (file: CustomFile): Promise<UploadApiResponse> => {
+    const options: UploadApiOptions = {
+        resource_type: "image", // or "raw" for non-image files
+    };
+
     return new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-            { resource_type: "image" },
-            (error, result) => {
-                if (error) return reject(error);
-                resolve(result as UploadApiResponse);
+        cloudinary.uploader.upload(file.path, options, (error, result) => {
+            if (error) {
+                return reject(error);
             }
-        );
-        uploadStream.end(file.buffer);
+            resolve(result as UploadApiResponse);
+        });
     });
 }
 
-// Memory storage is a MUST for Vercel
-const multerMiddleware: RequestHandler = multer({ storage: multer.memoryStorage() }).array('images', 4);
 
-export { uploadToCloudinary, multerMiddleware };
+//use multer to store images locally, temporarily and then upload to cloudinary
+const multerMiddleware: RequestHandler = multer({ dest: 'uploads/' }).array('images',4); //dest is the folder name where images are stored temporarily and 4 images can be uploaded at a time
+
+
+export { uploadToCloudinary, multerMiddleware };

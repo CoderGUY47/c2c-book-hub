@@ -41,10 +41,11 @@ const userSchema = new Schema<IUser>({
 
 
 //comparing passwords
-userSchema.pre('save', async function () {
-    if(!this.isModified('password')) return; //if password is not modified then return
+userSchema.pre('save', async function (next) {
+    if(!this.isModified('password')) return next(); //if password is not modified then return
     const salt = await bcrypt.genSalt(10); //if password is modified then hash it
     this.password = await bcrypt.hash(this.password!, salt);
+    next(); 
 })
 
 //matched with candidate password with user password
