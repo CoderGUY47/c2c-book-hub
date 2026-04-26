@@ -127,9 +127,10 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
 
   } catch (error: any) {
     console.error("Order creation error:", error?.name, error?.message);
-    console.error("Validation errors:", JSON.stringify(error?.errors, null, 2));
-    return response(res, 500, error?.message || "Order creation failed", {
+    console.error("Full error:", error);
+    return response(res, 500, `ORDER ERROR [${error?.name}]: ${error?.message}`, {
       name: error?.name,
+      stack: error?.stack,
       validationErrors: error?.errors,
     });
   }
