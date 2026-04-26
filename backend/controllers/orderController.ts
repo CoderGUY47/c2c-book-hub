@@ -5,6 +5,7 @@ import CartItems from "../models/CartItems";
 import Product from "../models/Products"; // Ensure Product model is registered for populate()
 import Address from "../models/Address"; // Ensure Address model is registered for populate()
 import Payment from "../models/Payment"; // Ensure Payment model is registered for populate()
+import User from "../models/User"; // Ensure User model is registered for populate()
 
 
 export const getOrderByUser = async (req: Request, res: Response) => {
