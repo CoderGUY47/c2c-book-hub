@@ -78,11 +78,20 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
       order.shippingAddress = shippingAddress || order.shippingAddress;
       order.paymentMethod = paymentMethod || order.paymentMethod;
       order.totalAmount = totalAmount || order.totalAmount;
-      // Fix any invalid status values from old data
+      // Fix any invalid status values from old data (including string "null")
       const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
       const validPaymentStatuses = ['pending', 'processing', 'complete', 'delivered', 'failed'];
-      if (!order.status || !validStatuses.includes(order.status)) order.status = 'processing';
-      if (!order.paymentStatus || !validPaymentStatuses.includes(order.paymentStatus)) order.paymentStatus = 'processing';
+      
+      const currentStatus = String(order.status).toLowerCase();
+      const currentPaymentStatus = String(order.paymentStatus).toLowerCase();
+
+      if (!order.status || currentStatus === 'null' || !validStatuses.includes(order.status)) {
+        order.status = 'processing';
+      }
+      if (!order.paymentStatus || currentPaymentStatus === 'null' || currentPaymentStatus === 'pending_payment' || !validPaymentStatuses.includes(order.paymentStatus)) {
+        order.paymentStatus = 'processing';
+      }
+
       if(paymentDetails){
         order.paymentDetails = paymentDetails;
         order.paymentStatus = "complete";
@@ -127,11 +136,15 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
 
   } catch (error: any) {
     console.error("Order creation error:", error?.name, error?.message);
-    console.error("Full error:", error);
+    // Use a safer error detail extraction to avoid JSON circular ref crashes
+    const errorDetails = error?.errors ? Object.keys(error.errors).map(key => ({
+      field: key,
+      message: error.errors[key].message
+    })) : null;
+
     return response(res, 500, `ORDER ERROR [${error?.name}]: ${error?.message}`, {
       name: error?.name,
-      stack: error?.stack,
-      validationErrors: error?.errors,
+      validationErrors: errorDetails,
     });
   }
 }

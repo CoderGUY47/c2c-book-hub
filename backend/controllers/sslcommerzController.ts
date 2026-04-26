@@ -106,11 +106,19 @@ export const initSslPayment = async (req: Request, res: Response) => {
 
     order.payment = payment._id;
 
-    // Sanitize legacy order fields before saving
+    // Sanitize legacy order fields before saving (including string "null")
     const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
     const validPaymentStatuses = ['pending', 'processing', 'complete', 'delivered', 'failed'];
-    if (!order.status || !validStatuses.includes(order.status)) order.status = 'processing';
-    if (!order.paymentStatus || !validPaymentStatuses.includes(order.paymentStatus)) order.paymentStatus = 'processing';
+    
+    const currentStatus = String(order.status).toLowerCase();
+    const currentPaymentStatus = String(order.paymentStatus).toLowerCase();
+
+    if (!order.status || currentStatus === 'null' || !validStatuses.includes(order.status)) {
+      order.status = 'processing';
+    }
+    if (!order.paymentStatus || currentPaymentStatus === 'null' || !validPaymentStatuses.includes(order.paymentStatus)) {
+      order.paymentStatus = 'processing';
+    }
 
     await order.save({ session });
     await payment.save({ session });
