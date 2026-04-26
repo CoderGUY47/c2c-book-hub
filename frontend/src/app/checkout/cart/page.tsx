@@ -327,6 +327,11 @@ const page = () => {
   };
 
   const handleSelectAddress = async (address: Address) => {
+    if (selectedAddress?._id === address._id) {
+       setShowAddressDialog(false);
+       return;
+    }
+    
     setSelectedAddress(address);
     setShowAddressDialog(false); //false means close the dialog
     if (orderId) {
