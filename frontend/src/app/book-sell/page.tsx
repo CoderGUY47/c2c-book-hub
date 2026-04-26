@@ -249,7 +249,7 @@ const page = () => {
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="mb-10 text-center">
-          <h1 className="text-4xl mb-4 font-bold font-langar font-poppins text-violet-600">
+          <h1 className="text-5xl mb-4 font-bold font-langar text-violet-600">
             Sell Your Used Books Here
           </h1>
           <p className="text-md text-gray-400 mb-4 font-semibold">
@@ -327,7 +327,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="category"
-                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                 >
                   Book Type
                 </Label>
@@ -365,7 +365,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="condition"
-                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                 >
                   Book Condition
                 </Label>
@@ -413,7 +413,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="classType"
-                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                 >
                   For class
                 </Label>
@@ -438,7 +438,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="genre"
-                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                 >
                   Genre
                 </Label>
@@ -510,7 +510,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="year"
-                  className="md:w-1/4 text-md font-bold font-langar text-slate-800"
+                  className="md:w-1/4 text-md font-bold font-poppins text-slate-800"
                 >
                   Year
                 </Label>
@@ -552,7 +552,7 @@ const page = () => {
               <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="author"
-                  className="md:w-1/4 text-md font-bold font-langar text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
                 >
                   Writer
                 </Label>
@@ -575,7 +575,7 @@ const page = () => {
 
               {/* Cover Image Section */}
               <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
-                <Label className="md:w-1/4 text-md font-bold font-langar text-gray-700 mt-2">
+                <Label className="md:w-1/4 text-md font-bold font-poppins text-gray-700 mt-2">
                   Cover Photo
                 </Label>
                 <div className="md:w-3/4 space-y-4">
@@ -848,7 +848,7 @@ const page = () => {
                       <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
                         <Label
                           htmlFor="description"
-                          className="md:w-1/4 text-md font-bold font-langar font-poppins text-gray-700 md:mt-2"
+                          className="md:w-1/4 text-md font-bold font-poppins text-gray-700 md:mt-2"
                         >
                           Description
                         </Label>
