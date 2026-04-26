@@ -47,7 +47,7 @@ export const removeFromWishlist = async(req: Request, res: Response)=>{
         if(!wishList){ //if cart not exist, create new cart
             return response(res,404,'Wishlist not found for this user');
         }
-        wishList.products = wishList.products.filter((id) => id.toString() !== productId); //remove product from wishlist
+        wishList.products = (wishList.products as any[]).filter((id: any) => id.toString() !== productId); //remove product from wishlist
         await wishList.save();
 
         return response(res,200,'Item removed from wishlist successfully');
