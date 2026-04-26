@@ -265,7 +265,7 @@ export const getTransactionStatusByTranId = async (req: Request, res: Response) 
 export const getTransactionStatusBySessionId = async (req: Request, res: Response) => {
   try {
     const { sessionkey } = req.params;
-    const apiResult = await sslcommerzService.queryBySessionId(sessionkey);
+    const apiResult = await sslcommerzService.queryBySessionId(String(sessionkey));
 
     if (apiResult.no_of_trans_found === 0) {
       return response(res, 404, "Transaction not found via SSLCommerz API.", apiResult);
@@ -312,7 +312,7 @@ export const initiateRefund = async (req: Request, res: Response) => {
 export const getRefundStatus = async (req: Request, res: Response) => {
   try {
     const { refund_ref_id } = req.params;
-    const result = await sslcommerzService.queryRefundStatus(refund_ref_id);
+    const result = await sslcommerzService.queryRefundStatus(String(refund_ref_id));
     return response(res, 200, "Refund status fetched successfully.", result);
   } catch (error: any) {
     return response(res, 500, "Failed to get refund status.", { error: error.message });
