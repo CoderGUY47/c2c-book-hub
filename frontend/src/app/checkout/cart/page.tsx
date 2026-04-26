@@ -432,27 +432,24 @@ const page = () => {
     `);
 
     setIsProcessing(true);
-
-    // Periodically check if the new tab/window is closed
-    const timer = setInterval(() => {
-      if (paymentWindow.closed) {
-        clearInterval(timer);
-        setIsProcessing(false);
-      }
-    }, 500);
     try {
       const result = await createSslPayment({ orderId }).unwrap();
       console.log("SSL Payment init result:", result);
 
       if (result.success && result.data?.redirectURL) {
-        paymentWindow.location.href = result.data.redirectURL;
+        if (paymentWindow && !paymentWindow.closed) {
+          paymentWindow.location.href = result.data.redirectURL;
+        } else {
+          // Fallback to main window if popup was closed or blocked
+          window.location.href = result.data.redirectURL;
+        }
       } else {
-        paymentWindow.close();
+        if (paymentWindow) paymentWindow.close();
         toast.error("Failed to initiate payment redirection");
         setIsProcessing(false);
       }
     } catch (error: any) {
-      paymentWindow.close();
+      if (paymentWindow) paymentWindow.close();
       console.error("Payment init error:", error);
       toast.error(error?.data?.message || "Failed to create ssl payment");
       setIsProcessing(false);
