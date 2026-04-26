@@ -184,10 +184,10 @@ export const sslSuccess = async (req: Request, res: Response) => {
       return response(res, 400, "Payment validation failed", validation);
     }
     await handleSuccessfulPayment(orderId, validation);
-    res.redirect(`${process.env.FRONTEND_URL}/checkout/payment-success?orderId=${orderId}`);
+    res.redirect(303, `${process.env.FRONTEND_URL}/checkout/payment-success?orderId=${orderId}`);
   } catch (error: any) {
     console.error("sslSuccess error:", error?.message || error);
-    res.redirect(`${process.env.FRONTEND_URL}/checkout/payment-fail?error=${encodeURIComponent(error.message)}`);
+    res.redirect(303, `${process.env.FRONTEND_URL}/checkout/payment-fail?error=${encodeURIComponent(error.message)}`);
   }
 
 };
@@ -214,13 +214,13 @@ async function handleFailedPayment(orderId: string, payload: any, status: "faile
 export const sslFail = async (req: Request, res: Response) => {
   const payload = { ...req.body, ...req.query };
   await handleFailedPayment(payload.orderId, payload, "failed");
-  res.redirect(`${process.env.FRONTEND_URL}/checkout/payment-fail?orderId=${payload.orderId}`);
+  res.redirect(303, `${process.env.FRONTEND_URL}/checkout/payment-fail?orderId=${payload.orderId}`);
 };
 
 export const sslCancel = async (req: Request, res: Response) => {
   const payload = { ...req.body, ...req.query };
   await handleFailedPayment(payload.orderId, payload, "cancelled");
-  res.redirect(`${process.env.FRONTEND_URL}/checkout/payment-cancel?orderId=${payload.orderId}`);
+  res.redirect(303, `${process.env.FRONTEND_URL}/checkout/payment-cancel?orderId=${payload.orderId}`);
 };
 
 export const sslIpn = async (req: Request, res: Response) => {
