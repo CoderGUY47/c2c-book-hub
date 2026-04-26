@@ -350,86 +350,84 @@ const page = () => {
 
     // Open new tab immediately to avoid popup blockers
     const paymentWindow = window.open("", "_blank");
-    if (!paymentWindow) {
-      toast.error("Please allow popups to proceed with payment");
-      return;
-    }
 
-    // Show loading state in the new tab with project branding
-    paymentWindow.document.write(`
-      <html>
-        <head>
-          <title>Redirecting to Payment...</title>
-          <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-            body { 
-              font-family: 'Inter', sans-serif; 
-              display: flex; 
-              flex-direction: column; 
-              align-items: center; 
-              justify-content: center; 
-              height: 100vh; 
-              margin: 0; 
-              background: #f8fafc; 
-              color: #0f172a; 
-            }
-            .container {
-              text-align: center;
-              padding: 40px;
-              background: white;
-              border-radius: 24px;
-              box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-              max-width: 400px;
-              width: 90%;
-            }
-            .logo {
-              font-size: 24px;
-              font-weight: 900;
-              color: #4f46e5; /* Indigo 600 */
-              margin-bottom: 32px;
-              letter-spacing: -0.025em;
-            }
-            .loader-ring {
-              display: inline-block;
-              position: relative;
-              width: 64px;
-              height: 64px;
-              margin-bottom: 24px;
-            }
-            .loader-ring div {
-              box-sizing: border-box;
-              display: block;
-              position: absolute;
-              width: 51px;
-              height: 51px;
-              margin: 6px;
-              border: 4px solid #4f46e5;
-              border-radius: 50%;
-              animation: loader-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-              border-color: #4f46e5 transparent transparent transparent;
-            }
-            .loader-ring div:nth-child(1) { animation-delay: -0.45s; }
-            .loader-ring div:nth-child(2) { animation-delay: -0.3s; }
-            .loader-ring div:nth-child(3) { animation-delay: -0.15s; }
-            @keyframes loader-ring {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-            h1 { font-size: 18px; font-weight: 600; margin: 0 0 8px 0; }
-            p { font-size: 14px; color: #64748b; margin: 0; line-height: 1.5; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="logo">BOOK SHOP</div>
-            <div class="loader-ring"><div></div><div></div><div></div><div></div></div>
-            <h1>Secure Payment</h1>
-            <p>We are redirecting you to SSLCommerz...</p>
-            <p style="margin-top: 12px; font-size: 12px; opacity: 0.7;">Please do not close this window.</p>
-          </div>
-        </body>
-      </html>
-    `);
+    if (paymentWindow) {
+      // Show loading state in the new tab with project branding
+      paymentWindow.document.write(`
+        <html>
+          <head>
+            <title>Redirecting to Payment...</title>
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+              body { 
+                font-family: 'Inter', sans-serif; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                justify-content: center; 
+                height: 100vh; 
+                margin: 0; 
+                background: #f8fafc; 
+                color: #0f172a; 
+              }
+              .container {
+                text-align: center;
+                padding: 40px;
+                background: white;
+                border-radius: 24px;
+                box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+                max-width: 400px;
+                width: 90%;
+              }
+              .logo {
+                font-size: 24px;
+                font-weight: 900;
+                color: #4f46e5; /* Indigo 600 */
+                margin-bottom: 32px;
+                letter-spacing: -0.025em;
+              }
+              .loader-ring {
+                display: inline-block;
+                position: relative;
+                width: 64px;
+                height: 64px;
+                margin-bottom: 24px;
+              }
+              .loader-ring div {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                width: 51px;
+                height: 51px;
+                margin: 6px;
+                border: 4px solid #4f46e5;
+                border-radius: 50%;
+                animation: loader-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: #4f46e5 transparent transparent transparent;
+              }
+              .loader-ring div:nth-child(1) { animation-delay: -0.45s; }
+              .loader-ring div:nth-child(2) { animation-delay: -0.3s; }
+              .loader-ring div:nth-child(3) { animation-delay: -0.15s; }
+              @keyframes loader-ring {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              h1 { font-size: 18px; font-weight: 600; margin: 0 0 8px 0; }
+              p { font-size: 14px; color: #64748b; margin: 0; line-height: 1.5; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="logo">BOOK SHOP</div>
+              <div class="loader-ring"><div></div><div></div><div></div><div></div></div>
+              <h1>Secure Payment</h1>
+              <p>We are redirecting you to SSLCommerz...</p>
+              <p style="margin-top: 12px; font-size: 12px; opacity: 0.7;">Please do not close this window.</p>
+            </div>
+          </body>
+        </html>
+      `);
+    }
 
     setIsProcessing(true);
     try {
