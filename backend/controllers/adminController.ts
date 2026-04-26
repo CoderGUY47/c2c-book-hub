@@ -10,7 +10,7 @@ export const getAllOrders = async(req:Request, res:Response)=>{
     try{
         const {status, paymentStatus,startDate,endDate} = req.query;
         const paidOrderRecord = await SellerPayment.find().select("order")
-        const paidOrderIds = paidOrderRecord.map((record)=>record.order.toString());
+        const paidOrderIds = paidOrderRecord.map((record: any)=>record.order.toString());
 
         const query : any = {
             paymentStatus:"complete",
