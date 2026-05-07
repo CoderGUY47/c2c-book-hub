@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ChevronLeft,
@@ -29,19 +29,58 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
   const dispatch = useDispatch();
   const [addToCartMutation] = useAddToCartMutation();
   const [currentBookSlide, setCurrentBookSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Touch swipe refs
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  // Responsive: 1 card per slide on mobile, 3 on desktop
+  const booksPerSlide = isMobile ? 1 : 3;
+  const totalSlides = Math.ceil(Math.min(books.length, 9) / booksPerSlide);
+
+  // Detect mobile on mount and resize
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentBookSlide((prev) => (prev + 1) % 3);
-    }, 7000); // Change image every 7 seconds
-    return () => clearInterval(timer);
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setCurrentBookSlide(0); // reset on resize
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Auto-advance slide
+  useEffect(() => {
+    if (totalSlides <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentBookSlide((prev) => (prev + 1) % totalSlides);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [totalSlides]);
+
   const prevSlide = () => {
-    setCurrentBookSlide((prev) => (prev - 1 + 3) % 3);
+    setCurrentBookSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
   const nextSlide = () => {
-    setCurrentBookSlide((prev) => (prev + 1) % 3);
+    setCurrentBookSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  // Touch swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
   };
 
   const calculateDiscount = (price: number, finalPrice: number): number => {
@@ -87,7 +126,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
 
   return (
     <section className="py-14 bg-white relative overflow-hidden">
-      <div className="w-[80%] mx-auto px-4 pt-6 relative z-10">
+      <div className="w-full md:w-[80%] mx-auto px-4 md:px-4 pt-6 relative z-10">
         <div className="flex flex-col items-center mb-6">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-8 h-[1px] bg-indigo-500"></span>
@@ -100,25 +139,34 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
             Newly Arrived
           </h2>
         </div>
-        <div className="relative">
+        <div className="relative group">
           {books && books.length > 0 ? (
             <>
-              <div className="overflow-hidden">
+              {/* Slider track — touch events attached here */}
+              <div
+                className="overflow-hidden"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
                 <div
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{
                     transform: `translateX(-${currentBookSlide * 100}%)`,
                   }}
                 >
-                  {Array.from({ length: 3 }).map((_, slideIndex) => (
+                  {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                     <div key={slideIndex} className="w-full flex-none py-7">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="flex flex-row gap-4 md:gap-6">
                         {books
-                          .slice(slideIndex * 3, slideIndex * 3 + 3)
-                          .map((book, idx) => (
+                          .slice(
+                            slideIndex * booksPerSlide,
+                            slideIndex * booksPerSlide + booksPerSlide
+                          )
+                          .map((book) => (
                             <Card
                               key={book._id}
-                              className="group relative h-[450px] w-full border-0 shadow-none bg-transparent transition-all duration-700 active:scale-[0.98]"
+                              className="group relative h-[420px] md:h-[450px] flex-1 min-w-0 border-0 shadow-none bg-transparent transition-all duration-700 active:scale-[0.98]"
                             >
                               <CardContent className="p-0 h-full relative flex flex-col justify-end">
                                 <Link
@@ -138,8 +186,8 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                   </span>
                                 </Link>
 
-                                {/* Image Canvas - DARK EDITORIAL REDESIGN */}
-                                <div className="absolute top-0 inset-x-0 h-[320px] rounded-2xl bg-black/40 border border-white/5 overflow-hidden pointer-events-none group-hover:bg-black/40 transition-all duration-700">
+                                {/* Image Canvas */}
+                                <div className="absolute top-0 inset-x-0 h-[300px] md:h-[320px] rounded-2xl bg-black/40 border border-white/5 overflow-hidden pointer-events-none group-hover:bg-black/40 transition-all duration-700">
                                   <div className="absolute top-[-20%] right-[-10%] w-40 h-40 bg-indigo-500/10 blur-3xl rounded-full group-hover:bg-indigo-500/20 transition-all duration-700" />
                                   <Image
                                     src={book.images[0]}
@@ -156,8 +204,8 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                   <Heart className="h-4 w-4 fill-current" />
                                 </button>
 
-                                {/* Content Box - OBSIDIAN BLACK REDESIGN */}
-                                <div className="relative z-10 mx-3 mb-3 p-6 rounded-2xl bg-zinc-950/80 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_-20px_rgba(0,0,0,1)] transition-all duration-500 group-hover:bg-black group-hover:-translate-y-2 pointer-events-none ring-1 ring-white/5">
+                                {/* Content Box */}
+                                <div className="relative z-10 mx-2 md:mx-3 mb-3 p-4 md:p-6 rounded-2xl bg-zinc-950/80 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_-20px_rgba(0,0,0,1)] transition-all duration-500 group-hover:bg-black group-hover:-translate-y-2 pointer-events-none ring-1 ring-white/5">
                                   <div className="flex justify-between items-start mb-3">
                                     <span className="text-[9px] font-black tracking-[0.3em] text-indigo-400 uppercase">
                                       {book.condition}
@@ -177,10 +225,10 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                     )}
                                   </div>
 
-                                  <h3 className="font-langar text-white text-lg leading-tight line-clamp-1 mb-1 tracking-tight">
+                                  <h3 className="font-langar text-white text-base md:text-lg leading-tight line-clamp-1 mb-1 tracking-tight">
                                     {book.title}
                                   </h3>
-                                  <p className="text-[11px] text-white/30 mb-4 line-clamp-1 font-normal uppercase tracking-widest">
+                                  <p className="text-[11px] text-white/30 mb-3 md:mb-4 line-clamp-1 font-normal uppercase tracking-widest">
                                     {book.subtitle || "Literary Collection"}
                                   </p>
 
@@ -200,7 +248,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                       <Button
                                         variant="outline"
                                         size="sm"
-                                        className="h-9 px-4 rounded-full border border-white/10 bg-transparent text-white/60 hover:bg-white hover:text-black hover:border-white flex items-center gap-2 text-[10px] font-black uppercase tracking-wider transition-all duration-500"
+                                        className="h-9 px-3 md:px-4 rounded-full border border-white/10 bg-transparent text-white/60 hover:bg-white hover:text-black hover:border-white flex items-center gap-2 text-[10px] font-black uppercase tracking-wider transition-all duration-500"
                                         onClick={(e) =>
                                           handleGoToDetails(e, book)
                                         }
@@ -227,29 +275,32 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                   ))}
                 </div>
               </div>
+
+              {/* Arrows — hidden on mobile, visible on md+ */}
               <button
-                className="absolute -mt-20 w-10 h-24 left-2 top-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-3xl border border-white/10 p-2 rounded-full shadow-2xl group/nav hover:bg-white/10 transition-all duration-500"
+                className="hidden md:flex items-center justify-center absolute left-0 top-[50%] -translate-y-[calc(50%+20px)] -translate-x-5 z-20 w-10 h-24 bg-black/10 backdrop-blur-2xl border border-black/10 rounded-2xl shadow-xl group/nav hover:bg-black/20 hover:border-black/20 transition-all duration-500"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
               >
-                <ChevronLeft className="h-6 w-6 text-white/40 group-hover/nav:text-white group-hover/nav:scale-110 transition-all" />
+                <ChevronLeft className="h-6 w-6 text-black/40 group-hover/nav:text-black group-hover/nav:scale-110 transition-all" />
               </button>
               <button
-                className="absolute -mt-20 w-10 h-24 right-2 top-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-3xl border border-white/10 p-2 rounded-full shadow-2xl group/nav hover:bg-white/10 transition-all duration-500"
+                className="hidden md:flex items-center justify-center absolute right-0 top-[50%] -translate-y-[calc(50%+20px)] translate-x-5 z-20 w-10 h-24 bg-black/10 backdrop-blur-2xl border border-black/10 rounded-2xl shadow-xl group/nav hover:bg-black/20 hover:border-black/20 transition-all duration-500"
                 onClick={nextSlide}
                 aria-label="Next Slide"
               >
-                <ChevronRight className="h-6 w-6 text-white/40 group-hover/nav:text-white group-hover/nav:scale-110 transition-all" />
+                <ChevronRight className="h-6 w-6 text-black/40 group-hover/nav:text-black group-hover/nav:scale-110 transition-all" />
               </button>
 
+              {/* Dot indicators */}
               <div className="flex mt-2 justify-center space-x-3">
-                {[0, 1, 2].map((dot) => (
+                {Array.from({ length: totalSlides }).map((_, dot) => (
                   <button
                     key={dot}
                     onClick={() => setCurrentBookSlide(dot)}
                     className={`transition-all duration-500 border border-white/10 ${
-                      currentBookSlide === dot 
-                        ? "h-2 w-8 bg-indigo-500 rounded-full" 
+                      currentBookSlide === dot
+                        ? "h-2 w-8 bg-indigo-500 rounded-full"
                         : "h-2 w-2 bg-white/10 rounded-full hover:bg-white/20"
                     }`}
                     aria-label={`Slide ${dot + 1}`}
@@ -271,10 +322,6 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
           </Button>
         </Link>
       </div>
-
-      {/* <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px]" />
-      <div className="absolute top-40 right-95 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px]" />
-      <div className="absolute top-1/2 left-1/2 w-[500px] h-[600px] bg-blue-600/5 rounded-full blur-[150px]" /> */}
     </section>
   );
 };
