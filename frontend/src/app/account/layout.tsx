@@ -97,7 +97,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             </div>
             <div className="flex-1 space-y-4 py-4">
-
+              <div className="px-6 py-2">
+                <div className="flex items-center justify-center bg-slate-800/50 hover:bg-violet-600/50 transition-all py-4 px-4 rounded-xl border-0 shadow-xl">
+                  <div className="flex flex-col text-center">
+                    <p className="font-bold text-white text-lg">{user.name}</p>
+                  </div>
+                </div>
+              </div>
 
               <Separator className='bg-gray-700 py-[.9px] rounded-sm' />
               <div className="space-y-1 px-2">
