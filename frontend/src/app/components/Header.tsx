@@ -250,7 +250,16 @@ const Header = () => {
         }
 
         return (
-          <DropdownMenuItem key={index} asChild>
+          <DropdownMenuItem 
+            key={index} 
+            asChild
+            onSelect={(e) => {
+              if (item.onclick) {
+                e.preventDefault();
+                item.onclick();
+              }
+            }}
+          >
             {item?.href ? (
               <Link
                 href={item.href}
