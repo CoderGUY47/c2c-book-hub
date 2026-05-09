@@ -23,7 +23,7 @@ router.post("/reset-password/:token", authController.resetPassword); //without t
 
 
 //for logout
-router.post("/logout", authController.logout);
+router.get("/logout", authController.logout);
 
 
 //verify authentication
