@@ -18,7 +18,14 @@ export default function LayoutWrapper ({children}: {children: React.ReactNode}){
     return(
         <Provider store={store}>
             <PersistGate loading={<BookLoader/>} persistor={persistor}>
-            <ToastContainer position="bottom-right" theme="dark" pauseOnHover />
+            <ToastContainer 
+                position="bottom-right" 
+                theme="dark" 
+                autoClose={4000} 
+                pauseOnHover 
+                toastClassName="!bg-black/40 !backdrop-blur-xl !border !border-white/10 !rounded-xl !shadow-2xl"
+                bodyClassName="!text-white !font-poppins !text-sm"
+            />
                 <AuthCheck>
                     {!isAdminRoute && <Header/>}
                     {children}
