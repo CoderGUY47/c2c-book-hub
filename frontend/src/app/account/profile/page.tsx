@@ -52,57 +52,52 @@ const page = () => {
         }
     };
 
-    const uploadToImgBB = async (file: File): Promise<string> => {
-        const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
-        if (!apiKey) throw new Error("ImgBB API key not configured.");
-
-        const base64 = await new Promise<string>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                const result = reader.result as string;
-                // Strip the data:image/...;base64, prefix
-                resolve(result.split(',')[1]);
+    // Resize and compress image to base64 using canvas (max 300x300, JPEG 80%)
+    const compressToBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const img = new window.Image();
+            const url = URL.createObjectURL(file);
+            img.onload = () => {
+                const MAX = 300;
+                let { width, height } = img;
+                if (width > height) {
+                    if (width > MAX) { height = (height * MAX) / width; width = MAX; }
+                } else {
+                    if (height > MAX) { width = (width * MAX) / height; height = MAX; }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return reject(new Error('Canvas not supported'));
+                ctx.drawImage(img, 0, 0, width, height);
+                URL.revokeObjectURL(url);
+                resolve(canvas.toDataURL('image/jpeg', 0.8));
             };
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
+            img.onerror = reject;
+            img.src = url;
         });
-
-        const formData = new FormData();
-        formData.append('key', apiKey);
-        formData.append('image', base64);
-
-        const res = await fetch('https://api.imgbb.com/1/upload', {
-            method: 'POST',
-            body: formData,
-        });
-        const json = await res.json();
-        if (!json.success) throw new Error("ImgBB upload failed");
-        return json.data.url as string;
     };
 
     const handleProfileEdit = async(data: UserData) => {
         const { name, phoneNumber } = data;
         try {
-            let profilePictureUrl: string | undefined;
-
             const uploadAndSave = async () => {
-                // Step 1: Upload to ImgBB if a new image was selected
-                if (profileImageFile) {
-                    profilePictureUrl = await uploadToImgBB(profileImageFile);
-                }
-
-                // Step 2: Send JSON (not FormData) to backend
                 const payload: Record<string, string> = {};
                 if (name && name.trim()) payload.name = name;
                 if (phoneNumber !== undefined) payload.phoneNumber = phoneNumber;
-                if (profilePictureUrl) payload.profilePicture = profilePictureUrl;
+
+                // Compress image to base64 and send directly — stored in MongoDB
+                if (profileImageFile) {
+                    payload.profilePicture = await compressToBase64(profileImageFile);
+                }
 
                 const result = await updateUser({ userId: user?._id, userData: payload }).unwrap();
                 return result;
             };
 
             const result = await toast.promise(uploadAndSave(), {
-                pending: profileImageFile ? 'Uploading image...' : 'Saving profile...',
+                pending: profileImageFile ? 'Compressing & saving image...' : 'Saving profile...',
                 success: 'Profile updated successfully!',
                 error: 'Profile update failed',
             });
@@ -140,11 +135,11 @@ const page = () => {
                             <div className="flex flex-col items-center gap-2">
                                 <div className="relative size-24 rounded-full overflow-hidden border-2 border-white/20 bg-gray-800">
                                     {profileImagePreview ? (
-                                        <Image
+                                        // eslint-disable-next-line @next/next/no-img-element
+                                        <img
                                             src={profileImagePreview}
                                             alt="Profile"
-                                            fill
-                                            className="object-cover"
+                                            className="w-full h-full object-cover"
                                         />
                                     ) : (
                                         <User className="w-full h-full p-4 text-gray-400" />
