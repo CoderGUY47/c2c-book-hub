@@ -93,20 +93,14 @@ const Header = () => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      // 1. Immediately update UI (instant logout experience)
+      await logoutMutation({}).unwrap();
       dispatch(logout());
+      // toast.success("User logged out successfully"); removed per request
       setIsDropdownOpen(false);
-      router.push("/");
-
-      // 2. Clear backend cookies asynchronously without blocking UI
-      logoutMutation({}).unwrap().catch((err) => console.log("Logout backend error:", err));
-      
-      // 3. Optional hard reload to ensure all cached data is wiped
-      setTimeout(() => window.location.reload(), 100);
     } catch (error) {
-      console.log(error);
+      // toast.error("Failed to logout. Please try again."); removed per request
     }
   };
   const userPlaceholder = user?.name
@@ -256,16 +250,7 @@ const Header = () => {
         }
 
         return (
-          <DropdownMenuItem 
-            key={index} 
-            asChild
-            onSelect={(e) => {
-              if (item.onclick) {
-                e.preventDefault();
-                item.onclick();
-              }
-            }}
-          >
+          <DropdownMenuItem key={index} asChild>
             {item?.href ? (
               <Link
                 href={item.href}
