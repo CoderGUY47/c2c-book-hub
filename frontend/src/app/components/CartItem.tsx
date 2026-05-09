@@ -117,36 +117,36 @@ const CartItems: React.FC<CartItemProp> = ({
 
               {/* Quantity Column */}
               <div className="border-r-2 border-white/10 py-6 px-4 flex items-center justify-center">
-                <div className="w-[120px] flex items-center justify-center border border-white/10 rounded-lg p-1 bg-white/5 shadow-lg">
+                <div className="w-[120px] flex items-center justify-center border border-white/10 rounded-full p-1.5 bg-white/5 shadow-inner">
                   {/* Decrement Button */}
-                  <Button
+                  <button
                     onClick={() => {
                       if (isUpdating) return;
                       onUpdateQuantity(item.product._id, item.quantity - 1);
                     }}
                     disabled={item.quantity <= 1}
-                    className="p-2 text-white bg-transparent hover:bg-transparent"
+                    className="h-7 w-7 flex items-center justify-center rounded-full bg-white/5 hover:bg-red-500/20 text-gray-300 hover:text-red-400 transition-all duration-200 active:scale-75 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white/5 disabled:hover:text-gray-300 disabled:active:scale-100"
                     aria-label="Decrease quantity"
                   >
-                    <Minus size={14} />
-                  </Button>
+                    <Minus size={14} strokeWidth={2.5} />
+                  </button>
 
                   {/* Quantity Display */}
-                  <span className="w-[40px] text-[12px] font-semibold text-white text-center tabular-nums">
+                  <span className="w-[36px] text-[14px] font-bold text-white text-center tabular-nums selection:bg-transparent">
                     {item.quantity}
                   </span>
 
                   {/* Increment Button */}
-                  <Button
+                  <button
                     onClick={() => {
                       if (isUpdating) return;
                       onUpdateQuantity(item.product._id, item.quantity + 1);
                     }}
-                    className="p-2 text-white bg-transparent hover:bg-transparent"
+                    className="h-7 w-7 flex items-center justify-center rounded-full bg-white/5 hover:bg-indigo-500/20 text-gray-300 hover:text-indigo-400 transition-all duration-200 active:scale-75"
                     aria-label="Increase quantity"
                   >
-                    <Plus size={14} />
-                  </Button>
+                    <Plus size={14} strokeWidth={2.5} />
+                  </button>
                 </div>
               </div>
 
