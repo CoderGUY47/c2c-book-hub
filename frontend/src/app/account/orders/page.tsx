@@ -17,7 +17,7 @@ const page = () => {
     const router = useRouter();
 
     if (isLoading) {
-        return <BookLoader />
+        return <BookLoader fullScreen={false} />
     }
 
     const orders: Order[] = orderData?.data || [];

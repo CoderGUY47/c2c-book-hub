@@ -76,7 +76,7 @@ const page = () => {
   }
 
   if (isLoading) {
-    return <BookLoader />
+    return <BookLoader fullScreen={false} />
   }
 
   if (!wishlistItems || wishlistItems.length === 0) {

@@ -28,7 +28,7 @@ const page = () => {
 
   if (isLoading) {
     return (
-      <BookLoader />
+      <BookLoader fullScreen={false} />
     )
   }
 

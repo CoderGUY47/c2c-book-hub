@@ -5,17 +5,25 @@ interface BookLoaderProps {
   subMessage?: string;
   color?: string;
   size?: number;
+  fullScreen?: boolean;
 }
 
 export default function BookLoader({
   message = "..Loading Books..",
   subMessage = "Your next favorite read is on its way!",
   color = "#7c08db",
-  size = 48
+  size = 48,
+  fullScreen = true,
 }: BookLoaderProps) {
   return (
-    <div className="w-full h-full min-h-[60vh] flex flex-col items-center justify-center bg-transparent">
-      <div className="flex flex-col items-center -mt-10">
+    <div
+      className={
+        fullScreen
+          ? "fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950"
+          : "w-full min-h-[60vh] flex flex-col items-center justify-center bg-transparent"
+      }
+    >
+      <div className="flex flex-col items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 200 200"
@@ -34,7 +42,7 @@ export default function BookLoader({
             cx="100"
             cy="100"
             r="70"
-            style={{ transformOrigin: 'center' }}
+            style={{ transformOrigin: "center" }}
           >
             <animateTransform
               type="rotate"
@@ -48,12 +56,8 @@ export default function BookLoader({
         </svg>
 
         {/* Loading Text */}
-        <p className="mt-6 text-3xl font-black text-white">
-          {message}
-        </p>
-        <p className="mt-2 text-lg font-semibold text-white">
-          {subMessage}
-        </p>
+        <p className="mt-6 text-3xl font-black text-white">{message}</p>
+        <p className="mt-2 text-lg font-semibold text-white">{subMessage}</p>
       </div>
     </div>
   );
