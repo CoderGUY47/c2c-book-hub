@@ -107,7 +107,7 @@ export const api = createApi({
         logout:builder.mutation({   //go to server, modify the data, cz mutation is used to update or modify the state and Query means get something not modifying things.
             query:() =>({
                 url:API_URLS.LOGOUT,
-                method:'GET',
+                method:'POST',
             })
         }),
 
