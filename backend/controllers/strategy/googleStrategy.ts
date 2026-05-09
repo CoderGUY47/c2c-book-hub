@@ -34,7 +34,7 @@ async (
             let user = await User.findOne({email: emails?.[0]?.value}); //find user by email
             if(user) //if user not found, create new user
             {
-                if(!user.profilePicture && photos?.[0]?.value){
+                if(photos?.[0]?.value){
                     console.log('[GOOGLE STRATEGY] Updating existing user with profile picture:', photos[0].value);
                     user.profilePicture = photos[0].value;
                     await user.save();
