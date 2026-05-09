@@ -23,8 +23,7 @@ export default function LayoutWrapper ({children}: {children: React.ReactNode}){
                 theme="dark" 
                 autoClose={4000} 
                 pauseOnHover 
-                toastClassName="!bg-black/40 !backdrop-blur-xl !border !border-white/10 !rounded-xl !shadow-2xl"
-                bodyClassName="!text-white !font-poppins !text-sm"
+                toastClassName="!bg-black/40 !backdrop-blur-xl !border !border-white/10 !rounded-xl !shadow-2xl !text-white !font-poppins !text-sm"
             />
                 <AuthCheck>
                     {!isAdminRoute && <Header/>}
