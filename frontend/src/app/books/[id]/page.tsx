@@ -223,7 +223,7 @@ const page = () => {
     return (
       <div className="my-10 max-w-3xl justify-center mx-auto">
         <NoData
-          imageUrl="/images/no-book.jpg"
+          imageUrl="/images/no-data.png"
           message="Loading...."
           description="Wait, we are fetching book details"
           onClick={() => router.push("/book-sell")}

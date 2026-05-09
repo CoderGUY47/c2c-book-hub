@@ -83,7 +83,7 @@ const page = () => {
     return (
       <div className="my-10 max-w-3xl justify-center mx-auto">
         <NoData
-          imageUrl="/images/no-wishlist.png" // Assuming you might have a different image or reuse standard one
+          imageUrl="/images/no-data.png" // Assuming you might have a different image or reuse standard one
           message="Your wishlist is empty"
           description="Explore our collection and add books to your wishlist to verify them later."
           onClick={() => router.push("/books")}

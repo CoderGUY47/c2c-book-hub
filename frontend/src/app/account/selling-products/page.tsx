@@ -37,7 +37,7 @@ const page = () => {
     return (
       <div className="my-10 max-w-3xl justify-center mx-auto">
         <NoData
-          imageUrl="/images/no-book.jpg"
+          imageUrl="/images/no-data.png"
           message="You haven't sold any books yet."
           description="Start selling your books to reach potential buyers. List your first book now and make it available to others."
           onClick={() => router.push("/book-sell")}

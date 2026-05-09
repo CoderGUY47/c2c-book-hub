@@ -14,8 +14,8 @@ export default function BookLoader({
   size = 48
 }: BookLoaderProps) {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-transparent ">
-      <div className="flex flex-col items-center -mt-25">
+    <div className="w-full h-full min-h-[60vh] flex flex-col items-center justify-center bg-transparent">
+      <div className="flex flex-col items-center -mt-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 200 200"
