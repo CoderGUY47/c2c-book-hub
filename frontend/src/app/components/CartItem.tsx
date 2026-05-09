@@ -121,7 +121,6 @@ const CartItems: React.FC<CartItemProp> = ({
                   {/* Decrement Button */}
                   <button
                     onClick={() => {
-                      if (isUpdating) return;
                       onUpdateQuantity(item.product._id, item.quantity - 1);
                     }}
                     disabled={item.quantity <= 1}
@@ -139,7 +138,6 @@ const CartItems: React.FC<CartItemProp> = ({
                   {/* Increment Button */}
                   <button
                     onClick={() => {
-                      if (isUpdating) return;
                       onUpdateQuantity(item.product._id, item.quantity + 1);
                     }}
                     className="h-7 w-7 flex items-center justify-center rounded-full bg-white/5 hover:bg-indigo-500/20 text-gray-300 hover:text-indigo-400 transition-all duration-200 active:scale-75"

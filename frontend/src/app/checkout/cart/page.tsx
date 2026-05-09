@@ -134,15 +134,33 @@ const page = () => {
     const delta = newQuantity - currentItem.quantity;
     if (delta === 0) return;
 
+    // --- Optimistic Update for Instant Feedback ---
+    const optimisticCart = {
+      ...cart,
+      items: cart.items.map(item => 
+        item.product._id === productId 
+          ? { ...item, quantity: newQuantity } 
+          : item
+      )
+    };
+    dispatch(setCart(optimisticCart));
+
     try {
       const result = await addToCartMutation({
         productId,
         quantity: delta,
       }).unwrap();
+      
       if (result.success) {
         dispatch(setCart(result.data));
+      } else {
+        // Revert if success is false
+        dispatch(setCart(cart));
+        toast.error("Failed to update quantity on server");
       }
     } catch (error: any) {
+      // Revert on error
+      dispatch(setCart(cart));
       toast.error(error?.data?.message || "Failed to update quantity");
     }
   };
