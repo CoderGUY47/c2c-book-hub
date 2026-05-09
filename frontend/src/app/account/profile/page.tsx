@@ -59,21 +59,30 @@ const page = () => {
             formData.append('name', name || "");
             formData.append('phoneNumber', phoneNumber || "");
             if (profileImageFile) {
-                formData.append('images', profileImageFile); // Backend multer is looking for 'images'
+                formData.append('images', profileImageFile); 
             }
 
-            const result = await updateUser({userId:user?._id, userData: formData})
-            if(result && result?.data){
-                dispatch(setUser(result?.data))
-                setIsEditing(false)
-                toast.success("Profile updated successfully")
+            // Using toast.promise to show a "Saving..." state while the image uploads to Cloudinary
+            const promise = updateUser({userId:user?._id, userData: formData}).unwrap();
+            
+            toast.promise(promise, {
+                pending: 'Uploading image and saving profile...',
+                success: 'Profile updated successfully!',
+                error: 'Profile update failed'
+            });
+
+            const result = await promise;
+            
+            if(result && result.data){
+                dispatch(setUser(result.data));
+                setIsEditing(false);
+            } else if (result && !result.success) { // Handle case where success might be in the root
+                dispatch(setUser(result));
+                setIsEditing(false);
             }
-            else{
-                throw new Error("Profile update failed")
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error("Profile update failed")
+        } catch (error: any) {
+            console.log(error);
+            // Error is handled by toast.promise automatically
         }
     }
 
