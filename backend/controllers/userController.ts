@@ -11,7 +11,10 @@ export const updateUserProfile = async(req: Request, res: Response)=>{
         }
         const {name, email, phoneNumber}= req.body;
         
-        const updateData: any = { name, email, phoneNumber };
+        const updateData: any = {};
+        if (name && name.trim() !== "") updateData.name = name;
+        if (email && email.trim() !== "") updateData.email = email;
+        if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber;
         
         const images = req.files as Express.Multer.File[];
         if (images && images.length > 0) {

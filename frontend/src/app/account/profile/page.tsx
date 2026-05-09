@@ -147,9 +147,9 @@ const page = () => {
                                     <input
                                         id="username"
                                         placeholder="jhon doe"
-                                        disabled={!isEditing}
+                                        readOnly={!isEditing}
                                         {...register("name")}
-                                        className="w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
+                                        className={`w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600 ${!isEditing ? 'opacity-70 cursor-not-allowed' : ''}`}
                                     />
                                 </div>
                             </div>
@@ -161,9 +161,9 @@ const page = () => {
                                     <input
                                         id="email"
                                         placeholder="jhon.doe@example.com"
-                                        disabled={!isEditing || isEditing} //email change can not be changed
+                                        readOnly={true} // email cannot be changed
                                         {...register("email")}
-                                        className="w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
+                                        className="w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600 opacity-70 cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -175,9 +175,9 @@ const page = () => {
                                     <input
                                         id="phoneNumber"
                                         placeholder="+country-code-1234567890"
-                                        disabled={!isEditing}
+                                        readOnly={!isEditing}
                                         {...register("phoneNumber")}
-                                        className="w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600"
+                                        className={`w-full pl-10 pr-4 py-2 font-bold bg-white/5 text-gray-400 text-sm border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:border-violet-600 ${!isEditing ? 'opacity-70 cursor-not-allowed' : ''}`}
                                     />
                                 </div>
                             </div>
