@@ -97,26 +97,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             </div>
             <div className="flex-1 space-y-4 py-4">
-              <div className="px-6 py-2">
-                <div className="flex items-center gap-4 bg-slate-800/50 hover:bg-violet-600/50 transition-all py-4 px-4 rounded-xl border-0 shadow-xl">
-                  <Avatar className="w-12 h-12 -ml-2 rounded-full">
-                    {user?.profilePicture ? (
-                      <AvatarImage
-                        src={user?.profilePicture}
-                        alt="user_image"
-                      ></AvatarImage>
-                    ) : (
-                      <AvatarFallback className="bg-gray-300 border-transparent">
-                        {userPlaceholder}
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <p className="font-bold text-white text-lg">{user.name}</p>
-                    <p className="font-medium text-sm text-white">{user.email}</p>
-                  </div>
-                </div>
-              </div>
+
 
               <Separator className='bg-gray-700 py-[.9px] rounded-sm' />
               <div className="space-y-1 px-2">
