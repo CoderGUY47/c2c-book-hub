@@ -271,7 +271,6 @@ const Header = () => {
             ) : (
               <button
                 className={`flex w-full items-center px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 ${item.className || "hover:bg-white/5"} focus:bg-white/10 outline-none active:scale-[0.98]`}
-                onClick={item.onclick}
               >
                 {itemContent}
               </button>
