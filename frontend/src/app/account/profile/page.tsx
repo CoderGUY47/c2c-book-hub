@@ -6,7 +6,7 @@ import { UserData } from '@/lib/types/type';
 import { useForm } from 'react-hook-form';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Mail, Map, Phone, User } from 'lucide-react';
+import { Mail, Map, Phone, User, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useUpdateUserMutation } from '@/store/api';
 import { useDispatch } from 'react-redux';
@@ -16,34 +16,53 @@ import { FcReadingEbook } from "react-icons/fc";
 import { FaPenToSquare } from "react-icons/fa6";
 import { setUser } from '@/store/slice/userSlice';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 const page = () => {
     const [isEditing,setIsEditing] = useState(false);
     const user = useSelector((state: RootState) => state.user.user);
     const [updateUser, {isLoading}] = useUpdateUserMutation();
     const dispatch = useDispatch();
+    const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
+    const [profileImagePreview, setProfileImagePreview] = useState<string | null>(null);
 
     const {register,handleSubmit,reset} = useForm<UserData>({
         defaultValues:{
             name:user?.name || "",
             email:user?.email || "",
             phoneNumber:user?.phoneNumber || "",
-            // addresses:user?.state || [],
         },
     });
+    
     useEffect(()=>{
         reset({
             name:user?.name || "",
             email:user?.email || "",
             phoneNumber:user?.phoneNumber || "",
-            // addresses:user?.state || [],
-        })
+        });
+        setProfileImagePreview(user?.profilePicture || null);
+        setProfileImageFile(null);
     },[user, isEditing, reset])
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setProfileImageFile(file);
+            setProfileImagePreview(URL.createObjectURL(file));
+        }
+    };
 
     const handleProfileEdit = async(data: UserData) => {
         const  {name,phoneNumber} = data;
         try {
-            const result = await updateUser({userId:user?._id, userData:{name,phoneNumber}})
+            const formData = new FormData();
+            formData.append('name', name || "");
+            formData.append('phoneNumber', phoneNumber || "");
+            if (profileImageFile) {
+                formData.append('images', profileImageFile); // Backend multer is looking for 'images'
+            }
+
+            const result = await updateUser({userId:user?._id, userData: formData})
             if(result && result?.data){
                 dispatch(setUser(result?.data))
                 setIsEditing(false)
@@ -76,6 +95,41 @@ const page = () => {
                 </CardHeader>
                 <CardContent className='space-y-4 -mt-3 pt-0'>
                     <form onSubmit={handleSubmit(handleProfileEdit)}>
+                        <div className="flex flex-col sm:flex-row gap-6 mb-6">
+                            <div className="flex flex-col items-center gap-2">
+                                <div className="relative size-24 rounded-full overflow-hidden border-2 border-white/20 bg-gray-800">
+                                    {profileImagePreview ? (
+                                        <Image
+                                            src={profileImagePreview}
+                                            alt="Profile"
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    ) : (
+                                        <User className="w-full h-full p-4 text-gray-400" />
+                                    )}
+                                    {isEditing && (
+                                        <label htmlFor="profilePicture" className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center cursor-pointer hover:bg-black/40 transition-colors">
+                                            <Camera className="size-6 text-white mb-1" />
+                                            <span className="text-[10px] text-white font-bold">Change</span>
+                                        </label>
+                                    )}
+                                </div>
+                                <input
+                                    type="file"
+                                    id="profilePicture"
+                                    accept="image/*"
+                                    className="hidden"
+                                    disabled={!isEditing}
+                                    onChange={handleImageChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-center space-y-1">
+                                <h3 className="text-xl font-bold text-white">{user?.name}</h3>
+                                <p className="text-sm text-gray-400">{user?.email}</p>
+                            </div>
+                        </div>
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="name" className='font-semibold font-poppins text-gray-50'>Username</Label>

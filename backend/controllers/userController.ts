@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { response } from "../utils/responseHandler";
 import User from "../models/User";
+import { uploadToCloudinary } from "../config/cloudinaryConfig";
 
 export const updateUserProfile = async(req: Request, res: Response)=>{
     try{
@@ -9,9 +10,17 @@ export const updateUserProfile = async(req: Request, res: Response)=>{
             return response(res, 400, "User is required, please enter the valid user id.");
         }
         const {name, email, phoneNumber}= req.body;
+        
+        const updateData: any = { name, email, phoneNumber };
+        
+        const images = req.files as Express.Multer.File[];
+        if (images && images.length > 0) {
+            const uploadImage = await uploadToCloudinary(images[0] as any);
+            updateData.profilePicture = uploadImage.secure_url;
+        }
 
         const updateUser = await User.findByIdAndUpdate(userId, 
-            {name,email,phoneNumber},
+            updateData,
             {new:true, runValidators:true},
         ).select('-password -resetPasswordToken -resetPasswordExpires -verificationToken');
 
