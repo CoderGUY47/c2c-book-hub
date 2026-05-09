@@ -1,26 +1,21 @@
 import { Request, Response } from "express";
 import { response } from "../utils/responseHandler";
 import User from "../models/User";
-import { uploadToCloudinary } from "../config/cloudinaryConfig";
 
 export const updateUserProfile = async(req: Request, res: Response)=>{
     try{
-        const {userId} = req.params; // Assuming authenticatedUser middleware adds user to req
+        const {userId} = req.params;
         if(!userId){
             return response(res, 400, "User is required, please enter the valid user id.");
         }
-        const {name, email, phoneNumber}= req.body;
+        const {name, email, phoneNumber, profilePicture} = req.body;
         
         const updateData: any = {};
         if (name && name.trim() !== "") updateData.name = name;
         if (email && email.trim() !== "") updateData.email = email;
         if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber;
-        
-        const images = req.files as Express.Multer.File[];
-        if (images && images.length > 0) {
-            const uploadImage = await uploadToCloudinary(images[0] as any);
-            updateData.profilePicture = uploadImage.secure_url;
-        }
+        // Accept profilePicture as a plain URL string (uploaded to ImgBB on the frontend)
+        if (profilePicture && profilePicture.trim() !== "") updateData.profilePicture = profilePicture;
 
         const updateUser = await User.findByIdAndUpdate(userId, 
             updateData,

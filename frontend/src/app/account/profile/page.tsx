@@ -52,37 +52,69 @@ const page = () => {
         }
     };
 
-    const handleProfileEdit = async(data: UserData) => {
-        const  {name,phoneNumber} = data;
-        try {
-            const formData = new FormData();
-            formData.append('name', name || "");
-            formData.append('phoneNumber', phoneNumber || "");
-            if (profileImageFile) {
-                formData.append('images', profileImageFile); 
-            }
+    const uploadToImgBB = async (file: File): Promise<string> => {
+        const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+        if (!apiKey) throw new Error("ImgBB API key not configured.");
 
-            // Using toast.promise to show a "Saving..." state while the image uploads to Cloudinary
-            const promise = updateUser({userId:user?._id, userData: formData}).unwrap();
-            
-            toast.promise(promise, {
-                pending: 'Uploading image and saving profile...',
+        const base64 = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const result = reader.result as string;
+                // Strip the data:image/...;base64, prefix
+                resolve(result.split(',')[1]);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+
+        const formData = new FormData();
+        formData.append('key', apiKey);
+        formData.append('image', base64);
+
+        const res = await fetch('https://api.imgbb.com/1/upload', {
+            method: 'POST',
+            body: formData,
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error("ImgBB upload failed");
+        return json.data.url as string;
+    };
+
+    const handleProfileEdit = async(data: UserData) => {
+        const { name, phoneNumber } = data;
+        try {
+            let profilePictureUrl: string | undefined;
+
+            const uploadAndSave = async () => {
+                // Step 1: Upload to ImgBB if a new image was selected
+                if (profileImageFile) {
+                    profilePictureUrl = await uploadToImgBB(profileImageFile);
+                }
+
+                // Step 2: Send JSON (not FormData) to backend
+                const payload: Record<string, string> = {};
+                if (name && name.trim()) payload.name = name;
+                if (phoneNumber !== undefined) payload.phoneNumber = phoneNumber;
+                if (profilePictureUrl) payload.profilePicture = profilePictureUrl;
+
+                const result = await updateUser({ userId: user?._id, userData: payload }).unwrap();
+                return result;
+            };
+
+            const result = await toast.promise(uploadAndSave(), {
+                pending: profileImageFile ? 'Uploading image...' : 'Saving profile...',
                 success: 'Profile updated successfully!',
-                error: 'Profile update failed'
+                error: 'Profile update failed',
             });
 
-            const result = await promise;
-            
-            if(result && result.data){
+            if (result?.data) {
                 dispatch(setUser(result.data));
-                setIsEditing(false);
-            } else if (result && !result.success) { // Handle case where success might be in the root
+            } else if (result && !result.success) {
                 dispatch(setUser(result));
-                setIsEditing(false);
             }
+            setIsEditing(false);
         } catch (error: any) {
             console.log(error);
-            // Error is handled by toast.promise automatically
         }
     }
 
