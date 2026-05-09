@@ -104,9 +104,18 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
         router.push("/");
         window.location.reload();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Email already registered.");
+      const msg = error?.data?.message || "";
+      if (msg === "GOOGLE_ACCOUNT_EXISTS") {
+        toast.info("You already signed up with Google. Please use the 'Continue with Google' button to login.", { autoClose: 6000 });
+        setCurrentTab("login");
+      } else if (msg === "User already exists") {
+        toast.error("This email is already registered. Please login instead.");
+        setCurrentTab("login");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
     } finally {
       setSignupLoading(false);
     }
@@ -127,9 +136,14 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
         router.push("/");
         window.location.reload();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error("Email or password is incorrect.");
+      const msg = error?.data?.message || "";
+      if (msg === "GOOGLE_ACCOUNT_EXISTS") {
+        toast.info("This account was created with Google. Please use the 'Continue with Google' button to login.", { autoClose: 6000 });
+      } else {
+        toast.error("Email or password is incorrect.");
+      }
     } finally {
       setLoginLoading(false);
     }

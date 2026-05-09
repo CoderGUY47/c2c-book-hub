@@ -13,6 +13,10 @@ export const register = async (req: Request, res: Response) => {
     const { name, email, password, agreeTerms } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      // If account was created via Google OAuth, tell user to use Google login
+      if (existingUser.googleId) {
+        return response(res, 400, "GOOGLE_ACCOUNT_EXISTS");
+      }
       return response(res, 400, "User already exists");
     }
 
@@ -72,8 +76,11 @@ export const login = async (req: Request, res: Response) => {
       return response(res, 400, "The Email or Password is invalid or expired");
     }
 
-    // Check if the user has a password
+    // Check if the user signed up via Google OAuth (no password set)
     if (!user.password) {
+      if (user.googleId) {
+        return response(res, 400, "GOOGLE_ACCOUNT_EXISTS");
+      }
       return response(
         res,
         400,
