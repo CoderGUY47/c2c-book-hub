@@ -418,6 +418,32 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
                       )}
                     </Button>
                   </form>
+                  <div className="flex items-center my-4">
+                    <div className="h-px flex-1 bg-white/30"></div>
+                    <span className="mx-4 text-white font-poppins">or</span>
+                    <div className="h-px flex-1 bg-white/30"></div>
+                  </div>
+                  <Button
+                    onClick={handleGoogleLogin}
+                    className="w-full flex items-center font-poppins justify-center gap-2 bg-white text-gray-700 border border-gray-300 font-bold hover:bg-white/70 hover:border-none transition duration-300"
+                  >
+                    {googleLoading ? (
+                      <>
+                        <Loader2 className="animate-spin mr-2" size={20} />
+                        Continue with Google
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          src="/icons/google.svg"
+                          alt="google"
+                          width={20}
+                          height={20}
+                        />
+                        Continue with Google
+                      </>
+                    )}
+                  </Button>
                 </TabsContent>
 
                 {/* forgot password part */}
