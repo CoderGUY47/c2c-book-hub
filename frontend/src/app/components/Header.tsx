@@ -97,10 +97,14 @@ const Header = () => {
     try {
       await logoutMutation({}).unwrap();
       dispatch(logout());
-      // toast.success("User logged out successfully"); removed per request
       setIsDropdownOpen(false);
+      router.push("/");
+      // Force a hard reload to clear any cached states or auth contexts
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (error) {
-      // toast.error("Failed to logout. Please try again."); removed per request
+      console.log(error);
     }
   };
   const userPlaceholder = user?.name
