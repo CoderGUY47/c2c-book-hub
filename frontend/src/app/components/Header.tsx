@@ -93,16 +93,18 @@ const Header = () => {
     }
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      await logoutMutation({}).unwrap();
+      // 1. Immediately update UI (instant logout experience)
       dispatch(logout());
       setIsDropdownOpen(false);
       router.push("/");
-      // Force a hard reload to clear any cached states or auth contexts
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
+
+      // 2. Clear backend cookies asynchronously without blocking UI
+      logoutMutation({}).unwrap().catch((err) => console.log("Logout backend error:", err));
+      
+      // 3. Optional hard reload to ensure all cached data is wiped
+      setTimeout(() => window.location.reload(), 100);
     } catch (error) {
       console.log(error);
     }
@@ -254,7 +256,16 @@ const Header = () => {
         }
 
         return (
-          <DropdownMenuItem key={index} asChild>
+          <DropdownMenuItem 
+            key={index} 
+            asChild
+            onSelect={(e) => {
+              if (item.onclick) {
+                e.preventDefault();
+                item.onclick();
+              }
+            }}
+          >
             {item?.href ? (
               <Link
                 href={item.href}
