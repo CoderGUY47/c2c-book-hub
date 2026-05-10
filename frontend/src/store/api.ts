@@ -17,6 +17,7 @@ const API_URLS={
     UPADATE_USER_PROFILE:(userId:string)=> `/api/user/profile/update/${userId}`,
     SAVE_INSTITUTION_INFO: `/api/user/institution-info`,
     SEND_INSTITUTION_OTP: `/api/user/institution-otp`,
+    REQUEST_EMAIL_CHANGE: `/api/user/email-change-request`,
 
 /*\\\\ ** product related urls **////////*/
     PRODUCTS:`/api/products`,
@@ -140,6 +141,14 @@ export const api = createApi({
                 url: API_URLS.SEND_INSTITUTION_OTP,
                 method: 'POST',
                 body: { educationalEmail },
+            }),
+        }),
+
+        requestEmailChange: builder.mutation({
+            query: (data) => ({
+                url: API_URLS.REQUEST_EMAIL_CHANGE,
+                method: 'POST',
+                body: data,
             }),
         }),
 
@@ -328,6 +337,7 @@ export const {
   useUpdateUserMutation,
   useSaveInstitutionInfoMutation,
   useSendInstitutionOtpMutation,
+  useRequestEmailChangeMutation,
   useGetAddressQuery,
   useAddOrUpdateAddressMutation,
 

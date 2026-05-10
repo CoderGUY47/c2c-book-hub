@@ -7,5 +7,6 @@ const router = express.Router();
 router.put('/profile/update/:userId', authenticatedUser, UserController.updateUserProfile);
 router.post('/institution-info', authenticatedUser, UserController.saveInstitutionInfo);
 router.post('/institution-otp', authenticatedUser, UserController.sendInstitutionOtp);
+router.post('/email-change-request', authenticatedUser, UserController.requestEmailChange);
 
 export default router;

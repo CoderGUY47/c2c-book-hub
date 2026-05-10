@@ -6,10 +6,11 @@ import { UserData } from '@/lib/types/type';
 import { useForm } from 'react-hook-form';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Mail, Map, Phone, User, Camera } from 'lucide-react';
+import { Mail, Map, Phone, User, Camera, GraduationCap, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useUpdateUserMutation } from '@/store/api';
+import { useUpdateUserMutation, useRequestEmailChangeMutation } from '@/store/api';
 import { useDispatch } from 'react-redux';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { TbBrandDatabricks } from "react-icons/tb";
 import { FcReading } from "react-icons/fc";
 import { FcReadingEbook } from "react-icons/fc";
@@ -25,6 +26,14 @@ const page = () => {
     const dispatch = useDispatch();
     const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
     const [profileImagePreview, setProfileImagePreview] = useState<string | null>(null);
+
+    const [requestEmailChange, { isLoading: isRequesting }] = useRequestEmailChangeMutation();
+    const [isChangeDialogOpen, setIsChangeDialogOpen] = useState(false);
+    const [requestData, setRequestData] = useState({
+        requestType: 'change',
+        reason: '',
+        otherReasonDetail: ''
+    });
 
     const {register,handleSubmit,reset} = useForm<UserData>({
         defaultValues:{
@@ -112,6 +121,22 @@ const page = () => {
             console.log(error);
         }
     }
+
+    const handleRequestSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!requestData.reason || (requestData.reason === 'Other' && !requestData.otherReasonDetail)) {
+            toast.error("Please provide a valid reason.");
+            return;
+        }
+        try {
+            await requestEmailChange(requestData).unwrap();
+            toast.success("Request submitted successfully! Admin will review it soon.");
+            setIsChangeDialogOpen(false);
+            setRequestData({ requestType: 'change', reason: '', otherReasonDetail: '' });
+        } catch (error: any) {
+            toast.error(error?.data?.message || "Failed to submit request.");
+        }
+    };
 
     return (
         <div className='space-y-3 -mt-1'>
@@ -208,6 +233,86 @@ const page = () => {
                                     />
                                 </div>
                             </div>
+
+                            {/* Educational Email Display & Request Change Logic */}
+                            {user?.educationalEmail && user.educationalEmail !== user.email && (
+                                <div className="space-y-2 sm:col-span-2 mt-2">
+                                    <Label className='font-semibold font-poppins text-gray-50 flex items-center gap-2'>
+                                        Educational / Professional Email
+                                        <span className="bg-indigo-500/20 text-indigo-300 text-[10px] px-2 py-0.5 rounded-full border border-indigo-500/30">VERIFIED</span>
+                                    </Label>
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <div className="relative flex-1">
+                                            <GraduationCap className='absolute size-5 left-3 top-1/2 -translate-y-1/2 text-indigo-400'/>
+                                            <input
+                                                value={user.educationalEmail}
+                                                readOnly
+                                                className="w-full pl-10 pr-4 py-2 font-bold bg-indigo-500/10 text-indigo-200 text-sm border border-indigo-500/20 rounded-lg focus:outline-none opacity-90 cursor-not-allowed"
+                                            />
+                                        </div>
+                                        
+                                        <Dialog open={isChangeDialogOpen} onOpenChange={setIsChangeDialogOpen}>
+                                            <DialogTrigger asChild>
+                                                <Button type="button" variant="outline" className="bg-white/5 border-white/10 hover:bg-white/10 text-white shrink-0">
+                                                    Request Change / Remove
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent className="bg-gray-900 border border-white/10 text-white sm:max-w-[425px]">
+                                                <DialogHeader>
+                                                    <DialogTitle className="flex items-center gap-2"><AlertCircle className="text-orange-500"/> Update Educational Email</DialogTitle>
+                                                    <DialogDescription className="text-gray-400 mt-2">
+                                                        Educational emails are strictly verified. You cannot change them yourself. Please submit a request to the admin with a valid reason.
+                                                    </DialogDescription>
+                                                </DialogHeader>
+                                                <div className="space-y-4 mt-4">
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs text-gray-400 uppercase tracking-wider font-bold">Request Type</Label>
+                                                        <select 
+                                                            className="w-full bg-gray-800 border border-white/10 rounded-lg p-3 text-white appearance-none"
+                                                            value={requestData.requestType}
+                                                            onChange={(e) => setRequestData({...requestData, requestType: e.target.value})}
+                                                        >
+                                                            <option value="change">Change Educational Email</option>
+                                                            <option value="remove">Remove Educational Email</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label className="text-xs text-gray-400 uppercase tracking-wider font-bold">Reason</Label>
+                                                        <select 
+                                                            className="w-full bg-gray-800 border border-white/10 rounded-lg p-3 text-white appearance-none"
+                                                            value={requestData.reason}
+                                                            onChange={(e) => setRequestData({...requestData, reason: e.target.value})}
+                                                        >
+                                                            <option value="">Select a reason...</option>
+                                                            <option value="Graduated / Left Institution">Graduated / Left Institution</option>
+                                                            <option value="Changed Institution">Changed Institution</option>
+                                                            <option value="Lost Access to Email">Lost Access to Email</option>
+                                                            <option value="Used Wrong Email">Used Wrong Email initially</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                    {requestData.reason === 'Other' && (
+                                                        <div className="space-y-2">
+                                                            <Label className="text-xs text-gray-400 uppercase tracking-wider font-bold">Please specify your reason</Label>
+                                                            <textarea 
+                                                                className="w-full bg-gray-800 border border-white/10 rounded-lg p-3 text-white text-sm min-h-[80px]"
+                                                                placeholder="Explain why you need to update your email..."
+                                                                value={requestData.otherReasonDetail}
+                                                                onChange={(e) => setRequestData({...requestData, otherReasonDetail: e.target.value})}
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    <Button type="button" onClick={handleRequestSubmit} disabled={isRequesting} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold h-11 mt-2">
+                                                        {isRequesting ? <Loader2 className="animate-spin size-4 mr-2"/> : null}
+                                                        Submit Request
+                                                    </Button>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
+                                    </div>
+                                    <p className="text-xs text-gray-500 mt-1">This email is strictly hidden from other users and used only for campus verification.</p>
+                                </div>
+                            )}
 
                             {/* <div className="space-y-2">
                             <Label htmlFor="name" className='font-bold font-poppins'>Address</Label>

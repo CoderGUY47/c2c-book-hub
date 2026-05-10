@@ -124,3 +124,40 @@ export const saveInstitutionInfo = async (req: Request, res: Response) => {
         return response(res, 500, "Internal Server Error, please try again later.");
     }
 }
+
+import EmailChangeRequest from "../models/EmailChangeRequest";
+
+export const requestEmailChange = async (req: Request, res: Response) => {
+    try {
+        const userId = (req as any).id;
+        if (!userId) return response(res, 401, "Unauthenticated.");
+
+        const { requestType, reason, otherReasonDetail } = req.body;
+
+        if (!requestType || !['change', 'remove'].includes(requestType)) {
+            return response(res, 400, "Valid request type (change or remove) is required.");
+        }
+
+        if (!reason) {
+            return response(res, 400, "Reason is required.");
+        }
+
+        // Check if there is already a pending request
+        const existingRequest = await EmailChangeRequest.findOne({ user: userId, status: 'pending' });
+        if (existingRequest) {
+            return response(res, 400, "You already have a pending email change request. Please wait for admin approval.");
+        }
+
+        const newRequest = await EmailChangeRequest.create({
+            user: userId,
+            requestType,
+            reason,
+            otherReasonDetail: reason === 'Other' ? otherReasonDetail : null
+        });
+
+        return response(res, 201, "Your request has been submitted successfully and is pending admin review.", newRequest);
+    } catch (error) {
+        console.log(error);
+        return response(res, 500, "Failed to submit request. Please try again.");
+    }
+};
