@@ -248,7 +248,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                       <Button
                                         variant="outline"
                                         size="sm"
-                                        className="h-9 px-3 md:px-4 rounded-full border border-white/10 bg-transparent text-white/60 hover:bg-white hover:text-black hover:border-white flex items-center gap-2 text-[10px] font-black uppercase tracking-wider transition-all duration-500"
+                                        className="h-9 px-3 md:px-4 rounded-full border-0 bg-transparent text-white/60 hover:bg-white hover:text-black flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider transition-all duration-500"
                                         onClick={(e) =>
                                           handleGoToDetails(e, book)
                                         }
