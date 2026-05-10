@@ -34,7 +34,7 @@ const InstitutionInfoPage = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await verifyAuth().unwrap();
+        const res = await verifyAuth({}).unwrap();
         setUserData(res.data);
         if (res.data?.hasCompletedProfile) {
           router.push("/"); // Already completed
