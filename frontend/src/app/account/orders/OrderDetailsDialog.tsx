@@ -15,7 +15,7 @@ import { LuPackageCheck } from "react-icons/lu";
 import React from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { HiTemplate } from "react-icons/hi";
-import { TbListDetails } from "react-icons/lu";
+import { TbListDetails } from "react-icons/tb";
 import { LuClipboardList } from "react-icons/lu";
 import Image from "next/image";
 import { QRCodeCanvas } from "qrcode.react";
