@@ -102,7 +102,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 <span className='text-3xl font-extrabold drop-shadow-[0_0_10px_rgogba(255,255,255,0.2)] text-white'>Your Account</span>
               </Link>
             </div>
-            <div className="flex-1 space-y-4 py-4 overflow-y-auto scrollbar-hide">
+            <div className="flex-1 space-y-4 py-4 overflow-y-auto modern-scrollbar">
               <div className="px-6 py-2">
                 <div className="flex items-center gap-4 bg-slate-800/50 hover:bg-violet-600/50 transition-all py-4 px-4 rounded-xl border-0 shadow-xl">
                   <Avatar className="w-12 h-12 -ml-2 rounded-full">

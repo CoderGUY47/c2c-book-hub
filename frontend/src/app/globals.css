@@ -607,29 +607,26 @@
 
 /* Modern Custom Scrollbar Utility */
 .modern-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
 }
 
 .modern-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: transparent;
 }
 
 .modern-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.4); /* violet-500/40 */
-  border-radius: 10px;
-  transition: all 0.3s ease;
+  background: rgba(139, 92, 246, 0.3); /* violet-500/30 */
+  border-radius: 20px;
 }
 
 .modern-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.7); /* violet-500/70 */
+  background: rgba(139, 92, 246, 0.6); /* violet-500/60 */
 }
 
 /* For Firefox */
 .modern-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(142, 94, 255, 0.806) transparent;
+  scrollbar-color: rgba(139, 92, 246, 0.4) transparent;
 }
 
 /* From Uiverse.io by aaronross1 */ 
