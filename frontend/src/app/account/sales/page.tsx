@@ -116,10 +116,10 @@ const SalesPage = () => {
                 <div className="p-6 md:w-1/3 border-b md:border-b-0 md:border-r border-white/10 flex flex-col gap-4">
                    {/* Order ID and Status - stacked vertically */}
                    <div className="flex flex-col gap-2">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 bg-indigo-400/10 px-3 py-1 rounded-full border border-indigo-400/20 w-fit">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-400/10 px-3 py-1 rounded-full border border-indigo-400/20 w-fit">
                         ORDER ID: {order._id.substring(0, 8)}...
                       </span>
-                      <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border w-fit
+                      <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border w-fit
                         ${order.status === 'delivered' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 
                           order.status === 'ready_for_handover' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 
                           'bg-orange-500/10 text-orange-400 border-orange-500/20'}`}>
@@ -133,9 +133,9 @@ const SalesPage = () => {
                            <img src={item.product.images[0]} alt={item.product.title} className="w-full h-full object-cover" />
                         </div>
                         <div className="flex flex-col justify-center min-w-0">
-                           <h3 className="text-white font-black text-sm line-clamp-1">{item.product.title}</h3>
+                           <h3 className="text-white font-bold text-sm line-clamp-1">{item.product.title}</h3>
                            <p className="text-gray-400 text-xs font-medium mt-0.5">QTY: {item.quantity}</p>
-                           <p className="text-indigo-400 font-black text-sm mt-1">৳{item.product.finalPrice}</p>
+                           <p className="text-indigo-400 font-bold text-sm mt-1">৳{item.product.finalPrice}</p>
                         </div>
                      </div>
                    ))}
@@ -145,24 +145,24 @@ const SalesPage = () => {
                 <div className="p-6 md:w-2/3 flex flex-col justify-between gap-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                        <div className="space-y-3">
-                          <h4 className="text-[10px] uppercase font-black text-white/40 tracking-widest flex items-center gap-2">
+                          <h4 className="text-[10px] uppercase font-bold text-white/40 tracking-widest flex items-center gap-2">
                             <User className="size-3" /> Buyer Details
                           </h4>
                           <div className="flex items-center gap-3">
-                             <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center font-black text-white shadow-lg shrink-0">
+                             <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shrink-0">
                                 {order.user.name[0]}
                              </div>
                              <div className="flex flex-col">
-                                <p className="text-white font-black text-sm">{order.user.name}</p>
+                                <p className="text-white font-bold text-sm">{order.user.name}</p>
                                 <p className="text-gray-400 text-xs font-normal">{order.user.email}</p>
                              </div>
                           </div>
                        </div>
                        <div className="space-y-3">
-                          <h4 className="text-[10px] uppercase font-black text-white/40 tracking-widest flex items-center gap-2">
+                          <h4 className="text-[10px] uppercase font-bold text-white/40 tracking-widest flex items-center gap-2">
                             <Calendar className="size-3" /> Ordered On
                           </h4>
-                          <p className="text-white font-black text-sm">
+                          <p className="text-white font-bold text-sm">
                             {new Date(order.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                           </p>
                        </div>
@@ -172,7 +172,7 @@ const SalesPage = () => {
                     <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/5">
                        {order.status === 'processing' && (
                          <Button 
-                           className="bg-indigo-600 hover:bg-indigo-700 text-white font-black uppercase tracking-wider text-xs h-11 rounded-xl px-6 shadow-lg shadow-indigo-600/20"
+                           className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-wider text-xs h-11 rounded-xl px-6 shadow-lg shadow-indigo-600/20"
                            onClick={() => handleMarkAsReady(order._id)}
                            disabled={isMarkingReady}
                          >
@@ -182,7 +182,7 @@ const SalesPage = () => {
 
                       {order.status === 'ready_for_handover' && (
                         <Button 
-                          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black uppercase tracking-wider text-xs h-11 rounded-xl px-6 shadow-lg shadow-blue-600/30 animate-pulse"
+                          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold uppercase tracking-wider text-xs h-11 rounded-xl px-6 shadow-lg shadow-blue-600/30 animate-pulse"
                           onClick={() => startScanner(order._id)}
                         >
                           <Scan className="mr-2 size-4" /> Scan Buyer's QR
@@ -190,7 +190,7 @@ const SalesPage = () => {
                       )}
 
                       {order.status === 'delivered' && (
-                        <div className="flex items-center gap-2 text-green-400 font-black uppercase tracking-widest text-[10px] bg-green-500/10 px-4 py-2 rounded-xl border border-green-500/20">
+                        <div className="flex items-center gap-2 text-green-400 font-bold uppercase tracking-widest text-[10px] bg-green-500/10 px-4 py-2 rounded-xl border border-green-500/20">
                           <CheckCircle2 className="size-4" /> Transaction Completed
                         </div>
                       )}
@@ -223,7 +223,7 @@ const SalesPage = () => {
                     <div className="absolute inset-0 rounded-full bg-green-400/30 animate-ping" />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-3xl font-black text-white uppercase tracking-tight">
+                    <h2 className="text-3xl font-bold text-white uppercase tracking-tight">
                       Handover Complete!
                     </h2>
                     <p className="text-green-400 font-bold text-lg">
@@ -232,7 +232,7 @@ const SalesPage = () => {
                     <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mt-4">
                       <p className="text-gray-300 text-sm font-medium leading-relaxed">
                         Thank you for using{" "}
-                        <span className="text-indigo-400 font-black">OxPecker BookHub</span>
+                        <span className="text-indigo-400 font-bold">OxPecker BookHub</span>
                         !<br />
                         The transaction has been marked as complete.
                       </p>
@@ -240,7 +240,7 @@ const SalesPage = () => {
                   </div>
                   <button
                     onClick={() => { setActiveScanner(null); setScanSuccess(false); }}
-                    className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-black uppercase tracking-wider text-sm px-8 py-3 rounded-xl shadow-lg shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 transition-all"
+                    className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold uppercase tracking-wider text-sm px-8 py-3 rounded-xl shadow-lg shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 transition-all"
                   >
                     Done
                   </button>
@@ -252,7 +252,7 @@ const SalesPage = () => {
                      <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
                         <QrCode className="size-8 text-white" />
                      </div>
-                     <h2 className="text-2xl font-black text-white uppercase tracking-tight">Scan Handover QR</h2>
+                     <h2 className="text-2xl font-bold text-white uppercase tracking-tight">Scan Handover QR</h2>
                      <p className="text-gray-400 font-medium text-sm mt-2">
                        Scan the QR code shown on the buyer's screen to confirm the book handover.
                      </p>
@@ -260,7 +260,7 @@ const SalesPage = () => {
 
                   <div id="reader" className="overflow-hidden rounded-2xl border-4 border-indigo-600/30 bg-black"></div>
                   
-                  <p className="text-[10px] text-gray-600 text-center mt-6 font-black uppercase tracking-widest">
+                  <p className="text-[10px] text-gray-600 text-center mt-6 font-bold uppercase tracking-widest">
                     Scanning for order: {activeScanner.substring(0, 8)}...
                   </p>
                 </>
