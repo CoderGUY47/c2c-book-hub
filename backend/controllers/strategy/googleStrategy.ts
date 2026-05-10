@@ -29,7 +29,14 @@ async (
             photoUrl: photos?.[0]?.value,
             fullProfile: JSON.stringify(profile)
         });
+        const email = emails?.[0]?.value;
+        if (!email || !email.endsWith('@diu.edu.bd')) {
+            console.log('[GOOGLE STRATEGY] Unauthorized email domain:', email);
+            return done(null, false); 
+        }
+
         try{
+
             // Here, you would typically search for the user in your database and create a new user if they don't exist. For demonstration, we'll just return a mock user object.
             let user = await User.findOne({email: emails?.[0]?.value}); //find user by email
             if(user) //if user not found, create new user
