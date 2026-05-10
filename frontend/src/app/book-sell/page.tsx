@@ -297,7 +297,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="Title Of Your Book"
-                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.title && (
                       <p className="text-indigo-300 text-sm font-normal">
@@ -313,7 +313,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="Subtitle Of Your Book"
-                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.subtitle && (
                       <p className="text-indigo-300 text-sm font-normal">
@@ -341,7 +341,7 @@ const page = () => {
                         onValueChange={field.onChange}
                         value={field.value}
                       >
-                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400">
+                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400 text-black">
                           <SelectValue placeholder="select your book category" />
                         </SelectTrigger>
                         <SelectContent className="font-poppins font-semibold">
@@ -424,7 +424,7 @@ const page = () => {
                     })}
                     type="text"
                     placeholder="Enter Class (Class 1 to 12, B.Sc, Master, Ph.D, etc...)"
-                    className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                    className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                   />
                   {errors.classType && (
                     <p className="text-indigo-300 text-sm font-normal">
@@ -452,7 +452,7 @@ const page = () => {
                         onValueChange={field.onChange}
                         value={field.value}
                       >
-                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400">
+                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400 text-black">
                           <SelectValue placeholder="Select Genre" />
                         </SelectTrigger>
                         <SelectContent className="font-poppins font-semibold h-60">
@@ -524,7 +524,7 @@ const page = () => {
                         onValueChange={field.onChange}
                         value={field.value}
                       >
-                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400">
+                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400 text-black">
                           <SelectValue placeholder="Select Year" />
                         </SelectTrigger>
                         <SelectContent className="font-poppins font-semibold h-60">
@@ -563,7 +563,7 @@ const page = () => {
                     })}
                     type="text"
                     placeholder="Enter writer's name"
-                    className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                    className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                   />
                   {errors.author && (
                     <p className="text-indigo-300 text-sm font-normal">
@@ -762,7 +762,7 @@ const page = () => {
                             {...register("price")}
                             type="text"
                             placeholder="Price Of Your Book in BDT"
-                            className="md:w-3/4 font-semibold placeholder:text-gray-400"
+                            className="md:w-3/4 font-semibold placeholder:text-gray-400 text-black"
                           />
                           {errors.price && (
                             <p className="text-indigo-300 text-sm font-normal">
@@ -784,7 +784,7 @@ const page = () => {
                             {...register("pageCount")}
                             type="number"
                             placeholder="Number of pages"
-                            className="md:w-3/4 font-poppins font-semibold placeholder:text-gray-400"
+                            className="md:w-3/4 font-poppins font-semibold placeholder:text-gray-400 text-black"
                           />
                           {errors.pageCount && (
                             <p className="text-indigo-300 text-sm font-normal">
@@ -805,7 +805,7 @@ const page = () => {
                           <Input
                             {...register("releaseDate")}
                             type="date"
-                            className="md:w-3/4 font-poppins text-purple-400 font-semibold placeholder:text-gray-500"
+                            className="md:w-3/4 font-poppins text-black font-semibold placeholder:text-gray-500"
                           />
                           {errors.releaseDate && (
                             <p className="text-indigo-500 text-sm font-normal">
@@ -835,7 +835,7 @@ const page = () => {
                           id="aboutAuthor"
                           {...register("aboutAuthor")}
                           placeholder="Short bio about the author"
-                          className="md:w-3/4 font-poppins placeholder:text-gray-400 font-semibold h-32 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:border-transparent transition-all"
+                          className="md:w-3/4 font-poppins placeholder:text-gray-400 font-semibold h-32 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:border-transparent transition-all text-black"
                           rows={4}
                         />
                         {errors.aboutAuthor && (
@@ -856,7 +856,7 @@ const page = () => {
                           id="description"
                           {...register("description")}
                           placeholder="Description of the book"
-                          className="md:w-3/4 font-poppins placeholder:text-gray-400 font-semibold h-52 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:border-transparent transition-all"
+                          className="md:w-3/4 font-poppins placeholder:text-gray-400 font-semibold h-52 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:border-transparent transition-all text-black"
                           rows={9}
                         />
                         {errors.description && (
@@ -900,7 +900,7 @@ const page = () => {
                           {...register("shippingCharge")}
                           type="text"
                           placeholder="Enter your shipping charges"
-                          className="w-full md:w-1/2 font-semibold placeholder:text-gray-400"
+                          className="w-full md:w-1/2 font-semibold placeholder:text-gray-400 text-black"
                           disabled={watch("shippingCharge") === "free"}
                         />
                         <span className="text-gray-400 font-semibold text-sm">
@@ -946,7 +946,7 @@ const page = () => {
                         {...register("finalPrice")}
                         type="text"
                         placeholder="What's your negotiation offer"
-                        className="font-poppins font-semibold placeholder:text-gray-400 w-full"
+                        className="font-poppins font-semibold placeholder:text-gray-400 w-full text-black"
                       />
                       {watch("discount") > 0 && (
                         <Badge
@@ -1088,7 +1088,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="sample: 646c5b69c6762"
-                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="pl-10 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.paymentDetails?.sessionId && (
                       <p className="text-indigo-300 text-sm font-normal">
@@ -1118,7 +1118,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="Enter your account number"
-                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.paymentDetails?.bankDetails?.accountNumber && (
                       <p className="text-indigo-300 text-sm font-normal">
@@ -1148,7 +1148,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="Enter your BIC code"
-                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.paymentDetails?.bankDetails?.bicCode && (
                       <p className="text-indigo-300 text-sm font-normal">
@@ -1170,7 +1170,7 @@ const page = () => {
                       })}
                       type="text"
                       placeholder="Enter your Bank name"
-                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full"
+                      className="md:w-3/4 placeholder:text-gray-400 font-poppins font-semibold w-full text-black"
                     />
                     {errors.paymentDetails?.bankDetails?.bankName && (
                       <p className="text-indigo-300 text-sm font-normal">
