@@ -153,13 +153,7 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
     setGoogleLoading(true);
     try {
       router.push(`${BASE_URL}/api/auth/google`);
-      dispatch(authStatus());
-      dispatch(toggleLoginDialog());
-      setTimeout(() => {
-        toast.success("Google login successful.");
-        setIsLoginOpen(false);
-        router.push("/");
-      }, 3000);
+      // No more setTimeout with fake success message, backend handles redirection
     } catch (error) {
       console.error(error);
       toast.error("Google login failed. Please try again.");

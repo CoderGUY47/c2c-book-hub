@@ -30,6 +30,14 @@ async (
             fullProfile: JSON.stringify(profile)
         });
         const email = emails?.[0]?.value;
+
+        /* 
+        // UNRESTRICTED GOOGLE LOGIN LOGIC (Old)
+        // This allowed any Google account to sign in.
+        const allowAnyEmail = true; 
+        */
+
+        // RESTRICTED GOOGLE LOGIN LOGIC (@diu.edu.bd only)
         if (!email || !email.endsWith('@diu.edu.bd')) {
             console.log('[GOOGLE STRATEGY] Unauthorized email domain:', email);
             return done(null, false); 
