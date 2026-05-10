@@ -5,8 +5,8 @@ interface NoDataProps {
   message: string;
   imageUrl: string;
   description: string;
-  onClick: () => void;
-  buttonText: string;
+  onClick?: () => void;
+  buttonText?: string;
 }
 
 const NoData: React.FC<NoDataProps> = ({
