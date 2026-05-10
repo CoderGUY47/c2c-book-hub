@@ -94,4 +94,5 @@ export interface Order{
     paymentMethod: string;
     paymentDetails: PaymentDetails;
     status: string;
+    handoverCode?: string;
 }

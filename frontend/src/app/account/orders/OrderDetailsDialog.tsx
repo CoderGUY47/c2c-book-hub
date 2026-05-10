@@ -15,9 +15,10 @@ import { LuPackageCheck } from "react-icons/lu";
 import React from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { HiTemplate } from "react-icons/hi";
-import { TbListDetails } from "react-icons/tb";
+import { TbListDetails } from "react-icons/lu";
 import { LuClipboardList } from "react-icons/lu";
 import Image from "next/image";
+import { QRCodeCanvas } from "qrcode.react";
 interface OrderDetailsDialogProps {
     order: Order;
 }
@@ -44,7 +45,7 @@ const StatusStep = ({
 };
 const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
     const getStatusIndex = (Status: string) => {
-        const statuses = ["processing", "shipped", "delivered", "cancelled"];
+        const statuses = ["processing", "ready_for_handover", "delivered", "cancelled"];
         return statuses.indexOf(Status);
     };
 
@@ -92,7 +93,7 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                                 className={`h-0.5 flex-1 ${statusIndex > 0 ? "bg-yellow-300" : "bg-gray-300"}`}
                             />
                             <StatusStep
-                                title="Shipped"
+                                title="Ready"
                                 icon={<FaTruckFast className="size-6" />}
                                 isCompleted={statusIndex > 1}
                                 isActive={statusIndex === 1}
@@ -120,6 +121,32 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                             )}
                         </div>
                     </div>
+
+                    {order.status === 'ready_for_handover' && (
+                        <div className="bg-indigo-600 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 animate-in fade-in zoom-in duration-500">
+                            <h3 className="text-white font-black uppercase tracking-widest flex items-center gap-2">
+                                <Package className="size-5" /> Campus Handover Ready
+                            </h3>
+                            <div className="bg-white p-3 rounded-2xl shadow-inner">
+                                <QRCodeCanvas 
+                                    value={JSON.stringify({ orderId: order._id, code: order.handoverCode || order._id.slice(-7) })}
+                                    size={180}
+                                    level="H"
+                                    includeMargin={false}
+                                />
+                            </div>
+                            <div className="text-center space-y-1">
+                                <p className="text-indigo-100 text-[10px] uppercase font-black tracking-[0.2em] opacity-80">Handover Code</p>
+                                <p className="text-3xl font-mono font-black text-white tracking-[0.3em]">
+                                    #{order.handoverCode || order._id.slice(-7).toUpperCase()}
+                                </p>
+                            </div>
+                            <p className="text-indigo-100 text-xs text-center font-bold leading-relaxed max-w-[280px]">
+                                Show this QR to the seller when you meet on campus to verify your book handover.
+                            </p>
+                        </div>
+                    )}
+
                     <div className="bg-gradient-to-tl from-white/20 to-white/10 p-4 rounded-lg">
                         <h3 className="flex items-center gap-2 font-bold text-lg text-white mb-2 font-poppins"><HiTemplate />Ordered Items:</h3>
                         <div className="space-y-4">
