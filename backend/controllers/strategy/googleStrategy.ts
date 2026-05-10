@@ -40,21 +40,38 @@ async (
         try{
 
             // Here, you would typically search for the user in your database and create a new user if they don't exist. For demonstration, we'll just return a mock user object.
-            let user = await User.findOne({email: emails?.[0]?.value}); //find user by email
-            if(user) //if user not found, create new user
+            let user = await User.findOne({email: emails?.[0]?.value}); 
+            if(user) 
             {
-                if(photos?.[0]?.value){
+                let updated = false;
+                if(photos?.[0]?.value && user.profilePicture !== photos[0].value){
                     console.log('[GOOGLE STRATEGY] Updating existing user with profile picture:', photos[0].value);
                     user.profilePicture = photos[0].value;
+                    updated = true;
+                }
+
+                // If they are an edu/govt user but haven't been marked as completed profile, fix it
+                if (isEduOrGovt && !user.hasCompletedProfile) {
+                    user.hasCompletedProfile = true;
+                    user.isVerified = true;
+                    // Optionally set educationalEmail to their login email if not set
+                    if (!user.educationalEmail) {
+                        user.educationalEmail = email;
+                    }
+                    updated = true;
+                }
+
+                if (updated) {
                     await user.save();
                 }
+
                 console.log('[GOOGLE STRATEGY] Existing user returned:', {
                     id: user._id,
                     name: user.name,
                     email: user.email,
-                    profilePicture: user.profilePicture
+                    hasCompletedProfile: user.hasCompletedProfile
                 });
-                return done(null, user); //user found, return user
+                return done(null, user); 
             }
 
             console.log('[GOOGLE STRATEGY] Creating new user with profile picture:', photos?.[0]?.value);
@@ -62,6 +79,7 @@ async (
                 googleId: profile.id,
                 name: displayName,
                 email: emails?.[0]?.value,
+                educationalEmail: isEduOrGovt ? email : null,
                 profilePicture: photos?.[0]?.value, 
                 isVerified: isEduOrGovt,
                 hasCompletedProfile: isEduOrGovt, // edu/govt = auto-complete, gmail = needs institution info
