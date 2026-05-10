@@ -12,6 +12,8 @@ const API_URLS={
     RESET_PASSWORD:(token:string)=>`/api/auth/reset-password/${token}`, //when do reset password, need token
     VERIFY_AUTH:`/api/auth/verify-auth`,
     LOGOUT:`/api/auth/logout`,
+    SEND_OTP:`/api/auth/send-otp`,
+    VERIFY_OTP:`/api/auth/verify-otp`,
     UPADATE_USER_PROFILE:(userId:string)=> `/api/user/profile/update/${userId}`,
 
 /*\\\\ ** product related urls **////////*/
@@ -251,6 +253,20 @@ export const api = createApi({
             invalidatesTags: ['Order']
         }),
 
+        sendOtp: builder.mutation<any, void>({
+            query: () => ({
+                url: API_URLS.SEND_OTP,
+                method: 'POST',
+            }),
+        }),
+
+        verifyOtp: builder.mutation({
+            query: (otp: string) => ({
+                url: API_URLS.VERIFY_OTP,
+                method: 'POST',
+                body: { otp },
+            }),
+        }),
 
         createSslPayment: builder.mutation({
             query: (data) => ({
@@ -318,6 +334,8 @@ export const {
   useCreateOrUpdateOrderMutation,
   useMarkOrderAsReadyMutation,
   useVerifyHandoverMutation,
+  useSendOtpMutation,
+  useVerifyOtpMutation,
 
   // Payment hooks
   useCreateSslPaymentMutation,

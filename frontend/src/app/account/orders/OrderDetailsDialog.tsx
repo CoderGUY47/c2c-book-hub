@@ -18,7 +18,7 @@ import { HiTemplate } from "react-icons/hi";
 import { TbListDetails } from "react-icons/tb";
 import { LuClipboardList } from "react-icons/lu";
 import Image from "next/image";
-import { QRCodeCanvas } from "qrcode.react";
+import HandoverQR from "@/app/components/HandoverQR";
 interface OrderDetailsDialogProps {
     order: Order;
 }
@@ -123,28 +123,11 @@ const OrderDetailsDialog = ({ order }: OrderDetailsDialogProps) => {
                     </div>
 
                     {order.status === 'ready_for_handover' && (
-                        <div className="bg-indigo-600 p-6 rounded-xl shadow-2xl flex flex-col items-center gap-4 animate-in fade-in zoom-in duration-500">
-                            <h3 className="text-white font-black uppercase tracking-widest flex items-center gap-2">
-                                <Package className="size-5" /> Campus Handover Ready
-                            </h3>
-                            <div className="bg-white p-3 rounded-2xl shadow-inner">
-                                <QRCodeCanvas 
-                                    value={JSON.stringify({ orderId: order._id, code: order.handoverCode || order._id.slice(-7) })}
-                                    size={180}
-                                    level="H"
-                                    includeMargin={false}
-                                />
-                            </div>
-                            <div className="text-center space-y-1">
-                                <p className="text-indigo-100 text-[10px] uppercase font-black tracking-[0.2em] opacity-80">Handover Code</p>
-                                <p className="text-3xl font-mono font-black text-white tracking-[0.3em]">
-                                    #{order.handoverCode || order._id.slice(-7).toUpperCase()}
-                                </p>
-                            </div>
-                            <p className="text-indigo-100 text-xs text-center font-bold leading-relaxed max-w-[280px]">
-                                Show this QR to the seller when you meet on campus to verify your book handover.
-                            </p>
-                        </div>
+                        <HandoverQR
+                            orderId={order._id}
+                            handoverCode={order.handoverCode}
+                            size={180}
+                        />
                     )}
 
                     <div className="bg-gradient-to-tl from-white/20 to-white/10 p-4 rounded-lg">

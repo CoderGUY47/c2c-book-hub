@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Calendar, CreditCard, ShoppingBag, Package } from 'lucide-react';
 import OrderDetailsDialog from './OrderDetailsDialog';
 import { Button } from '@/components/ui/button';
-import { QRCodeCanvas } from "qrcode.react";
+import HandoverQR from '@/app/components/HandoverQR';
 
 
 const page = () => {
@@ -73,21 +73,12 @@ const page = () => {
                                         <CreditCard className='size-6 mr-2 text-white' /> Total: <i className='fa fa-bangladeshi-taka-sign text-white' />{order.totalAmount}
                                     </p>
                                     {order.status === 'ready_for_handover' && (
-                                        <div className="mt-4 p-4 bg-indigo-600/20 border border-indigo-500/30 rounded-xl flex flex-col items-center gap-3">
-                                            <div className="bg-white p-2 rounded-lg shadow-xl">
-                                                <QRCodeCanvas 
-                                                    value={JSON.stringify({ orderId: order._id, code: order.handoverCode || order._id.slice(-7) })}
-                                                    size={100}
-                                                    level="H"
-                                                />
-                                            </div>
-                                            <div className="text-center">
-                                                <p className="text-[10px] uppercase font-black tracking-widest text-indigo-300 opacity-80">Handover Code</p>
-                                                <p className="text-lg font-mono font-black text-white tracking-widest">#{order.handoverCode || order._id.slice(-7).toUpperCase()}</p>
-                                            </div>
-                                            <p className="text-[10px] text-center font-medium text-gray-300 leading-tight">
-                                                Show this QR to the seller to confirm handover
-                                            </p>
+                                        <div className="mt-4">
+                                            <HandoverQR
+                                                orderId={order._id}
+                                                handoverCode={order.handoverCode}
+                                                size={140}
+                                            />
                                         </div>
                                     )}
                                     <div className={`p-2 rounded-lg bg-transparent shadow-sm mt-4 flex items-center justify-between`}>

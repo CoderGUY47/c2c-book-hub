@@ -5,6 +5,7 @@ import crypto from "crypto";
 import {
   sendResetPasswordLinkToEmail,
   sendVerificationToEmail,
+  sendOtpToEmail,
 } from "../config/emailConfig";
 import { generateToken } from "../utils/generateToken";
 import { isAllowedEmail } from "../utils/authUtils";
@@ -251,5 +252,70 @@ export const checkUserAuth = async (req: Request, res: Response) => {
       500,
       "An Internal server error occurred, Keep trying...!",
     );
+  }
+};
+
+// Send OTP to user's verified edu/govt email
+export const sendOtp = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).id;
+    if (!userId) return response(res, 401, "Unauthenticated.");
+
+    const user = await User.findById(userId);
+    if (!user) return response(res, 404, "User not found.");
+
+    // Generate a 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+    user.otp = otp;
+    user.otpExpires = otpExpires;
+    await user.save();
+
+    await sendOtpToEmail(user.email, otp, user.name);
+
+    return response(res, 200, `OTP sent to ${user.email}. Valid for 10 minutes.`);
+  } catch (error) {
+    console.log(error);
+    return response(res, 500, "Failed to send OTP. Please try again.");
+  }
+};
+
+// Verify OTP submitted by user
+export const verifyOtp = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).id;
+    if (!userId) return response(res, 401, "Unauthenticated.");
+
+    const { otp } = req.body;
+    if (!otp) return response(res, 400, "OTP is required.");
+
+    const user = await User.findById(userId);
+    if (!user) return response(res, 404, "User not found.");
+
+    if (!user.otp || !user.otpExpires) {
+      return response(res, 400, "No OTP was requested. Please request a new one.");
+    }
+
+    if (new Date() > user.otpExpires) {
+      user.otp = undefined;
+      user.otpExpires = undefined;
+      await user.save();
+      return response(res, 400, "OTP has expired. Please request a new one.");
+    }
+
+    if (user.otp !== otp) {
+      return response(res, 400, "Invalid OTP. Please try again.");
+    }
+
+    // OTP is valid – clear it
+    user.otp = undefined;
+    user.otpExpires = undefined;
+    await user.save();
+
+    return response(res, 200, "OTP verified successfully! ✅ Thank you for using OxPecker BookHub.");
+  } catch (error) {
+    console.log(error);
+    return response(res, 500, "Failed to verify OTP. Please try again.");
   }
 };

@@ -55,3 +55,62 @@ export const sendResetPasswordLinkToEmail = async (
     `;
   await sendEmail(to, "Please, Reset your password.", html);
 };
+
+// Send OTP for login verification
+export const sendOtpToEmail = async (to: string, otp: string, name: string) => {
+  const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your OTP Code</title>
+</head>
+<body style="margin:0;padding:0;background:#0f0f1a;font-family:'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f1a;padding:40px 0;">
+    <tr>
+      <td align="center">
+        <table width="520" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,#1e1b4b,#1e1040);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+          <!-- Header -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:36px 40px;text-align:center;">
+              <h1 style="margin:0;color:#fff;font-size:26px;font-weight:800;letter-spacing:1px;">📚 OxPecker BookHub</h1>
+              <p style="margin:8px 0 0;color:rgba(255,255,255,0.8);font-size:14px;">Campus Book Exchange Platform</p>
+            </td>
+          </tr>
+          <!-- Body -->
+          <tr>
+            <td style="padding:40px;">
+              <p style="color:#a5b4fc;font-size:15px;margin:0 0 8px;">Hello, <strong style="color:#e0e7ff;">${name}</strong> 👋</p>
+              <p style="color:#c7d2fe;font-size:15px;margin:0 0 28px;line-height:1.6;">
+                Use the OTP below to verify your identity on <strong style="color:#818cf8;">OxPecker BookHub</strong>. 
+                This code is valid for <strong style="color:#f59e0b;">10 minutes</strong>.
+              </p>
+              <!-- OTP Box -->
+              <div style="background:linear-gradient(135deg,#312e81,#4c1d95);border-radius:16px;padding:32px;text-align:center;margin:0 0 28px;border:1px solid rgba(99,102,241,0.3);">
+                <p style="color:#a5b4fc;font-size:12px;text-transform:uppercase;letter-spacing:3px;margin:0 0 12px;">Your OTP Code</p>
+                <div style="background:#fff;border-radius:12px;padding:16px 24px;display:inline-block;">
+                  <span style="font-size:42px;font-weight:900;letter-spacing:12px;color:#4f46e5;font-family:'Courier New',monospace;">${otp}</span>
+                </div>
+                <p style="color:#818cf8;font-size:12px;margin:16px 0 0;">Do not share this code with anyone.</p>
+              </div>
+              <p style="color:#6b7280;font-size:13px;line-height:1.6;margin:0;">
+                If you did not request this OTP, please ignore this email. Your account is safe.
+              </p>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="background:#0f0f1a;padding:20px 40px;text-align:center;border-top:1px solid rgba(99,102,241,0.2);">
+              <p style="color:#374151;font-size:12px;margin:0;">© 2026 OxPecker BookHub · Campus Book Exchange · All rights reserved</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `;
+  await sendEmail(to, "🔐 Your OxPecker BookHub OTP Code", html);
+};

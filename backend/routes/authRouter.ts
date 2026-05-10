@@ -56,4 +56,8 @@ async(req:Request, res: Response, next: NextFunction) : Promise<void> =>{ //cook
     }
 })
 
+// OTP routes (requires authentication - sends to the user's verified edu/govt email)
+router.post("/send-otp", authenticatedUser, authController.sendOtp);
+router.post("/verify-otp", authenticatedUser, authController.verifyOtp);
+
 export default router;

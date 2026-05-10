@@ -31,6 +31,7 @@ const SalesPage = () => {
   const [verifyHandover, { isLoading: isVerifying }] = useVerifyHandoverMutation();
   
   const [activeScanner, setActiveScanner] = useState<string | null>(null);
+  const [scanSuccess, setScanSuccess] = useState(false);
 
   const handleMarkAsReady = async (orderId: string) => {
     try {
@@ -62,9 +63,8 @@ const SalesPage = () => {
             }
 
             await verifyHandover({ orderId, scannedCode: data.code }).unwrap();
-            toast.success("Handover verified successfully!");
             scanner.clear();
-            setActiveScanner(null);
+            setScanSuccess(true);
             refetch();
           } catch (err) {
             console.error(err);
@@ -209,27 +209,64 @@ const SalesPage = () => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-300">
            <div className="bg-gray-900 border border-white/10 rounded-3xl p-8 max-w-md w-full relative shadow-2xl">
               <button 
-                onClick={() => setActiveScanner(null)}
+                onClick={() => { setActiveScanner(null); setScanSuccess(false); }}
                 className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white transition-colors"
               >
                 <X className="size-6" />
               </button>
               
-              <div className="text-center mb-8">
-                 <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                    <QrCode className="size-8 text-white" />
-                 </div>
-                 <h2 className="text-2xl font-black text-white uppercase tracking-tight">Scan Handover QR</h2>
-                 <p className="text-gray-400 font-medium text-sm mt-2">
-                   Scan the QR code shown on the buyer's screen to confirm the book handover.
-                 </p>
-              </div>
+              {scanSuccess ? (
+                /* ✅ Thank You Screen */
+                <div className="flex flex-col items-center gap-6 py-4 text-center">
+                  <div className="relative">
+                    <div className="w-28 h-28 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl shadow-green-500/40">
+                      <CheckCircle2 className="size-16 text-white" />
+                    </div>
+                    <div className="absolute inset-0 rounded-full bg-green-400/30 animate-ping" />
+                  </div>
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-black text-white uppercase tracking-tight">
+                      Handover Complete!
+                    </h2>
+                    <p className="text-green-400 font-bold text-lg">
+                      ✅ Book successfully delivered
+                    </p>
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mt-4">
+                      <p className="text-gray-300 text-sm font-medium leading-relaxed">
+                        Thank you for using{" "}
+                        <span className="text-indigo-400 font-black">OxPecker BookHub</span>
+                        !<br />
+                        The transaction has been marked as complete.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => { setActiveScanner(null); setScanSuccess(false); }}
+                    className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-black uppercase tracking-wider text-sm px-8 py-3 rounded-xl shadow-lg shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 transition-all"
+                  >
+                    Done
+                  </button>
+                </div>
+              ) : (
+                /* 📷 Scanner Screen */
+                <>
+                  <div className="text-center mb-8">
+                     <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                        <QrCode className="size-8 text-white" />
+                     </div>
+                     <h2 className="text-2xl font-black text-white uppercase tracking-tight">Scan Handover QR</h2>
+                     <p className="text-gray-400 font-medium text-sm mt-2">
+                       Scan the QR code shown on the buyer's screen to confirm the book handover.
+                     </p>
+                  </div>
 
-              <div id="reader" className="overflow-hidden rounded-2xl border-4 border-indigo-600/30 bg-black"></div>
-              
-              <p className="text-[10px] text-gray-600 text-center mt-6 font-black uppercase tracking-widest">
-                Scanning for order: {activeScanner.substring(0, 8)}...
-              </p>
+                  <div id="reader" className="overflow-hidden rounded-2xl border-4 border-indigo-600/30 bg-black"></div>
+                  
+                  <p className="text-[10px] text-gray-600 text-center mt-6 font-black uppercase tracking-widest">
+                    Scanning for order: {activeScanner.substring(0, 8)}...
+                  </p>
+                </>
+              )}
            </div>
         </div>
       )}

@@ -13,6 +13,8 @@ export interface IUser extends Document {
     verificationToken?: string;
     resetPasswordToken?: string;
     resetPasswordExpires?: Date;
+    otp?: string;
+    otpExpires?: Date;
     agreeTerms: boolean;
     addresses: mongoose.Types.ObjectId[];
     comparePassword(candidatePassword: string): Promise<boolean>;
@@ -32,6 +34,8 @@ const userSchema = new Schema<IUser>({
     verificationToken: {type:String, default:null},
     resetPasswordToken: {type:String, default:null},
     resetPasswordExpires: {type:Date, default:null},
+    otp: {type:String, default:null},
+    otpExpires: {type:Date, default:null},
     addresses: [{type:Schema.Types.ObjectId, ref: "Address"}],
     role: {type:String, enum:["user","admin"], default:"user"}
 }, { timestamps: true });
