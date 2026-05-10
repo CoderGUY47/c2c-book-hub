@@ -93,8 +93,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <div className="absolute top-1/2 left-1/2 w-[500px] h-[600px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className='relative z-10 w-[83.5%] grid lg:grid-cols-[370px_1fr] p-4 mx-auto'>
-        <div className="p-2 m-5 h-[480px] rounded-lg hidden bg-gradient-to-tl from-gray-800/80 via-white/10 to-gray-800/60 shadow-xl border-0 lg:block">
-          <div className="flex flex-col gap-2">
+        <div className="p-2 m-5 h-[540px] rounded-lg hidden bg-gradient-to-tl from-gray-800/80 via-white/10 to-gray-800/60 shadow-xl border-0 lg:block">
+          <div className="flex flex-col h-full gap-2">
             <div className="flex h-60px items-center px-6 mt-2 -mb-4">
               <Link href="/"
                 className='flex items-center gap-2 font-bold font-poppins text-white'
@@ -102,7 +102,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 <span className='text-3xl font-extrabold drop-shadow-[0_0_10px_rgogba(255,255,255,0.2)] text-white'>Your Account</span>
               </Link>
             </div>
-            <div className="flex-1 space-y-4 py-4">
+            <div className="flex-1 space-y-4 py-4 overflow-y-auto scrollbar-hide">
               <div className="px-6 py-2">
                 <div className="flex items-center gap-4 bg-slate-800/50 hover:bg-violet-600/50 transition-all py-4 px-4 rounded-xl border-0 shadow-xl">
                   <Avatar className="w-12 h-12 -ml-2 rounded-full">
@@ -144,7 +144,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 </nav>
               </div>
             </div>
-            <div className="-mt-12 flex px-5 py-4">
+            <div className="flex px-5 py-4 border-t border-gray-700/50">
               <Button variant='default' className='w-full justify-start bg-transparent gap-2 font-semibold text-md hover:bg-violet-600 hover:text-white transition-all duration-300 ease-in-out' onClick={handleLogout}>
                 <LogOut className="h-8 w-8" />Logout
               </Button>
