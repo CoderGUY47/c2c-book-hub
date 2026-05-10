@@ -125,9 +125,9 @@ const HandoverQR: React.FC<HandoverQRProps> = ({
             size={size}
             level="H"
             imageSettings={{
-              src: "/images/oxpecker-bookhub.png",
-              height: Math.round(size * 0.20),
-              width: Math.round(size * 0.38),
+              src: "/images/oxpecker.png",
+              height: Math.round(size * 0.24),
+              width: Math.round(size * 0.24),
               excavate: true,
             }}
             fgColor="#3730a3"
@@ -154,9 +154,9 @@ const HandoverQR: React.FC<HandoverQRProps> = ({
             size={size}
             level="H"
             imageSettings={{
-              src: "/images/oxpecker-bookhub.png",
-              height: Math.round(size * 0.20),
-              width: Math.round(size * 0.38),
+              src: "/images/oxpecker.png",
+              height: Math.round(size * 0.24),
+              width: Math.round(size * 0.24),
               excavate: true,
             }}
             fgColor="#3730a3"
