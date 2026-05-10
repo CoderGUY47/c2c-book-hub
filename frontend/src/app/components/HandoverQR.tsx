@@ -126,8 +126,8 @@ const HandoverQR: React.FC<HandoverQRProps> = ({
             level="H"
             imageSettings={{
               src: "/images/oxpecker-bookhub.png",
-              height: Math.round(size * 0.22),
-              width: Math.round(size * 0.22),
+              height: Math.round(size * 0.20),
+              width: Math.round(size * 0.38),
               excavate: true,
             }}
             fgColor="#3730a3"
@@ -135,7 +135,7 @@ const HandoverQR: React.FC<HandoverQRProps> = ({
           />
         </div>
         <div className="bg-indigo-800/60 px-4 py-2 rounded-xl border border-indigo-500/30 w-full">
-          <p className="text-indigo-300 text-[10px] uppercase font-black tracking-[0.2em]">Handover Code</p>
+          <p className="text-indigo-300 text-[10px] uppercase font-bold tracking-[0.2em]">Handover Code</p>
           <p className="text-white text-2xl font-mono font-black tracking-[0.3em] mt-1">
             #{code}
           </p>
@@ -155,8 +155,8 @@ const HandoverQR: React.FC<HandoverQRProps> = ({
             level="H"
             imageSettings={{
               src: "/images/oxpecker-bookhub.png",
-              height: Math.round(size * 0.22),
-              width: Math.round(size * 0.22),
+              height: Math.round(size * 0.20),
+              width: Math.round(size * 0.38),
               excavate: true,
             }}
             fgColor="#3730a3"
