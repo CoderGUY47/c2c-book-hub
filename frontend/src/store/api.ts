@@ -33,6 +33,8 @@ const API_URLS={
 /*\\\\ ** order related urls **////////*/
     ORDER: `/api/order`,
     ORDER_BY_ID: (orderId:string) => `/api/order/${orderId}`,
+    READY_FOR_HANDOVER: `/api/order/ready-for-handover`,
+    VERIFY_HANDOVER: `/api/order/verify-handover`,
     CREATE_SSL_PAYMENT: `/api/payments/ssl/payment`,
 
 /*\\ ** address related urls **////////*/
@@ -224,6 +226,24 @@ export const api = createApi({
             }),
             invalidatesTags: ['Order', 'Cart']
         }),
+        
+        markOrderAsReady: builder.mutation({
+            query: (orderId) => ({
+                url: API_URLS.READY_FOR_HANDOVER,
+                method: 'POST',
+                body: { orderId },
+            }),
+            invalidatesTags: ['Order']
+        }),
+
+        verifyHandover: builder.mutation({
+            query: ({ orderId, scannedCode }) => ({
+                url: API_URLS.VERIFY_HANDOVER,
+                method: 'POST',
+                body: { orderId, scannedCode },
+            }),
+            invalidatesTags: ['Order']
+        }),
 
 
         createSslPayment: builder.mutation({
@@ -289,6 +309,8 @@ export const {
   useGetUserOrderQuery,
   useGetOrderByIdQuery,
   useCreateOrUpdateOrderMutation,
+  useMarkOrderAsReadyMutation,
+  useVerifyHandoverMutation,
 
   // Payment hooks
   useCreateSslPaymentMutation,
