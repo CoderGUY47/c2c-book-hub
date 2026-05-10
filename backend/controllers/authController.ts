@@ -7,6 +7,7 @@ import {
   sendVerificationToEmail,
 } from "../config/emailConfig";
 import { generateToken } from "../utils/generateToken";
+import { isAllowedEmail } from "../utils/authUtils";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -17,9 +18,9 @@ export const register = async (req: Request, res: Response) => {
     const existingUser = await User.findOne({ email });
     */
 
-    // RESTRICTED REGISTRATION LOGIC (@diu.edu.bd only)
-    if (!email || !email.endsWith('@diu.edu.bd')) {
-      return response(res, 400, "Only educational emails with @diu.edu.bd domain are allowed.");
+    // RESTRICTED REGISTRATION LOGIC (Academic & Professional only)
+    if (!email || !isAllowedEmail(email)) {
+      return response(res, 400, "Only academic or professional emails are allowed.");
     }
 
     const existingUser = await User.findOne({ email });
@@ -87,9 +88,9 @@ export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ email }).select("+password");
     */
 
-    // RESTRICTED LOGIN LOGIC (@diu.edu.bd only)
-    if (!email || !email.endsWith('@diu.edu.bd')) {
-        return response(res, 400, "Only educational emails with @diu.edu.bd domain are allowed.");
+    // RESTRICTED LOGIN LOGIC (Academic & Professional only)
+    if (!email || !isAllowedEmail(email)) {
+        return response(res, 400, "Only academic or professional emails are allowed.");
     }
 
     const user = await User.findOne({ email }).select("+password");

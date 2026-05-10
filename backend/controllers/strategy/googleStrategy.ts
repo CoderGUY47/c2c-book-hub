@@ -3,6 +3,7 @@ import {Strategy as GoogleStrategy, Profile} from 'passport-google-oauth20';
 import dotenv from 'dotenv';
 import { Request } from 'express';
 import User, { IUser } from '../../models/User';
+import { isAllowedEmail } from '../../utils/authUtils';
 
 
 dotenv.config(); 
@@ -37,8 +38,8 @@ async (
         const allowAnyEmail = true; 
         */
 
-        // RESTRICTED GOOGLE LOGIN LOGIC (@diu.edu.bd only)
-        if (!email || !email.endsWith('@diu.edu.bd')) {
+        // RESTRICTED GOOGLE LOGIN LOGIC (Academic & Professional only)
+        if (!email || !isAllowedEmail(email)) {
             console.log('[GOOGLE STRATEGY] Unauthorized email domain:', email);
             return done(null, false); 
         }

@@ -22,13 +22,13 @@ const UnauthorizedEmailPage = () => {
         {/* Text Content */}
         <div className="space-y-6">
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Please log in with your educational account.
+            Please log in with your <br/> official account.
           </h1>
-          <p className="text-xl text-gray-300 font-medium leading-relaxed max-w-[320px] mx-auto">
-            Sign in with your educational gmail account which is <span className="text-purple-400 font-bold">@diu.edu.bd</span>
+          <p className="text-xl text-gray-300 font-medium leading-relaxed max-w-[400px] mx-auto">
+            Use your <span className="text-purple-400 font-bold">academic</span> (.edu, .ac.bd) or <span className="text-blue-400 font-bold">professional</span> (.gov.bd) email to access the platform.
           </p>
           <p className="text-sm text-gray-500 italic">
-            Personal Google accounts are not accepted at this time.
+            Personal Gmail/Outlook accounts are not accepted for verification.
           </p>
         </div>
 
