@@ -15,6 +15,13 @@ export interface IUser extends Document {
     resetPasswordExpires?: Date;
     otp?: string;
     otpExpires?: Date;
+    // Institution info (required for personal Gmail users)
+    hasCompletedProfile: boolean;
+    institution?: string;
+    institutionType?: 'university' | 'college' | 'govt_organization' | 'other';
+    department?: string;
+    institutionRole?: 'student' | 'faculty' | 'staff' | 'alumni' | 'employee' | 'other';
+    studentId?: string;
     agreeTerms: boolean;
     addresses: mongoose.Types.ObjectId[];
     comparePassword(candidatePassword: string): Promise<boolean>;
@@ -36,6 +43,12 @@ const userSchema = new Schema<IUser>({
     resetPasswordExpires: {type:Date, default:null},
     otp: {type:String, default:null},
     otpExpires: {type:Date, default:null},
+    hasCompletedProfile: {type:Boolean, default:false},
+    institution: {type:String, default:null},
+    institutionType: {type:String, enum:['university','college','govt_organization','other'], default:null},
+    department: {type:String, default:null},
+    institutionRole: {type:String, enum:['student','faculty','staff','alumni','employee','other'], default:null},
+    studentId: {type:String, default:null},
     addresses: [{type:Schema.Types.ObjectId, ref: "Address"}],
     role: {type:String, enum:["user","admin"], default:"user"}
 }, { timestamps: true });

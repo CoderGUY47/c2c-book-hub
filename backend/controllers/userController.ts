@@ -33,3 +33,37 @@ export const updateUserProfile = async(req: Request, res: Response)=>{
         return response(res, 500, "Internal Server Error, please try again later.");
     }
 }
+
+export const saveInstitutionInfo = async (req: Request, res: Response) => {
+    try {
+        const userId = (req as any).id;
+        if (!userId) return response(res, 401, "Unauthenticated.");
+
+        const { institution, institutionType, department, institutionRole, studentId } = req.body;
+
+        if (!institution || !institutionType || !institutionRole) {
+            return response(res, 400, "Institution name, type, and your role are required.");
+        }
+
+        const user = await User.findByIdAndUpdate(
+            userId,
+            {
+                institution,
+                institutionType,
+                department: department || null,
+                institutionRole,
+                studentId: studentId || null,
+                hasCompletedProfile: true,
+                isVerified: true,
+            },
+            { new: true, runValidators: true }
+        ).select('-password -resetPasswordToken -resetPasswordExpires -verificationToken');
+
+        if (!user) return response(res, 404, "User not found.");
+
+        return response(res, 200, "Institution info saved. Welcome to OxPecker BookHub! \uD83C\uDF89", user);
+    } catch (error) {
+        console.log(error);
+        return response(res, 500, "Internal Server Error, please try again later.");
+    }
+}

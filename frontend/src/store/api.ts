@@ -15,6 +15,7 @@ const API_URLS={
     SEND_OTP:`/api/auth/send-otp`,
     VERIFY_OTP:`/api/auth/verify-otp`,
     UPADATE_USER_PROFILE:(userId:string)=> `/api/user/profile/update/${userId}`,
+    SAVE_INSTITUTION_INFO: `/api/user/institution-info`,
 
 /*\\\\ ** product related urls **////////*/
     PRODUCTS:`/api/products`,
@@ -122,6 +123,15 @@ export const api = createApi({
                 method:'PUT', //PUT is used to update the data
                 body: userData
             })
+        }),
+
+        saveInstitutionInfo: builder.mutation({
+            query: (data) => ({
+                url: API_URLS.SAVE_INSTITUTION_INFO,
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['User'],
         }),
 
         //products endpoint
@@ -307,6 +317,7 @@ export const {
 
   // User hooks
   useUpdateUserMutation,
+  useSaveInstitutionInfoMutation,
   useGetAddressQuery,
   useAddOrUpdateAddressMutation,
 

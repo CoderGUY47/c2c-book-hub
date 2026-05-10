@@ -32,17 +32,10 @@ async (
         });
         const email = emails?.[0]?.value;
 
-        /* 
-        // UNRESTRICTED GOOGLE LOGIN LOGIC (Old)
-        // This allowed any Google account to sign in.
-        const allowAnyEmail = true; 
-        */
-
-        // RESTRICTED GOOGLE LOGIN LOGIC (Academic & Professional only)
-        if (!email || !isAllowedEmail(email)) {
-            console.log('[GOOGLE STRATEGY] Unauthorized email domain:', email);
-            return done(null, false); 
-        }
+        // Allow ALL Google accounts. Edu/govt emails are pre-verified.
+        // Personal Gmail users must complete institution info after login.
+        const isEduOrGovt = !!email && isAllowedEmail(email);
+        console.log('[GOOGLE STRATEGY] Email:', email, '| isEduOrGovt:', isEduOrGovt);
 
         try{
 
@@ -70,7 +63,8 @@ async (
                 name: displayName,
                 email: emails?.[0]?.value,
                 profilePicture: photos?.[0]?.value, 
-                isVerified: emails?.[0]?.verified || false,
+                isVerified: isEduOrGovt,
+                hasCompletedProfile: isEduOrGovt, // edu/govt = auto-complete, gmail = needs institution info
                 agreeTerms: true,
                 role:"user",
             })
