@@ -24,7 +24,8 @@ export interface IOrder extends Document {
     ssl_payment_id?: string;
     ssl_signature?: string;
   };
-  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
+  status: "pending" | "processing" | "ready_for_handover" | "shipped" | "delivered" | "cancelled";
+  handoverCode?: string;
   notes?:string;   
 }
 
@@ -53,9 +54,10 @@ const OrderSchema = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
+      enum: ["pending", "processing", "ready_for_handover", "shipped", "delivered", "cancelled"],
       default: "processing",
     },      
+    handoverCode: { type: String }, // Unique code for QR verification
     notes: {type:String},
   },
   { timestamps: true }

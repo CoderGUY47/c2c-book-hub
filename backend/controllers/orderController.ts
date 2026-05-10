@@ -6,6 +6,7 @@ import Product from "../models/Products"; // Ensure Product model is registered 
 import Address from "../models/Address"; // Ensure Address model is registered for populate()
 import Payment from "../models/Payment"; // Ensure Payment model is registered for populate()
 import User from "../models/User"; // Ensure User model is registered for populate()
+import crypto from "crypto";
 
 
 export const getOrderByUser = async (req: Request, res: Response) => {
@@ -125,7 +126,7 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
     }
 
     // FINAL HARDEN: Ensure status fields are NEVER null or invalid strings before saving
-    const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+    const validStatuses = ['pending', 'processing', 'ready_for_handover', 'shipped', 'delivered', 'cancelled'];
     const validPaymentStatuses = ['pending', 'processing', 'complete', 'delivered', 'failed'];
 
     const s = order.status ? String(order.status).toLowerCase() : "";
@@ -160,3 +161,78 @@ export const createOrUpdateOrder = async(req: Request, res: Response) => {
     });
   }
 }
+
+// --- Handover Feature Functions ---
+
+/**
+ * Seller marks an order as ready for campus handover.
+ * This generates a unique handoverCode.
+ */
+export const markOrderAsReady = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).id;
+    const { orderId } = req.body;
+
+    const order = await Order.findById(orderId).populate('items.product');
+    if (!order) return response(res, 404, "Order not found");
+
+    // Check if the current user is the seller of the product(s) in the order
+    // (Assuming simple 1-product-per-order or same seller for all items for now)
+    const product = order.items[0]?.product as any;
+    if (product?.seller?.toString() !== userId) {
+      return response(res, 403, "Only the seller can mark this order as ready.");
+    }
+
+    if (order.status === 'delivered') {
+       return response(res, 400, "Order is already delivered.");
+    }
+
+    // Generate a unique 6-character code
+    const code = crypto.randomBytes(3).toString('hex').toUpperCase();
+    
+    order.status = 'ready_for_handover';
+    order.handoverCode = code;
+    await order.save();
+
+    return response(res, 200, "Order is now ready for handover. Tell the buyer to meet you!", {
+      status: order.status,
+      handoverCode: order.handoverCode
+    });
+  } catch (error: any) {
+    return response(res, 500, `Handover ready error: ${error.message}`);
+  }
+};
+
+/**
+ * Seller verifies the handover by scanning the Buyer's QR code (which contains the handoverCode).
+ */
+export const verifyHandoverCode = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).id;
+    const { orderId, scannedCode } = req.body;
+
+    const order = await Order.findById(orderId).populate('items.product');
+    if (!order) return response(res, 404, "Order not found");
+
+    // Verification
+    const product = order.items[0]?.product as any;
+    if (product?.seller?.toString() !== userId) {
+      return response(res, 403, "Unauthorized: You are not the seller of this book.");
+    }
+
+    if (order.handoverCode !== scannedCode) {
+      return response(res, 400, "Invalid Handover Code. Please scan the buyer's QR code again.");
+    }
+
+    // Update status to delivered
+    order.status = 'delivered';
+    order.paymentStatus = 'complete'; // Handover implies payment is settled or released
+    await order.save();
+
+    return response(res, 200, "Handover Verified Successfully! The book is now marked as delivered.", {
+      status: order.status
+    });
+  } catch (error: any) {
+    return response(res, 500, `Handover verification error: ${error.message}`);
+  }
+};
