@@ -2,7 +2,7 @@
 import { useLogoutMutation } from '@/store/api';
 import { logout, toggleLoginDialog } from '@/store/slice/userSlice';
 import { RootState } from '@/store/store';
-import { BookOpen, Heart, LogOut, Package, User } from 'lucide-react'
+import { BookOpen, Heart, LogOut, Package, User, ShoppingBag } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { toast } from 'react-toastify';
@@ -24,6 +24,12 @@ const navigation = [
     title: "My Orders",
     href: "/account/orders",
     icon: Package,
+    color: "bg-black/80 text-white"
+  },
+  {
+    title: "My Sales",
+    href: "/account/sales",
+    icon: ShoppingBag,
     color: "bg-black/80 text-white"
   },
   {

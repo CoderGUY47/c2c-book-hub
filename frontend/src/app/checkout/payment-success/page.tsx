@@ -7,6 +7,7 @@ import { useGetOrderByIdQuery } from "@/store/api";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
+import { QRCodeCanvas } from "qrcode.react";
 
 const PaymentSuccessPage = () => {
   const searchParams = useSearchParams();
@@ -105,6 +106,35 @@ const PaymentSuccessPage = () => {
 
               {/* RIGHT SIDE: Details Section */}
               <div className="w-full md:w-8/12 p-6 md:p-8 flex flex-col justify-center text-left">
+                {/* Handover QR Section */}
+                {orderData?.data?.status === 'ready_for_handover' && (
+                  <div className="bg-indigo-600 text-white rounded-2xl p-6 mb-6 shadow-xl animate-in fade-in slide-in-from-top-4 duration-700">
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                      <div className="bg-white p-3 rounded-xl shadow-lg shrink-0">
+                        <QRCodeCanvas 
+                          value={JSON.stringify({ orderId: orderId, code: orderData.data.handoverCode })}
+                          size={120}
+                          level="H"
+                          includeMargin={false}
+                        />
+                      </div>
+                      <div className="text-center sm:text-left space-y-2">
+                        <h3 className="text-xl font-black flex items-center justify-center sm:justify-start gap-2 uppercase tracking-tight">
+                          <Package className="size-5" />
+                          Handover QR Ready
+                        </h3>
+                        <p className="text-indigo-100 text-sm font-medium leading-relaxed">
+                          Your book is ready! Show this QR code to the seller when you meet on campus to confirm the handover.
+                        </p>
+                        <div className="bg-white/20 px-3 py-1.5 rounded-lg inline-block border border-white/20">
+                          <span className="text-[10px] uppercase font-black tracking-widest opacity-80 block">Handover Code</span>
+                          <span className="text-lg font-mono font-black tracking-widest">{orderData.data.handoverCode}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Order Details Grid */}
                 <div className="bg-white/30 backdrop-blur-lg rounded-2xl p-5 mb-6 border-2 hover:border-white/50 transition-all hover:bg-white/30">
 
@@ -168,15 +198,16 @@ const PaymentSuccessPage = () => {
                 <div className={`p-4 rounded-xl border mb-6 shadow-sm flex items-center justify-between
                     ${orderData?.data?.status === 'delivered' ? 'bg-green-100/60 border-green-200 text-green-900' :
                     orderData?.data?.status === 'cancelled' || orderData?.data?.status === 'failed' ? 'bg-red-100/60 border-red-200 text-red-900' :
+                    orderData?.data?.status === 'ready_for_handover' ? 'bg-indigo-100/60 border-indigo-200 text-indigo-900' :
                       'bg-white/60 border-white text-zinc-700'}`}>
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-full ${orderData?.data?.status === 'delivered' ? 'bg-green-200' : orderData?.data?.status === 'cancelled' ? 'bg-red-200' : 'bg-orange-300'} shadow-sm`}>
+                    <div className={`p-2 rounded-full ${orderData?.data?.status === 'delivered' ? 'bg-green-200' : orderData?.data?.status === 'cancelled' ? 'bg-red-200' : orderData?.data?.status === 'ready_for_handover' ? 'bg-indigo-200' : 'bg-orange-300'} shadow-sm`}>
                       <Package className="size-5" />
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="text-[10px] font-bold uppercase tracking-wider opacity-70">Status</span>
                       <span className="text-sm font-black tracking-wide uppercase">
-                        {orderData?.data?.status || "PROCESSING"}
+                        {orderData?.data?.status?.replace(/_/g, ' ') || "PROCESSING"}
                       </span>
                     </div>
                   </div>

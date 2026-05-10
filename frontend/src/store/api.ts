@@ -32,6 +32,7 @@ const API_URLS={
 
 /*\\\\ ** order related urls **////////*/
     ORDER: `/api/order`,
+    SELLER_ORDERS: `/api/order/seller`,
     ORDER_BY_ID: (orderId:string) => `/api/order/${orderId}`,
     READY_FOR_HANDOVER: `/api/order/ready-for-handover`,
     VERIFY_HANDOVER: `/api/order/verify-handover`,
@@ -211,6 +212,11 @@ export const api = createApi({
                 API_URLS.ORDER,
                 providesTags:['Order']
         }),
+        
+        getSellerOrders:builder.query<any, void>({ 
+            query:() => API_URLS.SELLER_ORDERS,
+            providesTags:['Order']
+        }),
 
         getOrderById:builder.query({   //go to server, modify the data
             query:(orderId) =>
@@ -307,6 +313,7 @@ export const {
 
   // Order hooks
   useGetUserOrderQuery,
+  useGetSellerOrdersQuery,
   useGetOrderByIdQuery,
   useCreateOrUpdateOrderMutation,
   useMarkOrderAsReadyMutation,

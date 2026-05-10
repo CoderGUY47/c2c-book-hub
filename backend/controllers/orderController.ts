@@ -39,6 +39,33 @@ export const getOrderByUser = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * Fetch orders where the current user is the SELLER.
+ */
+export const getOrdersBySeller = async (req: Request, res: Response) => {
+  try {
+    const userId = (req as any).id;
+
+    // Find all products owned by this user
+    const sellerProducts = await Product.find({ seller: userId }).select('_id');
+    const productIds = sellerProducts.map(p => p._id);
+
+    // Find orders containing any of these products
+    const orders = await Order.find({
+      'items.product': { $in: productIds }
+    })
+      .sort({ createdAt: -1 })
+      .populate("user", "name email profilePicture")
+      .populate("shippingAddress")
+      .populate({ path: "items.product", model: "Product" });
+
+    return response(res, 200, "Seller Orders fetched successfully", orders);
+  } catch (error: any) {
+    console.error("Error fetching seller orders:", error);
+    return response(res, 500, `Seller Order fetch error: ${error?.message}`);
+  }
+};
+
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const order = await Order.findById(req.params.id)
