@@ -20,6 +20,7 @@ export interface IUser extends Document {
     institution?: string;
     institutionType?: 'university' | 'college' | 'govt_organization' | 'other';
     department?: string;
+    educationalEmail?: string;
     institutionRole?: 'student' | 'faculty' | 'staff' | 'alumni' | 'employee' | 'other';
     studentId?: string;
     agreeTerms: boolean;
@@ -47,6 +48,7 @@ const userSchema = new Schema<IUser>({
     institution: {type:String, default:null},
     institutionType: {type:String, enum:['university','college','govt_organization','other'], default:null},
     department: {type:String, default:null},
+    educationalEmail: {type:String, default:null},
     institutionRole: {type:String, enum:['student','faculty','staff','alumni','employee','other'], default:null},
     studentId: {type:String, default:null},
     addresses: [{type:Schema.Types.ObjectId, ref: "Address"}],

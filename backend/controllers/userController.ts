@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { response } from "../utils/responseHandler";
 import User from "../models/User";
+import { isAllowedEmail } from "../utils/authUtils";
+import { sendOtpToEmail } from "../config/emailConfig";
 
 export const updateUserProfile = async(req: Request, res: Response)=>{
     try{
@@ -34,34 +36,89 @@ export const updateUserProfile = async(req: Request, res: Response)=>{
     }
 }
 
+export const sendInstitutionOtp = async (req: Request, res: Response) => {
+    try {
+        const userId = (req as any).id;
+        if (!userId) return response(res, 401, "Unauthenticated.");
+
+        const { educationalEmail } = req.body;
+        if (!educationalEmail) {
+            return response(res, 400, "Educational or Professional email is required.");
+        }
+
+        if (!isAllowedEmail(educationalEmail)) {
+            return response(res, 400, "Please provide a valid institutional email (.edu.bd, .ac.bd, .gov.bd, etc).");
+        }
+
+        const user = await User.findById(userId);
+        if (!user) return response(res, 404, "User not found.");
+
+        // Generate a 6-digit OTP
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+        user.otp = otp;
+        user.otpExpires = otpExpires;
+        await user.save();
+
+        await sendOtpToEmail(educationalEmail, otp, user.name);
+
+        return response(res, 200, `OTP sent to ${educationalEmail}. Valid for 10 minutes.`);
+    } catch (error) {
+        console.log(error);
+        return response(res, 500, "Failed to send OTP. Please try again.");
+    }
+};
+
 export const saveInstitutionInfo = async (req: Request, res: Response) => {
     try {
         const userId = (req as any).id;
         if (!userId) return response(res, 401, "Unauthenticated.");
 
-        const { institution, institutionType, department, institutionRole, studentId } = req.body;
+        const { institution, institutionType, department, institutionRole, studentId, educationalEmail, otp } = req.body;
 
-        if (!institution || !institutionType || !institutionRole) {
-            return response(res, 400, "Institution name, type, and your role are required.");
+        if (!institution || !institutionType || !institutionRole || !educationalEmail || !otp) {
+            return response(res, 400, "Please fill in all required fields, including educational email and OTP.");
         }
 
-        const user = await User.findByIdAndUpdate(
+        const user = await User.findById(userId);
+        if (!user) return response(res, 404, "User not found.");
+
+        if (!user.otp || !user.otpExpires) {
+            return response(res, 400, "No OTP was requested. Please request an OTP first.");
+        }
+
+        if (new Date() > user.otpExpires) {
+            user.otp = undefined;
+            user.otpExpires = undefined;
+            await user.save();
+            return response(res, 400, "OTP has expired. Please request a new one.");
+        }
+
+        if (user.otp !== otp) {
+            return response(res, 400, "Invalid OTP. Please try again.");
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
             userId,
             {
                 institution,
                 institutionType,
                 department: department || null,
+                educationalEmail,
                 institutionRole,
                 studentId: studentId || null,
                 hasCompletedProfile: true,
                 isVerified: true,
+                otp: undefined,
+                otpExpires: undefined
             },
             { new: true, runValidators: true }
         ).select('-password -resetPasswordToken -resetPasswordExpires -verificationToken');
 
-        if (!user) return response(res, 404, "User not found.");
+        if (!updatedUser) return response(res, 404, "User not found.");
 
-        return response(res, 200, "Institution info saved. Welcome to OxPecker BookHub! \uD83C\uDF89", user);
+        return response(res, 200, "Institution info saved. Welcome to OxPecker BookHub! 🎉", updatedUser);
     } catch (error) {
         console.log(error);
         return response(res, 500, "Internal Server Error, please try again later.");

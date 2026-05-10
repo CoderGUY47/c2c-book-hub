@@ -16,6 +16,7 @@ const API_URLS={
     VERIFY_OTP:`/api/auth/verify-otp`,
     UPADATE_USER_PROFILE:(userId:string)=> `/api/user/profile/update/${userId}`,
     SAVE_INSTITUTION_INFO: `/api/user/institution-info`,
+    SEND_INSTITUTION_OTP: `/api/user/institution-otp`,
 
 /*\\\\ ** product related urls **////////*/
     PRODUCTS:`/api/products`,
@@ -132,6 +133,14 @@ export const api = createApi({
                 body: data,
             }),
             invalidatesTags: ['User'],
+        }),
+
+        sendInstitutionOtp: builder.mutation({
+            query: (educationalEmail) => ({
+                url: API_URLS.SEND_INSTITUTION_OTP,
+                method: 'POST',
+                body: { educationalEmail },
+            }),
         }),
 
         //products endpoint
@@ -318,6 +327,7 @@ export const {
   // User hooks
   useUpdateUserMutation,
   useSaveInstitutionInfoMutation,
+  useSendInstitutionOtpMutation,
   useGetAddressQuery,
   useAddOrUpdateAddressMutation,
 
