@@ -36,7 +36,7 @@ router.get("/google", passport.authenticate('google',{
 
 
 //google callback
-router.get('/google/callback',passport.authenticate ('google', {failureRedirect: `${process.env.FRONTEND_URL}`,
+router.get('/google/callback',passport.authenticate ('google', {failureRedirect: `${process.env.FRONTEND_URL}/unauthorized-email`,
     session: false,
 }),
 async(req:Request, res: Response, next: NextFunction) : Promise<void> =>{ //cookies will be created here and stored in browser

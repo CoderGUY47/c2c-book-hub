@@ -114,7 +114,7 @@ const AuthPage: React.FC<LoginProps> = ({ isLoginOpen, setIsLoginOpen }) => {
         toast.error("This email is already registered. Please login instead.");
         setCurrentTab("login");
       } else {
-        toast.error("Registration failed. Please try again.");
+        toast.error(msg || "Registration failed. Please try again.");
       }
     } finally {
       setSignupLoading(false);
