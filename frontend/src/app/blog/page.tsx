@@ -31,7 +31,7 @@ const featuredPost = {
   author: "বুক-হাব সম্পাদকীয়",
   date: "২০ এপ্রিল, ২০২৬",
   readTime: "৬ মিনিট পড়ার সময়",
-  imageSrc: "/images/reading.png",
+  imageSrc: "/images/books/book_1778841214693.jpg",
   tags: ["পড়ার অভ্যাস", "আত্ম-উন্নতি", "দৈনন্দিন রুটিন"],
 };
 
@@ -47,7 +47,7 @@ const blogPosts = [
     authorInitial: "আ",
     date: "১৮ এপ্রিল, ২০২৬",
     readTime: "৫ মিনিট পড়ার সময়",
-    imageSrc: "/images/bookshelf.png",
+    imageSrc: "/images/books/book_1778841217085.jpg",
   },
   {
     id: 2,
@@ -60,7 +60,7 @@ const blogPosts = [
     authorInitial: "নু",
     date: "১৫ এপ্রিল, ২০২৬",
     readTime: "৮ মিনিট পড়ার সময়",
-    imageSrc: "/images/feedback.png",
+    imageSrc: "/images/books/book_1778841219882.jpg",
   },
   {
     id: 3,
@@ -73,7 +73,7 @@ const blogPosts = [
     authorInitial: "তা",
     date: "১২ এপ্রিল, ২০২৬",
     readTime: "৪ মিনিট পড়ার সময়",
-    imageSrc: "/images/reading.png",
+    imageSrc: "/images/books/book_1778841222808.jpg",
   },
   {
     id: 4,
@@ -86,7 +86,7 @@ const blogPosts = [
     authorInitial: "সু",
     date: "১০ এপ্রিল, ২০২৬",
     readTime: "৭ মিনিট পড়ার সময়",
-    imageSrc: "/images/bookshelf.png",
+    imageSrc: "/images/books/book_1778841225521.jpg",
   },
   {
     id: 5,
@@ -99,7 +99,7 @@ const blogPosts = [
     authorInitial: "মে",
     date: "৮ এপ্রিল, ২০২৬",
     readTime: "৫ মিনিট পড়ার সময়",
-    imageSrc: "/images/reading.png",
+    imageSrc: "/images/books/book_1778841214693.jpg",
   },
   {
     id: 6,
@@ -112,7 +112,7 @@ const blogPosts = [
     authorInitial: "ফা",
     date: "৫ এপ্রিল, ২০২৬",
     readTime: "৪ মিনিট পড়ার সময়",
-    imageSrc: "/images/feedback.png",
+    imageSrc: "/images/books/book_1778841217085.jpg",
   },
 ];
 
@@ -155,7 +155,7 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-langar text-white tracking-tighter leading-[1.05] mb-6">
+              <h1 className="text-5xl lg:text-7xl font-bangla text-white tracking-tighter leading-[1.05] mb-6">
                 গল্প এবং{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
                   আইডিয়া
@@ -189,7 +189,7 @@ export default function BlogPage() {
                   key={s.label}
                   className="bg-white/[0.03] border border-white/[0.07] p-7 rounded-sm backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300"
                 >
-                  <p className="text-4xl font-langar text-white mb-2 tracking-tight">{s.value}</p>
+                  <p className="text-4xl font-bangla text-white mb-2 tracking-tight">{s.value}</p>
                   <p className="text-xs font-semibold text-white/40 uppercase tracking-widest">{s.label}</p>
                 </div>
               ))}
@@ -268,7 +268,7 @@ export default function BlogPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-2xl md:text-3xl font-langar text-white leading-tight mb-5 group-hover:text-violet-200 transition-colors duration-300 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-bangla text-white leading-tight mb-5 group-hover:text-violet-200 transition-colors duration-300 tracking-tight">
                   {featuredPost.title}
                 </h2>
 
@@ -367,7 +367,7 @@ export default function BlogPage() {
                 <p className="text-white/25 text-[10px] font-medium mb-3">{post.date}</p>
 
                 {/* Title */}
-                <h3 className="text-sm font-langar text-white leading-snug mb-3 group-hover:text-violet-200 transition-colors duration-200 line-clamp-2 tracking-tight">
+                <h3 className="text-sm font-bangla text-white leading-snug mb-3 group-hover:text-violet-200 transition-colors duration-200 line-clamp-2 tracking-tight">
                   {post.title}
                 </h3>
 
@@ -434,7 +434,7 @@ export default function BlogPage() {
               <span className="text-[10px] font-bold tracking-[0.3em] text-violet-400 uppercase block mb-3">
                 Stay Updated
               </span>
-              <h2 className="text-3xl md:text-4xl font-langar text-white mb-3 tracking-tight leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bangla text-white mb-3 tracking-tight leading-tight">
                 প্রতি সপ্তাহে নতুন নিবন্ধ<br className="hidden md:block" /> পান — বিনামূল্যে
               </h2>
               <p className="text-white/40 text-sm max-w-md leading-relaxed">

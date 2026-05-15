@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Hanken_Grotesk, Langar } from "next/font/google";
+import { Poppins, Hanken_Grotesk, Langar, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -28,6 +28,13 @@ const langar = Langar({
   variable: "--font-langar",
 });
 
+const siliguri = Hind_Siliguri({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["bengali", "latin"],
+  display: "swap",
+  variable: "--font-siliguri",
+});
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Book-Hub",
@@ -48,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${langar.variable}`}
+      className={`${poppins.variable} ${langar.variable} ${siliguri.variable}`}
     >
       <head>
         <link rel="stylesheet" href="/icons/css/all.min.css" />
