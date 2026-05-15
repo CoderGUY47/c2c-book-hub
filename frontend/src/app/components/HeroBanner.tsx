@@ -14,6 +14,10 @@ const bannerImages = [
   "/images/book5.webp",
   "/images/book6.webp",
   "/images/book7.webp",
+  "/images/books/book_1778841214693.jpg",
+  "/images/books/book_1778841217085.jpg",
+  "/images/books/book_1778841219882.jpg",
+  "/images/books/book_1778841222808.jpg",
 ];
 
 export default function HeroBanner() {
@@ -108,16 +112,16 @@ export default function HeroBanner() {
                 >
                   <div className="w-[35%] h-full relative">
                     <Image 
-                      src="/images/mock-books/sapiens.jpg" 
+                      src="/images/books/book_1778841214693.jpg" 
                       fill
                       className="object-contain drop-shadow-lg" 
-                      alt="Sapiens" 
+                      alt="সাম্যবাদী" 
                       sizes="(max-width: 768px) 100vw, 200px"
                     />
                   </div>
                   <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-2xl font-poppins text-white mb-1">Sapiens</h3>
-                    <p className="text-[12px] text-white/80 font-langar uppercase tracking-[0.3em] opacity-60">Yuval Noah Harari</p>
+                    <h3 className="text-2xl font-poppins text-white mb-1">সাম্যবাদী</h3>
+                    <p className="text-[12px] text-white/80 font-langar uppercase tracking-[0.3em] opacity-60">কাজী নজরুল ইসলাম</p>
                     <div className="mt-4 h-px w-20 bg-gray-200 group-hover:w-full transition-all duration-700" />
                   </div>
                 </motion.div>
@@ -129,14 +133,14 @@ export default function HeroBanner() {
                 >
                   <div className="w-full h-[70%] mb-4 relative">
                     <Image 
-                      src="/images/mock-books/thinking-fast-and-slow.jpg" 
+                      src="/images/books/book_1778841217085.jpg" 
                       fill
                       className="object-contain drop-shadow-md" 
-                      alt="Thinking Fast" 
+                      alt="কুহেলিকা" 
                       sizes="(max-width: 768px) 100vw, 150px"
                     />
                   </div>
-                  <h3 className="text-sm font-langar text-white text-center line-clamp-1">Fast & Slow</h3>
+                  <h3 className="text-sm font-langar text-white text-center line-clamp-1">কুহেলিকা</h3>
                 </motion.div>
               </div>
 
@@ -149,14 +153,14 @@ export default function HeroBanner() {
                 >
                   <div className="w-full h-[70%] mb-4 relative">
                     <Image 
-                      src="/images/mock-books/alchemist.jpg" 
+                      src="/images/books/book_1778841219882.jpg" 
                       fill
                       className="object-contain drop-shadow-md" 
-                      alt="The Alchemist" 
+                      alt="মৃত্যুক্ষুধা" 
                       sizes="(max-width: 768px) 100vw, 150px"
                     />
                   </div>
-                  <h3 className="text-sm font-langar text-white text-center line-clamp-1">The Alchemist</h3>
+                  <h3 className="text-sm font-langar text-white text-center line-clamp-1">মৃত্যুক্ষুধা</h3>
                 </motion.div>
 
                 {/* Box 4 - Wide Rectangle */}
@@ -165,16 +169,16 @@ export default function HeroBanner() {
                   className="flex-[0.65] bg-white/5 backdrop-blur-sm border border-white rounded-sm  shadow-[0_20px_50px_-10px_rgba(0,0,0,0.05)] overflow-hidden flex items-center p-6 space-x-6 group transition-all duration-500 hover:shadow-2xl hover:bg-white/10"
                 >
                   <div className="flex-1 flex flex-col justify-center items-end text-right">
-                    <h3 className="text-2xl font-poppins text-white mb-1">Becoming</h3>
-                    <p className="text-[12px] text-white/80 font-langar uppercase tracking-[0.3em] opacity-60">Michelle Obama</p>
+                    <h3 className="text-2xl font-poppins text-white mb-1">সঞ্চিতা</h3>
+                    <p className="text-[12px] text-white/80 font-langar uppercase tracking-[0.3em] opacity-60">কাজী নজরুল ইসলাম</p>
                     <div className="mt-4 h-px w-20 bg-gray-200 group-hover:w-full transition-all duration-700" />
                   </div>
                   <div className="w-[35%] h-full relative">
                     <Image 
-                      src="/images/mock-books/becoming.jpg" 
+                      src="/images/books/book_1778841222808.jpg" 
                       fill
                       className="object-contain drop-shadow-lg" 
-                      alt="Becoming" 
+                      alt="সঞ্চিতা" 
                       sizes="(max-width: 768px) 100vw, 200px"
                     />
                   </div>
