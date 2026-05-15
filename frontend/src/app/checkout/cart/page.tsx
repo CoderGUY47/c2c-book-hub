@@ -49,6 +49,7 @@ import CheckoutAddress from "@/app/components/CheckoutAddress";
 import { PiNotePencilLight } from "react-icons/pi";
 import BookLoader from "@/lib/BookLoader";
 import { Skeleton } from "@/components/ui/skeleton";
+import loginAnimation from "../../../../public/animations/login.json";
 
 declare global {
   interface Window {
@@ -205,7 +206,7 @@ const page = () => {
         message="Please log in to access your cart."
         description="You need to be logged in to view your cart and checkout."
         buttonText="Login"
-        imageUrl="/images/login.jpg"
+        animationData={loginAnimation}
         onClick={handleOpenLogin}
       />
     );

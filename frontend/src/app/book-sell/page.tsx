@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NoData from "../components/NoData";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import loginAnimation from "../../public/animations/login.json";
 import {
   Book,
   ChevronRight,
@@ -239,7 +240,7 @@ const page = () => {
         message="Please log in to sell your books."
         description="You need to be logged in to list your books for sale."
         buttonText="Login"
-        imageUrl="/images/login.jpg"
+        animationData={loginAnimation}
         onClick={handleOpenLogin}
       />
     );
