@@ -15,7 +15,7 @@ const blogPosts = [
     author: "আরিফ হোসেন",
     date: "১৮ এপ্রিল, ২০২৬",
     readTime: "৫ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841217085.jpg",
+    imageSrc: "/images/book1.webp",
   },
   {
     id: "2",
@@ -25,7 +25,7 @@ const blogPosts = [
     author: "নুসরাত জাহান",
     date: "১৫ এপ্রিল, ২০২৬",
     readTime: "৮ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841219882.jpg",
+    imageSrc: "/images/book2.webp",
   },
   {
     id: "3",
@@ -35,7 +35,7 @@ const blogPosts = [
     author: "তানভীর রহমান",
     date: "১২ এপ্রিল, ২০২৬",
     readTime: "৪ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841222808.jpg",
+    imageSrc: "/images/book3.webp",
   },
   {
     id: "4",
@@ -45,7 +45,7 @@ const blogPosts = [
     author: "সুমাইয়া আক্তার",
     date: "১০ এপ্রিল, ২০২৬",
     readTime: "৭ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841225521.jpg",
+    imageSrc: "/images/book4.webp",
   },
   {
     id: "5",
@@ -55,7 +55,7 @@ const blogPosts = [
     author: "মেহেদী হাসান",
     date: "৮ এপ্রিল, ২০২৬",
     readTime: "৫ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841214693.jpg",
+    imageSrc: "/images/book5.webp",
   },
   {
     id: "6",
@@ -65,7 +65,7 @@ const blogPosts = [
     author: "ফারিহা ইসলাম",
     date: "৫ এপ্রিল, ২০২৬",
     readTime: "৪ মিনিট পড়ার সময়",
-    imageSrc: "/images/books/book_1778841217085.jpg",
+    imageSrc: "/images/book6.webp",
   },
 ];
 

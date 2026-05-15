@@ -16,7 +16,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { MdSell } from "react-icons/md";
 import { logout, toggleLoginDialog } from "@/store/slice/userSlice";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet";
@@ -40,6 +40,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const isLoginOpen = useSelector(
     (state: RootState) => state.user.isLoginDialogOpen
@@ -301,10 +302,27 @@ const Header = () => {
             />
           </Link>
           <div className="hidden lg:flex space-x-8 text-xs font-poppins font-semibold tracking-[0.1em] uppercase text-white/50">
-            <Link href="/books" className="text-white relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-indigo-500 after:scale-x-100 transition-all">Explore Books</Link>
-            <Link href="/book-sell" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">Sell Books</Link>
-            <Link href="/blog" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">Blog</Link>
-            <Link href="/about-us" className="hover:text-white hover:-translate-y-0.5 transition-all duration-300 inline-block">About Us</Link>
+            {[
+              { href: "/books", label: "Explore Books" },
+              { href: "/book-sell", label: "Sell Books" },
+              { href: "/blog", label: "Blog" },
+              { href: "/about-us", label: "About Us" },
+            ].map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative transition-all duration-300 inline-block ${
+                    isActive
+                      ? "text-white after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-indigo-500 after:scale-x-100"
+                      : "hover:text-white hover:-translate-y-0.5 after:absolute after:bottom-[-6px] after:left-0 after:w-full after:h-[2px] after:bg-indigo-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const AboutUs = () => {
   return (
-    <div className="relative min-h-screen bg-gray-950 overflow-hidden py-24">
+    <div className="relative min-h-screen bg-gray-950 overflow-hidden py-24 font-bangla">
       {/* Background decorative elements - Dark theme */}
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-40 right-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
@@ -13,7 +13,7 @@ const AboutUs = () => {
 
       <div className="container relative z-10 w-[80%] mx-auto px-4">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-black font-langar mb-6 text-white tracking-tight">
+          <h1 className="text-5xl md:text-6xl font-black font-bangla mb-6 text-white tracking-tight">
             আমাদের <span className="text-transparent bg-clip-text bg-gradient-to-tr from-indigo-500 to-purple-500">সম্পর্কে</span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
@@ -45,7 +45,7 @@ const AboutUs = () => {
                   {item.icon}
                 </div>
               </div>
-              <h2 className="text-2xl font-black font-poppins text-center mb-4 text-white uppercase tracking-wide">
+              <h2 className="text-2xl font-black font-bangla text-center mb-4 text-white uppercase tracking-wide">
                 {item.title}
               </h2>
               <p className="text-gray-400 text-center font-medium leading-relaxed">
@@ -57,7 +57,7 @@ const AboutUs = () => {
 
         {/* Why Choose Us Section */}
         <section className="py-20 relative px-0 bg-transparent">
-          <h2 className="text-4xl md:text-5xl font-black text-center mb-16 text-white font-langar tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-16 text-white font-bangla tracking-tight">
             কেন <span className="text-transparent bg-clip-text bg-gradient-to-tr from-red-600 to-orange-400">বুক-হাব</span> বেছে নেবেন?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -71,7 +71,7 @@ const AboutUs = () => {
                 <div className="flex items-center justify-center mb-6 text-4xl transform transition-transform group-hover:scale-125 duration-500">
                   {feature.emoji}
                 </div>
-                <h3 className="font-black font-poppins text-md text-center mb-3 text-white uppercase tracking-wide">
+                <h3 className="font-black font-bangla text-md text-center mb-3 text-white uppercase tracking-wide">
                   {feature.title}
                 </h3>
                 <p className="text-gray-400 text-center text-sm font-semibold leading-relaxed">
@@ -136,7 +136,7 @@ const AboutUs = () => {
         </div>
 
         <div className="text-center py-10 bg-gradient-to-tr from-slate-900/80 via-gray-600/30 to-slate-900/80 rounded-[4rem] border-0 backdrop-blur-xl">
-          <h2 className="text-2xl md:text-3xl font-black font-poppins text-white mb-4 uppercase tracking-wider">
+          <h2 className="text-2xl md:text-3xl font-black font-bangla text-white mb-4 uppercase tracking-wider">
             আজই আমাদের সাথে যোগ দিন!
           </h2>
           <p className="text-gray-300 text-md md:text-lg font-medium mb-4 max-w-[600px] mx-auto">
