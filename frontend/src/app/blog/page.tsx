@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { Loader2 } from "lucide-react";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -130,6 +132,24 @@ const stats = [
    ───────────────────────────────────────────────────────────── */
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubscribing(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    
+    toast.success("Thank you for subscribing to our newsletter!");
+    setEmail("");
+    setIsSubscribing(false);
+  };
 
   const filteredPosts = useMemo(() => {
     if (activeCategory === "all") return blogPosts;
@@ -560,16 +580,30 @@ export default function BlogPage() {
 
             {/* Right: form */}
             <div className="w-full md:w-auto flex-shrink-0">
-              <div className="flex flex-col sm:flex-row gap-3 min-w-[340px]">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 min-w-[340px]">
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   className="flex-1 px-4 py-3.5 bg-white/[0.05] border border-white/10 text-white/70 placeholder-white/25 text-sm focus:outline-none focus:border-violet-500/50 transition-all duration-200 rounded-sm min-w-0"
+                  required
                 />
-                <button className="px-6 py-3.5 bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer whitespace-nowrap shadow-[0_0_30px_rgba(139,92,246,0.3)] rounded-sm">
-                  Subscribe Free
+                <button 
+                  type="submit"
+                  disabled={isSubscribing}
+                  className="px-6 py-3.5 bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer whitespace-nowrap shadow-[0_0_30px_rgba(139,92,246,0.3)] rounded-sm flex items-center justify-center min-w-[150px] disabled:opacity-70"
+                >
+                  {isSubscribing ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      Subscribing...
+                    </>
+                  ) : (
+                    "Subscribe Free"
+                  )}
                 </button>
-              </div>
+              </form>
               <p className="text-white/20 text-[10px] mt-3 text-center sm:text-left">
                 By subscribing you agree to our Privacy Policy.
               </p>
