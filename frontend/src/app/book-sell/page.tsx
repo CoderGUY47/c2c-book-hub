@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NoData from "../components/NoData";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import loginAnimation from "../../public/animations/login.json";
+import loginAnimation from "../../../public/animations/login.json";
 import {
   Book,
   ChevronRight,
