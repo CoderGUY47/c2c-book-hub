@@ -5,7 +5,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Blog | Book-Hub",
   description:
-    "Discover reading tips, book reviews, seller guides, and community stories on the Book-Hub blog. Helpful articles written for every kind of reader.",
+    "বুক-হাব ব্লগে পড়ার টিপস, বইয়ের রিভিউ, বিক্রেতাদের গাইড এবং কমিউনিটির গল্প জানুন। প্রতিটি পাঠকের জন্য সহায়ক নিবন্ধ।",
   keywords: "book blog, reading tips, book reviews, buy sell books guide, book hub community",
 };
 
@@ -24,103 +24,103 @@ const categories = [
 ];
 
 const featuredPost = {
-  category: "Reading Tips",
-  title: "Why Reading Just 20 Minutes a Day Can Completely Change Your Life",
+  category: "পড়ার টিপস",
+  title: "দিনে মাত্র ২০ মিনিট পড়লে কীভাবে আপনার জীবন পুরোপুরি বদলে যেতে পারে",
   excerpt:
-    "Reading isn't just something students do for homework — it's one of the most powerful daily habits you can build. Just 20 minutes a day with a good book can sharpen your mind, reduce stress, grow your vocabulary, and help you see the world differently. In this article, we break down exactly how to start — and how to keep going.",
-  author: "Book-Hub Editorial",
-  date: "April 20, 2026",
-  readTime: "6 min read",
+    "পড়া শুধু শিক্ষার্থীদের বাড়ির কাজের মধ্যে সীমাবদ্ধ নয় — এটি অন্যতম শক্তিশালী দৈনন্দিন অভ্যাস যা আপনি গড়ে তুলতে পারেন। একটি ভালো বই নিয়ে দিনে মাত্র ২০ মিনিট পড়লে আপনার মন তীক্ষ্ণ হয়, মানসিক চাপ কমে, শব্দভাণ্ডার বাড়ে এবং পৃথিবীকে ভিন্নভাবে দেখতে সাহায্য করে। এই নিবন্ধে, আমরা ঠিক কীভাবে শুরু করতে হবে এবং কীভাবে তা চালিয়ে যেতে হবে তা নিয়ে আলোচনা করেছি।",
+  author: "বুক-হাব সম্পাদকীয়",
+  date: "২০ এপ্রিল, ২০২৬",
+  readTime: "৬ মিনিট পড়ার সময়",
   imageSrc: "/images/reading.png",
-  tags: ["Reading Habits", "Self-improvement", "Daily Routine"],
+  tags: ["পড়ার অভ্যাস", "আত্ম-উন্নতি", "দৈনন্দিন রুটিন"],
 };
 
 const blogPosts = [
   {
     id: 1,
-    tag: "Seller Guide",
+    tag: "বিক্রেতা গাইড",
     tagColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
-    title: "How to Sell Your Old Books in 3 Simple Steps",
+    title: "মাত্র ৩টি সহজ ধাপে আপনার পুরনো বই কীভাবে বিক্রি করবেন",
     excerpt:
-      "Got books gathering dust on your shelf? List them on Book-Hub in under 10 minutes and start earning money from books you've already read.",
-    author: "Arif Hossain",
-    authorInitial: "A",
-    date: "April 18, 2026",
-    readTime: "5 min read",
+      "আপনার তাকে ধুলো জমা বই আছে? ১০ মিনিটেরও কম সময়ে সেগুলো বুক-হাবে তালিকাভুক্ত করুন এবং ইতিমধ্যে পড়া বই থেকে টাকা উপার্জন শুরু করুন।",
+    author: "আরিফ হোসেন",
+    authorInitial: "আ",
+    date: "১৮ এপ্রিল, ২০২৬",
+    readTime: "৫ মিনিট পড়ার সময়",
     imageSrc: "/images/bookshelf.png",
   },
   {
     id: 2,
-    tag: "Book Review",
+    tag: "বইয়ের রিভিউ",
     tagColor: "bg-violet-500/15 text-violet-400 border-violet-500/20",
-    title: "10 Books Every Reader Should Try at Least Once",
+    title: "১০টি বই যা প্রতিটি পাঠকের অন্তত একবার পড়া উচিত",
     excerpt:
-      "Whether you love stories, history, or science — this list has something for you. These are the books Book-Hub readers keep recommending to friends.",
-    author: "Nusrat Jahan",
-    authorInitial: "N",
-    date: "April 15, 2026",
-    readTime: "8 min read",
+      "আপনি গল্প, ইতিহাস বা বিজ্ঞান ভালোবাসুন না কেন — এই তালিকায় আপনার জন্য কিছু না কিছু আছে। এই বইগুলোই বুক-হাবের পাঠকেরা তাদের বন্ধুদের বারবার সুপারিশ করে।",
+    author: "নুসরাত জাহান",
+    authorInitial: "নু",
+    date: "১৫ এপ্রিল, ২০২৬",
+    readTime: "৮ মিনিট পড়ার সময়",
     imageSrc: "/images/feedback.png",
   },
   {
     id: 3,
-    tag: "Free Resources",
+    tag: "ফ্রি রিসোর্স",
     tagColor: "bg-sky-500/15 text-sky-400 border-sky-500/20",
-    title: "Where to Read Books Online for Free — 100% Legally",
+    title: "কোথায় অনলাইনে বিনামূল্যে বই পড়া যায় — ১০০% বৈধ উপায়ে",
     excerpt:
-      "You don't need to spend money to read great books. We've listed the best websites where you can find thousands of free books — no subscriptions needed.",
-    author: "Tanvir Rahman",
-    authorInitial: "T",
-    date: "April 12, 2026",
-    readTime: "4 min read",
+      "দারুণ বই পড়ার জন্য আপনার টাকা খরচ করার প্রয়োজন নেই। আমরা এমন সেরা ওয়েবসাইটগুলোর তালিকা করেছি যেখানে আপনি হাজার হাজার বিনামূল্যের বই পাবেন — কোনো সাবস্ক্রিপশন ছাড়াই।",
+    author: "তানভীর রহমান",
+    authorInitial: "তা",
+    date: "১২ এপ্রিল, ২০২৬",
+    readTime: "৪ মিনিট পড়ার সময়",
     imageSrc: "/images/reading.png",
   },
   {
     id: 4,
-    tag: "Community",
+    tag: "কমিউনিটি",
     tagColor: "bg-amber-500/15 text-amber-400 border-amber-500/20",
-    title: "Real People, Real Stories: How Our Sellers Started",
+    title: "আসল মানুষ, আসল গল্প: আমাদের বিক্রেতারা কীভাবে শুরু করেছিলেন",
     excerpt:
-      "Meet the everyday students and readers who turned their love of books into a steady side income. Their journeys might just inspire yours.",
-    author: "Sumaiya Akter",
-    authorInitial: "S",
-    date: "April 10, 2026",
-    readTime: "7 min read",
+      "সাধারণ শিক্ষার্থী এবং পাঠকদের সাথে পরিচিত হোন যারা বইয়ের প্রতি তাদের ভালোবাসাকে একটি স্থির বাড়তি আয়ের উৎসে পরিণত করেছেন। তাদের গল্পগুলো আপনাকে অনুপ্রাণিত করতে পারে।",
+    author: "সুমাইয়া আক্তার",
+    authorInitial: "সু",
+    date: "১০ এপ্রিল, ২০২৬",
+    readTime: "৭ মিনিট পড়ার সময়",
     imageSrc: "/images/bookshelf.png",
   },
   {
     id: 5,
-    tag: "Productivity",
+    tag: "উৎপাদনশীলতা",
     tagColor: "bg-rose-500/15 text-rose-400 border-rose-500/20",
-    title: "Too Busy to Read? Here's How to Finish a Book Every Month",
+    title: "পড়ার জন্য অনেক ব্যস্ত? এখানে প্রতি মাসে একটি বই শেষ করার উপায় দেওয়া হলো",
     excerpt:
-      "You don't need hours of free time. With a few small changes to your daily routine, you can comfortably read one book per month — even with a packed schedule.",
-    author: "Mehedi Hassan",
-    authorInitial: "M",
-    date: "April 8, 2026",
-    readTime: "5 min read",
+      "আপনার ঘণ্টার পর ঘণ্টা অবসর সময়ের প্রয়োজন নেই। আপনার দৈনন্দিন রুটিনে কিছু ছোট পরিবর্তন এনে আপনি স্বাচ্ছন্দ্যে মাসে একটি বই পড়তে পারেন — এমনকি ব্যস্ত সময়সূচীর মধ্যেও।",
+    author: "মেহেদী হাসান",
+    authorInitial: "মে",
+    date: "৮ এপ্রিল, ২০২৬",
+    readTime: "৫ মিনিট পড়ার সময়",
     imageSrc: "/images/reading.png",
   },
   {
     id: 6,
-    tag: "Buyer Guide",
+    tag: "ক্রেতা গাইড",
     tagColor: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
-    title: "Your First Time Buying on Book-Hub? Here's Everything You Need to Know",
+    title: "বুক-হাবে আপনার প্রথম কেনাকাটা? এখানে সবকিছু আপনার জানা প্রয়োজন",
     excerpt:
-      "New to Book-Hub? This friendly guide walks you through finding the right book, placing your first order safely, and getting it delivered — step by step.",
-    author: "Fariha Islam",
-    authorInitial: "F",
-    date: "April 5, 2026",
-    readTime: "4 min read",
+      "বুক-হাবে নতুন? এই বন্ধুত্বপূর্ণ গাইডটি আপনাকে সঠিক বই খুঁজে পেতে, নিরাপদে আপনার প্রথম অর্ডারটি দিতে এবং এটি হাতে পেতে সাহায্য করবে — ধাপে ধাপে।",
+    author: "ফারিহা ইসলাম",
+    authorInitial: "ফা",
+    date: "৫ এপ্রিল, ২০২৬",
+    readTime: "৪ মিনিট পড়ার সময়",
     imageSrc: "/images/feedback.png",
   },
 ];
 
 const stats = [
-  { value: "120+", label: "Articles Published" },
-  { value: "15K+", label: "Monthly Readers" },
-  { value: "6", label: "Topic Categories" },
-  { value: "100%", label: "Free to Read" },
+  { value: "১২০+", label: "প্রকাশিত নিবন্ধ" },
+  { value: "১৫ হাজার+", label: "মাসিক পাঠক" },
+  { value: "৬", label: "টপিক ক্যাটাগরি" },
+  { value: "১০০%", label: "পড়ার জন্য বিনামূল্যে" },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -156,16 +156,15 @@ export default function BlogPage() {
               </div>
 
               <h1 className="text-5xl lg:text-7xl font-langar text-white tracking-tighter leading-[1.05] mb-6">
-                Stories &amp;{" "}
+                গল্প এবং{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                  Ideas
+                  আইডিয়া
                 </span>
-                <br />for Every Reader
+                <br />প্রতিটি পাঠকের জন্য
               </h1>
 
               <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-normal">
-                Whether you want to buy, sell, or simply love reading — our blog has
-                helpful guides, honest reviews, and real stories written for everyday readers like you.
+                আপনি কেনা, বেচা বা শুধুই পড়তে ভালোবাসুন না কেন — আমাদের ব্লগে রয়েছে সহায়ক গাইড, সৎ রিভিউ এবং আপনার মতো সাধারণ পাঠকদের জন্য লেখা বাস্তব গল্প।
               </p>
 
               {/* Search bar */}
@@ -177,7 +176,7 @@ export default function BlogPage() {
                 </div>
                 <input
                   type="text"
-                  placeholder="Search for new articles… e.g. 'how to sell books'"
+                  placeholder="Search for new articles / 'how to sell books'"
                   className="w-full pl-11 pr-4 py-3.5 bg-white/[0.05] border border-white/10 rounded-none text-white/70 placeholder-white/25 text-sm focus:outline-none focus:border-violet-500/50 focus:bg-white/[0.07] transition-all duration-200"
                 />
               </div>
@@ -436,11 +435,10 @@ export default function BlogPage() {
                 Stay Updated
               </span>
               <h2 className="text-3xl md:text-4xl font-langar text-white mb-3 tracking-tight leading-tight">
-                Get new articles<br className="hidden md:block" /> every week — free
+                প্রতি সপ্তাহে নতুন নিবন্ধ<br className="hidden md:block" /> পান — বিনামূল্যে
               </h2>
               <p className="text-white/40 text-sm max-w-md leading-relaxed">
-                Join thousands of readers and get our best book picks, selling tips, and community stories
-                delivered straight to your inbox. No spam. Unsubscribe at any time.
+                হাজার হাজার পাঠকের সাথে যোগ দিন এবং আমাদের সেরা বইয়ের সংগ্রহ, বিক্রয়ের টিপস এবং কমিউনিটির গল্প সরাসরি আপনার ইনবক্সে পান। কোনো স্প্যাম নেই। যেকোনো সময় আনসাবস্ক্রাইব করতে পারবেন।
               </p>
             </div>
 
