@@ -1,19 +1,37 @@
-"use client";
 import {
-  ArrowUpRight,
+  ArrowUpRight, Loader2,
 } from "lucide-react";
 import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { SiGumroad } from "react-icons/si";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "react-toastify";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubscribing(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    
+    toast.success("Thank you for subscribing to our newsletter!");
+    setEmail("");
+    setIsSubscribing(false);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -148,16 +166,27 @@ const Footer = () => {
               <p className="text-xs font-semibold text-gray-300 leading-relaxed tracking-wider">
                 Subscribe to our newsletter for exclusive updates & offers.
               </p>
-              <div className="flex gap-2">
+              <form onSubmit={handleSubscribe} className="flex gap-2">
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
                   className="bg-gray-700 border-0 rounded-xl px-4 py-2 text-xs text-white w-full focus:ring-1 focus:ring-indigo-500 outline-none"
+                  required
                 />
-                <button className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition-colors">
-                  <ArrowUpRight className="w-4 h-4" />
+                <button 
+                  type="submit"
+                  disabled={isSubscribing}
+                  className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 transition-colors disabled:opacity-70 flex items-center justify-center min-w-[44px]"
+                >
+                  {isSubscribing ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <ArrowUpRight className="w-4 h-4" />
+                  )}
                 </button>
-              </div>
+              </form>
             </div>
           </motion.div>
         </motion.div>
