@@ -308,7 +308,7 @@ const Header = () => {
               { href: "/blog", label: "Blog" },
               { href: "/about-us", label: "About Us" },
             ].map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
