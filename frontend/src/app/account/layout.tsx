@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import loginAnimation from "../../../public/animations/login.json";
 
 const navigation = [
   {
@@ -78,7 +79,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         message="Please log in to access your cart."
         description="You need to be logged in to view your cart and checkout."
         buttonText="Login"
-        imageUrl="/images/login.jpg"
+        animationData={loginAnimation}
         onClick={handleOpenLogin}
       />
     );

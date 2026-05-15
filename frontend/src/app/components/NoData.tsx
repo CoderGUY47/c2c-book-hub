@@ -1,9 +1,12 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import Lottie from "lottie-react";
 
 interface NoDataProps {
   message: string;
-  imageUrl: string;
+  imageUrl?: string;
+  animationData?: any;
   description: string;
   onClick?: () => void;
   buttonText?: string;
@@ -12,6 +15,7 @@ interface NoDataProps {
 const NoData: React.FC<NoDataProps> = ({
   message,
   imageUrl,
+  animationData,
   description,
   onClick,
   buttonText = "Retry",
@@ -19,13 +23,17 @@ const NoData: React.FC<NoDataProps> = ({
   return (
     <div className="flex flex-col items-center justify-center p-6 bg-gray-950/50 shadow-md rounded-lg overflow-x-hidden space-y-6 mx-auto">
       <div className="relative w-60 md:w-80">
-        <Image
-          src={imageUrl}
-          alt="no_data"
-          width={320}
-          height={320}
-          className="shadow-md hover:shadow-lg transition duration-500"
-        />
+        {animationData ? (
+          <Lottie animationData={animationData} loop={true} />
+        ) : imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt="no_data"
+            width={320}
+            height={320}
+            className="shadow-md hover:shadow-lg transition duration-500"
+          />
+        ) : null}
       </div>
       <div className="max-w-md text-center space-y-2">
         <p className="text-2xl text-white font-bold font-poppins tracking-wide">
