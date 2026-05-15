@@ -498,46 +498,37 @@ const page = () => {
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           {/* Modern Stepper */}
           <div className="mb-12">
-            <div className="flex justify-center items-start md:justify-center md:items-center gap-2 md:gap-0 max-w-3xl mx-auto px-2 md:px-0">
-              {/* Step 1: Cart */}
-              <div className="flex flex-col md:flex-row items-center flex-1">
-                <div className="flex flex-col md:flex-row items-center group cursor-pointer text-center md:text-left">
+            <div className="flex items-center justify-center max-w-xl mx-auto px-4">
+              {/* Step 1: Bag */}
+              <div className="flex items-center flex-1">
+                <div className="flex flex-col items-center relative group cursor-pointer min-w-[50px]">
                   <div
-                    className={`flex items-center justify-center size-9 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "cart"
+                    className={`flex items-center justify-center size-8 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "cart"
                       ? "bg-indigo-500 text-white shadow-indigo-500/20 scale-110"
                       : "bg-white/5 text-gray-500"
                       }`}
                   >
                     <ShoppingCart className="size-4 md:size-5" />
                   </div>
-                  <div className="md:ml-3 mt-2 md:mt-0 flex flex-col items-center md:items-start">
-                    <span
-                      className={`text-[7px] md:text-[9px] uppercase tracking-[0.2em] font-black leading-none mb-1 ${step === "cart" ? "text-indigo-500" : "text-gray-500"
-                        }`}
-                    >
+                  <div className="absolute -bottom-6 flex flex-col items-center w-max">
+                    <span className={`text-[6px] md:text-[9px] uppercase tracking-widest font-black ${step === "cart" ? "text-indigo-500" : "text-gray-500"}`}>
                       Step 01
                     </span>
-                    <span
-                      className={`text-[10px] md:text-sm font-black tracking-tight leading-none ${step === "cart" ? "text-white" : "text-gray-500"
-                        }`}
-                    >
+                    <span className={`text-[9px] md:text-sm font-black tracking-tight ${step === "cart" ? "text-white" : "text-gray-500"}`}>
                       Bag
                     </span>
                   </div>
                 </div>
-                <div className="mx-2 md:mx-6 flex-1 h-[1px] md:h-[2px] bg-gray-800 border-none mt-4 md:mt-0 min-w-[20px] md:w-12">
-                  <div
-                    className={`h-full bg-indigo-500 transition-all duration-1000 ${step !== "cart" ? "w-full" : "w-0"
-                      }`}
-                  ></div>
+                <div className="flex-1 h-[1px] md:h-[2px] bg-gray-800 mx-2 md:mx-4">
+                  <div className={`h-full bg-indigo-500 transition-all duration-1000 ${step !== "cart" ? "w-full" : "w-0"}`} />
                 </div>
               </div>
 
-              {/* Step 2: Address */}
-              <div className="flex flex-col md:flex-row items-center flex-1">
-                <div className="flex flex-col md:flex-row items-center group cursor-pointer text-center md:text-left">
+              {/* Step 2: Shipping */}
+              <div className="flex items-center flex-1">
+                <div className="flex flex-col items-center relative group cursor-pointer min-w-[50px]">
                   <div
-                    className={`flex items-center justify-center size-9 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "address"
+                    className={`flex items-center justify-center size-8 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "address"
                       ? "bg-indigo-500 text-white shadow-indigo-500/20 scale-110"
                       : step === "payment"
                         ? "bg-indigo-500/10 text-indigo-500"
@@ -546,57 +537,41 @@ const page = () => {
                   >
                     <MapPin className="size-4 md:size-5" />
                   </div>
-                  <div className="md:ml-3 mt-2 md:mt-0 flex flex-col items-center md:items-start">
-                    <span
-                      className={`text-[7px] md:text-[9px] uppercase tracking-[0.2em] font-black leading-none mb-1 ${step === "address" ? "text-indigo-500" : "text-gray-500"
-                        }`}
-                    >
+                  <div className="absolute -bottom-6 flex flex-col items-center w-max">
+                    <span className={`text-[6px] md:text-[9px] uppercase tracking-widest font-black ${step === "address" ? "text-indigo-500" : "text-gray-500"}`}>
                       Step 02
                     </span>
-                    <span
-                      className={`text-[10px] md:text-sm font-black tracking-tight leading-none ${step === "address" ? "text-white" : "text-gray-500"
-                        }`}
-                    >
+                    <span className={`text-[9px] md:text-sm font-black tracking-tight ${step === "address" ? "text-white" : "text-gray-500"}`}>
                       Shipping
                     </span>
                   </div>
                 </div>
-                <div className="mx-2 md:mx-6 flex-1 h-[1px] md:h-[2px] bg-gray-800 border-none mt-4 md:mt-0 min-w-[20px] md:w-12">
-                  <div
-                    className={`h-full bg-indigo-500 transition-all duration-1000 ${step === "payment" ? "w-full" : "w-0"
-                      }`}
-                  ></div>
+                <div className="flex-1 h-[1px] md:h-[2px] bg-gray-800 mx-2 md:mx-4">
+                  <div className={`h-full bg-indigo-500 transition-all duration-1000 ${step === "payment" ? "w-full" : "w-0"}`} />
                 </div>
               </div>
 
               {/* Step 3: Payment */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex flex-col md:flex-row items-center group cursor-pointer text-center md:text-left">
-                  <div
-                    className={`flex items-center justify-center size-9 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "payment"
-                      ? "bg-indigo-500 text-white shadow-indigo-500/20 scale-110"
-                      : "bg-white/5 text-gray-500"
-                      }`}
-                  >
-                    <CreditCardIcon className="size-4 md:size-5" />
-                  </div>
-                  <div className="md:ml-3 mt-2 md:mt-0 flex flex-col items-center md:items-start">
-                    <span
-                      className={`text-[7px] md:text-[9px] uppercase tracking-[0.2em] font-black leading-none mb-1 ${step === "payment" ? "text-indigo-500" : "text-gray-500"
-                        }`}
-                    >
-                      Step 03
-                    </span>
-                    <span
-                      className={`text-[10px] md:text-sm font-black tracking-tight leading-none ${step === "payment" ? "text-white" : "text-gray-500"
-                        }`}
-                    >
-                      Payment
-                    </span>
-                  </div>
+              <div className="flex flex-col items-center relative group cursor-pointer min-w-[50px]">
+                <div
+                  className={`flex items-center justify-center size-8 md:size-10 rounded-xl md:rounded-2xl transition-all duration-500 shadow-lg ${step === "payment"
+                    ? "bg-indigo-500 text-white shadow-indigo-500/20 scale-110"
+                    : "bg-white/5 text-gray-500"
+                    }`}
+                >
+                  <CreditCardIcon className="size-4 md:size-5" />
+                </div>
+                <div className="absolute -bottom-6 flex flex-col items-center w-max">
+                  <span className={`text-[6px] md:text-[9px] uppercase tracking-widest font-black ${step === "payment" ? "text-indigo-500" : "text-gray-500"}`}>
+                    Step 03
+                  </span>
+                  <span className={`text-[9px] md:text-sm font-black tracking-tight ${step === "payment" ? "text-white" : "text-gray-500"}`}>
+                    Payment
+                  </span>
                 </div>
               </div>
             </div>
+            <div className="h-10" /> {/* Spacer for absolute text */}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
