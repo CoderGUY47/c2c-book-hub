@@ -216,7 +216,7 @@ const Header = () => {
 
   const MenuItems = ({ className = "", isMobile = false }) => (
     <div className={className}>
-      {menuItems?.map((item: any, index: number) => {
+      {menuItems?.slice(isMobile && user ? 1 : 0).map((item: any, index: number) => {
         const itemContent = (
           <div className="flex items-center gap-x-3 w-full group">
             <div className="flex items-center justify-center">

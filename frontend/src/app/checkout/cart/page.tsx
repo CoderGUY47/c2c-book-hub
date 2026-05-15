@@ -498,7 +498,7 @@ const page = () => {
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           {/* Modern Stepper */}
           <div className="mb-12">
-            <div className="flex justify-between items-start md:justify-center md:items-center gap-4 md:gap-0 max-w-2xl mx-auto px-4 md:px-0">
+            <div className="flex justify-center items-start md:justify-center md:items-center gap-2 md:gap-0 max-w-3xl mx-auto px-2 md:px-0">
               {/* Step 1: Cart */}
               <div className="flex flex-col md:flex-row items-center flex-1">
                 <div className="flex flex-col md:flex-row items-center group cursor-pointer text-center md:text-left">
