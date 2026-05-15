@@ -131,12 +131,12 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
           <div className="flex items-center gap-2 mb-4">
             <span className="w-8 h-[1px] bg-indigo-500"></span>
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-indigo-400">
-              Fresh Additions
+              Newly Arrived
             </span>
             <span className="w-8 h-[1px] bg-indigo-500"></span>
           </div>
           <h2 className="text-5xl md:text-6xl font-langar font-bold text-black text-center tracking-tight">
-            Newly Arrived
+            Sell Books <span className="text-indigo-600">Collection</span>
           </h2>
         </div>
         <div className="relative group">
@@ -317,7 +317,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
         <Link href="/books">
           <Button className="ripple-button inline-flex items-center justify-between bg-purple-600 text-md font-bold p-6 text-white border-0 rounded-full tracking-wider overflow-hidden transition-all cursor-pointer">
             <i className="animation"></i>
-            Go to Books Collection <BiCollection className="ml-2 size-5" />
+            Go to Sell Books Collection <BiCollection className="ml-2 size-5" />
             <i className="animation"></i>
           </Button>
         </Link>

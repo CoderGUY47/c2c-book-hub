@@ -182,7 +182,7 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-bangla text-white tracking-tighter leading-[1.05] mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bangla font-bold text-white tracking-tighter leading-5 mb-6">
                 গল্প এবং{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
                   আইডিয়া
