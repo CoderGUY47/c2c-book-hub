@@ -69,8 +69,9 @@ const blogPosts = [
   },
 ];
 
-export default function BlogPostDetail({ params }: { params: { id: string } }) {
-  const post = blogPosts.find((p) => p.id === params.id) || blogPosts[0];
+export default async function BlogPostDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const post = blogPosts.find((p) => p.id === id) || blogPosts[0];
 
   return (
     <main className="min-h-screen bg-gray-950 text-white py-24 px-4 font-bangla">
