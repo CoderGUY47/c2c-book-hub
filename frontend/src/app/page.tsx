@@ -9,7 +9,7 @@ const TrendingBooksSection = dynamic(() => import("./components/TrendingBooksSec
 const NewBooks = dynamic(() => import("./components/NewBooks"), { ssr: true });
 const MockBooksSection = dynamic(() => import("./components/MockBooksSection"), { ssr: true });
 const FreeEbooksSection = dynamic(() => import("./components/FreeEbooksSection"), { ssr: true });
-const CustomerReviews = dynamic(() => import("./components/CustomerReviews"), { ssr: false });
+const CustomerReviews = dynamic(() => import("./components/CustomerReviews"), { ssr: true });
 
 export const metadata: Metadata = {
   title: "Book-Hub | Online Buying & Selling Book Shop in Bangladesh",

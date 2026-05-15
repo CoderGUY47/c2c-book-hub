@@ -42,6 +42,7 @@ const reviews = [
 ];
 
 const CustomerReviews = () => {
+  const [mounted, setMounted] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
@@ -60,6 +61,7 @@ const CustomerReviews = () => {
   }, [emblaApi, setSelectedIndex]);
 
   useEffect(() => {
+    setMounted(true);
     if (!emblaApi) return;
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
@@ -71,6 +73,8 @@ const CustomerReviews = () => {
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
   );
+
+  if (!mounted) return null;
 
   return (
     <section className="w-full bg-[#0a0a0a] py-24 relative overflow-hidden">
