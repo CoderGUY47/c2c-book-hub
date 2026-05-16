@@ -24,19 +24,19 @@ const sellSteps = [
     step: "Step 1",
     title: "Post an ad",
     description: "List your books and add details easily.",
-    lottieUrl: "https://assets5.lottiefiles.com/packages/lf20_ygi6poy9.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/ecommerce.json",
   },
   {
     step: "Step 2",
     title: "Set your price",
     description: "Choose a fair price for your books.",
-    lottieUrl: "https://assets10.lottiefiles.com/packages/lf20_6wutsrox.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/payment.json",
   },
   {
     step: "Step 3",
     title: "Get paid",
     description: "Receive payments directly to your account.",
-    lottieUrl: "https://assets2.lottiefiles.com/packages/lf20_96bovdur.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/success.json",
   },
 ];
 
@@ -45,19 +45,19 @@ const buySteps = [
     step: "Step 1",
     title: "Browse books",
     description: "Browse thousands of available books.",
-    lottieUrl: "https://assets9.lottiefiles.com/packages/lf20_m9ubts9h.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/search.json",
   },
   {
     step: "Step 2",
     title: "Place order",
     description: "Place your order with a single click.",
-    lottieUrl: "https://assets3.lottiefiles.com/packages/lf20_kh0p5hze.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/empty_cart.json",
   },
   {
     step: "Step 3",
     title: "Fast delivery",
     description: "Fast delivery right to your doorstep.",
-    lottieUrl: "https://assets1.lottiefiles.com/packages/lf20_jmejebmv.json",
+    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/delivery.json",
   },
 ];
 
