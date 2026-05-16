@@ -125,7 +125,7 @@ export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden border-b border-white/5">
+      <section className="relative py-20 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(99,102,241,0.15),transparent)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
@@ -139,12 +139,12 @@ export default function PrivacyPolicyPage() {
           <p className="text-gray-400 text-lg font-medium max-w-2xl mx-auto leading-relaxed">
             At Book-Hub, we're committed to protecting your privacy. Here's exactly how we collect, use, and protect your data.
           </p>
-          <p className="text-gray-600 text-sm mt-4 font-medium">Last Updated: July 18, 2025</p>
+          <p className="text-gray-600 text-sm mt-4 font-medium">Last Updated: {new Date().toLocaleDateString('en-US')}</p>
         </div>
       </section>
 
       {/* Sections */}
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="max-w-4xl mx-auto space-y-4">
           {sections.map((s, i) => (
             <div
@@ -172,7 +172,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 px-6 text-center border-t border-white/5">
+      <section className="py-10 px-6 text-center border-t border-white/5">
         <p className="text-gray-500 text-sm">Have questions about your privacy? <a href="/contact-us" className="text-indigo-400 hover:underline font-semibold">Contact our team →</a></p>
       </section>
     </main>

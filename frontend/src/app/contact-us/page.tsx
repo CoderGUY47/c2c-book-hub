@@ -35,7 +35,7 @@ export default function ContactUsPage() {
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden border-b border-white/5">
+      <section className="relative py-16 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(99,102,241,0.15),transparent)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
@@ -49,7 +49,7 @@ export default function ContactUsPage() {
         </div>
       </section>
 
-      <section className="py-24 px-6">
+      <section className="py-14 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left: Contact Info */}
           <div className="space-y-6">
