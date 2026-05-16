@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 
 /* ── Animated SVG Icons ── */
 function ShieldIcon({ className }: { className?: string }) {
@@ -120,8 +119,6 @@ const sections = [
 ];
 
 export default function PrivacyPolicyPage() {
-  const [open, setOpen] = useState<number | null>(0);
-
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       {/* Hero */}
@@ -139,33 +136,23 @@ export default function PrivacyPolicyPage() {
           <p className="text-gray-400 text-lg font-medium max-w-2xl mx-auto leading-relaxed">
             At Book-Hub, we're committed to protecting your privacy. Here's exactly how we collect, use, and protect your data.
           </p>
-          <p className="text-gray-600 text-sm mt-4 font-medium">Last Updated: {new Date().toLocaleDateString('en-US')}</p>
+          <p className="text-gray-600 text-sm mt-4 font-medium" suppressHydrationWarning>Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
         </div>
       </section>
 
-      {/* Sections */}
+      {/* Grid Sections */}
       <section className="py-14 px-6">
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sections.map((s, i) => (
             <div
               key={i}
-              className={`border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${open === i ? s.color : "border-white/8 bg-white/[0.02] hover:bg-white/[0.04]"}`}
-              onClick={() => setOpen(open === i ? null : i)}
+              className={`border rounded-2xl p-8 hover:bg-white/[0.04] transition-all duration-300 ${s.color} flex flex-col`}
             >
-              <div className="flex items-center gap-5 p-6">
-                <div className={`w-14 h-14 rounded-xl ${open === i ? s.iconBg : "bg-white/5"} flex items-center justify-center flex-shrink-0 transition-colors`}>
-                  <s.Icon className="w-8 h-8" />
-                </div>
-                <h2 className="text-lg font-bold flex-1">{s.title}</h2>
-                <span className={`text-2xl font-bold text-gray-600 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}>+</span>
+              <div className={`w-16 h-16 rounded-2xl ${s.iconBg} flex items-center justify-center mb-6`}>
+                <s.Icon className="w-10 h-10" />
               </div>
-              {open === i && (
-                <div className="px-6 pb-6 pt-0">
-                  <div className="pl-[4.75rem]">
-                    <p className="text-gray-400 text-sm leading-relaxed">{s.content}</p>
-                  </div>
-                </div>
-              )}
+              <h2 className="text-xl font-bold mb-3">{s.title}</h2>
+              <p className="text-gray-400 text-sm leading-relaxed flex-1">{s.content}</p>
             </div>
           ))}
         </div>

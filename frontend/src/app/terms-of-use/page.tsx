@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { FreeToUseIcon, VerifiedUsersIcon, FairTradingIcon, SafePaymentsIcon } from "../animated-icons";
 
@@ -125,12 +124,10 @@ const sections = [
 ];
 
 export default function TermsOfUsePage() {
-  const [open, setOpen] = useState<number | null>(0);
-
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden border-b border-white/5">
+      <section className="relative py-10 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(124,58,237,0.15),transparent)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
@@ -144,7 +141,7 @@ export default function TermsOfUsePage() {
           <p className="text-gray-400 text-lg font-medium max-w-2xl mx-auto leading-relaxed">
             These terms outline the rules and guidelines for using Book-Hub. Please read them carefully before using our platform.
           </p>
-          <p className="text-gray-600 text-sm mt-4 font-medium">Last Updated: July 18, 2025</p>
+          <p className="text-gray-600 text-sm mt-4 font-medium" suppressHydrationWarning>Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
         </div>
       </section>
 
@@ -166,36 +163,30 @@ export default function TermsOfUsePage() {
         </div>
       </section>
 
-      {/* Accordion Sections */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto space-y-4">
+      {/* Grid Sections */}
+      <section className="py-10 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
           {sections.map((s, i) => (
             <div
               key={i}
-              className={`border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer ${open === i ? s.color : "border-white/8 bg-white/[0.02] hover:bg-white/[0.04]"}`}
-              onClick={() => setOpen(open === i ? null : i)}
+              className={`border rounded-2xl overflow-hidden p-6 hover:bg-white/[0.04] transition-all duration-300 ${s.color}`}
             >
-              <div className="flex items-center gap-5 p-6">
-                <div className={`w-14 h-14 rounded-xl ${open === i ? s.iconBg : "bg-white/5"} flex items-center justify-center flex-shrink-0 transition-colors`}>
+              <div className="flex items-start gap-5">
+                <div className={`w-14 h-14 rounded-xl ${s.iconBg} flex items-center justify-center flex-shrink-0`}>
                   <s.Icon className="w-8 h-8" />
                 </div>
-                <h2 className="text-lg font-bold flex-1">{s.title}</h2>
-                <span className={`text-2xl font-bold text-gray-600 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}>+</span>
-              </div>
-              {open === i && (
-                <div className="px-6 pb-6 pt-0">
-                  <div className="pl-[4.75rem]">
-                    <p className="text-gray-400 text-sm leading-relaxed">{s.content}</p>
-                  </div>
+                <div>
+                  <h2 className="text-lg font-bold mb-2">{s.title}</h2>
+                  <p className="text-gray-400 text-sm leading-relaxed">{s.content}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center border-t border-white/5">
+      <section className="py-10 px-6 text-center border-t border-white/5">
         <p className="text-gray-500 text-sm">
           Questions about our terms?{" "}
           <Link href="/contact-us" className="text-violet-400 hover:underline font-semibold">Contact us →</Link>

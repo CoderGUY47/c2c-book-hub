@@ -113,7 +113,7 @@ export default function Homepage() {
                   0{index + 1}
                 </div>
 
-                <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
+                <div className="relative z-10 bg-black/70 border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
                   <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
                     <step.Icon className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" />
                   </div>
@@ -151,7 +151,7 @@ export default function Homepage() {
                   0{index + 1}
                 </div>
 
-                <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
+                <div className="relative z-10 bg-black/70 border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
                   <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
                     <step.Icon className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" />
                   </div>
