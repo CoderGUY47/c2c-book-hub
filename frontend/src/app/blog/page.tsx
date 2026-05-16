@@ -182,7 +182,7 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-10 mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-16 mb-6">
                 Stories and{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
                   Ideas
@@ -227,7 +227,7 @@ export default function BlogPage() {
                   key={s.label}
                   className="bg-white/[0.03] border border-white/[0.07] p-7 rounded-sm backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300"
                 >
-                  <p className="text-4xl text-white mb-2 tracking-tight">
+                  <p className="text-4xl font-bold font-poppins text-white mb-2 tracking-tight">
                     {s.value}
                   </p>
                   <p className="text-xs font-semibold text-white/40 uppercase tracking-widest">

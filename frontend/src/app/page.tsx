@@ -24,19 +24,19 @@ const sellSteps = [
     step: "Step 1",
     title: "Post an ad",
     description: "List your books and add details easily.",
-    lottieUrl: "https://lottie.host/9712a32c-b3a5-48b2-b132-7a0f62261621/7E52vH9m8t.json",
+    lottieUrl: "https://assets5.lottiefiles.com/packages/lf20_ygi6poy9.json",
   },
   {
     step: "Step 2",
     title: "Set your price",
     description: "Choose a fair price for your books.",
-    lottieUrl: "https://lottie.host/29e20790-9c16-4191-88f5-3c1352e4f0a5/t1m9rW7u8K.json",
+    lottieUrl: "https://assets10.lottiefiles.com/packages/lf20_6wutsrox.json",
   },
   {
     step: "Step 3",
     title: "Get paid",
     description: "Receive payments directly to your account.",
-    lottieUrl: "https://lottie.host/17498c19-7e1e-4503-b924-4f81156637e1/Z8jLgq9S8Q.json",
+    lottieUrl: "https://assets2.lottiefiles.com/packages/lf20_96bovdur.json",
   },
 ];
 
@@ -45,19 +45,19 @@ const buySteps = [
     step: "Step 1",
     title: "Browse books",
     description: "Browse thousands of available books.",
-    lottieUrl: "https://lottie.host/a0a7f1a3-2d1d-4f7f-a9b0-9f1e3c8b6b1a/h7Y1j1l2l2.json",
+    lottieUrl: "https://assets9.lottiefiles.com/packages/lf20_m9ubts9h.json",
   },
   {
     step: "Step 2",
     title: "Place order",
     description: "Place your order with a single click.",
-    lottieUrl: "https://lottie.host/86d639b7-3b99-4d6c-bd15-37466986429c/3H8W4h5V2x.json",
+    lottieUrl: "https://assets3.lottiefiles.com/packages/lf20_kh0p5hze.json",
   },
   {
     step: "Step 3",
     title: "Fast delivery",
     description: "Fast delivery right to your doorstep.",
-    lottieUrl: "https://lottie.host/d193a0b5-7484-4841-8f5b-6b2c8a7e4e1a/m2r2k2t2p2.json",
+    lottieUrl: "https://assets1.lottiefiles.com/packages/lf20_jmejebmv.json",
   },
 ];
 
