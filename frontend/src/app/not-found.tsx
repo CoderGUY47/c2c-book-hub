@@ -83,7 +83,7 @@ export default function NotFound() {
         <canvas 
           ref={canvasRef} 
           className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" 
-          style={{ filter: "hue-rotate(225deg) saturate(1.2)" }}
+          style={{ filter: "hue-rotate(-80deg) saturate(1.4) brightness(0.95)" }}
         />
       </div>
 
