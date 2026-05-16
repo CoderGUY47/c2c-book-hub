@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   keywords: "books, buy books, sell books, used books, bangladesh, Book-Hub, library",
 };
 
-const LottieAnimation = dynamic(() => import("./components/LottieAnimation"), { ssr: false });
+import LottieAnimation from "./components/LottieAnimation";
 
 const sellSteps = [
   {
