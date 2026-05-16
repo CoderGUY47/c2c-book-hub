@@ -1,12 +1,38 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BookX, Home, Search, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DotLottie } from '@lottiefiles/dotlottie-web';
 
 export default function NotFound() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    let dotLottie: DotLottie | null = null;
+    
+    if (canvasRef.current) {
+      dotLottie = new DotLottie({
+        autoplay: true,
+        loop: true,
+        canvas: canvasRef.current,
+        src: "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.lottie",
+        renderConfig: {
+          autoResize: true,
+          devicePixelRatio: typeof window !== 'undefined' ? window.devicePixelRatio : 1,
+        },
+      });
+    }
+
+    return () => {
+      if (dotLottie) {
+        dotLottie.destroy();
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0f172a] overflow-hidden flex items-center justify-center relative p-4">
       {/* Dynamic Background Elements */}
@@ -50,23 +76,9 @@ export default function NotFound() {
       >
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 md:p-16 shadow-2xl text-center">
           
-          {/* Glitch Effect 404 Header */}
-          <div className="relative mb-8 inline-block">
-            <motion.h1 
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-              className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-sky-400 filter drop-shadow-[0_0_15px_rgba(96,165,250,0.4)]"
-            >
-              404
-            </motion.h1>
-            <motion.div 
-              animate={{ rotateZ: [-5, 5, -5] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 md:-top-8 md:-right-8 bg-slate-800 border-2 border-slate-700 rounded-2xl p-3 shadow-xl transform rotate-12"
-            >
-              <BookX className="size-8 md:size-12 text-blue-400" />
-            </motion.div>
+          {/* Lottie Animation Header */}
+          <div className="relative mb-8 flex justify-center">
+            <canvas ref={canvasRef} className="w-64 h-64 md:w-80 md:h-80 mx-auto drop-shadow-[0_0_15px_rgba(96,165,250,0.2)]" />
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-4 tracking-tight">
