@@ -51,7 +51,7 @@ const buySteps = [
     step: "Step 2",
     title: "Place order",
     description: "Place your order with a single click.",
-    lottieUrl: "https://lottie.host/0a9f1a3b-2d1d-4f7f-a9b0-9f1e3c8b6b1a/d1e1l1i1v1.json",
+    lottieUrl: "https://lottie.host/86d639b7-3b99-4d6c-bd15-37466986429c/3H8W4h5V2x.json",
   },
   {
     step: "Step 3",

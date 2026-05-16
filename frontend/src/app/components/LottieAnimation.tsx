@@ -1,13 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-
-// Dynamically import Lottie with no SSR
-const Lottie = dynamic(() => import("lottie-react"), { 
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-white/5 animate-pulse" />
-});
+import { useEffect, useRef, useState } from "react";
 
 interface LottieAnimationProps {
   animationUrl: string;
@@ -15,50 +8,63 @@ interface LottieAnimationProps {
 }
 
 const LottieAnimation = ({ animationUrl, className }: LottieAnimationProps) => {
-  const [animationData, setAnimationData] = useState<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let isMounted = true;
-    if (animationUrl) {
-      fetch(animationUrl)
-        .then((res) => {
-          if (!res.ok) throw new Error("Failed to fetch animation");
-          return res.json();
-        })
-        .then((data) => {
-          if (isMounted) setAnimationData(data);
-        })
-        .catch((err) => {
-          console.error("Lottie Error:", err);
-          if (isMounted) setError(true);
-        });
-    }
+    let animationInstance: any = null;
+
+    const loadAnimation = async () => {
+      try {
+        // Import lottie-web dynamically
+        const lottie = (await import("lottie-web")).default;
+
+        if (containerRef.current) {
+          animationInstance = lottie.loadAnimation({
+            container: containerRef.current,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: animationUrl, // Use the direct URL
+          });
+
+          animationInstance.addEventListener("DOMLoaded", () => {
+            setLoading(false);
+          });
+
+          animationInstance.addEventListener("data_failed", () => {
+            setError(true);
+            setLoading(false);
+          });
+        }
+      } catch (err) {
+        console.error("Lottie loading error:", err);
+        setError(true);
+        setLoading(false);
+      }
+    };
+
+    loadAnimation();
+
     return () => {
-      isMounted = false;
+      if (animationInstance) {
+        animationInstance.destroy();
+      }
     };
   }, [animationUrl]);
 
-  if (error) {
-    return (
-      <div className={`${className} flex items-center justify-center bg-white/5 text-[10px] text-white/20`}>
-        Animation Error
-      </div>
-    );
-  }
-
-  if (!animationData) {
-    return <div className={`${className} bg-white/5 animate-pulse`} />;
-  }
-
   return (
-    <div className={className}>
-      <Lottie
-        animationData={animationData}
-        loop={true}
-        autoplay={true}
-        style={{ width: "100%", height: "100%" }}
-      />
+    <div className={`${className} relative`}>
+      {loading && !error && (
+        <div className="absolute inset-0 bg-white/5 animate-pulse rounded-sm" />
+      )}
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/5 text-[10px] text-white/20 rounded-sm">
+          Animation Error
+        </div>
+      )}
+      <div ref={containerRef} className="w-full h-full" />
     </div>
   );
 };

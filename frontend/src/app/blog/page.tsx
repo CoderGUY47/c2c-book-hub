@@ -182,7 +182,7 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-5 mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-10 mb-6">
                 Stories and{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
                   Ideas
@@ -191,7 +191,7 @@ export default function BlogPage() {
                 for Every Reader
               </h1>
 
-              <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-normal">
+              <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-lg mb-8 font-normal">
                 Whether you love to buy, sell, or just read — our blog has helpful guides, honest reviews, and real stories written for ordinary readers like you.
               </p>
 
