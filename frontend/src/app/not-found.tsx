@@ -1,11 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatedCat404 } from "./animated-icons";
+import LottieAnimation from "@/app/components/LottieAnimation";
 
 export default function NotFound() {
   const router = useRouter();
+  const [lottieUrl, setLottieUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch the exact animation JSON URL dynamically as requested
+    fetch("https://graphql.lottiefiles.com/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `{ animation(slug: "ZltNpefmQj") { jsonUrl lottieUrl } }`
+      })
+    })
+      .then(r => r.json())
+      .then(d => {
+        if (d?.data?.animation?.jsonUrl) {
+          setLottieUrl(d.data.animation.jsonUrl);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div style={styles.page as React.CSSProperties}>
@@ -28,7 +47,13 @@ export default function NotFound() {
 
       {/* Animation wrapper */}
       <div style={styles.animationWrap as React.CSSProperties}>
-        <AnimatedCat404 className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" />
+        {lottieUrl ? (
+          <LottieAnimation animationUrl={lottieUrl} className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" />
+        ) : (
+          <div className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw] flex items-center justify-center">
+            <span className="text-white/50 text-sm animate-pulse">Loading Cat Animation...</span>
+          </div>
+        )}
       </div>
 
       {/* Content */}
