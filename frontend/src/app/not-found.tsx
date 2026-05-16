@@ -60,7 +60,7 @@ export default function NotFound() {
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(79,70,229,0.12) 0%, transparent 70%)"
+          background: "radial-gradient(circle, rgba(79,70,229,0.12) 0%, transparent 95%)"
         }}
         aria-hidden="true" 
       />
@@ -68,7 +68,7 @@ export default function NotFound() {
 
 
       {/* Animation wrapper */}
-      <div className="relative z-10 animate-float-404 bg-indigo-500/80 rounded-full">
+      <div className="relative z-10 animate-float-404">
         <canvas 
           ref={canvasRef} 
           className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw] rounded-full"
