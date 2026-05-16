@@ -67,8 +67,12 @@ export default function NotFound() {
 
       {/* Ghost "404" text */}
       <span 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[52%] font-mono text-[clamp(120px,22vw,280px)] font-normal tracking-tighter text-transparent select-none pointer-events-none whitespace-nowrap z-0"
-        style={{ WebkitTextStroke: "1px rgba(255,255,255,0.05)" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[52%] text-[clamp(120px,22vw,280px)] font-normal tracking-tighter text-transparent select-none pointer-events-none whitespace-nowrap z-0"
+        style={{ 
+          fontFamily: 'var(--font-langar)',
+          WebkitTextStroke: "2px rgba(99,102,241,0.2)",
+          color: "rgba(99,102,241,0.05)"
+        }}
         aria-hidden="true"
       >
         404
