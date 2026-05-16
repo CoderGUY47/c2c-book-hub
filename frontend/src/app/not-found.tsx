@@ -65,25 +65,14 @@ export default function NotFound() {
         aria-hidden="true" 
       />
 
-      {/* Ghost "404" text */}
-      <span 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[52%] text-[clamp(120px,22vw,280px)] font-normal tracking-tighter text-transparent select-none pointer-events-none whitespace-nowrap z-0"
-        style={{ 
-          fontFamily: 'var(--font-langar)',
-          WebkitTextStroke: "2px rgba(99,102,241,0.2)",
-          color: "rgba(99,102,241,0.05)"
-        }}
-        aria-hidden="true"
-      >
-        404
-      </span>
+
 
       {/* Animation wrapper */}
       <div className="relative z-10 animate-float-404">
         <canvas 
           ref={canvasRef} 
           className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" 
-          style={{ filter: "hue-rotate(-80deg) saturate(1.4) brightness(0.95)" }}
+          style={{ filter: "hue-rotate(220deg) saturate(1.6) brightness(0.9)" }}
         />
       </div>
 
