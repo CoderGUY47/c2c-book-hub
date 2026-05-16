@@ -3,68 +3,68 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "নিবন্ধ বিস্তারিত | Book-Hub",
+  title: "Article Details | Book-Hub",
 };
 
 const blogPosts = [
   {
     id: "1",
-    tag: "বিক্রেতা গাইড",
-    title: "মাত্র ৩টি সহজ ধাপে আপনার পুরনো বই কীভাবে বিক্রি করবেন",
-    excerpt: "আপনার তাকে ধুলো জমা বই আছে? ১০ মিনিটেরও কম সময়ে সেগুলো বুক-হাবে তালিকাভুক্ত করুন এবং ইতিমধ্যে পড়া বই থেকে টাকা উপার্জন শুরু করুন।",
-    author: "আরিফ হোসেন",
-    date: "১৮ এপ্রিল, ২০২৬",
-    readTime: "৫ মিনিট পড়ার সময়",
+    tag: "Seller Guide",
+    title: "How to Sell Your Used Books in Just 3 Easy Steps",
+    excerpt: "Have dusty books on your shelf? List them on Book-Hub in less than 10 minutes and start earning money from books you've already read.",
+    author: "Arif Hossain",
+    date: "April 18, 2026",
+    readTime: "5 min read",
     imageSrc: "/images/book1.webp",
   },
   {
     id: "2",
-    tag: "বইয়ের রিভিউ",
-    title: "১০টি বই যা প্রতিটি পাঠকের অন্তত একবার পড়া উচিত",
-    excerpt: "আপনি গল্প, ইতিহাস বা বিজ্ঞান ভালোবাসুন না কেন — এই তালিকায় আপনার জন্য কিছু না কিছু আছে। এই বইগুলোই বুক-হাবের পাঠকেরা তাদের বন্ধুদের বারবার সুপারিশ করে।",
-    author: "নুসরাত জাহান",
-    date: "১৫ এপ্রিল, ২০২৬",
-    readTime: "৮ মিনিট পড়ার সময়",
+    tag: "Book Reviews",
+    title: "10 Books Every Reader Should Read at Least Once",
+    excerpt: "Whether you love fiction, history, or science — there's something for you in this list. These are the books Book-Hub readers recommend to their friends over and over.",
+    author: "Nusrat Jahan",
+    date: "April 15, 2026",
+    readTime: "8 min read",
     imageSrc: "/images/book2.webp",
   },
   {
     id: "3",
-    tag: "ফ্রি রিসোর্স",
-    title: "কোথায় অনলাইনে বিনামূল্যে বই পড়া যায় — ১০০% বৈধ উপায়ে",
-    excerpt: "দারুণ বই পড়ার জন্য আপনার টাকা খরচ করার প্রয়োজন নেই। আমরা এমন সেরা ওয়েবসাইটগুলোর তালিকা করেছি যেখানে আপনি হাজার হাজার বিনামূল্যের বই পাবেন — কোনো সাবস্ক্রিপশন ছাড়াই।",
-    author: "তানভীর রহমান",
-    date: "১২ এপ্রিল, ২০২৬",
-    readTime: "৪ মিনিট পড়ার সময়",
+    tag: "Free Resources",
+    title: "Where to Read Books for Free Online — 100% Legal Ways",
+    excerpt: "You don't need to spend money to read great books. We've listed the best websites where you can find thousands of free books — with no subscription needed.",
+    author: "Tanvir Rahman",
+    date: "April 12, 2026",
+    readTime: "4 min read",
     imageSrc: "/images/book3.webp",
   },
   {
     id: "4",
-    tag: "কমিউনিটি",
-    title: "আসল মানুষ, আসল গল্প: আমাদের বিক্রেতারা কীভাবে শুরু করেছিলেন",
-    excerpt: "সাধারণ শিক্ষার্থী এবং পাঠকদের সাথে পরিচিত হোন যারা বইয়ের প্রতি তাদের ভালোবাসাকে একটি স্থির বাড়তি আয়ের উৎসে পরিণত করেছেন। তাদের গল্পগুলো আপনাকে অনুপ্রাণিত করতে পারে।",
-    author: "সুমাইয়া আক্তার",
-    date: "১০ এপ্রিল, ২০২৬",
-    readTime: "৭ মিনিট পড়ার সময়",
+    tag: "Community",
+    title: "Real People, Real Stories: How Our Sellers Got Started",
+    excerpt: "Meet ordinary students and readers who have turned their love for books into a steady source of extra income. Their stories might inspire you.",
+    author: "Sumaiya Akter",
+    date: "April 10, 2026",
+    readTime: "7 min read",
     imageSrc: "/images/book4.webp",
   },
   {
     id: "5",
-    tag: "উৎপাদনশীলতা",
-    title: "পড়ার জন্য অনেক ব্যস্ত? এখানে প্রতি মাসে একটি বই শেষ করার উপায় দেওয়া হলো",
-    excerpt: "আপনার ঘণ্টার পর ঘণ্টা অবসর সময়ের প্রয়োজন নেই। আপনার দৈনন্দিন রুটিনে কিছু ছোট পরিবর্তন এনে আপনি স্বাচ্ছন্দ্যে মাসে একটি বই পড়তে পারেন — এমনকি ব্যস্ত সময়সূচীর মধ্যেও।",
-    author: "মেহেদী হাসান",
-    date: "৮ এপ্রিল, ২০২৬",
-    readTime: "৫ মিনিট পড়ার সময়",
+    tag: "Productivity",
+    title: "Too Busy to Read? Here's How to Finish One Book a Month",
+    excerpt: "You don't need hours of free time. By making some small changes to your daily routine, you can comfortably read one book a month — even with a busy schedule.",
+    author: "Mehedi Hasan",
+    date: "April 8, 2026",
+    readTime: "5 min read",
     imageSrc: "/images/book5.webp",
   },
   {
     id: "6",
-    tag: "ক্রেতা গাইড",
-    title: "বুক-হাবে আপনার প্রথম কেনাকাটা? এখানে সবকিছু আপনার জানা প্রয়োজন",
-    excerpt: "বুক-হাবে নতুন? এই বন্ধুত্বপূর্ণ গাইডটি আপনাকে সঠিক বই খুঁজে পেতে, নিরাপদে আপনার প্রথম অর্ডারটি দিতে এবং এটি হাতে পেতে সাহায্য করবে — ধাপে ধাপে।",
-    author: "ফারিহা ইসলাম",
-    date: "৫ এপ্রিল, ২০২৬",
-    readTime: "৪ মিনিট পড়ার সময়",
+    tag: "Buyer Guide",
+    title: "Your First Purchase on Book-Hub? Here's Everything You Need to Know",
+    excerpt: "New to Book-Hub? This friendly guide will help you find the right books, place your first order safely, and get it in your hands — step by step.",
+    author: "Fariha Islam",
+    date: "April 5, 2026",
+    readTime: "4 min read",
     imageSrc: "/images/book6.webp",
   },
 ];
@@ -74,10 +74,10 @@ export default async function BlogPostDetail({ params }: { params: Promise<{ id:
   const post = blogPosts.find((p) => p.id === id) || blogPosts[0];
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white py-24 px-4 font-bangla">
+    <main className="min-h-screen bg-gray-950 text-white py-24 px-4">
       <div className="max-w-4xl mx-auto">
         <Link href="/blog" className="text-violet-400 hover:text-violet-300 text-sm mb-8 inline-flex items-center gap-2">
-          &larr; ব্লগে ফিরে যান
+          &larr; Back to Blog
         </Link>
         <div className="flex items-center gap-4 text-white/50 text-sm mb-4">
           <span>{post.date}</span>
@@ -109,9 +109,9 @@ export default async function BlogPostDetail({ params }: { params: Promise<{ id:
             {post.excerpt}
           </p>
           <p className="text-lg text-white/60 leading-relaxed mb-6">
-            এটি একটি ডেমো বিস্তারিত পৃষ্ঠা। বর্তমানে এখানে একটি ছোট নমুনা দেখানো হচ্ছে। 
-            ভবিষ্যতে আপনি এখানে বিস্তারিত কন্টেন্ট, ছবি এবং অন্যান্য দরকারি তথ্য যোগ করতে পারবেন। 
-            বুক-হাবের লক্ষ্য হলো পাঠকদের জন্য একটি আদর্শ প্ল্যাটফর্ম তৈরি করা।
+            This is a demo detail page. Currently, a short sample is shown here. 
+            In the future, you will be able to add detailed content, images, and other useful information here. 
+            Book-Hub's mission is to create an ideal platform for readers.
           </p>
         </div>
       </div>

@@ -17,45 +17,47 @@ export const metadata: Metadata = {
   keywords: "books, buy books, sell books, used books, bangladesh, Book-Hub, library",
 };
 
+const LottieAnimation = dynamic(() => import("./components/LottieAnimation"), { ssr: false });
+
 const sellSteps = [
   {
     step: "Step 1",
-    title: "Post an ad for selling used books",
-    description: "Post an ad & describe your book details to sell your old books online.",
-    imageSrc: "/icons/post-online.png",
+    title: "Post an ad",
+    description: "List your books and add details easily.",
+    lottieUrl: "https://lottie.host/9712a32c-b3a5-48b2-b132-7a0f62261621/7E52vH9m8t.json",
   },
   {
     step: "Step 2",
-    title: "Set the selling price for your books",
-    description: "Set the price for your books at which you want to sell them.",
-    imageSrc: "/icons/price.png",
+    title: "Set your price",
+    description: "Choose a fair price for your books.",
+    lottieUrl: "https://lottie.host/29e20790-9c16-4191-88f5-3c1352e4f0a5/t1m9rW7u8K.json",
   },
   {
     step: "Step 3",
-    title: "Get paid into your Online Banking account",
-    description: "You will get money into your account once you receive an order for your book.",
-    imageSrc: "/icons/payment.png",
+    title: "Get paid",
+    description: "Receive payments directly to your account.",
+    lottieUrl: "https://lottie.host/17498c19-7e1e-4503-b924-4f81156637e1/Z8jLgq9S8Q.json",
   },
 ];
 
 const buySteps = [
   {
     step: "Step 1",
-    title: "Select the used books you want",
-    description: "Search from over thousands of used books listed on Book-Hub.",
-    imageSrc: "/icons/searching.svg",
+    title: "Browse books",
+    description: "Browse thousands of available books.",
+    lottieUrl: "https://lottie.host/a0a7f1a3-2d1d-4f7f-a9b0-9f1e3c8b6b1a/h7Y1j1l2l2.json",
   },
   {
     step: "Step 2",
-    title: "Place the order by making payment",
-    description: "Then simply place the order by clicking on the 'Buy Now' button.",
-    imageSrc: "/icons/payment.svg",
+    title: "Place order",
+    description: "Place your order with a single click.",
+    lottieUrl: "https://lottie.host/0a9f1a3b-2d1d-4f7f-a9b0-9f1e3c8b6b1a/d1e1l1i1v1.json",
   },
   {
     step: "Step 3",
-    title: "Get the books delivered at your doorstep",
-    description: "The books will be delivered to you at your doorstep!",
-    imageSrc: "/icons/delivery.svg",
+    title: "Fast delivery",
+    description: "Fast delivery right to your doorstep.",
+    lottieUrl: "https://lottie.host/d193a0b5-7484-4841-8f5b-6b2c8a7e4e1a/m2r2k2t2p2.json",
   },
 ];
 
@@ -93,7 +95,7 @@ export default function Homepage() {
               Used Books in Book-Hub?
             </h2>
             <p className="text-black/40 max-w-2xl mx-auto text-base font-semibold tracking-tight">
-              Turn your bookshelf into a goldmine with our refined 3-step selling process designed for authors and collectors.
+              Turn your bookshelf into a goldmine with our refined 3-step selling process.
             </p>
           </div>
 
@@ -106,23 +108,18 @@ export default function Homepage() {
                 </div>
 
                 <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
-                  <div className="w-70 h-50 mb-10 p-6 rounded-none flex items-center justify-center">
-                    {step.imageSrc && (
-                      <Image
-                        src={step.imageSrc}
-                        alt={step.title}
-                        width={120}
-                        height={120}
-                        className="w-full h-full object-cover grayscale opacity-100 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                      />
-                    )}
+                  <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
+                    <LottieAnimation 
+                      animationUrl={step.lottieUrl} 
+                      className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" 
+                    />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white tracking-tight leading-tight mb-2">
+                  <h3 className="text-lg font-bold text-white tracking-tight leading-tight mb-2 uppercase">
                     {step.title}
                   </h3>
-                  <div className="w-10 h-[1px] bg-indigo-500 mb-2 transition-all duration-500 group-hover:w-full" />
-                  <p className="text-white/60 font-normal leading-relaxed text-xs">
+                  <div className="w-10 h-[2px] bg-indigo-500 mb-4 transition-all duration-500 group-hover:w-20" />
+                  <p className="text-white/60 font-medium leading-relaxed text-sm">
                     {step.description}
                   </p>
                 </div>
@@ -139,7 +136,7 @@ export default function Homepage() {
               Next Story in Book-Hub?
             </h2>
             <p className="text-black/40 max-w-2xl mx-auto text-base font-semibold tracking-tight">
-              Get limited discounts and the best rates for your collection with our streamlined buying interface.
+              Best rates for your collection with our streamlined buying interface.
             </p>
           </div>
 
@@ -152,23 +149,18 @@ export default function Homepage() {
                 </div>
 
                 <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
-                  <div className="w-70 h-50 mb-10 p-6 rounded-none flex items-center justify-center">
-                    {step.imageSrc && (
-                      <Image
-                        src={step.imageSrc}
-                        alt={step.title}
-                        width={120}
-                        height={120}
-                        className="w-full h-full object-cover grayscale opacity-100 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-                      />
-                    )}
+                  <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
+                    <LottieAnimation 
+                      animationUrl={step.lottieUrl} 
+                      className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" 
+                    />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white tracking-tight leading-tight mb-2">
+                  <h3 className="text-lg font-bold text-white tracking-tight leading-tight mb-2 uppercase">
                     {step.title}
                   </h3>
-                  <div className="w-10 h-[1px] bg-purple-500 mb-2 transition-all duration-500 group-hover:w-full" />
-                  <p className="text-white/60 font-normal leading-relaxed text-xs">
+                  <div className="w-10 h-[2px] bg-purple-500 mb-4 transition-all duration-500 group-hover:w-20" />
+                  <p className="text-white/60 font-medium leading-relaxed text-sm">
                     {step.description}
                   </p>
                 </div>

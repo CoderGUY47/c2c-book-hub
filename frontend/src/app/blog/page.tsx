@@ -21,110 +21,110 @@ const categories = [
 ];
 
 const featuredPost = {
-  category: "পড়ার টিপস",
+  category: "Reading Tips",
   categorySlug: "reading-tips",
-  title: "দিনে মাত্র ২০ মিনিট পড়লে কীভাবে আপনার জীবন পুরোপুরি বদলে যেতে পারে",
+  title: "How Reading for Just 20 Minutes a Day Can Completely Change Your Life",
   excerpt:
-    "পড়া শুধু শিক্ষার্থীদের বাড়ির কাজের মধ্যে সীমাবদ্ধ নয় — এটি অন্যতম শক্তিশালী দৈনন্দিন অভ্যাস যা আপনি গড়ে তুলতে পারেন। একটি ভালো বই নিয়ে দিনে মাত্র ২০ মিনিট পড়লে আপনার মন তীক্ষ্ণ হয়, মানসিক চাপ কমে, শব্দভাণ্ডার বাড়ে এবং পৃথিবীকে ভিন্নভাবে দেখতে সাহায্য করে। এই নিবন্ধে, আমরা ঠিক কীভাবে শুরু করতে হবে এবং কীভাবে তা চালিয়ে যেতে হবে তা নিয়ে আলোচনা করেছি।",
-  author: "বুক-হাব সম্পাদকীয়",
-  date: "২০ এপ্রিল, ২০২৬",
-  readTime: "৬ মিনিট পড়ার সময়",
+    "Reading isn't just limited to student homework — it's one of the most powerful daily habits you can build. Reading a good book for just 20 minutes a day sharpens your mind, reduces stress, expands your vocabulary, and helps you see the world differently. In this article, we discuss exactly how to start and how to keep it going.",
+  author: "Book-Hub Editorial",
+  date: "April 20, 2026",
+  readTime: "6 min read",
   imageSrc: "/images/book7.webp",
-  tags: ["পড়ার অভ্যাস", "আত্ম-উন্নতি", "দৈনন্দিন রুটিন"],
+  tags: ["Reading Habits", "Self-Improvement", "Daily Routine"],
 };
 
 const blogPosts = [
   {
     id: 1,
     category: "seller-guide",
-    tag: "বিক্রেতা গাইড",
+    tag: "Seller Guide",
     tagColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
-    title: "মাত্র ৩টি সহজ ধাপে আপনার পুরনো বই কীভাবে বিক্রি করবেন",
+    title: "How to Sell Your Used Books in Just 3 Easy Steps",
     excerpt:
-      "আপনার তাকে ধুলো জমা বই আছে? ১০ মিনিটেরও কম সময়ে সেগুলো বুক-হাবে তালিকাভুক্ত করুন এবং ইতিমধ্যে পড়া বই থেকে টাকা উপার্জন শুরু করুন।",
-    author: "আরিফ হোসেন",
-    authorInitial: "আ",
-    date: "১৮ এপ্রিল, ২০২৬",
-    readTime: "৫ মিনিট পড়ার সময়",
+      "Have dusty books on your shelf? List them on Book-Hub in less than 10 minutes and start earning money from books you've already read.",
+    author: "Arif Hossain",
+    authorInitial: "A",
+    date: "April 18, 2026",
+    readTime: "5 min read",
     imageSrc: "/images/book1.webp",
   },
   {
     id: 2,
     category: "book-reviews",
-    tag: "বইয়ের রিভিউ",
+    tag: "Book Reviews",
     tagColor: "bg-violet-500/15 text-violet-400 border-violet-500/20",
-    title: "১০টি বই যা প্রতিটি পাঠকের অন্তত একবার পড়া উচিত",
+    title: "10 Books Every Reader Should Read at Least Once",
     excerpt:
-      "আপনি গল্প, ইতিহাস বা বিজ্ঞান ভালোবাসুন না কেন — এই তালিকায় আপনার জন্য কিছু না কিছু আছে। এই বইগুলোই বুক-হাবের পাঠকেরা তাদের বন্ধুদের বারবার সুপারিশ করে।",
-    author: "নুসরাত জাহান",
-    authorInitial: "নু",
-    date: "১৫ এপ্রিল, ২০২৬",
-    readTime: "৮ মিনিট পড়ার সময়",
+      "Whether you love fiction, history, or science — there's something for you in this list. These are the books Book-Hub readers recommend to their friends over and over.",
+    author: "Nusrat Jahan",
+    authorInitial: "N",
+    date: "April 15, 2026",
+    readTime: "8 min read",
     imageSrc: "/images/book2.webp",
   },
   {
     id: 3,
     category: "free-ebooks",
-    tag: "ফ্রি রিসোর্স",
+    tag: "Free Resources",
     tagColor: "bg-sky-500/15 text-sky-400 border-sky-500/20",
-    title: "কোথায় অনলাইনে বিনামূল্যে বই পড়া যায় — ১০০% বৈধ উপায়ে",
+    title: "Where to Read Books for Free Online — 100% Legal Ways",
     excerpt:
-      "দারুণ বই পড়ার জন্য আপনার টাকা খরচ করার প্রয়োজন নেই। আমরা এমন সেরা ওয়েবসাইটগুলোর তালিকা করেছি যেখানে আপনি হাজার হাজার বিনামূল্যের বই পাবেন — কোনো সাবস্ক্রিপশন ছাড়াই।",
-    author: "তানভীর রহমান",
-    authorInitial: "তা",
-    date: "১২ এপ্রিল, ২০২৬",
-    readTime: "৪ মিনিট পড়ার সময়",
+      "You don't need to spend money to read great books. We've listed the best websites where you can find thousands of free books — with no subscription needed.",
+    author: "Tanvir Rahman",
+    authorInitial: "T",
+    date: "April 12, 2026",
+    readTime: "4 min read",
     imageSrc: "/images/book3.webp",
   },
   {
     id: 4,
     category: "community",
-    tag: "কমিউনিটি",
+    tag: "Community",
     tagColor: "bg-amber-500/15 text-amber-400 border-amber-500/20",
-    title: "আসল মানুষ, আসল গল্প: আমাদের বিক্রেতারা কীভাবে শুরু করেছিলেন",
+    title: "Real People, Real Stories: How Our Sellers Got Started",
     excerpt:
-      "সাধারণ শিক্ষার্থী এবং পাঠকদের সাথে পরিচিত হোন যারা বইয়ের প্রতি তাদের ভালোবাসাকে একটি স্থির বাড়তি আয়ের উৎসে পরিণত করেছেন। তাদের গল্পগুলো আপনাকে অনুপ্রাণিত করতে পারে।",
-    author: "সুমাইয়া আক্তার",
-    authorInitial: "সু",
-    date: "১০ এপ্রিল, ২০২৬",
-    readTime: "৭ মিনিট পড়ার সময়",
+      "Meet ordinary students and readers who have turned their love for books into a steady source of extra income. Their stories might inspire you.",
+    author: "Sumaiya Akter",
+    authorInitial: "S",
+    date: "April 10, 2026",
+    readTime: "7 min read",
     imageSrc: "/images/book4.webp",
   },
   {
     id: 5,
     category: "reading-tips",
-    tag: "উৎপাদনশীলতা",
+    tag: "Productivity",
     tagColor: "bg-rose-500/15 text-rose-400 border-rose-500/20",
-    title: "পড়ার জন্য অনেক ব্যস্ত? এখানে প্রতি মাসে একটি বই শেষ করার উপায় দেওয়া হলো",
+    title: "Too Busy to Read? Here's How to Finish One Book a Month",
     excerpt:
-      "আপনার ঘণ্টার পর ঘণ্টা অবসর সময়ের প্রয়োজন নেই। আপনার দৈনন্দিন রুটিনে কিছু ছোট পরিবর্তন এনে আপনি স্বাচ্ছন্দ্যে মাসে একটি বই পড়তে পারেন — এমনকি ব্যস্ত সময়সূচীর মধ্যেও।",
-    author: "মেহেদী হাসান",
-    authorInitial: "মে",
-    date: "৮ এপ্রিল, ২০২৬",
-    readTime: "৫ মিনিট পড়ার সময়",
+      "You don't need hours of free time. By making some small changes to your daily routine, you can comfortably read one book a month — even with a busy schedule.",
+    author: "Mehedi Hasan",
+    authorInitial: "M",
+    date: "April 8, 2026",
+    readTime: "5 min read",
     imageSrc: "/images/book5.webp",
   },
   {
     id: 6,
     category: "buyer-guide",
-    tag: "ক্রেতা গাইড",
+    tag: "Buyer Guide",
     tagColor: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
-    title: "বুক-হাবে আপনার প্রথম কেনাকাটা? এখানে সবকিছু আপনার জানা প্রয়োজন",
+    title: "Your First Purchase on Book-Hub? Here's Everything You Need to Know",
     excerpt:
-      "বুক-হাবে নতুন? এই বন্ধুত্বপূর্ণ গাইডটি আপনাকে সঠিক বই খুঁজে পেতে, নিরাপদে আপনার প্রথম অর্ডারটি দিতে এবং এটি হাতে পেতে সাহায্য করবে — ধাপে ধাপে।",
-    author: "ফারিহা ইসলাম",
-    authorInitial: "ফা",
-    date: "৫ এপ্রিল, ২০২৬",
-    readTime: "৪ মিনিট পড়ার সময়",
+      "New to Book-Hub? This friendly guide will help you find the right books, place your first order safely, and get it in your hands — step by step.",
+    author: "Fariha Islam",
+    authorInitial: "F",
+    date: "April 5, 2026",
+    readTime: "4 min read",
     imageSrc: "/images/book6.webp",
   },
 ];
 
 const stats = [
-  { value: "১২০+", label: "প্রকাশিত নিবন্ধ" },
-  { value: "১৫ হাজার+", label: "মাসিক পাঠক" },
-  { value: "৬", label: "টপিক ক্যাটাগরি" },
-  { value: "১০০%", label: "পড়ার জন্য বিনামূল্যে" },
+  { value: "120+", label: "Articles Published" },
+  { value: "15k+", label: "Monthly Readers" },
+  { value: "6", label: "Topic Categories" },
+  { value: "100%", label: "Free to Read" },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -157,7 +157,7 @@ export default function BlogPage() {
   }, [activeCategory]);
 
   return (
-    <main className="min-h-screen bg-gray-950 overflow-x-hidden font-bangla">
+    <main className="min-h-screen bg-gray-950 overflow-x-hidden">
       {/* ══════════════════════════════════════════════════════
           HERO SECTION
       ══════════════════════════════════════════════════════ */}
@@ -182,19 +182,17 @@ export default function BlogPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bangla font-bold text-white tracking-tighter leading-5 mb-6">
-                গল্প এবং{" "}
+              <h1 className="text-5xl lg:text-6xl font-bold text-white tracking-tighter leading-5 mb-6">
+                Stories and{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                  আইডিয়া
+                  Ideas
                 </span>
                 <br />
-                প্রতিটি পাঠকের জন্য
+                for Every Reader
               </h1>
 
               <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-lg mb-8 font-normal">
-                আপনি কেনা, বেচা বা শুধুই পড়তে ভালোবাসুন না কেন — আমাদের ব্লগে
-                রয়েছে সহায়ক গাইড, সৎ রিভিউ এবং আপনার মতো সাধারণ পাঠকদের জন্য
-                লেখা বাস্তব গল্প।
+                Whether you love to buy, sell, or just read — our blog has helpful guides, honest reviews, and real stories written for ordinary readers like you.
               </p>
 
               {/* Search bar */}
@@ -229,7 +227,7 @@ export default function BlogPage() {
                   key={s.label}
                   className="bg-white/[0.03] border border-white/[0.07] p-7 rounded-sm backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300"
                 >
-                  <p className="text-4xl font-bangla text-white mb-2 tracking-tight">
+                  <p className="text-4xl text-white mb-2 tracking-tight">
                     {s.value}
                   </p>
                   <p className="text-xs font-semibold text-white/40 uppercase tracking-widest">
@@ -324,7 +322,7 @@ export default function BlogPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-2xl md:text-3xl font-bangla text-white leading-tight mb-5 group-hover:text-violet-200 transition-colors duration-300 tracking-tight">
+                <h2 className="text-2xl md:text-3xl text-white leading-tight mb-5 group-hover:text-violet-200 transition-colors duration-300 tracking-tight">
                   {featuredPost.title}
                 </h2>
 
@@ -457,7 +455,7 @@ export default function BlogPage() {
                 </p>
 
                 {/* Title */}
-                <h3 className="text-sm font-bangla text-white leading-snug mb-3 group-hover:text-violet-200 transition-colors duration-200 line-clamp-2 tracking-tight">
+                <h3 className="text-sm text-white leading-snug mb-3 group-hover:text-violet-200 transition-colors duration-200 line-clamp-2 tracking-tight">
                   {post.title}
                 </h3>
 
@@ -518,8 +516,8 @@ export default function BlogPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
             </div>
-            <h3 className="text-white/60 text-lg font-bangla mb-2">এই ক্যাটাগরিতে কোনো নিবন্ধ পাওয়া যায়নি</h3>
-            <p className="text-white/30 text-sm max-w-xs">আমরা শীঘ্রই নতুন নিবন্ধ যোগ করার জন্য কাজ করছি। অন্য কোনো ক্যাটাগরি ট্রাই করুন।</p>
+            <h3 className="text-white/60 text-lg mb-2">No articles found in this category</h3>
+            <p className="text-white/30 text-sm max-w-xs">We are working on adding new articles soon. Please try another category.</p>
             <button 
               onClick={() => setActiveCategory("all")}
               className="mt-6 text-violet-400 text-xs font-bold uppercase tracking-widest hover:text-violet-300 transition-colors"
@@ -567,14 +565,12 @@ export default function BlogPage() {
               <span className="text-[10px] font-bold tracking-[0.3em] text-violet-400 uppercase block mb-3">
                 Stay Updated
               </span>
-              <h2 className="text-3xl md:text-4xl font-bangla text-white mb-3 tracking-tight leading-tight">
-                প্রতি সপ্তাহে নতুন নিবন্ধ
-                <br className="hidden md:block" /> পান — বিনামূল্যে
+              <h2 className="text-3xl md:text-4xl text-white mb-3 tracking-tight leading-tight">
+                Get New Articles Every Week
+                <br className="hidden md:block" /> — For Free
               </h2>
               <p className="text-white/40 text-sm max-w-md leading-relaxed font-normal">
-                হাজার হাজার পাঠকের সাথে যোগ দিন এবং আমাদের সেরা বইয়ের সংগ্রহ,
-                বিক্রয়ের টিপস এবং কমিউনিটির গল্প সরাসরি আপনার ইনবক্সে পান। কোনো
-                স্প্যাম নেই। যেকোনো সময় আনসাবস্ক্রাইব করতে পারবেন।
+                Join thousands of readers and get our best book collections, selling tips, and community stories directly to your inbox. No spam. You can unsubscribe at any time.
               </p>
             </div>
 
