@@ -2,6 +2,14 @@ import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import {
+  PostAdIcon,
+  SetPriceIcon,
+  GetPaidIcon,
+  BrowseBooksIcon,
+  PlaceOrderIcon,
+  DeliveryIcon,
+} from "./components/BuySellIcons";
 
 const HeroBanner = dynamic(() => import("./components/HeroBanner"), { ssr: true });
 const BrowseGenresSection = dynamic(() => import("./components/BrowseGenresSectionV2"), { ssr: true });
@@ -17,26 +25,24 @@ export const metadata: Metadata = {
   keywords: "books, buy books, sell books, used books, bangladesh, Book-Hub, library",
 };
 
-import LottieAnimation from "./components/LottieAnimation";
-
 const sellSteps = [
   {
     step: "Step 1",
     title: "Post an ad",
     description: "List your books and add details easily.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/ecommerce.json",
+    Icon: PostAdIcon,
   },
   {
     step: "Step 2",
     title: "Set your price",
     description: "Choose a fair price for your books.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/payment.json",
+    Icon: SetPriceIcon,
   },
   {
     step: "Step 3",
     title: "Get paid",
     description: "Receive payments directly to your account.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/success.json",
+    Icon: GetPaidIcon,
   },
 ];
 
@@ -45,19 +51,19 @@ const buySteps = [
     step: "Step 1",
     title: "Browse books",
     description: "Browse thousands of available books.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/search.json",
+    Icon: BrowseBooksIcon,
   },
   {
     step: "Step 2",
     title: "Place order",
     description: "Place your order with a single click.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/empty_cart.json",
+    Icon: PlaceOrderIcon,
   },
   {
     step: "Step 3",
     title: "Fast delivery",
     description: "Fast delivery right to your doorstep.",
-    lottieUrl: "https://raw.githubusercontent.com/Karthik-S-K/Lottie-Animations/master/Animations/delivery.json",
+    Icon: DeliveryIcon,
   },
 ];
 
@@ -109,10 +115,7 @@ export default function Homepage() {
 
                 <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
                   <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
-                    <LottieAnimation 
-                      animationUrl={step.lottieUrl} 
-                      className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" 
-                    />
+                    <step.Icon className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" />
                   </div>
 
                   <h3 className="text-lg font-bold text-white tracking-tight leading-tight mb-2 uppercase">
@@ -150,10 +153,7 @@ export default function Homepage() {
 
                 <div className="relative z-10 bg-black/70 border border-gray-100 rounded-none p-4 flex flex-col items-center text-center shadow-sm hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 h-full group-hover:-translate-y-0.5">
                   <div className="w-full h-48 mb-6 p-4 flex items-center justify-center overflow-hidden">
-                    <LottieAnimation 
-                      animationUrl={step.lottieUrl} 
-                      className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" 
-                    />
+                    <step.Icon className="w-40 h-40 transform transition-transform duration-500 group-hover:scale-110" />
                   </div>
 
                   <h3 className="text-lg font-bold text-white tracking-tight leading-tight mb-2 uppercase">
