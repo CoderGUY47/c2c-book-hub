@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { FreeToUseIcon, VerifiedUsersIcon, FairTradingIcon, SafePaymentsIcon } from "../animated-icons";
 
 /* ── Animated SVG Icons ── */
 function HandshakeIcon({ className }: { className?: string }) {
@@ -151,12 +152,13 @@ export default function TermsOfUsePage() {
       <section className="py-12 px-6 bg-white/[0.015] border-b border-white/5">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[
-            { label: "Free to Use", sub: "No listing fees" },
-            { label: "Verified Users", sub: "DIU community" },
-            { label: "Fair Trading", sub: "No fake listings" },
-            { label: "Safe Payments", sub: "Encrypted & secure" },
+            { label: "Free to Use", sub: "No listing fees", Icon: FreeToUseIcon },
+            { label: "Verified Users", sub: "DIU community", Icon: VerifiedUsersIcon },
+            { label: "Fair Trading", sub: "No fake listings", Icon: FairTradingIcon },
+            { label: "Safe Payments", sub: "Encrypted & secure", Icon: SafePaymentsIcon },
           ].map((item, i) => (
-            <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-4">
+            <div key={i} className="bg-white/[0.03] border border-white/10 rounded-xl p-4 flex flex-col items-center">
+              <item.Icon className="w-10 h-10 mb-3" />
               <p className="font-bold text-white text-sm">{item.label}</p>
               <p className="text-gray-500 text-xs mt-1">{item.sub}</p>
             </div>

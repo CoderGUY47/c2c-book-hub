@@ -90,7 +90,7 @@ export default function ReturnPolicyPage() {
   return (
     <main className="min-h-screen bg-gray-950 text-white">
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden border-b border-white/5">
+      <section className="relative py-14 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(99,102,241,0.15),transparent)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
@@ -101,16 +101,16 @@ export default function ReturnPolicyPage() {
           <p className="text-gray-400 text-lg font-medium max-w-2xl mx-auto leading-relaxed">
             We stand behind every purchase. If something's not right, we'll make it right — with a fair, transparent return process.
           </p>
-          <div className="mt-8 inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-6 py-2 text-indigo-300 text-sm font-bold">
+          <div className="mt-6 inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-6 py-2 text-indigo-300 text-sm font-bold">
             <ShieldCheck className="w-4 h-4" /> 3-Day Return Window on Eligible Orders
           </div>
         </div>
       </section>
 
       {/* Return Process */}
-      <section className="py-24 px-6">
+      <section className="py-10 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-[0.4em] text-violet-400">Process</span>
             <h2 className="text-4xl font-bold font-langar mt-3">How to Return a Book</h2>
           </div>
@@ -130,7 +130,7 @@ export default function ReturnPolicyPage() {
       </section>
 
       {/* Eligible / Not Eligible */}
-      <section className="py-24 px-6 bg-white/[0.015] border-y border-white/5">
+      <section className="py-10 px-6 bg-white/[0.015] border-y border-white/5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs font-bold uppercase tracking-[0.4em] text-violet-400">Conditions</span>
@@ -170,7 +170,7 @@ export default function ReturnPolicyPage() {
       </section>
 
       {/* Key Info Cards */}
-      <section className="py-24 px-6">
+      <section className="py-10 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
@@ -189,7 +189,7 @@ export default function ReturnPolicyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 text-center border-t border-white/5">
+      <section className="py-10 px-6 text-center border-t border-white/5">
         <h2 className="text-3xl font-bold font-langar mb-3">Need help with a return?</h2>
         <p className="text-gray-400 mb-8 font-medium">Our support team will guide you through the entire process.</p>
         <Link href="/contact-us" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">

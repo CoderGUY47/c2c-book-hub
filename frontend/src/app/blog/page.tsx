@@ -5,6 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
+import {
+  BookArticlesIcon,
+  ReadersIcon,
+  CategoriesIcon,
+  FreeReadIcon,
+} from "../animated-icons";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -121,10 +127,10 @@ const blogPosts = [
 ];
 
 const stats = [
-  { value: "120+", label: "Articles Published" },
-  { value: "15k+", label: "Monthly Readers" },
-  { value: "6", label: "Topic Categories" },
-  { value: "100%", label: "Free to Read" },
+  { value: "120+", label: "Articles Published", Icon: BookArticlesIcon, color: "border-indigo-500/20 hover:border-indigo-500/40" },
+  { value: "15k+", label: "Monthly Readers", Icon: ReadersIcon, color: "border-violet-500/20 hover:border-violet-500/40" },
+  { value: "6", label: "Topic Categories", Icon: CategoriesIcon, color: "border-purple-500/20 hover:border-purple-500/40" },
+  { value: "100%", label: "Free to Read", Icon: FreeReadIcon, color: "border-indigo-500/20 hover:border-indigo-500/40" },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -225,9 +231,10 @@ export default function BlogPage() {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="bg-white/[0.03] border border-white/[0.07] p-7 rounded-sm backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300"
+                  className={`bg-white/[0.03] border ${s.color} p-6 rounded-xl backdrop-blur-sm hover:bg-white/[0.05] transition-all duration-300 group`}
                 >
-                  <p className="text-4xl font-bold font-poppins text-white mb-2 tracking-tight">
+                  <s.Icon className="w-10 h-10 mb-3 group-hover:scale-110 transition-transform duration-300" />
+                  <p className="text-4xl font-bold font-poppins text-white mb-1 tracking-tight">
                     {s.value}
                   </p>
                   <p className="text-xs font-semibold text-white/40 uppercase tracking-widest">
