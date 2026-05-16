@@ -71,8 +71,7 @@ export default function NotFound() {
       <div className="relative z-10 animate-float-404">
         <canvas 
           ref={canvasRef} 
-          className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw] rounded-full"
-          style={{ filter: "sepia(1) hue-rotate(204deg) saturate(5) brightness(0.9) backgroundColor: '#6366f1' " }}
+          className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]"
         />
       </div>
 
