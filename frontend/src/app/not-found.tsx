@@ -60,7 +60,7 @@ export default function NotFound() {
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(79,70,229,0.12) 0%, transparent 95%)"
+          background: "radial-gradient(circle, rgba(79,70,229,0.12) 0%, transparent 70%)"
         }}
         aria-hidden="true" 
       />
@@ -72,6 +72,7 @@ export default function NotFound() {
         <canvas 
           ref={canvasRef} 
           className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw] rounded-full"
+          style={{ filter: "sepia(1) hue-rotate(204deg) saturate(5) brightness(0.9) backgroundColor: '#6366f1' " }}
         />
       </div>
 
