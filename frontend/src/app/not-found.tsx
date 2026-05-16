@@ -21,7 +21,6 @@ export default function NotFound() {
         renderConfig: {
           autoResize: true,
           devicePixelRatio: typeof window !== 'undefined' ? window.devicePixelRatio : 1,
-          backgroundColor: '#6366f1', // indigo-500 — fills canvas background before animation draws
         },
       });
     }
@@ -69,7 +68,7 @@ export default function NotFound() {
 
 
       {/* Animation wrapper */}
-      <div className="relative z-10 animate-float-404">
+      <div className="relative z-10 animate-float-404 bg-indigo-500/80 rounded-full">
         <canvas 
           ref={canvasRef} 
           className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw] rounded-full"
