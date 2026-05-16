@@ -76,13 +76,17 @@ export default function NotFound() {
 
       {/* Animation wrapper */}
       <div className="relative z-10 animate-float-404">
-        <canvas ref={canvasRef} className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" />
+        <canvas 
+          ref={canvasRef} 
+          className="w-[360px] h-[360px] max-w-[85vw] max-h-[85vw]" 
+          style={{ filter: "hue-rotate(225deg) saturate(1.2)" }}
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 -mt-6">
-        <span className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-3.5 py-1 text-xs font-semibold tracking-widest uppercase text-red-400 mb-4">
-          Error 404
+      <div className="relative z-10 mt-7">
+        <span className="inline-flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-3.5 py-1 text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-4 shadow-[0_0_15px_rgba(99,102,241,0.15)]">
+          404 Error
         </span>
         
         <h1 className="text-[clamp(1.6rem,4vw,2.4rem)] font-bold leading-tight mb-3 tracking-tight text-white">
@@ -109,7 +113,7 @@ export default function NotFound() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[11px] text-white/15 tracking-widest z-10 whitespace-nowrap">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[11px] text-white/69 tracking-widest z-10 whitespace-nowrap">
         HTTP 404 &middot; PAGE_NOT_FOUND
       </div>
     </div>
