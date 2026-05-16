@@ -73,7 +73,7 @@ const FreeEbooksSection = () => {
                             </div>
                             <span className="text-sm font-black text-indigo-400 uppercase tracking-[0.3em]">Open Knowledge</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-langar text-white leading-tight uppercase tracking-tighter mb-1">
+                        <h2 className="text-4xl md:text-5xl font-langar font-bold text-white leading-tight uppercase tracking-tighter mb-1">
                             FREE <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">EBOOKS.</span>
                         </h2>
                         <p className="mt-2 text-gray-400 font-medium max-w-lg leading-relaxed">

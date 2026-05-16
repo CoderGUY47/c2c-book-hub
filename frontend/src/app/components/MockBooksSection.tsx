@@ -23,7 +23,7 @@ const MockBooksSection = () => {
                                 Curated Picks
                             </span>
                         </div>
-                        <h2 className="text-5xl md:text-6xl font-langar text-zinc-950 leading-tight tracking-tight">
+                        <h2 className="text-5xl md:text-5xl font-bold font-langar text-zinc-950 leading-tight tracking-tight">
                             Best of <span className="text-indigo-600">Book-Hub.</span>
                         </h2>
                         <p className="mt-6 text-zinc-500 font-medium max-w-lg text-lg">
