@@ -6,4 +6,3 @@ export { FreeToUseIcon } from "./FreeToUseIcon";
 export { VerifiedUsersIcon } from "./VerifiedUsersIcon";
 export { FairTradingIcon } from "./FairTradingIcon";
 export { SafePaymentsIcon } from "./SafePaymentsIcon";
-export { AnimatedCat404 } from "./AnimatedCat404";
