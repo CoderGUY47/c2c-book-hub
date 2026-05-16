@@ -16,8 +16,8 @@ export default function NotFound() {
         autoplay: true,
         loop: true,
         canvas: canvasRef.current,
-        // The EXACT Cat animation URL from LottieFiles
-        src: "https://assets-v2.lottiefiles.com/a/f0eb5d7c-117f-11ee-a567-436398b6fdbc/6cUUA6bUcA.lottie",
+        // Local recolored blue cat animation
+        src: "/cat-404-blue.lottie",
         renderConfig: {
           autoResize: true,
           devicePixelRatio: typeof window !== 'undefined' ? window.devicePixelRatio : 1,
