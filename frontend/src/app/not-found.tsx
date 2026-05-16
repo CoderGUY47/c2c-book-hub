@@ -9,17 +9,15 @@ import { AnimatedCat404 } from './animated-icons';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#0f172a] overflow-hidden flex items-center justify-center relative p-4">
+    <div className="min-h-screen bg-white overflow-hidden flex items-center justify-center relative p-4">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/20 blur-[120px]" />
         
-        {/* Floating Book Silhouettes */}
-        {[...Array(6)].map((_, i) => (
+        {/* Floating Background SVGs */}
+        {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute opacity-10 text-white"
+            className="absolute opacity-[0.03] text-indigo-500"
             initial={{ 
               x: Math.random() * window.innerWidth, 
               y: Math.random() * window.innerHeight,
@@ -47,27 +45,26 @@ export default function NotFound() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full max-w-2xl relative z-10"
+        className="w-full max-w-4xl relative z-10"
       >
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 md:p-16 shadow-2xl text-center">
+        <div className="bg-white rounded-3xl p-8 md:p-16 text-center">
           
           {/* Cat Animation */}
-          <div className="relative mb-6 mx-auto w-full max-w-[280px] md:max-w-[340px]">
-            <AnimatedCat404 className="w-full h-auto drop-shadow-2xl" />
+          <div className="relative mx-auto w-full max-w-[450px] md:max-w-[600px]">
+            <AnimatedCat404 className="w-full h-auto" />
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-4 tracking-tight">
-            Lost in the Archives
+          <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-4 tracking-tight mt-6">
+            Page Not Found
           </h2>
           
-          <p className="text-slate-400 text-base md:text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+          <p className="text-slate-500 text-base md:text-lg mb-10 max-w-lg mx-auto leading-relaxed font-medium">
             The book, page, or chapter you are looking for has been misplaced, checked out, or never existed in our library.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto group relative h-14 px-8 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 hover:from-indigo-500 hover:to-blue-400 text-white font-semibold text-base shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all overflow-hidden border-0">
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+              <Button className="w-full sm:w-auto group relative h-14 px-8 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-bold text-base shadow-[0_10px_20px_-10px_rgba(59,130,246,0.6)] transition-all overflow-hidden border-0">
                 <span className="relative flex items-center justify-center gap-2">
                   <Home className="size-5 group-hover:-translate-y-1 transition-transform duration-300" />
                   Return Home
@@ -76,11 +73,11 @@ export default function NotFound() {
             </Link>
 
             <Link href="/books" className="w-full sm:w-auto">
-              <Button variant="outline" className="w-full sm:w-auto group h-14 px-8 rounded-full border-slate-700 bg-slate-800/50 hover:bg-slate-700 text-slate-200 font-semibold text-base transition-all">
+              <Button variant="outline" className="w-full sm:w-auto group h-14 px-8 rounded-full border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-base transition-all shadow-sm">
                 <span className="flex items-center justify-center gap-2">
-                  <Search className="size-5 text-slate-400 group-hover:text-white transition-colors" />
+                  <Search className="size-5 text-slate-400 group-hover:text-blue-500 transition-colors" />
                   Browse Books
-                  <ChevronRight className="size-4 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-blue-400" />
+                  <ChevronRight className="size-4 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-blue-500" />
                 </span>
               </Button>
             </Link>
