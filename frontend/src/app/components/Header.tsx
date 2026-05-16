@@ -285,8 +285,8 @@ const Header = () => {
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-500 py-4 ${isScrolled
-          ? "bg-gray-950/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-          : "bg-gray-950/95 border-b border-transparent"
+          ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+          : "bg-black/95 border-b border-transparent"
         }`}
     >
       <div className="container w-[94%] lg:w-[88%] mx-auto flex items-center justify-between px-4">
@@ -362,7 +362,7 @@ const Header = () => {
                   </span>
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-72 p-1.5 mt-4 bg-gray-950/95 border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)] rounded-2xl text-white backdrop-blur-3xl animate-in fade-in zoom-in-95 duration-300 ring-1 ring-white/5">
+              <DropdownMenuContent className="w-72 p-1.5 mt-4 bg-black/95 border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)] rounded-2xl text-white backdrop-blur-3xl animate-in fade-in zoom-in-95 duration-300 ring-1 ring-white/5">
                 <MenuItems />
               </DropdownMenuContent>
             </DropdownMenu>
@@ -386,7 +386,7 @@ const Header = () => {
                   <Menu className="h-5 w-5 text-white/60 hover:text-white" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] p-0 bg-gray-950 border-r border-white/5 text-white backdrop-blur-2xl">
+              <SheetContent side="left" className="w-[300px] p-0 bg-black border-r border-white/5 text-white backdrop-blur-2xl">
                 <SheetHeader className="border-b border-white/10 p-6 bg-white/[0.01]">
                   <SheetTitle className="text-xl font-normal text-left text-white tracking-[0.2em] uppercase opacity-80">Book-Hub</SheetTitle>
                 </SheetHeader>

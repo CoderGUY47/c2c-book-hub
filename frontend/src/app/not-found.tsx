@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BookX, Home, Search, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AnimatedCat404 } from './animated-icons';
 
 export default function NotFound() {
   return (
@@ -50,23 +51,9 @@ export default function NotFound() {
       >
         <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 md:p-16 shadow-2xl text-center">
           
-          {/* Glitch Effect 404 Header */}
-          <div className="relative mb-8 inline-block">
-            <motion.h1 
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-              className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-sky-400 filter drop-shadow-[0_0_15px_rgba(96,165,250,0.4)]"
-            >
-              404
-            </motion.h1>
-            <motion.div 
-              animate={{ rotateZ: [-5, 5, -5] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 md:-top-8 md:-right-8 bg-slate-800 border-2 border-slate-700 rounded-2xl p-3 shadow-xl transform rotate-12"
-            >
-              <BookX className="size-8 md:size-12 text-blue-400" />
-            </motion.div>
+          {/* Cat Animation */}
+          <div className="relative mb-6 mx-auto w-full max-w-[280px] md:max-w-[340px]">
+            <AnimatedCat404 className="w-full h-auto drop-shadow-2xl" />
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-4 tracking-tight">
