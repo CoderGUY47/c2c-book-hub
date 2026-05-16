@@ -69,7 +69,7 @@ export default function NotFound() {
   );
 }
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   page: {
     position: "relative",
     minHeight: "100vh",
