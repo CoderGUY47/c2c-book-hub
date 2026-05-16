@@ -86,7 +86,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-black text-white border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-gray-950 text-white border-t border-white/5 overflow-hidden">
       <div className="w-[78%] mx-auto px-0 relative z-10 pt-20 pb-10">
         <motion.div
           variants={containerVariants}
