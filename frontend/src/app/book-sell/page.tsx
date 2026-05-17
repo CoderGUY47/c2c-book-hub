@@ -3,10 +3,9 @@ import { Bookdetails } from "@/lib/types/type";
 import { useAddProductsMutation } from "@/store/api";
 import { toggleLoginDialog } from "@/store/slice/userSlice";
 import { RootState } from "@/store/store";
-// import { useRouter } from 'next/router';
+import { toast } from "react-toastify";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-// toast import removed as per request
 import { useDispatch, useSelector } from "react-redux";
 import NoData from "../components/NoData";
 import { useRouter } from "next/navigation";
@@ -68,6 +67,7 @@ const page = () => {
       images: [],
       agreeToTerms: false,
       discount: 0,
+      genre: [] as any,
     },
   });
 
@@ -152,8 +152,9 @@ const page = () => {
           key !== "finalPrice" &&
           key !== "shippingCharge"
         ) {
-          // Skip empty strings or null/undefined values to avoid Mongoose casting errors
-          if (value !== "" && value !== null && value !== undefined) {
+          if (key === "genre" && Array.isArray(value)) {
+            formData.append(key, value.join(", "));
+          } else if (value !== "" && value !== null && value !== undefined) {
             formData.append(key, value as string);
           }
         }
@@ -216,7 +217,7 @@ const page = () => {
           .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
           .replace(/[\s_-]+/g, "-");
         router.push(`/books/${slug}`);
-        // toast.success("Your Book has been added successfully");
+        toast.success("Your Book has been added successfully");
         reset();
       }
     } catch (error: any) {
@@ -436,10 +437,10 @@ const page = () => {
               </div>
 
               {/* Genre Field */}
-              <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
+              <div className="flex flex-col md:flex-row md:items-start space-y-2 md:space-y-0 md:space-x-4">
                 <Label
                   htmlFor="genre"
-                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700"
+                  className="md:w-1/4 text-md font-bold font-poppins text-gray-700 mt-2"
                 >
                   Genre
                 </Label>
@@ -447,60 +448,108 @@ const page = () => {
                   <Controller
                     name="genre"
                     control={control}
-                    rules={{ required: "Genre is required" }}
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="font-poppins font-bold w-full justify-between text-left pl-10 data-[placeholder]:text-gray-400 text-black">
-                          <SelectValue placeholder="Select Genre" />
-                        </SelectTrigger>
-                        <SelectContent className="font-poppins font-semibold h-60">
-                          {[
-                            "Fiction",
-                            "Non-Fiction",
-                            "Detective",
-                            "Mystery",
-                            "Thriller",
-                            "Romance",
-                            "Science Fiction",
-                            "Fantasy",
-                            "Biography",
-                            "History",
-                            "Self-Help",
-                            "Business",
-                            "Children",
-                            "Young Adult",
-                            "Crime",
-                            "Action",
-                            "Adventure",
-                            "Horror",
-                            "Poetry",
-                            "Comics",
-                            "Art",
-                            "Cookbooks",
-                            "Food & Drinks",
-                            "Journals",
-                            "Religion",
-                            "Science",
-                            "Travel",
-                            "True Crime",
-                            "Classic",
-                            "Motivational",
-                            "Graphic Novel",
-                            "Humanities & Social Sciences",
-                          ].map((item) => (
-                            <SelectItem key={item} value={item}>
-                              {item}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
+                    rules={{
+                      required: "Genre is required",
+                      validate: {
+                        minGenres: (value: any) => {
+                          const count = Array.isArray(value) ? value.length : 0;
+                          return count >= 3 || "Please select at least 3 genres";
+                        },
+                        maxGenres: (value: any) => {
+                          const count = Array.isArray(value) ? value.length : 0;
+                          return count <= 6 || "You can select up to 6 genres only";
+                        }
+                      }
+                    }}
+                    render={({ field }) => {
+                      const selectedGenres = (Array.isArray(field.value) ? field.value : []) as string[];
+                      const genresList = [
+                        "Fiction",
+                        "Non-Fiction",
+                        "Detective",
+                        "Mystery",
+                        "Thriller",
+                        "Romance",
+                        "Science Fiction",
+                        "Fantasy",
+                        "Biography",
+                        "History",
+                        "Self-Help",
+                        "Business",
+                        "Children",
+                        "Young Adult",
+                        "Crime",
+                        "Action",
+                        "Adventure",
+                        "Horror",
+                        "Poetry",
+                        "Comics",
+                        "Art",
+                        "Cookbooks",
+                        "Food & Drinks",
+                        "Journals",
+                        "Religion",
+                        "Science",
+                        "Travel",
+                        "True Crime",
+                        "Classic",
+                        "Motivational",
+                        "Graphic Novel",
+                        "Humanities & Social Sciences",
+                      ];
+
+                      const toggleGenre = (genreName: string) => {
+                        let newSelected;
+                        if (selectedGenres.includes(genreName)) {
+                          newSelected = selectedGenres.filter((g) => g !== genreName);
+                        } else {
+                          if (selectedGenres.length >= 6) {
+                            return; // Cap at 6
+                          }
+                          newSelected = [...selectedGenres, genreName];
+                        }
+                        field.onChange(newSelected);
+                      };
+
+                      return (
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center text-xs font-semibold text-gray-500">
+                            <span>Select 3 to 6 genres:</span>
+                            <span className={selectedGenres.length >= 3 && selectedGenres.length <= 6 ? "text-indigo-600 font-bold" : "text-amber-600 font-bold"}>
+                              {selectedGenres.length} selected (Min: 3, Max: 6)
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 border border-indigo-100 p-4 rounded-xl bg-indigo-50/20 max-h-60 overflow-y-auto scrollbar-thin">
+                            {genresList.map((item) => {
+                              const isSelected = selectedGenres.includes(item);
+                              return (
+                                <button
+                                  type="button"
+                                  key={item}
+                                  onClick={() => toggleGenre(item)}
+                                  className={`py-2 px-3 text-xs font-semibold rounded-lg text-left transition-all duration-200 border cursor-pointer select-none flex items-center justify-between
+                                    ${isSelected
+                                      ? "bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]"
+                                      : "bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50/50"
+                                    }`}
+                                >
+                                  <span>{item}</span>
+                                  {isSelected && (
+                                    <svg className="w-3.5 h-3.5 fill-current shrink-0 ml-1.5" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }}
                   />
                   {errors.genre && (
-                    <p className="text-indigo-300 text-sm font-normal">
+                    <p className="text-indigo-600 text-sm font-semibold mt-1">
                       {errors.genre.message}
                     </p>
                   )}

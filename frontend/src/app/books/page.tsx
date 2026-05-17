@@ -151,7 +151,11 @@ const BooksContent = () => {
       selectedGenre.length === 0 ||
       selectedGenre
         .map((cond) => cond.toLowerCase())
-        .includes(book.genre?.toLowerCase() || "");
+        .some((g) => {
+          if (!book.genre) return false;
+          const bookGenres = book.genre.toLowerCase().split(",").map(item => item.trim());
+          return bookGenres.includes(g);
+        });
 
     const authorMatch =
       selectedAuthor.length === 0 ||
