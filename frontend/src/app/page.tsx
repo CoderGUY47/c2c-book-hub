@@ -11,96 +11,13 @@ import {
   DeliveryIcon,
 } from "./components/BuySellIcons";
 
-// Premium layout-preserving skeleton loader to prevent layout shifts (CLS)
-function SectionSkeleton({ height = "300px" }: { height?: string }) {
-  return (
-    <div 
-      className="w-[85%] max-w-7xl mx-auto flex flex-col items-center justify-center animate-pulse bg-gray-900/40 rounded-3xl border border-gray-800/50 my-10 p-8"
-      style={{ height }}
-    >
-      <div className="w-1/3 h-8 bg-gray-800 rounded-full mb-6"></div>
-      <div className="w-1/2 h-4 bg-gray-800/80 rounded-full mb-8"></div>
-      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-6 flex-1 overflow-hidden">
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="bg-gray-800/30 rounded-2xl h-full flex flex-col p-4 border border-gray-800/20">
-            <div className="w-full aspect-[3/4] bg-gray-800/70 rounded-xl mb-4"></div>
-            <div className="w-3/4 h-4 bg-gray-800/80 rounded-full mb-2"></div>
-            <div className="w-1/2 h-3 bg-gray-800/50 rounded-full"></div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const HeroBanner = dynamic(() => import("./components/HeroBanner"), { 
-  ssr: true,
-  loading: () => (
-    <div className="w-full min-h-[70vh] bg-gray-950 flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/10 to-transparent pointer-events-none" />
-      <div className="animate-pulse flex flex-col items-center text-center max-w-3xl px-4 w-full">
-        <div className="w-48 h-6 bg-gray-800 rounded-full mb-6" />
-        <div className="w-96 max-w-full h-12 bg-gray-800 rounded-full mb-4" />
-        <div className="w-80 max-w-full h-12 bg-gray-800 rounded-full mb-8" />
-        <div className="w-64 max-w-full h-4 bg-gray-800/60 rounded-full mb-10" />
-        <div className="flex gap-4">
-          <div className="w-36 h-12 bg-gray-800 rounded-xl" />
-          <div className="w-36 h-12 bg-gray-800 rounded-xl" />
-        </div>
-      </div>
-    </div>
-  )
-});
-
-const BrowseGenresSection = dynamic(() => import("./components/BrowseGenresSectionV2"), { 
-  ssr: true,
-  loading: () => <SectionSkeleton height="260px" />
-});
-
-const TrendingBooksSection = dynamic(() => import("./components/TrendingBooksSection"), { 
-  ssr: true,
-  loading: () => <SectionSkeleton height="460px" />
-});
-
-const NewBooks = dynamic(() => import("./components/NewBooks"), { 
-  ssr: true,
-  loading: () => <SectionSkeleton height="460px" />
-});
-
-const MockBooksSection = dynamic(() => import("./components/MockBooksSection"), { 
-  ssr: true,
-  loading: () => <SectionSkeleton height="460px" />
-});
-
-const FreeEbooksSection = dynamic(() => import("./components/FreeEbooksSection"), { 
-  ssr: true,
-  loading: () => <SectionSkeleton height="460px" />
-});
-
-const CustomerReviews = dynamic(() => import("./components/CustomerReviews"), { 
-  ssr: true,
-  loading: () => (
-    <div className="w-[85%] max-w-7xl mx-auto min-h-[300px] flex flex-col items-center justify-center animate-pulse bg-gray-900/20 border border-gray-800/30 rounded-3xl p-8 my-10">
-      <div className="w-48 h-8 bg-gray-800 rounded-full mb-6" />
-      <div className="w-96 max-w-full h-4 bg-gray-800/80 rounded-full mb-10" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-800/40 rounded-2xl p-6 border border-gray-800/20 h-40">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gray-800 rounded-full" />
-              <div>
-                <div className="w-24 h-3 bg-gray-800 rounded-full mb-1" />
-                <div className="w-16 h-2.5 bg-gray-800/60 rounded-full" />
-              </div>
-            </div>
-            <div className="w-full h-3 bg-gray-800/60 rounded-full mb-2" />
-            <div className="w-3/4 h-3 bg-gray-800/40 rounded-full" />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-});
+const HeroBanner = dynamic(() => import("./components/HeroBanner"), { ssr: true });
+const BrowseGenresSection = dynamic(() => import("./components/BrowseGenresSectionV2"), { ssr: true });
+const TrendingBooksSection = dynamic(() => import("./components/TrendingBooksSection"), { ssr: true });
+const NewBooks = dynamic(() => import("./components/NewBooks"), { ssr: true });
+const MockBooksSection = dynamic(() => import("./components/MockBooksSection"), { ssr: true });
+const FreeEbooksSection = dynamic(() => import("./components/FreeEbooksSection"), { ssr: true });
+const CustomerReviews = dynamic(() => import("./components/CustomerReviews"), { ssr: true });
 
 export const metadata: Metadata = {
   title: "Book-Hub | Online Buying & Selling Book Shop in Bangladesh",
