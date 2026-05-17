@@ -67,7 +67,7 @@ const CartItems: React.FC<CartItemProp> = ({
                         ? item.product.title
                           .toLowerCase()
                           .trim()
-                          .replace(/[^\w\s-]/g, "")
+                          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
                           .replace(/[\s_-]+/g, "-")
                         : item.product._id
                       }`}
@@ -88,7 +88,7 @@ const CartItems: React.FC<CartItemProp> = ({
                         ? item.product.title
                           .toLowerCase()
                           .trim()
-                          .replace(/[^\w\s-]/g, "")
+                          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
                           .replace(/[\s_-]+/g, "-")
                         : item.product._id
                       }`}
@@ -169,7 +169,7 @@ const CartItems: React.FC<CartItemProp> = ({
             <div key={item._id} className="bg-white/5 border border-white/10 rounded-2xl p-4 relative overflow-hidden">
               <div className="flex gap-4">
                 {/* Image */}
-                <Link href={`/books/${item.product._id}`} className="shrink-0">
+                <Link href={`/books/${item.product.title ? item.product.title.toLowerCase().trim().replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "").replace(/[\s_-]+/g, "-") : item.product._id}`} className="shrink-0">
                   <Image
                     src={item?.product?.images?.[0] || "/images/placeholder.jpg"}
                     alt={item.product.title}

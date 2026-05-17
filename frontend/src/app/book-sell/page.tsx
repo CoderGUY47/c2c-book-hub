@@ -213,10 +213,10 @@ const page = () => {
         const slug = result.data.title
           .toLowerCase()
           .trim()
-          .replace(/[^\w\s-]/g, "")
+          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
           .replace(/[\s_-]+/g, "-");
         router.push(`/books/${slug}`);
-        // toast.success("Your Book has been added successfully"); removed per request
+        // toast.success("Your Book has been added successfully");
         reset();
       }
     } catch (error: any) {

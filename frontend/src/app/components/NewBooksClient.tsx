@@ -118,7 +118,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
       ? book.title
           .toLowerCase()
           .trim()
-          .replace(/[^\w\s-]/g, "")
+          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
           .replace(/[\s_-]+/g, "-")
       : book._id;
     router.push(`/books/${bookSlug}`);
@@ -175,7 +175,7 @@ const NewBooksClient = ({ books }: NewBooksClientProps) => {
                                       ? book.title
                                           .toLowerCase()
                                           .trim()
-                                          .replace(/[^\w\s-]/g, "")
+                                          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
                                           .replace(/[\s_-]+/g, "-")
                                       : book._id
                                   }`}

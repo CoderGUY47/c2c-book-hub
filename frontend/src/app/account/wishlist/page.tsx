@@ -155,7 +155,7 @@ const page = () => {
                 {/* Image Section */}
                 <div
                   className="relative h-[200px] w-full bg-black/20 rounded-xl overflow-hidden border border-white/5 group-hover:border-purple-500/30 transition-colors duration-300 cursor-pointer"
-                  onClick={() => router.push(`/books/${product?._id}`)}
+                  onClick={() => router.push(`/books/${product?.title ? product.title.toLowerCase().trim().replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "").replace(/[\s_-]+/g, "-") : product?._id}`)}
                 >
                   <Image
                     src={product?.images?.[0] || '/images/book-placeholder.png'}

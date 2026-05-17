@@ -4,7 +4,6 @@
 @theme inline {
   --font-sans: var(--font-poppins);
   --font-poppins: var(--font-poppins);
-  /* --font-hanken-grotesk: var(--font-hanken-grotesk); */
   --font-langar: var(--font-langar);
   --font-siliguri: var(--font-siliguri);
 }

@@ -422,7 +422,7 @@ const BooksContent = () => {
 
                           {/* Book Cover Container */}
                           <div className="relative h-[380px] w-full bg-slate-950/20 flex items-center justify-center overflow-hidden">
-                            <Link className="relative z-10 block h-full w-full p-8" href={`/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`}>
+                            <Link className="relative z-10 block h-full w-full p-8" href={`/books/${book.title ? book.title.toLowerCase().trim().replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "").replace(/[\s_-]+/g, "-") : book._id}`}>
                               <div className="relative h-full w-full transform group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
                                 <Image
                                   src={book.images[0]}
@@ -476,7 +476,7 @@ const BooksContent = () => {
                                     data={{
                                       text: `Check out this amazing book I patterns found on Book-Hub!`,
                                       title: book.title,
-                                      url: `${window.location.origin}/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`,
+                                      url: `${window.location.origin}/books/${book.title ? book.title.toLowerCase().trim().replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "").replace(/[\s_-]+/g, "-") : book._id}`,
                                     }}
                                   >
                                     <Button
@@ -500,7 +500,7 @@ const BooksContent = () => {
 
                           <CardContent className="p-6 space-y-4 relative bg-transparent">
                             <div className="space-y-2">
-                              <Link href={`/books/${book.title?.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").concat("-", book._id)}`}>
+                              <Link href={`/books/${book.title ? book.title.toLowerCase().trim().replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "").replace(/[\s_-]+/g, "-") : book._id}`}>
                                 <h3 className="h-12 -mt-8 mb-1.5 text-lg font-bold text-indigo-500 font-poppins line-clamp-2 leading-tight group-hover:text-indigo-400 transition-colors">
                                   {book.title}
                                 </h3>
