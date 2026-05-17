@@ -28,7 +28,7 @@ export default function BookLoader({
         autoplay: true,
         loop: true,
         canvas: canvasRef.current,
-        src: "/cube-loader.lottie",
+        src: "/cube-loader.json",
         renderConfig: {
           autoResize: true,
           devicePixelRatio: typeof window !== "undefined" ? window.devicePixelRatio : 1,
