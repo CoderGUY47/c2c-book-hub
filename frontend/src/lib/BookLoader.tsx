@@ -1,5 +1,8 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
+import { DotLottie } from "@lottiefiles/dotlottie-web";
+
 interface BookLoaderProps {
   message?: string;
   subMessage?: string;
@@ -15,49 +18,50 @@ export default function BookLoader({
   size = 48,
   fullScreen = true,
 }: BookLoaderProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    let dotLottie: DotLottie | null = null;
+
+    if (canvasRef.current) {
+      dotLottie = new DotLottie({
+        autoplay: true,
+        loop: true,
+        canvas: canvasRef.current,
+        src: "/cube-loader.lottie",
+        renderConfig: {
+          autoResize: true,
+          devicePixelRatio: typeof window !== "undefined" ? window.devicePixelRatio : 1,
+        },
+      });
+    }
+
+    return () => {
+      if (dotLottie) {
+        dotLottie.destroy();
+      }
+    };
+  }, []);
+
   return (
     <div
       className={
         fullScreen
-          ? "fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950"
+          ? "fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950/90 backdrop-blur-md"
           : "w-full min-h-[60vh] flex flex-col items-center justify-center bg-transparent"
       }
     >
-      <div className="flex flex-col items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 200 200"
-          className={`w-${size} h-${size}`}
-        >
-          <linearGradient id="a12">
-            <stop offset="0" stopColor={color} stopOpacity="0"></stop>
-            <stop offset="1" stopColor={color}></stop>
-          </linearGradient>
-          <circle
-            fill="none"
-            stroke="url(#a12)"
-            strokeWidth="15"
-            strokeLinecap="round"
-            strokeDasharray="0 44 0 44 0 44 0 44 0 360"
-            cx="100"
-            cy="100"
-            r="70"
-            style={{ transformOrigin: "center" }}
-          >
-            <animateTransform
-              type="rotate"
-              attributeName="transform"
-              calcMode="discrete"
-              dur="2"
-              values="360;324;288;252;216;180;144;108;72;36"
-              repeatCount="indefinite"
-            ></animateTransform>
-          </circle>
-        </svg>
+      <div className="flex flex-col items-center text-center p-4">
+        {/* Premium 3D Isometric Lottie Cube Loader */}
+        <canvas
+          ref={canvasRef}
+          style={{ width: `${size * 4}px`, height: `${size * 4}px` }}
+          className="max-w-[90vw] max-h-[90vh]"
+        />
 
         {/* Loading Text */}
-        <p className="mt-6 text-3xl font-black text-white">{message}</p>
-        <p className="mt-2 text-lg font-semibold text-white">{subMessage}</p>
+        <p className="mt-6 text-3xl font-black text-white tracking-wide">{message}</p>
+        <p className="mt-2 text-lg font-semibold text-slate-400 max-w-sm">{subMessage}</p>
       </div>
     </div>
   );
