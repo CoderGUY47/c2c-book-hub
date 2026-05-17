@@ -210,14 +210,7 @@ const page = () => {
 
       const result = await addProducts(formData).unwrap();
       if (result.success) {
-        // Redirect using title-slug logic
-        const slug = result.data.title
-          .toLowerCase()
-          .trim()
-          .replace(/[#?&/\\=+~`$^*()\[\]{}|:;"'<>,.!?]/g, "")
-          .replace(/[\s_-]+/g, "-");
-        router.push(`/books/${slug}`);
-        toast.success("Your Book has been added successfully");
+        router.push("/books");
         reset();
       }
     } catch (error: any) {
