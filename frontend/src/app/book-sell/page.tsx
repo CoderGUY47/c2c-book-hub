@@ -210,6 +210,7 @@ const page = () => {
 
       const result = await addProducts(formData).unwrap();
       if (result.success) {
+        toast.success("Your Book has been added successfully");
         router.push("/books");
         reset();
       }
