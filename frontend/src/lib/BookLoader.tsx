@@ -52,17 +52,12 @@ export default function BookLoader({
       }
     >
       <div className="flex flex-col items-center text-center p-4">
-        {/* Premium 3D Isometric Lottie Cube Loader Container */}
-        <div className="relative flex items-center justify-center" style={{ width: `${size * 4}px`, height: `${size * 4}px` }}>
-          {/* Violet smooth CSS spinner fallback during Lottie initialize */}
-          <div className="absolute inset-4 rounded-full border-4 border-violet-500/10 border-t-violet-500 animate-spin" />
-          
-          <canvas
-            ref={canvasRef}
-            style={{ width: `${size * 4}px`, height: `${size * 4}px` }}
-            className="max-w-[90vw] max-h-[90vh] relative z-10"
-          />
-        </div>
+        {/* Premium 3D Isometric Lottie Cube Loader */}
+        <canvas
+          ref={canvasRef}
+          style={{ width: `${size * 4}px`, height: `${size * 4}px` }}
+          className="max-w-[90vw] max-h-[90vh]"
+        />
 
         {/* Loading Text */}
         <p className="mt-6 text-3xl font-black text-white tracking-wide">{message}</p>
