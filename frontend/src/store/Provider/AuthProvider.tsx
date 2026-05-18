@@ -17,6 +17,7 @@ export default function AuthCheck({children}:{children:React.ReactNode}) {
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
     useEffect(() => {
+        const startTime = Date.now();
         const checkAuth = async()=>{
             try {
                 const response = await verifyAuth({}).unwrap(); 
@@ -38,7 +39,11 @@ export default function AuthCheck({children}:{children:React.ReactNode}) {
                 dispatch(logout());
             }
             finally{
-                setIsCheckingAuth(false);
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = Math.max(0, 1200 - elapsedTime);
+                setTimeout(() => {
+                    setIsCheckingAuth(false);
+                }, remainingTime);
             }
         }
         checkAuth();
