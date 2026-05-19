@@ -12,16 +12,18 @@ import { isAllowedEmail } from "../utils/authUtils";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, agreeTerms } = req.body;
+    const { name, email, password, agreeTerms, role } = req.body;
 
     /* 
     // UNRESTRICTED REGISTRATION LOGIC (Old)
     const existingUser = await User.findOne({ email });
     */
 
-    // RESTRICTED REGISTRATION LOGIC (Academic & Professional only)
-    if (!email || !isAllowedEmail(email)) {
-      return response(res, 400, "Only academic or professional emails are allowed.");
+    // RESTRICTED REGISTRATION LOGIC (Academic & Professional only) - Admin accounts are bypassed
+    if (role !== "admin") {
+      if (!email || !isAllowedEmail(email)) {
+        return response(res, 400, "Only academic or professional emails are allowed.");
+      }
     }
 
     const existingUser = await User.findOne({ email });
@@ -40,6 +42,7 @@ export const register = async (req: Request, res: Response) => {
       password,
       agreeTerms,
       verificationToken,
+      role: role || "user",
     });
     await user.save();
     await sendVerificationToEmail(user.email, verificationToken);
@@ -89,12 +92,14 @@ export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ email }).select("+password");
     */
 
-    // RESTRICTED LOGIN LOGIC (Academic & Professional only)
-    if (!email || !isAllowedEmail(email)) {
-        return response(res, 400, "Only academic or professional emails are allowed.");
-    }
-
     const user = await User.findOne({ email }).select("+password");
+
+    // RESTRICTED LOGIN LOGIC (Academic & Professional only) - Bypass for existing admin users
+    if (!user || user.role !== "admin") {
+      if (!email || !isAllowedEmail(email)) {
+        return response(res, 400, "Only academic or professional emails are allowed.");
+      }
+    }
 
     if (!user) {
       return response(res, 400, "The Email or Password is invalid or expired");
