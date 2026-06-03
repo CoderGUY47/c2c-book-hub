@@ -13,6 +13,19 @@
 
 </div>
 
+<br/>
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./frontend/public/assets/screenshot_1.png" alt="Book-Hub Hero Preview" width="100%" style="border-radius:8px;aspect-ratio:16/9;object-fit:cover" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><sub>📖 Book-Hub: Explore and Exchange Books Grid Preview</sub></td>
+  </tr>
+</table>
+
 ---
 
 ## 🎯 The Vision & Objective
